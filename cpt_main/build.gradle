@@ -58,6 +58,12 @@ configurations.all {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
+    //测试
+    testImplementation deps.android.junit
+    androidTestImplementation deps.android.test_junit
+    androidTestImplementation deps.android.test_espresso
+
+
     api project(':cs_cptServices')
 
 }
