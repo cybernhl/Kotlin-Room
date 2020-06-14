@@ -9,7 +9,7 @@ import com.guadou.testxiecheng.base.OkResult
 class AuthRepository : BaseRepository() {
 
     suspend fun getServerTime(): OkResult<ServerTimeBean> {
-        return handleErrorApiCall(call = {
+        return handleErrorApiCall({
             handleApiErrorResponse(
                 MainRetrofit.apiService.getServerTime(
                     Constants.NETWORK_CONTENT_TYPE,

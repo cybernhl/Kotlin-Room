@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 
@@ -48,7 +49,7 @@ fun ViewPager.bindFragment(
     fragments: List<Fragment>,
     pageTitles: List<String>? = null
 ): ViewPager {
-    adapter = object : FragmentPagerAdapter(fm) {
+    adapter = object : FragmentStatePagerAdapter(fm) {
         override fun getItem(p: Int) = fragments[p]
         override fun getCount() = fragments.size
         override fun getPageTitle(p: Int) = if (pageTitles == null) null else pageTitles[p]

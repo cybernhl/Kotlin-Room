@@ -112,49 +112,4 @@ public class CommUtils {
         }
     }
 
-    //运行在子线程：
-    public static void runInThread(Runnable runnable) {
-        new Thread(runnable).start();
-    }
-
-
-    /**
-     * 在子线程中弹吐司。在UI线程更新
-     */
-    public static void showToastInThread(final String text) {
-        CommUtils.runOnUIThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(CommUtils.getContext(), text, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    /**
-     * SnackBar的展示
-     */
-    public static void showHideSnack(Snackbar snackbar, View view, boolean isConnected) {
-        String message;
-        int color;
-        int duration;
-
-        if (isConnected) {
-            message = "You are now connected!";
-            color = Color.DKGRAY;
-            duration = Snackbar.LENGTH_SHORT;
-        } else {
-            message = "Sorry! No network connection";
-            color = Color.RED;
-            duration = Snackbar.LENGTH_INDEFINITE;
-        }
-
-        snackbar = Snackbar.make(view, message, duration);
-        View sbView = snackbar.getView();
-        sbView.setBackgroundColor(color);
-        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
-        textView.setTextColor(Color.WHITE);
-        snackbar.show();
-    }
-
-
 }

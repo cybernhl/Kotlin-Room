@@ -42,33 +42,39 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
                 LoadAction.STATE_NORMAL == loadAction.action -> showStateNormal()
                 LoadAction.STATE_ERROR == loadAction.action -> showStateError(loadAction.message)
                 LoadAction.STATE_SUCCESS == loadAction.action -> showStateSuccess()
-                LoadAction.STATE_LOADING == loadAction.action -> showStateLoading(loadAction.message)
+                LoadAction.STATE_LOADING == loadAction.action -> showStateLoading()
                 LoadAction.STATE_NO_DATA == loadAction.action -> showStateNoData()
                 LoadAction.STATE_PROGRESS == loadAction.action -> showStateProgress()
+                LoadAction.STATE_HIDE_PROGRESS == loadAction.action -> hideStateProgress()
             }
 
         }
     }
 
-    protected fun showStateNormal() {}
+    protected open fun showStateNormal() {}
 
-    protected fun showStateError(message: String?) {
+    protected open fun showStateError(message: String?) {
         LoadingDialogManager.get().dismissLoading()
     }
 
-    protected fun showStateSuccess() {
+    protected open fun showStateSuccess() {
         LoadingDialogManager.get().dismissLoading()
     }
 
-    protected fun showStateLoading(message: String?) {
+    protected open fun showStateLoading() {
         LoadingDialogManager.get().showLoading(this)
+    }
+
+    protected open fun showStateNoData() {
+        LoadingDialogManager.get().dismissLoading()
     }
 
     protected fun showStateProgress() {
         LoadingDialogManager.get().showLoading(mActivity)
     }
 
-    protected fun showStateNoData() {
+    protected fun hideStateProgress() {
         LoadingDialogManager.get().dismissLoading()
     }
+
 }

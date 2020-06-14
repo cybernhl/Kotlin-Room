@@ -1,30 +1,39 @@
 package com.guadou.lib_baselib.base
 
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.Observer
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
+import com.guadou.lib_baselib.view.gloading.Gloading
 
-abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
+
+abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    protected val mGloadingHolder by lazy {
+        Gloading.getDefault().wrap(this).withRetry{
+            onGoadingRetry()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         mViewModel = initVM()
-        //观察网络数据状态
-        mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
 
+        //观察网络数据状态
+        mViewModel.getActionLiveData().observe(this, stateObserver)
         init()
         startObserve()
     }
 
-    abstract fun startObserve()
     abstract fun initVM(): VM
+    abstract fun startObserve()
     abstract fun init()
+    protected open fun onGoadingRetry() {
+    }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }
@@ -47,22 +56,22 @@ abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
         }
     }
 
-    protected fun showStateNormal() {}
+    protected open fun showStateNormal() {}
 
-    protected fun showStateError(message: String?) {
-        LoadingDialogManager.get().dismissLoading()
+    protected open fun showStateLoading() {
+        mGloadingHolder.showLoading()
     }
 
-    protected fun showStateSuccess() {
-        LoadingDialogManager.get().dismissLoading()
+    protected open fun showStateSuccess() {
+        mGloadingHolder.showLoadSuccess()
     }
 
-    protected fun showStateLoading() {
-        LoadingDialogManager.get().showLoading(mActivity)
+    protected open fun showStateError(message: String?) {
+        mGloadingHolder.showLoadFailed(message)
     }
 
-    protected fun showStateNoData() {
-        LoadingDialogManager.get().dismissLoading()
+    protected open fun showStateNoData() {
+        mGloadingHolder.showEmpty()
     }
 
     protected fun showStateProgress() {
@@ -72,4 +81,5 @@ abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
     protected fun hideStateProgress() {
         LoadingDialogManager.get().dismissLoading()
     }
+
 }

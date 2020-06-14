@@ -13,5 +13,6 @@ data class LoadAction(var action: Int, var message: String? = "") {
         const val STATE_ERROR = 144
         const val STATE_NO_DATA = 145
         const val STATE_PROGRESS = 146
+        const val STATE_HIDE_PROGRESS = 147
     }
 }

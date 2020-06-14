@@ -21,6 +21,7 @@ import android.widget.TextView
  *  })
  * textView.styleSpan(str, range) //加粗，斜体等效果
  *
+
 实际项目中append系列方法会用的更多，用法按如下
 tv.text = "演示一下appendXX方法的用法"
 tv.appendSizeSpan("变大变大")

@@ -76,5 +76,6 @@
     <dimen name="d_400dp">400dp</dimen>
     <dimen name="d_500dp">500dp</dimen>
 
+    <dimen name="title_bar_height">46dp</dimen>
 
 </resources>

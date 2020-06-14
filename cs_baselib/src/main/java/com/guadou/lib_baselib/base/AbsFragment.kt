@@ -40,18 +40,20 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(inflateLayoutById(), container, false)
         initViews(view)
+        return transfromRootView(view)
+    }
+
+    //用于转换根数图View
+    protected open fun transfromRootView(view: View): View {
         return view
     }
 
-    protected fun initViews(view: View) {
+    protected open fun initViews(view: View) {
     }
 
     override fun onDestroyView() {
@@ -69,7 +71,6 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
             ConnectivityReceiver.unregisterAnnotationObserver(this)
         }
     }
-
 
     /**
      * 是否需要注册监听网络变换

@@ -23,11 +23,14 @@
             android:pivotX="50%"
             android:pivotY="50%"
             android:toDegrees="360" >
+
             <bitmap
                 android:antialias="true"
                 android:filter="true"
-                android:src="@drawable/loading" />
+                android:src="@drawable/icon_loading" />
+
         </rotate>
+
     </item>
 
 </layer-list>

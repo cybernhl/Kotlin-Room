@@ -42,7 +42,7 @@ open class BaseRepository {
         errorBlock: (suspend CoroutineScope.() -> Unit)? = null
     ): OkResult<T> {
 
-        return coroutineScope {
+        return coroutineScope {  //执行挂起函数
             if (response.code == 200) {  //这里根据业务逻辑来 200 -1 等
                 successBlock?.let { it() }
                 OkResult.Success(response.data)

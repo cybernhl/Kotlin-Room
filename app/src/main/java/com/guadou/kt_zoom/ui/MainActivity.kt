@@ -1,18 +1,19 @@
 package com.guadou.kt_zoom.ui
 
 import androidx.lifecycle.Observer
-import com.guadou.cs_router.YYRouterService
 import com.guadou.kt_zoom.R
 import com.guadou.kt_zoom.mvvm.MainViewModel
-import com.guadou.lib_baselib.base.BaseActivity
+import com.guadou.lib_baselib.base.BasePlaceHolderActivity
 import com.guadou.lib_baselib.ext.*
-import com.guadou.lib_baselib.glideconfig.GlideApp
+
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderView
+
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class MainActivity : BaseActivity<MainViewModel>() {
 
+class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
     override fun initVM(): MainViewModel = getViewModel()
 
@@ -36,9 +37,12 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     override fun inflateLayoutById(): Int = R.layout.activity_main
 
+    override fun inflatePlaceHolderLayoutRes(): Int = R.layout.layout_placeholder1
+
     override fun init() {
 
         initListener()
+
     }
 
     private fun initListener() {
@@ -65,9 +69,16 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
 
         btn_jump_auth.setOnClickListener {
-            YYRouterService.mainComponentServer.startAuthActivity()
+            //            YYRouterService.mainComponentServer.startAuthActivity()
+            DemoTestActivity.startInstance()
         }
+
     }
 
+
+    override fun showStateLoading() {
+        mGloadingHolder.withData(GloadingPlaceHolderView.NEED_LOADING_STATUS_MAGRIN_TITLE)
+        super.showStateLoading()
+    }
 
 }

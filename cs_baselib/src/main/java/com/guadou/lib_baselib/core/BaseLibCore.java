@@ -10,6 +10,8 @@ import com.guadou.basiclib.R;
 import com.guadou.lib_baselib.receiver.ConnectivityReceiver;
 import com.guadou.lib_baselib.utils.CommUtils;
 import com.guadou.lib_baselib.utils.ThreadPoolUtils;
+import com.guadou.lib_baselib.view.gloading.Gloading;
+import com.guadou.lib_baselib.view.gloading.GloadingGlobalAdapter;
 import com.guadou.lib_baselib.view.titlebar.EasyTitleBar;
 
 
@@ -42,8 +44,10 @@ public class BaseLibCore {
                 .lineColor(ContextCompat.getColor(application.getApplicationContext(), R.color.divider_color))
                 .titleColor(ContextCompat.getColor(application.getApplicationContext(), R.color.black))
                 .viewPadding(10)
-                .titleBarHeight(48);
+                .titleBarHeight(46);
 
+        //全局的Loading状态默认配置
+        Gloading.initDefault(new GloadingGlobalAdapter());
 
     }
 

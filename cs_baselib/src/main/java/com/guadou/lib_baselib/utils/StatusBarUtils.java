@@ -289,7 +289,7 @@ public class StatusBarUtils {
 
     /** 获取状态栏高度 */
     public static int getStatusBarHeight(Context context) {
-        int result = 24;
+        int result = 25;
         int resId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resId > 0) {
             result = context.getResources().getDimensionPixelSize(resId);
@@ -299,7 +299,6 @@ public class StatusBarUtils {
         }
         return result;
     }
-
 
     /**
      * 设置颜色

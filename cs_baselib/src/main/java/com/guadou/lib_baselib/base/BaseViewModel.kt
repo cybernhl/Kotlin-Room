@@ -35,15 +35,7 @@ open class BaseViewModel : ViewModel() {
     }
 
     fun loadStartLoading() {
-        loadStartLoading(null)
-    }
-
-    fun loadStartProgress() {
-        mLoadActionLiveData.postValue(LoadAction(LoadAction.STATE_PROGRESS))
-    }
-
-    fun loadStartLoading(message: String?) {
-        mLoadActionLiveData.postValue(LoadAction(LoadAction.STATE_LOADING, message))
+        mLoadActionLiveData.postValue(LoadAction(LoadAction.STATE_LOADING))
     }
 
     fun loadSuccess() {
@@ -56,6 +48,14 @@ open class BaseViewModel : ViewModel() {
 
     fun loadNoData() {
         mLoadActionLiveData.postValue(LoadAction(LoadAction.STATE_NO_DATA))
+    }
+
+    fun loadStartProgress() {
+        mLoadActionLiveData.postValue(LoadAction(LoadAction.STATE_PROGRESS))
+    }
+
+    fun loadHideProgress() {
+        mLoadActionLiveData.postValue(LoadAction(LoadAction.STATE_HIDE_PROGRESS))
     }
 
     fun getActionLiveData(): MutableLiveData<LoadAction> {

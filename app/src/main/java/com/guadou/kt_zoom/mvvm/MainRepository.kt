@@ -9,7 +9,7 @@ import com.guadou.testxiecheng.base.OkResult
 
 class MainRepository : BaseRepository() {
 
-    suspend fun getIndustry(): OkResult<List<Industry>> {
+    suspend inline fun getIndustry(): OkResult<List<Industry>> {
         return handleErrorApiCall(call = {
             handleApiErrorResponse(
                 CachedRetrofit.apiService.getIndustry(
@@ -22,7 +22,7 @@ class MainRepository : BaseRepository() {
     }
 
 
-    suspend fun getSchool(): OkResult<List<SchoolBean>> {
+    suspend inline fun getSchool(): OkResult<List<SchoolBean>> {
         return handleErrorApiCall(call = {
             handleApiErrorResponse(
                 CachedRetrofit.apiService.getSchool(
@@ -32,7 +32,6 @@ class MainRepository : BaseRepository() {
             )
         })
     }
-
 
 
 }
