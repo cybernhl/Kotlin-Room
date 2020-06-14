@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 
 /**
- * Description: Activity相关
- * Create by lxj, at 2018/12/7
+ * Activity相关
  */
 
+//内联函数+标注泛型 = 泛型实例化
 inline fun <reified T> Fragment.startActivity(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null) {
     activity?.startActivity<T>(flag, bundle)
 }
@@ -20,7 +20,7 @@ inline fun <reified T> Fragment.startActivityForResult(flag: Int = -1, bundle: A
     activity?.startActivityForResult<T>(flag, bundle, requestCode)
 }
 
-inline fun <reified T> Context.startActivity(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null, requestCode: Int = -1) {
+inline fun <reified T> Context.startActivity(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null) {
     val intent = Intent(this, T::class.java).apply {
         if (flag != -1) {
             this.addFlags(flag)

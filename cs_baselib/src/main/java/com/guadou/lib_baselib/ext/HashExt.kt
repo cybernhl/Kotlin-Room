@@ -2,8 +2,7 @@ package com.guadou.lib_baselib.ext
 
 
 /**
- * Description: 哈希，加密相关
- * Create by lxj, at 2018/12/5
+ * 哈希，加密相关
  */
 fun String.md5() = EncryptUtils.encryptMD5ToString(this)
 

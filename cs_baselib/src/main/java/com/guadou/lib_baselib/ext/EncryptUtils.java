@@ -12,8 +12,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Description: 从AndroidUtilCode项目拷贝修改而来
- * Create by lxj, at 2018/12/4
+ * 从AndroidUtilCode项目拷贝修改而来
  */
 
 final class EncryptUtils {

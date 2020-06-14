@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 
 /**
- * Description: Fragment相关扩展
- * Create by dance, at 2018/12/5
+ * Fragment相关扩展
  */
 
 /**

@@ -214,6 +214,7 @@ fun Any.toastSuccess(res: Int) {
 /** json相关 **/
 fun Any.toJson() = Gson().toJson(this)
 
+//内联函数+标注泛型 = 泛型实例化
 inline fun <reified T> String.toBean() = Gson().fromJson<T>(this, object : TypeToken<T>() {}.type)
 
 

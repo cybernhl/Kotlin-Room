@@ -12,7 +12,7 @@ import com.guadou.basiclib.R
 
 
 /**
- * 吐司工具类-兼容DToast-还是自己的布局还是自己的icon
+ * 吐司工具类-还是自己的布局还是自己的icon
  */
 internal object ToastUtils {
 

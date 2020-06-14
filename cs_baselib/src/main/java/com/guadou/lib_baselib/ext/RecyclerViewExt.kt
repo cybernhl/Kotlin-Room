@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.*
 
 /**
  * Description: RecyclerView扩展
- * Create by lxj, at 2018/12/25
+ * 关于Adapter的暂时没有写
  */
 
 /**
