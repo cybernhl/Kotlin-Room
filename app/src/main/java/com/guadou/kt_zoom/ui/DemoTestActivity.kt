@@ -1,6 +1,7 @@
 package com.guadou.kt_zoom.ui
 
 import android.content.Intent
+import android.graphics.Color
 import com.google.android.material.tabs.TabLayout
 import com.guadou.kt_zoom.R
 import com.guadou.lib_baselib.base.BaseActivity

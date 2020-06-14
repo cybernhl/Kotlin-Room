@@ -1,5 +1,6 @@
 package com.guadou.kt_zoom.ui
 
+import android.graphics.Color
 import androidx.lifecycle.Observer
 import com.guadou.kt_zoom.R
 import com.guadou.kt_zoom.mvvm.MainViewModel
@@ -7,6 +8,7 @@ import com.guadou.lib_baselib.base.BasePlaceHolderActivity
 import com.guadou.lib_baselib.ext.*
 
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderView
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,6 +43,9 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
     override fun init() {
 
+        setStatusBarColor(Color.WHITE)
+
+
         initListener()
 
     }
@@ -51,9 +56,9 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
         btn_toast.setOnClickListener {
 
-            val dateMills = 2032934294.toDateString()
+            //            val dateMills = 2032934294.toDateString()
+//            toastSuccess("测试成功tushi:" + dateMills)
 
-            toastSuccess("测试成功tushi:" + dateMills)
         }
 
         btn_request.setOnClickListener {
@@ -74,7 +79,6 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
         }
 
     }
-
 
     override fun showStateLoading() {
         mGloadingHolder.withData(GloadingPlaceHolderView.NEED_LOADING_STATUS_MAGRIN_TITLE)

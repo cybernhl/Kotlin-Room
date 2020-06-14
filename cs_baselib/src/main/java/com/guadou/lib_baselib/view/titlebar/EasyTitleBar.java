@@ -30,7 +30,7 @@ import com.guadou.lib_baselib.utils.ThreadPoolUtils;
 
 
 /**
- * 通用标题栏
+ * 通用标题栏,封装的TitleBar
  */
 public class EasyTitleBar extends RelativeLayout {
 

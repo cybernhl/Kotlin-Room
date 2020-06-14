@@ -9,29 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
- * Created by Jue on 2016/3/29.
- * 常用小工具类
+ * EasyTitle专用工具类
  */
-public class EasyUtil {
-
-    /**
-     * 获取屏幕宽度
-     */
-    public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int width = wm.getDefaultDisplay().getWidth();
-        return width;
-    }
-
-
-    /**
-     * 获取屏幕高度
-     */
-    public static int getScreenHeith(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int height = wm.getDefaultDisplay().getHeight();
-        return height;
-    }
+class EasyUtil {
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
@@ -109,14 +89,10 @@ public class EasyUtil {
 
     /**
      * 获取状态栏高度,在页面还没有显示出来之前
-     *
-     * @param a
-     * @return
      */
     public static int getStateBarHeight(Context a) {
         int result = 0;
-        int resourceId = a.getResources().getIdentifier("status_bar_height",
-                "dimen", "android");
+        int resourceId = a.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
             result = a.getResources().getDimensionPixelSize(resourceId);
         }

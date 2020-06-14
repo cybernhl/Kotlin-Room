@@ -17,7 +17,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public final class ShimmerDrawable extends Drawable {
+class ShimmerDrawable extends Drawable {
 
     private final ValueAnimator.AnimatorUpdateListener mUpdateListener =
             new ValueAnimator.AnimatorUpdateListener() {

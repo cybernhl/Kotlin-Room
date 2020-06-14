@@ -11,6 +11,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
+import androidx.databinding.DataBindingUtil.setContentView
 
 import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.ActivityManage
@@ -42,18 +44,17 @@ abstract class AbsActivity : AppCompatActivity(),
     protected fun getDataFromIntent(intent: Intent) {}
 
     /**
-     * 设置顶部状态栏的颜色（默认为蓝色）
+     * 设置顶部状态栏的颜色（默认为白色）
      */
     protected fun setStatusBarColor(): Int {
-
-        //项目需要为设置白底黑字
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            return Color.WHITE
+        //如果状态栏文字能变黑那么背景设置为白色，否则返回背景灰色文本默认为白色
+        return if (StatusBarUtils.setStatusBarBlackText(this)) {
+            Color.WHITE
+        } else {
+            Color.parseColor("#B0B0B0")
         }
-        return Color.parseColor("#B0B0B0")
-
     }
+
 
     /**
      * 动态的设置状态栏颜色
@@ -64,17 +65,20 @@ abstract class AbsActivity : AppCompatActivity(),
     fun setStatusBarColor(color: Int) {
 
         if (color == Color.WHITE) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            //变黑色文字成功
+            if (StatusBarUtils.setStatusBarBlackText(this)) {
                 StatusBarUtils.setColor(this, Color.WHITE)
             } else {
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
                 StatusBarUtils.setColor(this, Color.parseColor("#B0B0B0"))
             }
 
         } else {
+
+            //变为白色文字成功
+            StatusBarUtils.setStatusBarWhiteText(this)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
             StatusBarUtils.setColor(this, color)
+
         }
     }
 

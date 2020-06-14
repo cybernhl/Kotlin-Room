@@ -17,7 +17,7 @@ import com.guadou.basiclib.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class Shimmer {
+class Shimmer {
     private static final int COMPONENT_COUNT = 4;
 
     /**
