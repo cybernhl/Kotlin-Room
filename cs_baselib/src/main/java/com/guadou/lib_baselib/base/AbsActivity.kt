@@ -76,7 +76,6 @@ abstract class AbsActivity : AppCompatActivity(),
 
             //变为白色文字成功
             StatusBarUtils.setStatusBarWhiteText(this)
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
             StatusBarUtils.setColor(this, color)
 
         }

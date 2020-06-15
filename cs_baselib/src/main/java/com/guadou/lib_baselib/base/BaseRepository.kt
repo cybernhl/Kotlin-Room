@@ -2,6 +2,7 @@ package com.guadou.lib_baselib.base
 
 import android.text.TextUtils
 import com.google.gson.JsonParseException
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.testxiecheng.base.BaseBean
 import com.guadou.testxiecheng.base.OkResult
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +28,7 @@ open class BaseRepository {
         return try {
             call()
         } catch (e: Exception) {
+            YYLogUtils.e("BaseRepository1: 计算错误")
             if (!TextUtils.isEmpty(errorMessage)) {
                 OkResult.Error(IOException(errorMessage))
             } else {
@@ -42,7 +44,8 @@ open class BaseRepository {
         errorBlock: (suspend CoroutineScope.() -> Unit)? = null
     ): OkResult<T> {
 
-        return coroutineScope {  //执行挂起函数
+        return coroutineScope {
+            //执行挂起函数
             if (response.code == 200) {  //这里根据业务逻辑来 200 -1 等
                 successBlock?.let { it() }
                 OkResult.Success(response.data)
@@ -55,7 +58,7 @@ open class BaseRepository {
 
 
     //处理自定义错误消息
-    private fun handleExceptionMessage(e: Exception): IOException {
+    fun handleExceptionMessage(e: Exception): IOException {
         return when (e) {
             is UnknownHostException -> IOException("Unable to access domain name, unknown domain name.")
             is JsonParseException -> IOException("Data parsing exception.")

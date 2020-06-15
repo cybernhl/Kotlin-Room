@@ -32,10 +32,10 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
                 mMainRepository.getIndustry()
             }
 
-            val schoolResult = async {
-                YYLogUtils.w("thread3:" + CommUtils.isRunOnUIThread())
-                mMainRepository.getSchool()
-            }
+//            val schoolResult = async {
+//                YYLogUtils.w("thread3:" + CommUtils.isRunOnUIThread())
+//                mMainRepository.getSchool()
+//            }
 
 
             //协程内部嵌套普通的网络请求回调之类的也是可以的
@@ -77,37 +77,37 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
             YYLogUtils.w("thread4:" + (last - first).toString())
             YYLogUtils.w("thread4:" + CommUtils.isRunOnUIThread())
             //可以直接data获取到成功的数据
-            var industryStr = ""
-            val okResultIndustry = industryResult.await()
-            if (okResultIndustry is OkResult.Success) {
-                val beanIndustry = okResultIndustry.data
-                industryStr = beanIndustry.toString()
-            }
+//            var industryStr = ""
+//            val okResultIndustry = industryResult.await()
+//            if (okResultIndustry is OkResult.Success) {
+//                val beanIndustry = okResultIndustry.data
+//                industryStr = beanIndustry.toString()
+//            }
 
-            var schoolStr = ""
-            val okResultSchool = schoolResult.await()
-            if (okResultSchool is OkResult.Success) {
-                val beanSchool = okResultSchool.data
-                schoolStr = beanSchool.toString()
-            }
+//            var schoolStr = ""
+//            val okResultSchool = schoolResult.await()
+//            if (okResultSchool is OkResult.Success) {
+//                val beanSchool = okResultSchool.data
+//                schoolStr = beanSchool.toString()
+//            }
 
-            YYLogUtils.e(industryStr + " " + schoolStr)
+//            YYLogUtils.e("请求结果:" + industryStr + " " + schoolStr)
 //            toast(industryStr + " " + schoolStr)
-            toast("网络请求完成")
 
-//            loadError("Custom Error")
-            loadSuccess()
+//            toast("网络请求完成")
+
+
 
             //也可以使用函数的方式判断
-//            industryResult.checkResult({
-//                loadSuccess()
-//                mIndustryLiveData.postValue(it)
-//            }, {
-//                loadError(it)
-//                toast(it!!)
-//                mIndustryLiveData.postValue(null)
-//            })
-//
+            industryResult.await().checkResult({
+                loadSuccess()
+                mIndustryLiveData.postValue(it)
+            }, {
+                loadError(it)
+                toast(it!!)
+                mIndustryLiveData.postValue(null)
+            })
+
 //
 //            schoolResult.checkResult({
 //                loadSuccess()
@@ -118,7 +118,8 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
 //                mSchoolliveData.postValue(null)
 //            })
 
-
+//            loadError("Custom Error")
+//            loadSuccess()
         }
 
     }

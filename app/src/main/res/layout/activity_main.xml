@@ -9,8 +9,10 @@
     tools:context=".ui.MainActivity">
 
     <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        android:id="@+id/easy_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d_45dp"
+        app:Easy_hasStatusPadding="true"
+        android:layout_height="wrap_content"
         app:Easy_title="Main" />
 
     <ScrollView

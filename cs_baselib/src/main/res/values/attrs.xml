@@ -43,6 +43,7 @@
             <flag name="gone" value="0" />
             <flag name="visiable" value="1" />
         </attr>
+
         <!--标题栏分割线高度-->
         <attr name="Easy_lineHeight" format="dimension" />
         <!--标题栏分割线颜色-->
@@ -92,11 +93,10 @@
             <flag name="visiable" value="1" />
         </attr>
 
-        <!--设置是否充满状态栏-->
+        <!--设置是否充满状态栏,一般不用-->
         <attr name="Easy_fitsSystemWindows" format="boolean" />
-        <!--设置是否充满状态栏-->
+        <!--设置是否充满状态栏并带有状态栏的上边距，常用-->
         <attr name="Easy_hasStatusPadding" format="boolean" />
-
 
         <!--菜单图标大小-->
         <attr name="Easy_menuImgSize" format="dimension" />

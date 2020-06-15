@@ -25,7 +25,7 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
             YYLogUtils.w("Industory数据加载完成")
 
-//            tv_request_content.text = it?.toString()
+            tv_request_content.text = it?.toString()
 
 //            iv_image.load(it[0].industry_image_new)
 
@@ -43,8 +43,8 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
     override fun init() {
 
-        setStatusBarColor(Color.WHITE)
-
+//        setStatusBarColor(Color.RED)
+        StatusBarUtils.immersive(this)
 
         initListener()
 
@@ -54,11 +54,10 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
         toast("Test Toast")
 
-        btn_toast.setOnClickListener {
-
-            //            val dateMills = 2032934294.toDateString()
-//            toastSuccess("测试成功tushi:" + dateMills)
-
+        btn_toast.click {
+            val dateMills = 2032934294.toDateString()
+            toastSuccess("测试成功tushi:$dateMills")
+            iv_image.load("https://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0")
         }
 
         btn_request.setOnClickListener {
@@ -69,7 +68,7 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
         btn_load_img.setOnClickListener {
 
-            iv_image.load("https://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0")
+
         }
 
 
