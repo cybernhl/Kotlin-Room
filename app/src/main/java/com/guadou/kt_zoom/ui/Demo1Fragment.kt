@@ -4,10 +4,9 @@ import android.view.View
 import com.guadou.kt_zoom.R
 import com.guadou.kt_zoom.mvvm.MainViewModel
 import com.guadou.lib_baselib.base.BaseLazyLoadingFragment
-import com.guadou.lib_baselib.base.BaseLoadingFragment
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.view.gloading.GloadingGlobalAdapter
-import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
+
+import kotlinx.android.synthetic.main.fragment_demo_notitle.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
@@ -22,12 +21,7 @@ class Demo1Fragment : BaseLazyLoadingFragment<MainViewModel>() {
     override fun initVM(): MainViewModel = getViewModel()
 
     override fun init() {
-
-    }
-
-    override fun initViews(view: View) {
-//        view.findViewById<TextView>(R.id.tv_fragment_content).setText("1234")
-//        tv_fragment_content.setText("12345")
+        tv_fragment_content.setText("12345")
     }
 
     override fun onGoadingRetry() {

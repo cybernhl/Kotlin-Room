@@ -40,12 +40,18 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(inflateLayoutById(), container, false)
-        initViews(view)
         return transfromRootView(view)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initViews(view)
     }
 
     //用于转换根数图View
@@ -54,10 +60,6 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     }
 
     protected open fun initViews(view: View) {
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     /**
