@@ -67,14 +67,15 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
 
             case STATUS_LOAD_FAILED:
 
-                boolean networkConn = NetWorkUtil.isConnected(getContext());
-                if (!networkConn) {
-                    str = "NetWork Error";
-                    image = R.mipmap.page_icon_network;
-                } else {
-                    str = TextUtils.isEmpty(msg) ? "Load Error" : msg;
-                    image = R.mipmap.loading_error;
-                }
+                //是否需要加网络状态判断
+//                boolean networkConn = NetWorkUtil.isConnected(getContext());
+//                if (!networkConn) {
+//                    str = "NetWork Error";
+//                    image = R.mipmap.page_icon_network;
+//                } else {
+                str = TextUtils.isEmpty(msg) ? "Load Error" : msg;
+                image = R.mipmap.loading_error;
+//                }
 
                 onClickListener = this;
                 break;

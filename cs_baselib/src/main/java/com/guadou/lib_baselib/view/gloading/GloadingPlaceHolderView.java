@@ -91,14 +91,15 @@ public class GloadingPlaceHolderView extends LinearLayout implements View.OnClic
                     ((ShimmerFrameLayout) placeHolderFirstView).stopShimmer();
                 }
 
-                boolean networkConn = NetWorkUtil.isConnected(getContext());
-                if (!networkConn) {
-                    str = "NetWork Error";
-                    image = R.mipmap.page_icon_network;
-                } else {
+                //是否需要加网络状态判断
+//                boolean networkConn = NetWorkUtil.isConnected(getContext());
+//                if (!networkConn) {
+//                    str = "NetWork Error";
+//                    image = R.mipmap.page_icon_network;
+//                } else {
                     str = TextUtils.isEmpty(msg) ? "Load Error" : msg;
                     image = R.mipmap.loading_error;
-                }
+//                }
 
                 onClickListener = this;
                 break;

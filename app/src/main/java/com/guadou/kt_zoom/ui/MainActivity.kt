@@ -23,8 +23,6 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
         mViewModel.mIndustryLiveData.observe(this, Observer {
 
-            YYLogUtils.w("Industory数据加载完成")
-
             tv_request_content.text = it?.toString()
 
 //            iv_image.load(it[0].industry_image_new)

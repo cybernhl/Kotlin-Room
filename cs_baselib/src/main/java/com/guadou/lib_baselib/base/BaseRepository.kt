@@ -22,9 +22,7 @@ open class BaseRepository {
     }
 
     //处理Http错误-内部再处理Api错误
-    suspend fun <T : Any> handleErrorApiCall(
-        call: suspend () -> OkResult<T>, errorMessage: String = ""
-    ): OkResult<T> {
+    suspend fun <T : Any> handleErrorApiCall(call: suspend () -> OkResult<T>, errorMessage: String = ""): OkResult<T> {
         return try {
             call()
         } catch (e: Exception) {

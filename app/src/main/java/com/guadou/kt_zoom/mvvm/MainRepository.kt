@@ -7,26 +7,30 @@ import com.guadou.kt_zoom.http.CachedRetrofit
 import com.guadou.lib_baselib.base.BaseRepository
 import com.guadou.lib_baselib.ext.networkRequest
 import com.guadou.testxiecheng.base.OkResult
+import java.io.IOException
+import java.lang.Exception
 
 class MainRepository : BaseRepository() {
 
+    /**
+     * 使用扩展方法，自己的引擎类请求网络
+     */
     suspend inline fun getIndustry(): OkResult<List<Industry>> {
 
-        return handleErrorApiCall(call = {
-            handleApiErrorResponse(
-
-                CachedRetrofit.apiService.getIndustry(
-                    Constants.NETWORK_CONTENT_TYPE,
-                    Constants.NETWORK_ACCEPT_V1
-                )
-
+        return networkRequest {
+            CachedRetrofit.apiService.getIndustry(
+                Constants.NETWORK_CONTENT_TYPE,
+                Constants.NETWORK_ACCEPT_V1
             )
-        })
+        }
 
     }
 
-
+    /**
+     * 使用基类方法嵌套请求网络
+     */
     suspend inline fun getSchool(): OkResult<List<SchoolBean>> {
+
         return handleErrorApiCall(call = {
             handleApiErrorResponse(
 

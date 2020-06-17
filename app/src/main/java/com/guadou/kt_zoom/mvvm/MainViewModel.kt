@@ -1,8 +1,10 @@
 package com.guadou.kt_zoom.mvvm
 
 import androidx.lifecycle.MutableLiveData
+import com.guadou.cs_cptservices.Constants
 import com.guadou.kt_zoom.bean.Industry
 import com.guadou.kt_zoom.bean.SchoolBean
+import com.guadou.kt_zoom.http.CachedRetrofit
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
@@ -26,43 +28,15 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
 
             loadStartLoading()
 
-            YYLogUtils.w("thread1:" + CommUtils.isRunOnUIThread())
+
             val industryResult = async {
-                YYLogUtils.w("thread2:" + CommUtils.isRunOnUIThread())
                 mMainRepository.getIndustry()
             }
 
-//            val schoolResult = async {
-//                YYLogUtils.w("thread3:" + CommUtils.isRunOnUIThread())
-//                mMainRepository.getSchool()
-//            }
-
-
-            //协程内部嵌套普通的网络请求回调之类的也是可以的
-//            OkhttpUtil.okHttpGet("http://yyjobs-api-dev.guabean.com/index.php/api/employee/extra/school",
-//                null,
-//                mapOf(
-//                    "Content-Type" to Constants.NETWORK_CONTENT_TYPE,
-//                    "Accept" to Constants.NETWORK_ACCEPT_V1
-//                ),
-//                object : CallBackUtil.CallBackString() {
-//                    override fun onFailure(call: Call?, e: Exception?) {
-//                        e?.printStackTrace()
-//                    }
-//
-//                    override fun onResponse(call: Call?, response: String?) {
-//
-//                        YYLogUtils.e(response)
-//
-//                        loadSuccess()
-//                    }
-//
-//                })
 
             val first = System.currentTimeMillis()
 
 //            loadDB()  //默认是阻塞的,串联的
-
 
             async {
                 //loadDB()    //加上aync就是非阻塞的 并发的  ，也可以不定义方法直接用aync包裹代码
@@ -76,25 +50,6 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
 
             YYLogUtils.w("thread4:" + (last - first).toString())
             YYLogUtils.w("thread4:" + CommUtils.isRunOnUIThread())
-            //可以直接data获取到成功的数据
-//            var industryStr = ""
-//            val okResultIndustry = industryResult.await()
-//            if (okResultIndustry is OkResult.Success) {
-//                val beanIndustry = okResultIndustry.data
-//                industryStr = beanIndustry.toString()
-//            }
-
-//            var schoolStr = ""
-//            val okResultSchool = schoolResult.await()
-//            if (okResultSchool is OkResult.Success) {
-//                val beanSchool = okResultSchool.data
-//                schoolStr = beanSchool.toString()
-//            }
-
-//            YYLogUtils.e("请求结果:" + industryStr + " " + schoolStr)
-//            toast(industryStr + " " + schoolStr)
-
-//            toast("网络请求完成")
 
 
 

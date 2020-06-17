@@ -1,23 +1,32 @@
 package com.guadou.lib_baselib.ext
 
-import android.text.TextUtils
 import com.guadou.lib_baselib.base.BaseRepository
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.testxiecheng.base.BaseBean
 import com.guadou.testxiecheng.base.OkResult
-import kotlinx.coroutines.coroutineScope
+
 import java.io.IOException
+import java.lang.Exception
 
 /**
  * 网络请求的封装
  */
 
-suspend fun <T : Any> BaseRepository.networkRequest(bean: BaseBean<T>): OkResult<T> {
-    return handleErrorApiCall(call = {
-        handleApiErrorResponse(
-                bean
-        )
+//可用引擎切换 - 默认用于 Retrofit + suspend方式
+suspend fun <T : Any> BaseRepository.networkRequest(call: suspend () -> BaseBean<T>): OkResult<T> {
 
-    })
+    return try {
+
+        val response = call()
+
+        if (response.code == 200) {
+            OkResult.Success(response.data)
+        } else {
+            OkResult.Error(IOException(response.message))
+        }
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+        OkResult.Error(handleExceptionMessage(e))
+    }
 
 }
