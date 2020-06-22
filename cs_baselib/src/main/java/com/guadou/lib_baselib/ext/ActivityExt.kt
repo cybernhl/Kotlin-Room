@@ -12,15 +12,25 @@ import androidx.fragment.app.FragmentActivity
  */
 
 //内联函数+标注泛型 = 泛型实例化
-inline fun <reified T> Fragment.startActivity(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null) {
-    activity?.startActivity<T>(flag, bundle)
+inline fun <reified T> Fragment.gotoActivity(
+    flag: Int = -1,
+    bundle: Array<out Pair<String, Any?>>? = null
+) {
+    activity?.gotoActivity<T>(flag, bundle)
 }
 
-inline fun <reified T> Fragment.startActivityForResult(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null, requestCode: Int = -1) {
-    activity?.startActivityForResult<T>(flag, bundle, requestCode)
+inline fun <reified T> Fragment.gotoActivity(
+    flag: Int = -1,
+    bundle: Array<out Pair<String, Any?>>? = null,
+    requestCode: Int = -1
+) {
+    activity?.gotoActivityForResult<T>(flag, bundle, requestCode)
 }
 
-inline fun <reified T> Context.startActivity(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null) {
+inline fun <reified T> Context.gotoActivity(
+    flag: Int = -1,
+    bundle: Array<out Pair<String, Any?>>? = null
+) {
     val intent = Intent(this, T::class.java).apply {
         if (flag != -1) {
             this.addFlags(flag)
@@ -33,15 +43,26 @@ inline fun <reified T> Context.startActivity(flag: Int = -1, bundle: Array<out P
     startActivity(intent)
 }
 
-inline fun <reified T> View.startActivity(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null) {
-    context.startActivity<T>(flag, bundle)
+inline fun <reified T> View.gotoActivity(
+    flag: Int = -1,
+    bundle: Array<out Pair<String, Any?>>? = null
+) {
+    context.gotoActivity<T>(flag, bundle)
 }
 
-inline fun <reified T> View.startActivityForResult(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null, requestCode: Int = -1) {
-    (context as Activity).startActivityForResult<T>(flag, bundle, requestCode)
+inline fun <reified T> View.gotoActivityForResult(
+    flag: Int = -1,
+    bundle: Array<out Pair<String, Any?>>? = null,
+    requestCode: Int = -1
+) {
+    (context as Activity).gotoActivityForResult<T>(flag, bundle, requestCode)
 }
 
-inline fun <reified T> Activity.startActivityForResult(flag: Int = -1, bundle: Array<out Pair<String, Any?>>? = null, requestCode: Int = -1) {
+inline fun <reified T> Activity.gotoActivityForResult(
+    flag: Int = -1,
+    bundle: Array<out Pair<String, Any?>>? = null,
+    requestCode: Int = -1
+) {
     val intent = Intent(this, T::class.java).apply {
         if (flag != -1) {
             this.addFlags(flag)
@@ -50,8 +71,3 @@ inline fun <reified T> Activity.startActivityForResult(flag: Int = -1, bundle: A
     }
     startActivityForResult(intent, requestCode)
 }
-
-
-
-//view model
-//fun <T: ViewModel> FragmentActivity.getVM(clazz: Class<T>) = ViewModelProviders.of(this).get(clazz)

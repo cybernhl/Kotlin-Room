@@ -4,6 +4,9 @@
     package="com.guadou.kt_zoom"
     tools:ignore="GoogleAppIndexingWarning">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -22,6 +25,8 @@
         </activity>
 
         <activity android:name=".ui.DemoTestActivity"/>
+
+        <activity android:name=".ui.ImageSelectActivity"/>
 
     </application>
 

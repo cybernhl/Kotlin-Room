@@ -64,11 +64,9 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
         }
 
-        btn_load_img.setOnClickListener {
-
-
+        btn_load_img.click {
+            gotoActivity<ImageSelectActivity>()
         }
-
 
         btn_jump_auth.setOnClickListener {
             //            YYRouterService.mainComponentServer.startAuthActivity()

@@ -7,6 +7,7 @@ import com.guadou.kt_zoom.http.CachedRetrofit
 import com.guadou.lib_baselib.base.BaseRepository
 import com.guadou.lib_baselib.ext.networkRequest
 import com.guadou.testxiecheng.base.OkResult
+import com.luck.picture.lib.PictureSelector
 import java.io.IOException
 import java.lang.Exception
 

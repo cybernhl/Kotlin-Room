@@ -21,6 +21,7 @@ android {
             jvmTarget = JavaVersion.VERSION_1_8
         }
 
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -100,7 +101,15 @@ dependencies {
     api deps.support.permission
     api deps.support.live_bus
     api deps.support.brvah
-    api deps.support.smart_refresh
-    api deps.support.luban
+
+    //刷新布局
+    //    api deps.support.smart_refresh
+
+    //图片选择：带luban，ucorp
+    api(deps.support.picture_selector) {
+        exclude group: 'androidx.recyclerview'
+        exclude group: 'androidx.appcompat'
+        exclude group: 'com.squareup.okio'
+    }
 
 }

@@ -23,7 +23,7 @@ ext {
                     "lifecycle_vm"     : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0',
                     "lifecycle_live"   : 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0',
 
-                    "junit"            : 'junit:junit:4.13',
+                    "junit"            : 'junit:junit:4.12',
                     "test_junit"       : 'androidx.test.ext:junit:1.1.1',
                     "test_espresso"    : 'androidx.test.espresso:espresso-core:3.2.0',
 
@@ -48,7 +48,7 @@ ext {
                     "live_bus"         : 'com.jeremyliao:live-event-bus-x:1.6.1',
                     "brvah"            : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2',
                     "smart_refresh"    : 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-14',
-                    "luban"            : 'top.zibin:Luban-turbo:1.0.0'
+                    "picture_selector" : 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
 
             ]
 
