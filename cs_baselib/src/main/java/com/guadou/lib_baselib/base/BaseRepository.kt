@@ -17,7 +17,7 @@ import java.net.UnknownHostException
 open class BaseRepository {
 
     //无异常处理 -> 一般不用这个，一旦报错会App崩溃
-    suspend fun <T : Any> handleApiCall(call: suspend () -> BaseBean<T>): BaseBean<T> {
+    suspend inline fun <T : Any> handleApiCall(call: suspend () -> BaseBean<T>): BaseBean<T> {
         return call.invoke()
     }
 
@@ -26,7 +26,6 @@ open class BaseRepository {
         return try {
             call()
         } catch (e: Exception) {
-            YYLogUtils.e("BaseRepository1: 计算错误")
             if (!TextUtils.isEmpty(errorMessage)) {
                 OkResult.Error(IOException(errorMessage))
             } else {

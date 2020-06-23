@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.ext.image_select;
+package com.guadou.lib_baselib.ext.engine.image_select;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * 缓存的图片加载类
  */
- class GlideSelectCacheEngine implements CacheResourcesEngine {
+public class GlideSelectCacheEngine implements CacheResourcesEngine {
     /**
      * glide版本号,请根据用户集成为准 这里只是模拟
      */

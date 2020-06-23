@@ -5,11 +5,8 @@ import com.guadou.kt_zoom.bean.Industry
 import com.guadou.kt_zoom.bean.SchoolBean
 import com.guadou.kt_zoom.http.CachedRetrofit
 import com.guadou.lib_baselib.base.BaseRepository
-import com.guadou.lib_baselib.ext.networkRequest
+import com.guadou.lib_baselib.ext.engine.networkRequest
 import com.guadou.testxiecheng.base.OkResult
-import com.luck.picture.lib.PictureSelector
-import java.io.IOException
-import java.lang.Exception
 
 class MainRepository : BaseRepository() {
 

@@ -17,6 +17,12 @@
         android:layout_height="wrap_content"
         android:text="选择图片" />
 
+    <Button
+        android:id="@+id/btn_carme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择相机" />
+
     <TextView
         android:id="@+id/tv_select_image"
         android:layout_width="match_parent"

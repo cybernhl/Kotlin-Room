@@ -1,11 +1,11 @@
 package com.guadou.kt_zoom.ui
 
-import android.widget.Toast
 import com.guadou.kt_zoom.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.click
-import com.guadou.lib_baselib.ext.image_select.openImageSelect
+import com.guadou.lib_baselib.ext.engine.image_select.openCamera
+import com.guadou.lib_baselib.ext.engine.image_select.openImageSelect
 import com.guadou.lib_baselib.ext.toast
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
@@ -31,21 +31,41 @@ class ImageSelectActivity : BaseActivity<BaseViewModel>() {
             openImageSelect(mImageSelectDatas, object : OnResultCallbackListener<LocalMedia> {
 
                 override fun onResult(result: MutableList<LocalMedia>?) {
-
                     result?.also {
                         mImageSelectDatas.clear()
                         mImageSelectDatas.addAll(it)
                     }
-
                 }
 
                 override fun onCancel() {
                     toast("取消了选择")
                 }
 
-            })
+            }, selectNum = 6, canTackPhoto = true, canCrop = true, canCompress = true)
 
         }
+
+        btn_carme.click {
+
+            openCamera(mImageSelectDatas,
+                object : OnResultCallbackListener<LocalMedia> {
+                    override fun onResult(result: MutableList<LocalMedia>?) {
+
+                        result?.also {
+                            mImageSelectDatas.clear()
+                            mImageSelectDatas.addAll(it)
+                        }
+
+                    }
+
+                    override fun onCancel() {
+                        toast("取消了选择")
+                    }
+
+                }, true
+            )
+        }
+
     }
 
 

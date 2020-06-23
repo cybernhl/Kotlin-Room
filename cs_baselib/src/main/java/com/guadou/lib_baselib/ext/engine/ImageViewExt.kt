@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.ext
+package com.guadou.lib_baselib.ext.engine
 
 import android.widget.ImageView
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -10,7 +10,8 @@ import com.bumptech.glide.request.target.Target
 import com.guadou.lib_baselib.glideconfig.GlideApp
 
 /**
- *  ImageView相关
+ *  引擎类
+ *  ImageView相关的图片加载
  */
 
 /**

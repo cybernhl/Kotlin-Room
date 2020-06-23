@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.ext
+package com.guadou.lib_baselib.ext.engine
 
 import com.guadou.lib_baselib.base.BaseRepository
 import com.guadou.testxiecheng.base.BaseBean
@@ -8,6 +8,7 @@ import java.io.IOException
 import java.lang.Exception
 
 /**
+ * 引擎类
  * 网络请求的封装
  */
 
