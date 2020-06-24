@@ -6,6 +6,7 @@ import com.guadou.kt_zoom.bean.Industry
 import com.guadou.kt_zoom.bean.SchoolBean
 import com.guadou.kt_zoom.http.CachedRetrofit
 import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.ext.ControlledRunner
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
@@ -28,11 +29,12 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
 
             loadStartLoading()
 
-
             val industryResult = async {
                 mMainRepository.getIndustry()
             }
-
+            val schoolResult = async {
+                mMainRepository.getSchool()
+            }
 
             val first = System.currentTimeMillis()
 
@@ -52,7 +54,6 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
             YYLogUtils.w("thread4:" + CommUtils.isRunOnUIThread())
 
 
-
             //也可以使用函数的方式判断
             industryResult.await().checkResult({
                 loadSuccess()
@@ -63,15 +64,14 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
                 mIndustryLiveData.postValue(null)
             })
 
-//
-//            schoolResult.checkResult({
-//                loadSuccess()
-//                mSchoolliveData.postValue(it)
-//            }, {
-//                loadError(it)
-//                toast(it!!)
-//                mSchoolliveData.postValue(null)
-//            })
+            schoolResult.await().checkResult({
+                loadSuccess()
+                mSchoolliveData.postValue(it)
+            }, {
+                loadError(it)
+                toast(it!!)
+                mSchoolliveData.postValue(null)
+            })
 
 //            loadError("Custom Error")
 //            loadSuccess()

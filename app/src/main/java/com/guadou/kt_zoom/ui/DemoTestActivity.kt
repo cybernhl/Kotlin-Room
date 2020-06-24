@@ -1,12 +1,12 @@
 package com.guadou.kt_zoom.ui
 
 import android.content.Intent
-import android.graphics.Color
-import com.google.android.material.tabs.TabLayout
 import com.guadou.kt_zoom.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.bindFragment
+import com.guadou.lib_baselib.ext.putString
+import com.guadou.lib_baselib.ext.SP
 import com.guadou.lib_baselib.utils.CommUtils
 import kotlinx.android.synthetic.main.activity_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -31,6 +31,8 @@ class DemoTestActivity : BaseActivity<BaseViewModel>() {
     override fun inflateLayoutById(): Int = R.layout.activity_fragment
 
     override fun init() {
+
+      SP()
 
         viewPager.bindFragment(
             supportFragmentManager,

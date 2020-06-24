@@ -8,7 +8,7 @@ import com.guadou.kt_zoom.mvvm.MainViewModel
 import com.guadou.lib_baselib.base.BasePlaceHolderActivity
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.ext.engine.load
-import com.guadou.lib_baselib.ext.engine.sendPermissions
+import com.guadou.lib_baselib.ext.engine.permissionRequest
 
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.StatusBarUtils
@@ -69,20 +69,10 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
         }
 
         btn_load_img.click {
-//            AndPermission.with(this).runtime()
-//                .permission(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-//                .onDenied {
-//                    toast("没有权限")
-//                }
-//                .onGranted {
-//                    gotoActivity<ImageSelectActivity>()
-//                }
-//                .start()
 
-            sendPermissions(
+            permissionRequest(
                 Manifest.permission.CAMERA,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                deniedStr = "没有权限",
                 block = {
                     gotoActivity<ImageSelectActivity>()
                 }

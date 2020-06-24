@@ -1,6 +1,8 @@
 package com.guadou.lib_baselib.ext.engine.image_select
 
+import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import androidx.core.content.ContextCompat
@@ -14,13 +16,19 @@ import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.language.LanguageConfig
 import com.luck.picture.lib.listener.OnResultCallbackListener
+import com.luck.picture.lib.permissions.PermissionChecker
 import com.luck.picture.lib.style.PictureCropParameterStyle
 import com.luck.picture.lib.style.PictureParameterStyle
 import com.luck.picture.lib.style.PictureWindowAnimationStyle
+import com.luck.picture.lib.tools.PictureFileUtils
 
 /**
  * 图片选择的引擎类
  * 用于开启图片选择相关，压缩相关，裁剪相关
+ *
+ * openImageSelect -  开启图库的选择（选择数量，是否裁剪，是否压缩）
+ * openCamera  -  开启相机的选择 (是否裁剪，是否压缩)
+ *
  */
 
 //开启图片选择
@@ -517,4 +525,14 @@ fun Fragment.openCamera(
 }
 
 
+/**
+ * 清理图片选择，裁剪，压缩相关的缓存文件
+ */
+fun Context.clearImageSelectCache() {
+    if (PermissionChecker.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//        PictureFileUtils.deleteCacheDirFile(this, PictureMimeType.ofImage())
+        PictureFileUtils.deleteAllCacheDirFile(getContext())
+    }
+
+}
 

@@ -11,16 +11,18 @@ import com.guadou.lib_baselib.utils.CommUtils
  * sp().getString("a", "default")
  * sp().getBoolean("b", false)
  *
+   sp().putString("abc","test demo")
 
    sp().edit {
    putString("a", "1")
    putBoolean("b", true)
+ }
 
  * sp().clear()
 }
  */
 
-fun Any.sp(name: String = "app_config") =
+fun Any.SP(name: String = "app_config") =
     CommUtils.getContext().getSharedPreferences(name, Context.MODE_PRIVATE)
 
 /**

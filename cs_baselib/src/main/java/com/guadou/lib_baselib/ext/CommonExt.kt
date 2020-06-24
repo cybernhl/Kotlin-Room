@@ -1,6 +1,7 @@
 package com.guadou.lib_baselib.ext
 
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
@@ -16,14 +17,17 @@ import android.view.View
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -33,6 +37,13 @@ import java.io.Serializable
 /**
  *  通用扩展
  */
+
+/**
+ * 全局的Context
+ */
+fun Any.commContext(): Context {
+    return CommUtils.getContext()
+}
 
 /** dp和px转换 **/
 fun Context.dp2px(dpValue: Float): Int {
@@ -50,7 +61,6 @@ fun Context.sp2px(spValue: Float): Int {
 fun Context.px2sp(pxValue: Float): Int {
     return (pxValue / resources.displayMetrics.scaledDensity + 0.5f).toInt()
 }
-
 
 fun Fragment.dp2px(dpValue: Float): Int {
     return context!!.dp2px(dpValue)
@@ -313,8 +323,11 @@ fun Array<out Pair<String, Any?>>.toBundle(): Bundle? {
 }
 
 
-fun Any.runOnUIThread(action: () -> Unit) {
-    Handler(Looper.getMainLooper()).post { action() }
+/**
+ * 主线程运行
+ */
+fun Any.runOnUIThread(block: () -> Unit) {
+    Handler(Looper.getMainLooper()).post { block() }
 }
 
 
@@ -361,4 +374,48 @@ fun Bitmap.saveToAlbum(
             runOnUIThread { callback?.invoke(null, null) }
         }
     }
+}
+
+/**
+ * 倒计时的实现
+ */
+@ExperimentalCoroutinesApi
+fun BaseViewModel.countDown(
+    time: Int = 5,
+    start: (scop: CoroutineScope) -> Unit,
+    end: () -> Unit,
+    next: (time: Int) -> Unit
+) {
+
+    launchOnUI {
+
+        //开启一个子协程，可以取消这个子线程，无需取消整个VewModelScop
+        launch {
+
+            flow {
+                (time downTo 0).forEach {
+                    delay(1000)
+                    emit(it)
+                }
+            }.onStart {
+                // 倒计时开始 ，在这里可以让Button 禁止点击状态
+                start(this@launch)
+
+            }.onCompletion {
+                // 倒计时结束 ，在这里可以让Button 恢复点击状态
+                end()
+
+            }.catch {
+                //错误
+                toast(it.message)
+
+            }.collect {
+                // 在这里 更新值来显示到UI
+                next(it)
+            }
+
+        }
+
+    }
+
 }

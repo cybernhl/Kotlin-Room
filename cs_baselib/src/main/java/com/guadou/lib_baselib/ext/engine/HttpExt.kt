@@ -13,7 +13,7 @@ import java.lang.Exception
  */
 
 //可用引擎切换 - 默认用于 Retrofit + suspend方式
-suspend fun <T : Any> BaseRepository.networkRequest(call: suspend () -> BaseBean<T>): OkResult<T> {
+suspend fun <T : Any> BaseRepository.httpRequest(call: suspend () -> BaseBean<T>): OkResult<T> {
 
     return try {
 

@@ -4,10 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.guadou.lib_baselib.bean.LoadAction
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 
 open class BaseViewModel : ViewModel() {
@@ -15,9 +12,7 @@ open class BaseViewModel : ViewModel() {
     var mLoadActionLiveData: MutableLiveData<LoadAction> = MutableLiveData()
 
     fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
-
         viewModelScope.launch { block() }
-
     }
 
     suspend fun <T> launchOnIO(block: suspend CoroutineScope.() -> T) {
