@@ -114,8 +114,7 @@ class ControlledRunnerExampleImplementation<T> {
      * When several coroutines call joinPreviousOrRun at the same time, only one will run and
      * the others will return the result from the winner.
      */
-    @Deprecated("This code is not thread-safe. Use ControlledRunner below instead.",
-        level = ERROR)
+    @Deprecated("This code is not thread-safe. Use ControlledRunner below instead.", level = ERROR)
     suspend fun joinPreviousOrRun(block: suspend () -> T): T {
         // if there is an activeTask, return it's result and don't run the block
         activeTask?.let {

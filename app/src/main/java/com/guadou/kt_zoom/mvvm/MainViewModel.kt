@@ -21,11 +21,33 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
     val mIndustryLiveData = MutableLiveData<List<Industry>>()
     val mSchoolliveData = MutableLiveData<List<SchoolBean>>()
 
+    var controlledRunner = ControlledRunner<List<Industry>?>()
+
+    //测试重复的数据
+    fun testChongfu() {
+
+        launchOnUI {
+            val data = controlledRunner.cancelPreviousThenRun {
+
+                val dataResult = mMainRepository.getIndustry()
+                if (dataResult is OkResult.Success) {
+                    return@cancelPreviousThenRun dataResult.data
+                }
+                return@cancelPreviousThenRun null
+
+            }.toString()
+
+            YYLogUtils.e("测试重复的数据:" + data)
+        }
+    }
+
+
     //获取行业数据
     fun getIndustry() {
 
         //默认执行
         launchOnUI {
+
 
             loadStartLoading()
 
