@@ -51,7 +51,8 @@ class ImageSelectActivity : BaseActivity<ImageSelectViewModel>() {
 
         btn_carme.click {
 
-            openCamera(mImageSelectDatas,
+            openCamera(
+                mImageSelectDatas,
                 object : OnResultCallbackListener<LocalMedia> {
                     override fun onResult(result: MutableList<LocalMedia>?) {
 
@@ -72,7 +73,7 @@ class ImageSelectActivity : BaseActivity<ImageSelectViewModel>() {
 
         //转换
         btn_transfrom.click {
-//            val str = "abc,def,ght,lkh"
+            //            val str = "abc,def,ght,lkh"
 //            YYLogUtils.e(str.toCommaList().toString())
 //
 //            val list = listOf("taiwan","xianggang","aomen")
@@ -84,6 +85,7 @@ class ImageSelectActivity : BaseActivity<ImageSelectViewModel>() {
 
 
             mViewModel.startCountDown()
+
 
         }
 

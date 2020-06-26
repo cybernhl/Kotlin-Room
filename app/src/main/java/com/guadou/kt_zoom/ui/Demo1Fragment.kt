@@ -26,6 +26,8 @@ class Demo1Fragment : BaseLazyLoadingFragment<MainViewModel>() {
 
     override fun onGoadingRetry() {
         toast("重试一个请求")
+
+        onLazyInitData()
     }
 
     override fun onLazyInitData() {

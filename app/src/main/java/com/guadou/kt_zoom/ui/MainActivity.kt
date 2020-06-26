@@ -12,6 +12,7 @@ import com.guadou.lib_baselib.ext.engine.permissionRequest
 
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.StatusBarUtils
+import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderView
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -58,14 +59,16 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
         btn_toast.click {
             val dateMills = 2032934294.toDateString()
-            toastSuccess("测试成功tushi:$dateMills")
+            toast("测试成功tushi:$dateMills")
             iv_image.load("https://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0")
+
+            LoadingDialogManager.get().showLoading(this)
         }
 
         btn_request.setOnClickListener {
 
-//            mViewModel.getIndustry()
-            mViewModel.testChongfu()
+            mViewModel.getIndustry()
+//            mViewModel.testChongfu()
         }
 
         btn_load_img.click {

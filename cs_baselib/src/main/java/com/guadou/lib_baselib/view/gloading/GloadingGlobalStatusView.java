@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.guadou.basiclib.R;
 import com.guadou.lib_baselib.utils.Log.YYLogUtils;
 import com.guadou.lib_baselib.utils.NetWorkUtil;
+import com.guadou.lib_baselib.view.progress.jump.JumpLoadingView;
 
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
@@ -29,6 +30,7 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
     private final Runnable mRetryTask;
     private final ImageView mImageView;
     private final View mTitle;
+    private final JumpLoadingView loading_view;
 
     public GloadingGlobalStatusView(Context context, Runnable retryTask) {
         super(context);
@@ -38,6 +40,7 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
         mImageView = findViewById(R.id.image);
         mTextView = findViewById(R.id.text);
         mTitle = findViewById(R.id.title);
+        loading_view = findViewById(R.id.loading_view);
         this.mRetryTask = retryTask;
     }
 
@@ -54,19 +57,29 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
 
         View.OnClickListener onClickListener = null;
         int image = R.drawable.anim_gloading;
+        loading_view.setVisibility(VISIBLE);
+        mImageView.setVisibility(GONE);
         String str = "Loading...";
 
         switch (status) {
             case STATUS_LOAD_SUCCESS:
+                loading_view.setVisibility(GONE);
+                loading_view.stopLoading();
+                mImageView.setVisibility(GONE);
                 show = false;
                 break;
 
             case STATUS_LOADING:
+                loading_view.setVisibility(VISIBLE);
+                loading_view.startLoading(0);
+                mImageView.setVisibility(GONE);
                 str = "Loading...";
                 break;
 
             case STATUS_LOAD_FAILED:
-
+                loading_view.setVisibility(GONE);
+                loading_view.stopLoading();
+                mImageView.setVisibility(VISIBLE);
                 //是否需要加网络状态判断
 //                boolean networkConn = NetWorkUtil.isConnected(getContext());
 //                if (!networkConn) {
@@ -81,6 +94,9 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
                 break;
 
             case STATUS_EMPTY_DATA:
+                loading_view.setVisibility(GONE);
+                loading_view.stopLoading();
+                mImageView.setVisibility(VISIBLE);
                 str = "No Data";
                 image = R.mipmap.loading_error;
                 break;

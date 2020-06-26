@@ -145,6 +145,7 @@
     </declare-styleable>
 
 
+    <!--  原形的Loading-Anim  -->
     <declare-styleable name="CircleLoadingView">
         <attr name="loading_renderer">
 
@@ -155,6 +156,11 @@
             <enum name="GearLoadingRenderer" value="3" />
 
         </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="JumpLoadingView">
+        <attr name="delay" format="integer|reference" />
     </declare-styleable>
 
 </resources>

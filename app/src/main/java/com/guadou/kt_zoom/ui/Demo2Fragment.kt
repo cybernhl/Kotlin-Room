@@ -6,6 +6,7 @@ import com.guadou.kt_zoom.mvvm.MainViewModel
 import com.guadou.lib_baselib.base.BaseLazyLoadingFragment
 import com.guadou.lib_baselib.base.BaseLoadingFragment
 import com.guadou.lib_baselib.ext.toast
+import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalAdapter
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -33,10 +34,19 @@ class Demo2Fragment : BaseLazyLoadingFragment<MainViewModel>() {
 
     override fun onGoadingRetry() {
         toast("重试一个请求")
+        onLazyInitData()
     }
 
     override fun onLazyInitData() {
-        mViewModel.getIndustry()
+//        mViewModel.getIndustry()
+
+        showStateLoading()
+
+        CommUtils.getHandler().postDelayed({
+
+            showStateError("cuowule")
+
+        },2000)
     }
 
 }

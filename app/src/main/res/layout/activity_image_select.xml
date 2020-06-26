@@ -87,4 +87,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
+    <com.guadou.lib_baselib.view.progress.jump.JumpLoadingView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
 </LinearLayout>
