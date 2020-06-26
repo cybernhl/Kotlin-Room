@@ -35,15 +35,56 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_10dp"
+        android:text="下面展示一些自定义动画的Loading" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.guadou.lib_baselib.view.progress.rotate.CircleLoadingView
+            android:layout_width="@dimen/d_50dp"
+            android:layout_height="@dimen/d_50dp"
+            android:background="#fff1c02e"
+            app:loading_renderer="LevelLoadingRenderer" />
+
+        <com.guadou.lib_baselib.view.progress.rotate.CircleLoadingView
+            android:layout_width="@dimen/d_50dp"
+            android:layout_height="@dimen/d_50dp"
+            android:layout_marginLeft="@dimen/d_10dp"
+            android:background="#fff1c02e"
+            app:loading_renderer="MaterialLoadingRenderer" />
+
+        <com.guadou.lib_baselib.view.progress.rotate.CircleLoadingView
+            android:layout_width="@dimen/d_50dp"
+            android:layout_height="@dimen/d_50dp"
+            android:layout_marginLeft="@dimen/d_10dp"
+            android:background="#fff1c02e"
+            app:loading_renderer="GearLoadingRenderer" />
+
+        <com.guadou.lib_baselib.view.progress.rotate.CircleLoadingView
+            android:id="@+id/clv_4"
+            android:layout_width="@dimen/d_50dp"
+            android:layout_height="@dimen/d_50dp"
+            android:layout_marginLeft="@dimen/d_10dp"
+            android:background="#fff1c02e"
+            app:loading_renderer="WhorlLoadingRenderer" />
+
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/et_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/tv_select_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

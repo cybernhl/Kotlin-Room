@@ -87,6 +87,17 @@ public class CommUtils {
         return px / density;
     }
 
+    public static float dip2px(float dip) {
+        float density = getContext().getResources().getDisplayMetrics().density;
+        return (dip * density + 0.5f);
+    }
+
+    public static float px2dip(float px) {
+        float density = getContext().getResources().getDisplayMetrics().density;
+        return px / density;
+    }
+
+
     //-------------------加载布局文件-------------------------------------------------
 
     public static View inflate(int id) {

@@ -84,6 +84,7 @@ class ImageSelectActivity : BaseActivity<ImageSelectViewModel>() {
 
 
             mViewModel.startCountDown()
+
         }
 
         et_input.textChangeCallback {
