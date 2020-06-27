@@ -27,6 +27,7 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
     fun testChongfu() {
 
         launchOnUI {
+
             val data = controlledRunner.cancelPreviousThenRun {
 
                 val dataResult = mMainRepository.getIndustry()
@@ -39,6 +40,7 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
 
             YYLogUtils.e("测试重复的数据:" + data)
         }
+
     }
 
 

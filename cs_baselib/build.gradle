@@ -98,10 +98,9 @@ dependencies {
     api deps.support.cookie_jar
 
     //其他依赖
-    api deps.support.permission
+    implementation deps.support.permission
     api deps.support.live_bus
     api deps.support.brvah
-//    api 'com.nineoldandroids:library:2.4.0'
 
     //刷新布局
     //    api deps.support.smart_refresh
