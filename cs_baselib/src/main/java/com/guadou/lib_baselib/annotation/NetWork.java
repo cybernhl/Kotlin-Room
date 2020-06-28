@@ -16,5 +16,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME) //定义为运行时，在jvm运行的过程中通过反射获取到注解
 public @interface NetWork {
 
-    NetWorkUtil.NetworkType netWorkType() default NetWorkUtil.NetworkType.NETWORK_UNKNOWN;
+    NetWorkUtil.NetworkType netWorkType() default NetWorkUtil.NetworkType.NETWORK_NO;
 }

@@ -2,15 +2,18 @@ package com.guadou.kt_zoom.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.guadou.kt_zoom.R
 import com.guadou.kt_zoom.mvvm.MainViewModel
+import com.guadou.lib_baselib.annotation.NetWork
 import com.guadou.lib_baselib.base.BasePlaceHolderActivity
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.ext.engine.load
 import com.guadou.lib_baselib.ext.engine.permissionRequest
 
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderView
@@ -95,4 +98,9 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
         super.showStateLoading()
     }
 
+
+    @NetWork(netWorkType = NetWorkUtil.NetworkType.NETWORK_NO)
+    fun checkNetWork() {
+        toast("没有网络了")
+    }
 }

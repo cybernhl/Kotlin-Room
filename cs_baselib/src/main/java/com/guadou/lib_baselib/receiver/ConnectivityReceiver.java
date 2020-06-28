@@ -9,13 +9,11 @@ import android.net.ConnectivityManager;
 
 import androidx.annotation.NonNull;
 
-
 import com.guadou.lib_baselib.annotation.NetWork;
 import com.guadou.lib_baselib.utils.NetWorkUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -123,7 +121,8 @@ public class ConnectivityReceiver extends BroadcastReceiver {
      */
     public static void registerAnnotationObserver(Object object) {
         List<NetworkMethodManager> networkMethodManagers = mAnnotationNetWorkObservers.get(object);
-        if (networkMethodManagers != null && networkMethodManagers.size() > 0) {
+
+        if (networkMethodManagers == null || networkMethodManagers.isEmpty()) {
             //以前没有注册过，开始添加
             networkMethodManagers = findAnnotationMethod(object);
             mAnnotationNetWorkObservers.put(object, networkMethodManagers);
@@ -143,20 +142,8 @@ public class ConnectivityReceiver extends BroadcastReceiver {
             NetWork netWork = method.getAnnotation(NetWork.class);  //循环判断取出内部的@NetWork注解
             if (netWork == null) continue;
 
-            //方法返回值校验
-            Type returnType = method.getReturnType();
-            if (!"void".equals(returnType.toString())) {  //如果返回值不为void,那么抛异常
-                throw new RuntimeException("@NetWork注解的方法必须是void!!!");
-            }
-
-            //方法参数校验
-            Class<?>[] parameterTypes = method.getParameterTypes();
-            if (parameterTypes.length != 1) {
-                throw new RuntimeException("@NetWork注解的方法参数必须只有一个");
-            }
-
             //开始添加到集合
-            NetworkMethodManager manager = new NetworkMethodManager(parameterTypes[0], netWork.netWorkType(), method);
+            NetworkMethodManager manager = new NetworkMethodManager(null, netWork.netWorkType(), method);
             networkMethodManagers.add(manager);
         }
 
@@ -196,33 +183,34 @@ public class ConnectivityReceiver extends BroadcastReceiver {
         for (final Object getter : keySet) {
             //获取当前类的全部@NetWork方法
             List<NetworkMethodManager> networkMethodManagers = mAnnotationNetWorkObservers.get(getter);
+            assert networkMethodManagers != null;
             if (!networkMethodManagers.isEmpty()) {
+
                 for (final NetworkMethodManager manager : networkMethodManagers) {
-                    //必须匹配方法参数为正确的
-                    if (manager.getType().isAssignableFrom(networkType.getClass())) {
-                        //逐一匹配对应的
-                        if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_2G) {
-                            if (networkType == NetWorkUtil.NetworkType.NETWORK_2G || networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
-                                invoke(manager, getter, networkType);
-                            }
-                        } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_3G) {
-                            if (networkType == NetWorkUtil.NetworkType.NETWORK_3G || networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
-                                invoke(manager, getter, networkType);
-                            }
-                        } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_4G) {
-                            if (networkType == NetWorkUtil.NetworkType.NETWORK_4G || networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
-                                invoke(manager, getter, networkType);
-                            }
-                        } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_WIFI) {
-                            if (networkType == NetWorkUtil.NetworkType.NETWORK_WIFI || networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
-                                invoke(manager, getter, networkType);
-                            }
-                        } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_UNKNOWN) {
-                            invoke(manager, getter, networkType);
-                        } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_NO) {
-                            if (networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
-                                invoke(manager, getter, networkType);
-                            }
+
+                    //逐一匹配对应的
+                    if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_2G) {
+                        if (networkType == NetWorkUtil.NetworkType.NETWORK_2G || networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
+                            invoke(manager, getter);
+                        }
+                    } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_3G) {
+                        if (networkType == NetWorkUtil.NetworkType.NETWORK_3G || networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
+                            invoke(manager, getter);
+                        }
+                    } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_4G) {
+                        if (networkType == NetWorkUtil.NetworkType.NETWORK_4G || networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
+                            invoke(manager, getter);
+                        }
+                    } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_WIFI) {
+                        if (networkType == NetWorkUtil.NetworkType.NETWORK_WIFI || networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
+                            invoke(manager, getter);
+                        }
+                    } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_UNKNOWN) {
+                        invoke(manager, getter);
+
+                    } else if (manager.getNetworkType() == NetWorkUtil.NetworkType.NETWORK_NO) {
+                        if (networkType == NetWorkUtil.NetworkType.NETWORK_NO) {
+                            invoke(manager, getter);
                         }
                     }
                 }
@@ -233,14 +221,11 @@ public class ConnectivityReceiver extends BroadcastReceiver {
     /**
      * 反射执行的具体注解方法
      */
-    private void invoke(NetworkMethodManager manager, Object getter, NetWorkUtil.NetworkType
-            networkType) {
+    private void invoke(NetworkMethodManager manager, Object getter) {
         Method method = manager.getMethod();
         try {
-            method.invoke(getter, networkType);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+            method.invoke(getter);
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
