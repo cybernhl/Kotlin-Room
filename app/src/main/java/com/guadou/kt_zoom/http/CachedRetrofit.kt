@@ -1,11 +1,9 @@
 package com.guadou.kt_zoom.http
 
-import android.app.PendingIntent.getService
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.guadou.cs_cptservices.Constants
-import com.guadou.kt_zoom.MyApp
 import com.guadou.lib_baselib.base.BaseRetrofitClient
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil

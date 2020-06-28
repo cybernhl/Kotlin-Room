@@ -8,6 +8,7 @@ import com.guadou.kt_zoom.http.CachedRetrofit
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.ControlledRunner
 import com.guadou.lib_baselib.ext.SingleRunner
+import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
@@ -29,30 +30,34 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
     //测试重复的数据
     fun testChongfu() {
 
-        launchOnUI {
+        checkNet({
 
-            //取消上一次的，执行这一次的
-//            controlledRunner.cancelPreviousThenRun {
-//                return@cancelPreviousThenRun mMainRepository.getIndustry()
-//            }.checkSuccess {
-//                YYLogUtils.e("测试重复的数据:" + it.toString())
-//            }
+            launchOnUI {
 
-            //取消这一次的，返回上一次的
+                //取消上一次的，执行这一次的
+                controlledRunner.cancelPreviousThenRun {
+                    return@cancelPreviousThenRun mMainRepository.getIndustry()
+                }.checkSuccess {
+                    YYLogUtils.e("测试重复的数据:" + it.toString())
+                }
+
+                //取消这一次的，返回上一次的
 //            controlledRunner.joinPreviousOrRun {
 //                return@joinPreviousOrRun mMainRepository.getIndustry()
 //            }.checkSuccess {
 //                YYLogUtils.e("测试重复的数据:" + it.toString())
 //            }
 
-            //前一个执行完毕了，再执行下一个
-            singleRunner.afterPrevious {
-                mMainRepository.getIndustry()
-            }.checkSuccess {
-                YYLogUtils.e("测试重复的数据:" + it.toString())
+                //前一个执行完毕了，再执行下一个
+//                singleRunner.afterPrevious {
+//                    mMainRepository.getIndustry()
+//                }.checkSuccess {
+//                    YYLogUtils.e("测试重复的数据:" + it.toString())
+//                }
+
             }
 
-        }
+        })
 
     }
 
@@ -62,7 +67,6 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
 
         //默认执行
         launchOnUI {
-
 
             loadStartLoading()
 

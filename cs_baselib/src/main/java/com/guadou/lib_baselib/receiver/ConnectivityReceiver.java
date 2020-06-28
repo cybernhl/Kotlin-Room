@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import androidx.annotation.NonNull;
 
 import com.guadou.lib_baselib.annotation.NetWork;
+import com.guadou.lib_baselib.base.BaseApplication;
 import com.guadou.lib_baselib.utils.NetWorkUtil;
 
 import java.lang.reflect.InvocationTargetException;
@@ -74,8 +75,12 @@ public class ConnectivityReceiver extends BroadcastReceiver {
     private void doNotifyObserver(NetWorkUtil.NetworkType networkType) {
         //收到变换网络的通知就通过遍历集合去循环回调接口
         notifyObservers(networkType);
+
         //通知注解类型
         notifyByAnnotation(networkType);
+
+        //赋值Application全局的类型
+        BaseApplication.networkType = networkType;
     }
 
     /**

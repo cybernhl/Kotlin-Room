@@ -21,6 +21,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.guadou.lib_baselib.base.BaseApplication
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
@@ -375,6 +376,24 @@ fun Bitmap.saveToAlbum(
         }
     }
 }
+
+
+/**
+ * 检查是否有网络-直接检查全局内存
+ */
+fun Any.checkNet(
+    block: () -> Unit,
+    msg: String = "Network connection error, please check the network connection"
+) {
+
+    if (BaseApplication.checkHasNet()) {
+        block()
+    } else {
+        toast(msg)
+    }
+
+}
+
 
 /**
  * 倒计时的实现
