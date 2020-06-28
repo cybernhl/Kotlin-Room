@@ -7,6 +7,7 @@ import com.guadou.kt_zoom.bean.SchoolBean
 import com.guadou.kt_zoom.http.CachedRetrofit
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.ControlledRunner
+import com.guadou.lib_baselib.ext.SingleRunner
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
@@ -21,24 +22,36 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
     val mIndustryLiveData = MutableLiveData<List<Industry>>()
     val mSchoolliveData = MutableLiveData<List<SchoolBean>>()
 
-    var controlledRunner = ControlledRunner<List<Industry>?>()
+    var controlledRunner = ControlledRunner<OkResult<List<Industry>>>()  //取消之前的
+
+    val singleRunner = SingleRunner()   //任务队列，排队
 
     //测试重复的数据
     fun testChongfu() {
 
         launchOnUI {
 
-            val data = controlledRunner.cancelPreviousThenRun {
+            //取消上一次的，执行这一次的
+//            controlledRunner.cancelPreviousThenRun {
+//                return@cancelPreviousThenRun mMainRepository.getIndustry()
+//            }.checkSuccess {
+//                YYLogUtils.e("测试重复的数据:" + it.toString())
+//            }
 
-                val dataResult = mMainRepository.getIndustry()
-                if (dataResult is OkResult.Success) {
-                    return@cancelPreviousThenRun dataResult.data
-                }
-                return@cancelPreviousThenRun null
+            //取消这一次的，返回上一次的
+//            controlledRunner.joinPreviousOrRun {
+//                return@joinPreviousOrRun mMainRepository.getIndustry()
+//            }.checkSuccess {
+//                YYLogUtils.e("测试重复的数据:" + it.toString())
+//            }
 
-            }.toString()
+            //前一个执行完毕了，再执行下一个
+            singleRunner.afterPrevious {
+                mMainRepository.getIndustry()
+            }.checkSuccess {
+                YYLogUtils.e("测试重复的数据:" + it.toString())
+            }
 
-            YYLogUtils.e("测试重复的数据:" + data)
         }
 
     }

@@ -67,8 +67,8 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
         btn_request.setOnClickListener {
 
-            mViewModel.getIndustry()
-//            mViewModel.testChongfu()
+//            mViewModel.getIndustry()
+            mViewModel.testChongfu()
         }
 
         btn_load_img.click {
