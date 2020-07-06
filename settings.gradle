@@ -1,3 +1,10 @@
 rootProject.name='KT-Zoom'
 
-include ':app', ':cs_baselib', ':cs_cptServices', ':cs_router', ':cpt_main'
+include ':app',
+        ':cs_router',
+        ':cs_baselib',
+        ':cs_cptServices',
+
+        ':lib_xpopup',
+
+        ':cpt_main'

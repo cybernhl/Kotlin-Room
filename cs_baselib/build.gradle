@@ -104,6 +104,8 @@ dependencies {
 
     //刷新布局
     //    api deps.support.smart_refresh
+    //XPopup弹窗
+    api project(':lib_xpopup')
 
     //图片选择：带luban，ucorp
     api(deps.support.picture_selector) {
