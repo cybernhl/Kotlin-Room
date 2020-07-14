@@ -9,6 +9,7 @@
 /build
 /captures
 .externalNativeBuild
+proguardMapping.txt
 
 # ---> Android
 # Built application files
