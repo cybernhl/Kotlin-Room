@@ -3,20 +3,23 @@ package com.guadou.kt_zoom.ui
 import android.Manifest
 import android.annotation.SuppressLint
 import androidx.lifecycle.Observer
+import com.google.gson.Gson
 import com.guadou.kt_zoom.R
+import com.guadou.kt_zoom.bean.Price
 import com.guadou.kt_zoom.mvvm.MainViewModel
 import com.guadou.lib_baselib.annotation.NetWork
 import com.guadou.lib_baselib.base.BasePlaceHolderActivity
-import com.guadou.lib_baselib.ext.*
+import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.engine.extLoad
 import com.guadou.lib_baselib.ext.engine.extRequestPermission
-
+import com.guadou.lib_baselib.ext.gotoActivity
+import com.guadou.lib_baselib.ext.toDateString
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderView
-
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -65,6 +68,12 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
             iv_image.extLoad("https://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0")
 
             LoadingDialogManager.get().showLoading(this)
+
+            //Gson的解析容错测试
+            val json = "{\"price\":\"\",\"value\":2.12,\"type\":\"3\",\"id\":\"\",\"msg\":\"\"}"
+            val price = Gson().fromJson(json, Price::class.java)
+            YYLogUtils.e(price.toString())
+
         }
 
         btn_request.setOnClickListener {

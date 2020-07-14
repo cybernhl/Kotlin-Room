@@ -15,8 +15,7 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by luyao
- * on 2018/3/13 14:58
+ * 基类的Retrofit对象
  */
 abstract class BaseRetrofitClient {
 

@@ -45,7 +45,7 @@ ext {
                     'cookie_jar'       : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
 
                     "permission"       : 'com.yanzhenjie:permission:2.0.3',
-                    "live_bus"         : 'com.jeremyliao:live-event-bus-x:1.6.1',
+                    "live_bus"         : 'com.jeremyliao:live-event-bus-x:1.7.2',
                     "brvah"            : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2',
                     "smart_refresh"    : 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-14',
                     "picture_selector" : 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'

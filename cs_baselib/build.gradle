@@ -49,6 +49,8 @@ android {
 }
 
 configurations.all {
+    resolutionStrategy.force 'androidx.activity:activity:1.1.0'
+
     resolutionStrategy.force 'androidx.arch.core:core-common:2.1.0'
     resolutionStrategy.force 'androidx.arch.core:core-runtime:2.1.0'
 

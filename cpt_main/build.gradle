@@ -64,7 +64,6 @@ dependencies {
     androidTestImplementation deps.android.test_junit
     androidTestImplementation deps.android.test_espresso
 
-
     api project(':cs_cptServices')
 
 }

@@ -18,7 +18,11 @@ buildscript {
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
+        //字节码编辑路由器
         classpath 'io.github.prototypez:app-joint:1.7'
+
+        //在编译过程中,修改gson库的字节码,修改gson解析相关的方法
+        classpath 'com.github.LianjiaTech:gson-plugin:2.1.0'
 
         // 基础框架
         classpath "com.didiglobal.booster:booster-gradle-plugin:$booster_version"
@@ -48,7 +52,6 @@ buildscript {
         // 处理系统 Crash
         classpath "com.didiglobal.booster:booster-transform-activity-thread:$booster_version"
     }
-
 
 }
 

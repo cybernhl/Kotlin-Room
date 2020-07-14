@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.ke.gson.plugin'
 apply plugin: 'app-joint'
 
 //apply plugin: 'com.didiglobal.booster'
@@ -77,7 +78,6 @@ dependencies {
     testImplementation deps.android.junit
     androidTestImplementation deps.android.test_junit
     androidTestImplementation deps.android.test_espresso
-
 
     implementation project(':cpt_main')
 }
