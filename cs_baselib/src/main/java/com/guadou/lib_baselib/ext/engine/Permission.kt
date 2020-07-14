@@ -14,7 +14,7 @@ import java.io.File
  * 申请权限的引擎类
  * Activity的申请权限
  */
-fun Activity.permissionRequest(
+fun Activity.extRequestPermission(
     vararg permissions: String,
     deniedStr: String = "You have denied permission. You cannot open this module or use this function",
     rationaleStr: String = "You must agree to this permission to use this module or function. Are you sure you want to agree to this permission?",
@@ -54,7 +54,7 @@ fun Activity.permissionRequest(
  * 申请权限的引擎
  * Fragment的申请权限
  */
-fun Fragment.permissionRequest(
+fun Fragment.extRequestPermission(
     vararg permissions: String,
     deniedStr: String = "You have denied permission. You cannot open this module or use this function",
     rationaleStr: String = "You must agree to this permission to use this module or function. Are you sure you want to agree to this permission?",

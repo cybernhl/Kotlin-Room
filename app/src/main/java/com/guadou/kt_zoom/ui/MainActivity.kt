@@ -2,15 +2,14 @@ package com.guadou.kt_zoom.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.guadou.kt_zoom.R
 import com.guadou.kt_zoom.mvvm.MainViewModel
 import com.guadou.lib_baselib.annotation.NetWork
 import com.guadou.lib_baselib.base.BasePlaceHolderActivity
 import com.guadou.lib_baselib.ext.*
-import com.guadou.lib_baselib.ext.engine.load
-import com.guadou.lib_baselib.ext.engine.permissionRequest
+import com.guadou.lib_baselib.ext.engine.extLoad
+import com.guadou.lib_baselib.ext.engine.extRequestPermission
 
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
@@ -63,20 +62,20 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
         btn_toast.click {
             val dateMills = 2032934294.toDateString()
             toast("测试成功tushi:$dateMills")
-            iv_image.load("https://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0")
+            iv_image.extLoad("https://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0")
 
             LoadingDialogManager.get().showLoading(this)
         }
 
         btn_request.setOnClickListener {
 
-//            mViewModel.getIndustry()
-            mViewModel.testChongfu()
+            mViewModel.getIndustry()
+//            mViewModel.testChongfu()
         }
 
         btn_load_img.click {
 
-            permissionRequest(
+            extRequestPermission(
                 Manifest.permission.CAMERA,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 block = {

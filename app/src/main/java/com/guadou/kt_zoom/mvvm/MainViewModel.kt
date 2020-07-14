@@ -1,10 +1,8 @@
 package com.guadou.kt_zoom.mvvm
 
 import androidx.lifecycle.MutableLiveData
-import com.guadou.cs_cptservices.Constants
 import com.guadou.kt_zoom.bean.Industry
 import com.guadou.kt_zoom.bean.SchoolBean
-import com.guadou.kt_zoom.http.CachedRetrofit
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.ControlledRunner
 import com.guadou.lib_baselib.ext.SingleRunner
@@ -14,9 +12,6 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.testxiecheng.base.OkResult
 import kotlinx.coroutines.*
-
-import okhttp3.Call
-import java.lang.Exception
 
 class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel() {
 

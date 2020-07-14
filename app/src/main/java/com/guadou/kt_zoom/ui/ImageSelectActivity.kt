@@ -3,10 +3,9 @@ package com.guadou.kt_zoom.ui
 import com.guadou.kt_zoom.R
 import com.guadou.kt_zoom.mvvm.ImageSelectViewModel
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.*
-import com.guadou.lib_baselib.ext.engine.image_select.openCamera
-import com.guadou.lib_baselib.ext.engine.image_select.openImageSelect
+import com.guadou.lib_baselib.ext.engine.image_select.extOpenCamera
+import com.guadou.lib_baselib.ext.engine.image_select.extOpenImageSelect
 import com.guadou.lib_baselib.utils.ETMoneyValueFilter
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.luck.picture.lib.entity.LocalMedia
@@ -32,7 +31,7 @@ class ImageSelectActivity : BaseActivity<ImageSelectViewModel>() {
 
         btn_select.click {
 
-            openImageSelect(mImageSelectDatas, object : OnResultCallbackListener<LocalMedia> {
+            extOpenImageSelect(mImageSelectDatas, object : OnResultCallbackListener<LocalMedia> {
 
                 override fun onResult(result: MutableList<LocalMedia>?) {
                     result?.also {
@@ -51,7 +50,7 @@ class ImageSelectActivity : BaseActivity<ImageSelectViewModel>() {
 
         btn_carme.click {
 
-            openCamera(
+            extOpenCamera(
                 mImageSelectDatas,
                 object : OnResultCallbackListener<LocalMedia> {
                     override fun onResult(result: MutableList<LocalMedia>?) {

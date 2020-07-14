@@ -9,7 +9,9 @@ object AppRetrofit : BaseRetrofitClient() {
     //默认的ApiService
     val apiService by lazy { getService(AppApiService::class.java, Constants.BASE_URL) }
 
-    override fun handleBuilder(builder: OkHttpClient.Builder) {
+
+    override fun needHttpCache(): Boolean {
+        return true
     }
 
 }

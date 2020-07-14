@@ -21,7 +21,7 @@ class Demo1Fragment : BaseLazyLoadingFragment<MainViewModel>() {
     override fun initVM(): MainViewModel = getViewModel()
 
     override fun init() {
-        tv_fragment_content.setText("12345")
+//        tv_fragment_content.setText("12345")
     }
 
     override fun onGoadingRetry() {

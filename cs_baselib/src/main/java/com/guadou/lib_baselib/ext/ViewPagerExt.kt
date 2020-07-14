@@ -11,14 +11,14 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 
 /**
-   ViewPager相关
+ViewPager相关
 
-   绑定数据适配器 绑定Fragment适配器
-   viewPager.bind(10, bindView = {container, position ->
-   return@bind TextView(this)
-   })
+绑定数据适配器 绑定Fragment适配器
+viewPager.bind(10, bindView = {container, position ->
+return@bind TextView(this)
+})
 
-   pager.asCard() //通过参数可以调节卡片的距离和大小
+pager.asCard() //通过参数可以调节卡片的距离和大小
  */
 
 /**
@@ -38,6 +38,7 @@ fun ViewPager.bind(count: Int, bindView: (container: ViewGroup, position: Int) -
             container.removeView(obj as View)
         }
     }
+    offscreenPageLimit = count - 1
     return this
 }
 
@@ -54,6 +55,7 @@ fun ViewPager.bindFragment(
         override fun getCount() = fragments.size
         override fun getPageTitle(p: Int) = if (pageTitles == null) null else pageTitles[p]
     }
+    offscreenPageLimit = fragments.size - 1
     return this
 }
 

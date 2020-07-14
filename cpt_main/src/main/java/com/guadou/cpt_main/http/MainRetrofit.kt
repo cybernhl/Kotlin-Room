@@ -9,7 +9,4 @@ object MainRetrofit : BaseRetrofitClient() {
     //默认的ApiService
     val apiService by lazy { getService(MainApiService::class.java, Constants.BASE_URL) }
 
-    override fun handleBuilder(builder: OkHttpClient.Builder) {
-    }
-
 }

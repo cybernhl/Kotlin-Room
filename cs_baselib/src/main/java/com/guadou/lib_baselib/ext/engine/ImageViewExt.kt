@@ -25,7 +25,7 @@ import com.guadou.lib_baselib.glideconfig.GlideApp
  * @param isCrossFade 是否有过渡动画，默认没有过渡动画
  * @param isForceOriginalSize 是否强制使用原图，默认false
  */
-fun ImageView.load(
+fun ImageView.extLoad(
     url: Any?, placeholder: Int = 0, error: Int = 0,
     isCircle: Boolean = false,
     isCenterCrop: Boolean = false,

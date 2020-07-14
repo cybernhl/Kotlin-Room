@@ -32,7 +32,7 @@ import com.luck.picture.lib.tools.PictureFileUtils
  */
 
 //开启图片选择
-fun Activity.openImageSelect(
+fun Activity.extOpenImageSelect(
     selected: List<LocalMedia>,
     listener: OnResultCallbackListener<LocalMedia>,
     selectNum: Int = 1,
@@ -256,7 +256,7 @@ fun Activity.openImageSelect(
 /**
  * Fragment - 图片选择
  */
-fun Fragment.openImageSelect(
+fun Fragment.extOpenImageSelect(
     selected: List<LocalMedia>,
     listener: OnResultCallbackListener<LocalMedia>,
     selectNum: Int = 1,
@@ -268,7 +268,7 @@ fun Fragment.openImageSelect(
     clickSound: Boolean = false
 ) {
 
-    activity?.openImageSelect(
+    activity?.extOpenImageSelect(
         selected,
         listener,
         selectNum,
@@ -286,7 +286,7 @@ fun Fragment.openImageSelect(
 /**
  * 开启相机
  */
-fun Activity.openCamera(
+fun Activity.extOpenCamera(
     selected: List<LocalMedia>,
     listener: OnResultCallbackListener<LocalMedia>,
     canCrop: Boolean = false,
@@ -504,7 +504,7 @@ fun Activity.openCamera(
 /**
  * Fragment - 开启相机
  */
-fun Fragment.openCamera(
+fun Fragment.extOpenCamera(
     selected: List<LocalMedia>,
     listener: OnResultCallbackListener<LocalMedia>,
     canCrop: Boolean = false,
@@ -513,7 +513,7 @@ fun Fragment.openCamera(
     ratioY: Int = 1
 ) {
 
-    activity?.openCamera(
+    activity?.extOpenCamera(
         selected,
         listener,
         canCrop,
@@ -524,11 +524,10 @@ fun Fragment.openCamera(
 
 }
 
-
 /**
  * 清理图片选择，裁剪，压缩相关的缓存文件
  */
-fun Context.clearImageSelectCache() {
+fun Context.extClearImageSelectCache() {
     if (PermissionChecker.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 //        PictureFileUtils.deleteCacheDirFile(this, PictureMimeType.ofImage())
         PictureFileUtils.deleteAllCacheDirFile(getContext())
