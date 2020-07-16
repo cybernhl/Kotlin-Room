@@ -53,6 +53,7 @@ buildscript {
         classpath "com.didiglobal.booster:booster-transform-activity-thread:$booster_version"
     }
 
+
 }
 
 allprojects {

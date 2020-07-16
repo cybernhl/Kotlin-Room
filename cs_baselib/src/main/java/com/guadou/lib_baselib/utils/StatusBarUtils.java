@@ -99,7 +99,7 @@ public class StatusBarUtils {
     public static boolean setStatusBarBlackText(Activity activity) {
         if (activity == null) return false;
         // 无语系列：ZTK C2016只能时间和电池图标变色。。。。
-        if (DeviceUtils.INSTANCE.isZTKC2016()) {
+        if (DeviceUtils.isZTKC2016()) {
             return false;
         }
 
@@ -195,7 +195,7 @@ public class StatusBarUtils {
         int systemUi = light ? View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR : View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         systemUi = changeStatusBarModeRetainFlag(window, systemUi);
         decorView.setSystemUiVisibility(systemUi);
-        if (DeviceUtils.INSTANCE.isMIUIV9()) {
+        if (DeviceUtils.isMIUIV9()) {
             // MIUI 9 低于 6.0 版本依旧只能回退到以前的方案
             // https://github.com/Tencent/QMUI_Android/issues/160
             MIUISetStatusBarLightMode(window, light);
@@ -239,11 +239,11 @@ public class StatusBarUtils {
      * 见小米开发文档说明：https://dev.mi.com/console/doc/detail?pId=1159
      */
     private static boolean isMIUICustomStatusBarLightModeImpl() {
-        if (DeviceUtils.INSTANCE.isMIUIV9() && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (DeviceUtils.isMIUIV9() && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
-        return DeviceUtils.INSTANCE.isMIUIV5() || DeviceUtils.INSTANCE.isMIUIV6() ||
-                DeviceUtils.INSTANCE.isMIUIV7() || DeviceUtils.INSTANCE.isMIUIV8();
+        return DeviceUtils.isMIUIV5() || DeviceUtils.isMIUIV6() ||
+                DeviceUtils.isMIUIV7() || DeviceUtils.isMIUIV8();
     }
 
     /**
@@ -284,7 +284,7 @@ public class StatusBarUtils {
                 } catch (Exception ignored) {
 
                 }
-            } else if (DeviceUtils.INSTANCE.isFlyme()) {
+            } else if (DeviceUtils.isFlyme()) {
                 result = true;
             }
         }
@@ -391,7 +391,7 @@ public class StatusBarUtils {
         try {
             clazz = Class.forName("com.android.internal.R$dimen");
             obj = clazz.newInstance();
-            if (DeviceUtils.INSTANCE.isMeizu()) {
+            if (DeviceUtils.isMeizu()) {
                 try {
                     field = clazz.getField("status_bar_height_large");
                 } catch (Throwable t) {
@@ -412,7 +412,7 @@ public class StatusBarUtils {
                 t.printStackTrace();
             }
         }
-        if (DeviceUtils.INSTANCE.isTablet(context)
+        if (DeviceUtils.isTablet(context)
                 && sStatusBarHeight > CommUtils.dip2px(STATUS_BAR_DEFAULT_HEIGHT_DP)) {
             //状态栏高度大于25dp的平板，状态栏通常在下方
             sStatusBarHeight = 0;
