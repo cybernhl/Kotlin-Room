@@ -1,7 +1,8 @@
-package com.guadou.kt_demo
+package com.guadou.kt_demo.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.guadou.kt_demo.R
 
 class DemoMainActivity : AppCompatActivity() {
 
