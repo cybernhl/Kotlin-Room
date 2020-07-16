@@ -16,7 +16,7 @@ android {
 
         versionCode 1
         versionName "1.0"
-        applicationId "com.guadou.kt_zoom"
+        applicationId "com.guadou.kt_demo"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
@@ -86,5 +86,5 @@ dependencies {
     androidTestImplementation deps.android.test_junit
     androidTestImplementation deps.android.test_espresso
 
-    implementation project(':cpt_main')
+    implementation project(':cs_cptServices')
 }
