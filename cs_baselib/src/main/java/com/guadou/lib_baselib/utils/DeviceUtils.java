@@ -24,6 +24,7 @@ import android.content.res.Configuration;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
@@ -41,7 +42,7 @@ import java.util.regex.Pattern;
  * QMUI-设备帮助类
  */
 @SuppressLint("PrivateApi")
-public class DeviceHelper {
+public class DeviceUtils {
     private final static String KEY_MIUI_VERSION_NAME = "ro.miui.ui.version.name";
     private static final String KEY_FLYME_VERSION_NAME = "ro.build.display.id";
     private final static String FLYME = "flyme";
@@ -283,5 +284,17 @@ public class DeviceHelper {
         }
         if (name != null) name = name.toLowerCase();
         return name;
+    }
+
+    @SuppressLint("HardwareIds")
+    public static String getDeviceId(Context context) {
+        String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String id = androidID + Build.SERIAL;
+        try {
+            return Md5Util.md5(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return id;
+        }
     }
 }

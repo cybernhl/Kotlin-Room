@@ -8,6 +8,8 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.guadou.lib_baselib.utils.CommUtils;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +45,10 @@ public class ACache {
     private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
     private static Map<String, ACache> mInstanceMap = new HashMap<String, ACache>();
     private ACacheManager mCache;
+
+    public static ACache get() {
+        return get(CommUtils.getContext(), "ACache");
+    }
 
     public static ACache get(Context ctx) {
         return get(ctx, "ACache");

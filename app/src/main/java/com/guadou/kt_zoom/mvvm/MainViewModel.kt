@@ -28,7 +28,6 @@ class MainViewModel(private val mMainRepository: MainRepository) : BaseViewModel
         checkNet({
 
             launchOnUI {
-
                 //取消上一次的，执行这一次的
                 controlledRunner.cancelPreviousThenRun {
                     return@cancelPreviousThenRun mMainRepository.getIndustry()

@@ -41,7 +41,7 @@ abstract class AbsActivity : AppCompatActivity(),
     /**
      * 从intent中解析数据，具体子类来实现
      */
-    protected fun getDataFromIntent(intent: Intent) {}
+    open protected fun getDataFromIntent(intent: Intent) {}
 
     /**
      * 设置顶部状态栏的颜色（默认为白色）
@@ -54,7 +54,6 @@ abstract class AbsActivity : AppCompatActivity(),
             Color.parseColor("#B0B0B0")
         }
     }
-
 
     /**
      * 动态的设置状态栏颜色
