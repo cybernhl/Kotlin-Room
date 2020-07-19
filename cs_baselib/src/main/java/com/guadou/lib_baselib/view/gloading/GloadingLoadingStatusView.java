@@ -11,20 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.guadou.basiclib.R;
-import com.guadou.lib_baselib.utils.Log.YYLogUtils;
-import com.guadou.lib_baselib.utils.NetWorkUtil;
-import com.guadou.lib_baselib.view.progress.jump.JumpLoadingView;
 
-import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;
-import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
-import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_FAILED;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_EMPTY_DATA;
+import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;
+import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_FAILED;
+import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
 
 /**
  * 默认的是上下跳动的加载动画
+ * 这个是可配置菊花Loading
  */
 @SuppressLint("ViewConstructor")
-public class GloadingGlobalStatusView extends LinearLayout implements View.OnClickListener {
+public class GloadingLoadingStatusView extends LinearLayout implements View.OnClickListener {
 
     public static String HIDE_LOADING_STATUS_MSG = "hide_loading_status_msg";  //是否需要展示message文本
     public static String NEED_LOADING_STATUS_MAGRIN_TITLE = "loading_status_magrin_title";  //是否需要顶部的margin
@@ -33,17 +31,16 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
     private final Runnable mRetryTask;
     private final ImageView mImageView;
     private final View mTitle;
-    private final JumpLoadingView loading_view;
 
-    public GloadingGlobalStatusView(Context context, Runnable retryTask) {
+    public GloadingLoadingStatusView(Context context, Runnable retryTask) {
         super(context);
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER_HORIZONTAL);
-        LayoutInflater.from(context).inflate(R.layout.view_gloading_global_status, this, true);
+        LayoutInflater.from(context).inflate(R.layout.view_gloading_loading_status, this, true);
         mImageView = findViewById(R.id.image);
         mTextView = findViewById(R.id.text);
         mTitle = findViewById(R.id.title);
-        loading_view = findViewById(R.id.loading_view);
+
         this.mRetryTask = retryTask;
     }
 
@@ -60,30 +57,23 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
     public void setStatus(int status, String msg) {
         boolean show = true;  //是否展示这个布局
 
-        View.OnClickListener onClickListener = null;
+        OnClickListener onClickListener = null;
         int image = R.drawable.anim_gloading;
-        loading_view.setVisibility(VISIBLE);
-        mImageView.setVisibility(GONE);
+        mImageView.setVisibility(VISIBLE);
         String str = "Loading...";
 
         switch (status) {
             case STATUS_LOAD_SUCCESS:
-                loading_view.setVisibility(GONE);
-                loading_view.stopLoading();
                 mImageView.setVisibility(GONE);
                 show = false;
                 break;
 
             case STATUS_LOADING:
-                loading_view.setVisibility(VISIBLE);
-                loading_view.startLoading(0);
-                mImageView.setVisibility(GONE);
+                mImageView.setVisibility(VISIBLE);
                 str = "Loading...";
                 break;
 
             case STATUS_LOAD_FAILED:
-                loading_view.setVisibility(GONE);
-                loading_view.stopLoading();
                 mImageView.setVisibility(VISIBLE);
                 //是否需要加网络状态判断
 //                boolean networkConn = NetWorkUtil.isConnected(getContext());
@@ -99,8 +89,6 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
                 break;
 
             case STATUS_EMPTY_DATA:
-                loading_view.setVisibility(GONE);
-                loading_view.stopLoading();
                 mImageView.setVisibility(VISIBLE);
                 str = "No Data";
                 image = R.mipmap.loading_error;

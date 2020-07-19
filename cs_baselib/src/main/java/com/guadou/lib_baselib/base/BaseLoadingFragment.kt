@@ -12,35 +12,41 @@ abstract class BaseLoadingFragment<VM : BaseViewModel> : AbsFragment() {
 
     protected lateinit var mViewModel: VM
 
-    protected lateinit var mGloadingHolder: Gloading.Holder
+    protected lateinit var mGLoadingHolder: Gloading.Holder
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         mViewModel = initVM()
         //观察网络数据状态
         mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
 
         init()
         startObserve()
-        super.onViewCreated(view, savedInstanceState)
     }
 
 
+    override fun transformRootView(view: View): View {
 
-    override fun transfromRootView(view: View): View {
+        mGLoadingHolder = generateGLoading(view)
 
-        mGloadingHolder = Gloading.getDefault().wrap(view).withRetry {
+        return mGLoadingHolder.wrapper
+    }
+
+    //如果要替换GLoading，重写次方法
+    open protected fun generateGLoading(view: View): Gloading.Holder {
+        return Gloading.getDefault().wrap(view).withRetry {
             onGoadingRetry()
         }
-
-        return mGloadingHolder.wrapper
     }
 
     protected open fun onGoadingRetry() {
     }
 
-    abstract fun startObserve()
     abstract fun initVM(): VM
+    abstract override fun inflateLayoutById(): Int
+    abstract fun startObserve()
     abstract fun init()
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
@@ -67,19 +73,19 @@ abstract class BaseLoadingFragment<VM : BaseViewModel> : AbsFragment() {
     protected open fun showStateNormal() {}
 
     protected open fun showStateLoading() {
-        mGloadingHolder.showLoading()
+        mGLoadingHolder.showLoading()
     }
 
     protected open fun showStateSuccess() {
-        mGloadingHolder.showLoadSuccess()
+        mGLoadingHolder.showLoadSuccess()
     }
 
     protected open fun showStateError(message: String?) {
-        mGloadingHolder.showLoadFailed(message)
+        mGLoadingHolder.showLoadFailed(message)
     }
 
     protected open fun showStateNoData() {
-        mGloadingHolder.showEmpty()
+        mGLoadingHolder.showEmpty()
     }
 
     protected fun showStateProgress() {

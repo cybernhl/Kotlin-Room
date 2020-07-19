@@ -23,6 +23,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
     }
 
     abstract fun initVM(): VM
+    abstract override fun inflateLayoutById(): Int
     abstract fun startObserve()
     abstract fun init()
 

@@ -24,6 +24,7 @@ buildscript {
         //在编译过程中,修改gson库的字节码,修改gson解析相关的方法
         classpath 'com.github.LianjiaTech:gson-plugin:2.1.0'
 
+        // ==================== Booster优化插件 ====================
         // 基础框架
         classpath "com.didiglobal.booster:booster-gradle-plugin:$booster_version"
 

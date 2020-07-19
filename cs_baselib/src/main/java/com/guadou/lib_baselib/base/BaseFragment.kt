@@ -22,8 +22,9 @@ abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
         startObserve()
     }
 
-    abstract fun startObserve()
     abstract fun initVM(): VM
+    abstract override fun inflateLayoutById(): Int
+    abstract fun startObserve()
     abstract fun init()
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {

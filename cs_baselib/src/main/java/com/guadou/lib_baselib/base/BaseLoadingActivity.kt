@@ -12,8 +12,13 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
 
-    protected val mGloadingHolder by lazy {
-        Gloading.getDefault().wrap(this).withRetry{
+    protected val mGLoadingHolder by lazy {
+        generateGLoading()
+    }
+
+    //如果要替换GLoading，重写次方法
+    open protected fun generateGLoading(): Gloading.Holder {
+        return Gloading.getDefault().wrap(this).withRetry {
             onGoadingRetry()
         }
     }
@@ -30,12 +35,16 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
     }
 
     abstract fun initVM(): VM
+    abstract override fun inflateLayoutById(): Int
     abstract fun startObserve()
     abstract fun init()
     protected open fun onGoadingRetry() {
     }
 
-    override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
+    override fun onNetworkConnectionChanged(
+        isConnected: Boolean,
+        networkType: NetWorkUtil.NetworkType?
+    ) {
     }
 
     // ================== 网络状态的监听 ======================
@@ -59,19 +68,19 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
     protected open fun showStateNormal() {}
 
     protected open fun showStateLoading() {
-        mGloadingHolder.showLoading()
+        mGLoadingHolder.showLoading()
     }
 
     protected open fun showStateSuccess() {
-        mGloadingHolder.showLoadSuccess()
+        mGLoadingHolder.showLoadSuccess()
     }
 
     protected open fun showStateError(message: String?) {
-        mGloadingHolder.showLoadFailed(message)
+        mGLoadingHolder.showLoadFailed(message)
     }
 
     protected open fun showStateNoData() {
-        mGloadingHolder.showEmpty()
+        mGLoadingHolder.showEmpty()
     }
 
     protected fun showStateProgress() {

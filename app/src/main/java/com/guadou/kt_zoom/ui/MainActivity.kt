@@ -22,7 +22,6 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderView
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -38,7 +37,7 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
             tv_request_content.text = it?.toString()
 
-//            iv_image.load(it[0].industry_image_new)
+            iv_image.extLoad(it[0].industry_image_new)
 
         })
 
@@ -63,7 +62,6 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
 
     @SuppressLint("WrongConstant")
     private fun initListener() {
-
         toast("Test Toast")
 
         btn_toast.click {
@@ -107,7 +105,7 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
     }
 
     override fun showStateLoading() {
-        mGloadingHolder.withData(GloadingPlaceHolderView.NEED_LOADING_STATUS_MAGRIN_TITLE)
+        mGLoadingHolder.withData(GloadingPlaceHolderView.NEED_LOADING_STATUS_MAGRIN_TITLE)
         super.showStateLoading()
     }
 

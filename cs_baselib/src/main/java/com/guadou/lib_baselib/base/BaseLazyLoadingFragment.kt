@@ -16,7 +16,7 @@ abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
     private var isViewCreated = false//布局是否被创建
     private var isLoadData = false//数据是否加载
     private var isFirstVisible = true//是否第一次可见
-    protected lateinit var mGloadingHolder: Gloading.Holder
+    protected lateinit var mGLoadingHolder: Gloading.Holder
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,19 +44,25 @@ abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
     }
 
 
-    abstract fun startObserve()
     abstract fun initVM(): VM
+    abstract fun startObserve()
+    abstract override fun inflateLayoutById(): Int
     abstract fun init()
     abstract fun onLazyInitData()
 
     //Loading Create Root View
-    override fun transfromRootView(view: View): View {
+    override fun transformRootView(view: View): View {
 
-        mGloadingHolder = Gloading.getDefault().wrap(view).withRetry {
+        mGLoadingHolder = generateGLoading(view)
+
+        return mGLoadingHolder.wrapper
+    }
+
+    //如果要替换GLoading，重写次方法
+    open protected fun generateGLoading(view: View): Gloading.Holder {
+        return Gloading.getDefault().wrap(view).withRetry {
             onGoadingRetry()
         }
-
-        return mGloadingHolder.wrapper
     }
 
     protected open fun onGoadingRetry() {
@@ -128,19 +134,19 @@ abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
     protected open fun showStateNormal() {}
 
     protected open fun showStateLoading() {
-        mGloadingHolder.showLoading()
+        mGLoadingHolder.showLoading()
     }
 
     protected open fun showStateSuccess() {
-        mGloadingHolder.showLoadSuccess()
+        mGLoadingHolder.showLoadSuccess()
     }
 
     protected open fun showStateError(message: String?) {
-        mGloadingHolder.showLoadFailed(message)
+        mGLoadingHolder.showLoadFailed(message)
     }
 
     protected open fun showStateNoData() {
-        mGloadingHolder.showEmpty()
+        mGLoadingHolder.showEmpty()
     }
 
     protected fun showStateProgress() {

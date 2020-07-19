@@ -5,10 +5,12 @@ import android.view.View;
 import static com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView.HIDE_LOADING_STATUS_MSG;
 import static com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView.NEED_LOADING_STATUS_MAGRIN_TITLE;
 
+
 /**
  * 默认的是上下跳动的加载动画
+ * 这个是可配置菊花Loading
  */
-public class GloadingGlobalAdapter implements Gloading.Adapter {
+public class GloadingLoadingAdapter implements Gloading.Adapter {
 
     @Override
     public View getView(Gloading.Holder holder, View convertView, int status, String message) {
@@ -16,12 +18,12 @@ public class GloadingGlobalAdapter implements Gloading.Adapter {
         //Holder中缓存了各状态下对应的View
         //	如果status对应的View为null，则convertView为上一个状态的View
         //	如果上一个状态的View也为null，则convertView为null
-        GloadingGlobalStatusView loadingView = null;
-        if (convertView != null && convertView instanceof GloadingGlobalStatusView) {
-            loadingView = (GloadingGlobalStatusView) convertView;
+        GloadingLoadingStatusView loadingView = null;
+        if (convertView != null && convertView instanceof GloadingLoadingStatusView) {
+            loadingView = (GloadingLoadingStatusView) convertView;
         }
         if (loadingView == null) {
-            loadingView = new GloadingGlobalStatusView(holder.getContext(), holder.getRetryTask());
+            loadingView = new GloadingLoadingStatusView(holder.getContext(), holder.getRetryTask());
         }
 
         //show or not show msg view

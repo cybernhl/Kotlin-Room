@@ -13,7 +13,6 @@ val viewModelModule = module {
 
 }
 
-
 val repositoryModule = module {
 
     single { AuthRepository() }
