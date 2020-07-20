@@ -28,14 +28,14 @@
         android:id="@+id/btn_demo_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1.菊花的Loading方式加载"
+        android:text="2.菊花的Loading方式加载"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_demo_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2.PlaceHolder的方式加载"
+        android:text="3.PlaceHolder的方式加载"
         android:textAllCaps="false" />
 
     <TextView
@@ -44,4 +44,24 @@
         android:layout_margin="@dimen/d_10dp"
         android:text="Fragment的加载方式与动画" />
 
+    <Button
+        android:id="@+id/btn_demo_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1.默认的Loading方式加载"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_demo_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2.菊花的Loading方式加载"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_demo_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3.PlaceHolder的方式加载"
+        android:textAllCaps="false" />
 </LinearLayout>

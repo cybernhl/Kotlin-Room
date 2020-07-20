@@ -25,9 +25,11 @@
 
         <activity android:name=".ui.demo1.NormalLoadingActivity"/>
 
-        <activity android:name=".ui.demo1.NormalJumpLoadingActivity"/>
+        <activity android:name=".ui.demo1.JumpLoadingActivity"/>
 
         <activity android:name=".ui.demo1.PlaceHolderLoadingActivity"/>
+
+        <activity android:name=".ui.demo1.EmptyFragmentActivity"/>
 
     </application>
 

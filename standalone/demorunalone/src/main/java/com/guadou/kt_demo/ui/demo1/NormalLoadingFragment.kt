@@ -1,41 +1,43 @@
 package com.guadou.kt_demo.ui.demo1
 
-import android.content.Intent
+import android.view.View
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseLoadingActivity
+import com.guadou.lib_baselib.base.BaseLoadingFragment
 import com.guadou.lib_baselib.base.BaseViewModel
-import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
+import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
- * 默认是加载的上下跳动的动画
+ * 设置为菊花的转动
  */
-class NormalJumpLoadingActivity : BaseLoadingActivity<BaseViewModel>() {
+class NormalLoadingFragment : BaseLoadingFragment<BaseViewModel>() {
 
     companion object {
-        fun startInstance() {
-            commContext().let {
-                it.startActivity(Intent(it, NormalJumpLoadingActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                })
-            }
+        fun obtainFragment(): NormalLoadingFragment {
+            return NormalLoadingFragment()
         }
     }
 
     override fun initVM(): BaseViewModel = getViewModel()
 
-
     override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
-
 
     override fun startObserve() {
 
     }
 
-    override fun init() {
+    //重新生成GLoading对象
+    override fun generateGLoading(view: View): Gloading.Holder {
+        return  Gloading.from(GloadingRoatingAdapter()).wrap(view).withRetry {
+            onGoadingRetry()
+        }
+    }
 
+
+    override fun init() {
 
         //模拟的Loading的情况
         showStateLoading()
@@ -54,5 +56,6 @@ class NormalJumpLoadingActivity : BaseLoadingActivity<BaseViewModel>() {
         mGLoadingHolder.withData(GloadingGlobalStatusView.NEED_LOADING_STATUS_MAGRIN_TITLE)
         mGLoadingHolder.showLoading()
     }
+
 
 }

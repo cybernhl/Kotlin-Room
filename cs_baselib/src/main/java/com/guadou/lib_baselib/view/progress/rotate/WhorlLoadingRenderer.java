@@ -31,8 +31,9 @@ class WhorlLoadingRenderer extends LoadingRenderer {
     private static final float DEFAULT_CENTER_RADIUS = 12.5f;
     private static final float DEFAULT_STROKE_WIDTH = 2.5f;
 
+    //三圆环Loading的颜色
     private static final int[] DEFAULT_COLORS = new int[]{
-            Color.RED, Color.GREEN, Color.BLUE
+            0xfff5cb6b, 0xff72d572, 0xffffaa00
     };
 
     private final Paint mPaint = new Paint();

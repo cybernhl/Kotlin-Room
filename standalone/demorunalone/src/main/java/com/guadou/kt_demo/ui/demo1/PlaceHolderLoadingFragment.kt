@@ -1,44 +1,33 @@
 package com.guadou.kt_demo.ui.demo1
 
-import android.content.Intent
+import android.view.View
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseLoadingActivity
+import com.guadou.lib_baselib.base.BaseLoadingFragment
+import com.guadou.lib_baselib.base.BasePlaceHolderFragment
 import com.guadou.lib_baselib.base.BaseViewModel
-import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
-import com.guadou.lib_baselib.view.gloading.GloadingLoadingAdapter
 import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
- * 换成一种菊花转动的Loading加载
+ * 设置为菊花的转动
  */
-class NormalLoadingActivity : BaseLoadingActivity<BaseViewModel>() {
+class PlaceHolderLoadingFragment : BasePlaceHolderFragment<BaseViewModel>() {
 
     companion object {
-        fun startInstance() {
-            commContext().let {
-                it.startActivity(Intent(it, NormalLoadingActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                })
-            }
+        fun obtainFragment(): PlaceHolderLoadingFragment {
+            return PlaceHolderLoadingFragment()
         }
     }
 
     override fun initVM(): BaseViewModel = getViewModel()
 
-
     override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
 
-    //重新生成GLoading对象
-    override fun generateGLoading(): Gloading.Holder {
-
-        return Gloading.from(GloadingLoadingAdapter()).wrap(this).withRetry {
-            onGoadingRetry()
-        }
-    }
+    //可以选择重写占位布局的id-内部实现了闪光的效果
+    override fun inflatePlaceHolderLayoutRes(): Int = R.layout.layout_placeholder1
 
     override fun startObserve() {
 
@@ -46,7 +35,6 @@ class NormalLoadingActivity : BaseLoadingActivity<BaseViewModel>() {
 
     override fun init() {
 
-        //其他的使用的方法和默认的GLoading很类似
         //模拟的Loading的情况
         showStateLoading()
 
@@ -64,5 +52,6 @@ class NormalLoadingActivity : BaseLoadingActivity<BaseViewModel>() {
         mGLoadingHolder.withData(GloadingGlobalStatusView.NEED_LOADING_STATUS_MAGRIN_TITLE)
         mGLoadingHolder.showLoading()
     }
+
 
 }
