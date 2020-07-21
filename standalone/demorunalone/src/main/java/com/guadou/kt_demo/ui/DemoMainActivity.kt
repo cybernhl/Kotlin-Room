@@ -3,6 +3,10 @@ package com.guadou.kt_demo.ui
 import android.annotation.SuppressLint
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.ui.demo1.Demo1Activity
+import com.guadou.kt_demo.ui.demo2.Demo2Activity
+import com.guadou.kt_demo.ui.demo3.Demo3Activity
+import com.guadou.kt_demo.ui.demo4.Demo4Activity
+import com.guadou.kt_demo.ui.demo5.Demo5Activity
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.click
@@ -31,22 +35,22 @@ class DemoMainActivity : BaseActivity<BaseViewModel>() {
 
         btn_demo_2.text = "2.ViewPager/LazyFragment（占位图2）"
         btn_demo_2.click {
-
+            Demo2Activity.startInstance()
         }
 
         btn_demo_3.text = "3.BottomTab/LazyFragment"
         btn_demo_3.click {
-
+            Demo3Activity.startInstance()
         }
 
-        btn_demo_4.text = "4.吐司/弹窗/banner"
+        btn_demo_4.text = "4.沉浸式/吐司/弹窗/banner"
         btn_demo_4.click {
-
+            Demo4Activity.startInstance()
         }
 
         btn_demo_5.text = "5.网络请求（带去重策略）"
         btn_demo_5.click {
-
+            Demo5Activity.startInstance()
         }
 
         btn_demo_6.text = "6.权限/图库/相机"

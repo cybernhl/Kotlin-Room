@@ -44,7 +44,7 @@ abstract class AbsActivity : AppCompatActivity(),
     open protected fun getDataFromIntent(intent: Intent) {}
 
     /**
-     * 设置顶部状态栏的颜色（默认为白色）
+     * 设置顶部状态栏的颜色（默认为白色背景-黑色文字）
      */
     protected fun setStatusBarColor(): Int {
         //如果状态栏文字能变黑那么背景设置为白色，否则返回背景灰色文本默认为白色

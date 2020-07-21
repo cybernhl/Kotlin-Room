@@ -31,6 +31,14 @@
 
         <activity android:name=".ui.demo1.EmptyFragmentActivity"/>
 
+        <activity android:name=".ui.demo2.Demo2Activity"/>
+
+        <activity android:name=".ui.demo3.Demo3Activity"/>
+
+        <activity android:name=".ui.demo4.Demo4Activity"/>
+
+        <activity android:name=".ui.demo5.Demo5Activity"/>
+
     </application>
 
 </manifest>

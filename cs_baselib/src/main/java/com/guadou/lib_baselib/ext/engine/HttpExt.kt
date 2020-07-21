@@ -26,6 +26,7 @@ suspend fun <T : Any> BaseRepository.extRequestHttp(call: suspend () -> BaseBean
         }
 
     } catch (e: Exception) {
+
         e.printStackTrace()
         OkResult.Error(handleExceptionMessage(e))
     }
