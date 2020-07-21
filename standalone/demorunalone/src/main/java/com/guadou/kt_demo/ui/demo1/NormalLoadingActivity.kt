@@ -9,6 +9,7 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
 import com.guadou.lib_baselib.view.gloading.GloadingLoadingAdapter
+import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
@@ -33,6 +34,7 @@ class NormalLoadingActivity : BaseLoadingActivity<BaseViewModel>() {
 
     //重新生成GLoading对象
     override fun generateGLoading(): Gloading.Holder {
+
         return Gloading.from(GloadingLoadingAdapter()).wrap(this).withRetry {
             onGoadingRetry()
         }

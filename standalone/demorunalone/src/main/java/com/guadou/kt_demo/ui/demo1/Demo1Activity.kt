@@ -31,7 +31,7 @@ class Demo1Activity : BaseActivity<BaseViewModel>() {
     override fun init() {
 
         btn_demo_1.click {
-            NormalJumpLoadingActivity.startInstance()
+            JumpLoadingActivity.startInstance()
         }
 
         btn_demo_2.click {
@@ -40,6 +40,18 @@ class Demo1Activity : BaseActivity<BaseViewModel>() {
 
         btn_demo_3.click {
             PlaceHolderLoadingActivity.startInstance()
+        }
+
+        btn_demo_4.click {
+            EmptyFragmentActivity.startInstance(1)
+        }
+
+        btn_demo_5.click {
+            EmptyFragmentActivity.startInstance(2)
+        }
+
+        btn_demo_6.click {
+            EmptyFragmentActivity.startInstance(3)
         }
     }
 }

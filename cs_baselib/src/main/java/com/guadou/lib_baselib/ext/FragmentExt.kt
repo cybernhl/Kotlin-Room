@@ -19,7 +19,8 @@ fun FragmentActivity.fragmentManager(action: FragmentTransaction.() -> Unit) {
         .commitAllowingStateLoss()
 }
 
-fun FragmentActivity.replace(
+//自动替换fragment
+fun FragmentActivity.replaceFragment(
     layoutId: Int,
     f: Fragment,
     bundle: Array<out Pair<String, Any?>>? = null
@@ -30,7 +31,8 @@ fun FragmentActivity.replace(
         .commitAllowingStateLoss()
 }
 
-fun FragmentActivity.add(
+//添加fragment
+fun FragmentActivity.addFragment(
     layoutId: Int,
     f: Fragment,
     bundle: Array<out Pair<String, Any?>>? = null
@@ -41,52 +43,55 @@ fun FragmentActivity.add(
         .commitAllowingStateLoss()
 }
 
-fun FragmentActivity.hide(f: Fragment) {
+//隐藏
+fun FragmentActivity.hideFragment(f: Fragment) {
     supportFragmentManager.beginTransaction()
         .hide(f)
         .commitAllowingStateLoss()
 }
 
-fun FragmentActivity.show(f: Fragment) {
+//展示
+fun FragmentActivity.showFragment(f: Fragment) {
     supportFragmentManager.beginTransaction()
         .show(f)
         .commitAllowingStateLoss()
 }
 
-fun FragmentActivity.remove(f: Fragment) {
+//移除
+fun FragmentActivity.removeFragment(f: Fragment) {
     supportFragmentManager.beginTransaction()
         .remove(f)
         .commitAllowingStateLoss()
 }
 
-
-fun Fragment.replace(layoutId: Int, f: Fragment, bundle: Array<out Pair<String, Any?>>? = null) {
+//替换
+fun Fragment.replaceFragment(layoutId: Int, f: Fragment, bundle: Array<out Pair<String, Any?>>? = null) {
     if (bundle != null) f.arguments = bundle.toBundle()
     childFragmentManager.beginTransaction()
         .replace(layoutId, f)
         .commitAllowingStateLoss()
 }
 
-fun Fragment.add(layoutId: Int, f: Fragment, bundle: Array<out Pair<String, Any?>>? = null) {
+fun Fragment.addFragment(layoutId: Int, f: Fragment, bundle: Array<out Pair<String, Any?>>? = null) {
     if (bundle != null) f.arguments = bundle.toBundle()
     childFragmentManager.beginTransaction()
         .add(layoutId, f)
         .commitAllowingStateLoss()
 }
 
-fun Fragment.hide(f: Fragment) {
+fun Fragment.hideFragment(f: Fragment) {
     childFragmentManager.beginTransaction()
         .hide(f)
         .commitAllowingStateLoss()
 }
 
-fun Fragment.show(f: Fragment) {
+fun Fragment.showFragment(f: Fragment) {
     childFragmentManager.beginTransaction()
         .show(f)
         .commitAllowingStateLoss()
 }
 
-fun Fragment.remove(f: Fragment) {
+fun Fragment.removeFragment(f: Fragment) {
     childFragmentManager.beginTransaction()
         .remove(f)
         .commitAllowingStateLoss()

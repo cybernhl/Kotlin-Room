@@ -12,12 +12,12 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 /**
  * 默认是加载的上下跳动的动画
  */
-class NormalJumpLoadingActivity : BaseLoadingActivity<BaseViewModel>() {
+class JumpLoadingActivity : BaseLoadingActivity<BaseViewModel>() {
 
     companion object {
         fun startInstance() {
             commContext().let {
-                it.startActivity(Intent(it, NormalJumpLoadingActivity::class.java).apply {
+                it.startActivity(Intent(it, JumpLoadingActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 })
             }

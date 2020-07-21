@@ -18,8 +18,7 @@ abstract class LoadingRenderer {
     private static final long ANIMATION_DURATION = 1333;
     private static final float DEFAULT_SIZE = 56.0f;
 
-    private final ValueAnimator.AnimatorUpdateListener mAnimatorUpdateListener
-            = new ValueAnimator.AnimatorUpdateListener() {
+    private final ValueAnimator.AnimatorUpdateListener mAnimatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             computeRender((float) animation.getAnimatedValue());
