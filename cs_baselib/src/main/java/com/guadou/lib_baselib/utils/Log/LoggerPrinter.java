@@ -263,13 +263,14 @@ public class LoggerPrinter implements Printer {
         logChunk(priority, HORIZONTAL_DOUBLE_LINE + "[Thread] → " + Thread.currentThread().getName());
         logChunk(priority, MIDDLE_BORDER);
         String str = "";
+        int printTitleLine = 0;  //控制Title打印多少行
         StackTraceElement[] traces = Thread.currentThread().getStackTrace();
-        int tracesLenth = traces.length;
-        if (traces.length > 4) {   //这里修改了 只打印2行错误信息
-            tracesLenth = 4;
-        }
 
-        for (int i = 0; i < tracesLenth; i++) {
+        for (int i = 0; i < traces.length; i++) {
+
+            if (printTitleLine >= 2) {
+                break;
+            }
 
             StackTraceElement element = traces[i];
             StringBuilder perTrace = new StringBuilder(str);
@@ -281,6 +282,8 @@ public class LoggerPrinter implements Printer {
             if (className.startsWith("android.")
                     || className.contains("com.android")
                     || className.contains("java.lang")
+                    || className.contains("Log")
+                    || className.startsWith("kotlin")
                     || className.contains("com.youth.xframe")) {
                 continue;
             }
@@ -293,7 +296,9 @@ public class LoggerPrinter implements Printer {
                     .append(':')
                     .append(element.getLineNumber())
                     .append(")");
+
             str += "  ";
+            printTitleLine += 1;
 
             logContent(priority, perTrace.toString());
         }
