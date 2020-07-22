@@ -94,31 +94,20 @@ class Demo5ViewModel(private val mRepository: Demo5Repository) : BaseViewModel()
                     delay(10000)
                 }
 
-
                 //一起处理数据
-                var data1: List<Industry>? = null
-                var data2: List<SchoolBean>? = null
+                val industry = industryResult.await()
+                val school = schoolResult.await()
 
-                industryResult.await().checkSuccess {
-                    data1 = it
+                //如果都成功了才一起返回
+                if (industry is OkResult.Success && school is OkResult.Success) {
+                    loadHideProgress()
 
-                    if (data1 != null && data2 != null) {
-                        loadHideProgress()
-                        mIndustryLiveData.postValue(data1)
-                        mSchoolliveData.postValue(data2)
-                    }
+                    mIndustryLiveData.postValue(industry.data)
+                    mSchoolliveData.postValue(school.data)
                 }
 
-                schoolResult.await().checkSuccess {
-                    data2 = it
 
-                    if (data1 != null && data2 != null) {
-                        loadHideProgress()
-                        mIndustryLiveData.postValue(data1)
-                        mSchoolliveData.postValue(data2)
-                    }
-                }
-
+                YYLogUtils.e(localDBResult.await().toString() + "完成")
 
             }
 

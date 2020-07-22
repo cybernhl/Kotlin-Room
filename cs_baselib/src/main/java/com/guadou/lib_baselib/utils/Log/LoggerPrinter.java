@@ -47,7 +47,8 @@ public class LoggerPrinter implements Printer {
     private static final String BOTTOM_BORDER = BOTTOM_LEFT_CORNER + DOUBLE_DIVIDER;
     private static final String MIDDLE_BORDER = MIDDLE_CORNER + SINGLE_DIVIDER;
     public static String LINE_SEPARATOR = System.getProperty("line.separator");
-    private StringBuilder logStr=new StringBuilder();
+    private StringBuilder logStr = new StringBuilder();
+
     /**
      * 初始化
      */
@@ -55,22 +56,27 @@ public class LoggerPrinter implements Printer {
     public LogConfig init() {
         return config;
     }
+
     /**
      * 返回最后一次格式化的打印结果样式
+     *
      * @return
      */
     @Override
     public String getFormatLog() {
         return logStr.toString();
     }
+
     @Override
     public void d(String message, Object... args) {
         log(Log.DEBUG, message, args);
     }
+
     @Override
     public void e(String message, Object... args) {
         e(null, message, args);
     }
+
     @Override
     public void e(Throwable throwable, String message, Object... args) {
         if (throwable != null && message != null) {
@@ -84,22 +90,27 @@ public class LoggerPrinter implements Printer {
         }
         log(Log.ERROR, message, args);
     }
+
     @Override
     public void w(String message, Object... args) {
         log(Log.WARN, message, args);
     }
+
     @Override
     public void i(String message, Object... args) {
         log(Log.INFO, message, args);
     }
+
     @Override
     public void v(String message, Object... args) {
         log(Log.VERBOSE, message, args);
     }
+
     @Override
     public void wtf(String message, Object... args) {
         log(Log.ASSERT, message, args);
     }
+
     /**
      * 格式化json
      */
@@ -107,10 +118,10 @@ public class LoggerPrinter implements Printer {
     public void json(String json) {
         if (TextUtils.isEmpty(json)) {
             e("json 数据为空！");
-            return ;
+            return;
         }
         try {
-            String message="";
+            String message = "";
             if (json.startsWith("{")) {
                 JSONObject jo = new JSONObject(json);
                 message = jo.toString(4);
@@ -123,6 +134,7 @@ public class LoggerPrinter implements Printer {
             e(e.getCause().getMessage() + LINE_SEPARATOR + json);
         }
     }
+
     /**
      * 格式化xml
      */
@@ -139,12 +151,13 @@ public class LoggerPrinter implements Printer {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(xmlInput, xmlOutput);
-            String message=xmlOutput.getWriter().toString().replaceFirst(">", ">" + LINE_SEPARATOR);
+            String message = xmlOutput.getWriter().toString().replaceFirst(">", ">" + LINE_SEPARATOR);
             e(message);
         } catch (TransformerException e) {
             e(e.getCause().getMessage() + LINE_SEPARATOR + xml);
         }
     }
+
     /**
      * 格式化Map集合
      */
@@ -162,6 +175,7 @@ public class LoggerPrinter implements Printer {
             d(stringBuilder.toString());
         }
     }
+
     /**
      * 格式化List集合
      */
@@ -177,6 +191,7 @@ public class LoggerPrinter implements Printer {
             d(stringBuilder.toString());
         }
     }
+
     /**
      * 同步日志打印顺序
      */
@@ -184,7 +199,7 @@ public class LoggerPrinter implements Printer {
         if (!config.isDebug()) {
             return;
         }
-        logStr.delete(0,logStr.length());
+        logStr.delete(0, logStr.length());
         String message = args.length == 0 ? msg : String.format(msg, args);
         logChunk(priority, TOP_BORDER);
         if (config.isShowThreadInfo()) {
@@ -206,12 +221,14 @@ public class LoggerPrinter implements Printer {
         }
         logChunk(priority, BOTTOM_BORDER);
     }
+
     private void logContent(int priority, String chunk) {
         String[] lines = chunk.split(LINE_SEPARATOR);
         for (String line : lines) {
             logChunk(priority, HORIZONTAL_DOUBLE_LINE + " " + line);
         }
     }
+
     private void logChunk(int priority, String chunk) {
         logStr.append(LINE_SEPARATOR);
         logStr.append(chunk);
@@ -238,27 +255,36 @@ public class LoggerPrinter implements Printer {
                 break;
         }
     }
+
     /**
      * 打印堆栈信息.
      */
     private void getStackInfo(int priority) {
         logChunk(priority, HORIZONTAL_DOUBLE_LINE + "[Thread] → " + Thread.currentThread().getName());
         logChunk(priority, MIDDLE_BORDER);
-        String str="";
+        String str = "";
         StackTraceElement[] traces = Thread.currentThread().getStackTrace();
-        for (int i = 0; i < traces.length; i++) {
+        int tracesLenth = traces.length;
+        if (traces.length > 4) {   //这里修改了 只打印2行错误信息
+            tracesLenth = 4;
+        }
+
+        for (int i = 0; i < tracesLenth; i++) {
+
             StackTraceElement element = traces[i];
             StringBuilder perTrace = new StringBuilder(str);
             if (element.isNativeMethod()) {
                 continue;
             }
-            String className=element.getClassName();
+
+            String className = element.getClassName();
             if (className.startsWith("android.")
-                    ||className.contains("com.android")
-                    ||className.contains("java.lang")
-                    ||className.contains("com.youth.xframe")) {
+                    || className.contains("com.android")
+                    || className.contains("java.lang")
+                    || className.contains("com.youth.xframe")) {
                 continue;
             }
+
             perTrace.append(element.getClassName())
                     .append('.')
                     .append(element.getMethodName())
@@ -267,9 +293,11 @@ public class LoggerPrinter implements Printer {
                     .append(':')
                     .append(element.getLineNumber())
                     .append(")");
-            str+="  ";
+            str += "  ";
+
             logContent(priority, perTrace.toString());
         }
+
         logChunk(priority, MIDDLE_BORDER);
     }
 }
