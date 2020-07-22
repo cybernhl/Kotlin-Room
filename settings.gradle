@@ -1,4 +1,3 @@
-rootProject.name='KT-Zoom'
 
 include ':app',
         ':cs_router',
