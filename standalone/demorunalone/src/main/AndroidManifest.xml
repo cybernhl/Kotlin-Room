@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.guadou.kt_demo">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <application
         android:name=".DemoApplication"
         android:allowBackup="true"
@@ -38,6 +43,10 @@
         <activity android:name=".ui.demo4.Demo4Activity"/>
 
         <activity android:name=".ui.demo5.Demo5Activity"/>
+
+        <activity android:name=".ui.demo6.Demo6Activity"/>
+
+        <activity android:name=".ui.demo7.Demo7Activity"/>
 
     </application>
 

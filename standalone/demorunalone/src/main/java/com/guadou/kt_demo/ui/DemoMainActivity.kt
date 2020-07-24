@@ -7,6 +7,8 @@ import com.guadou.kt_demo.ui.demo2.Demo2Activity
 import com.guadou.kt_demo.ui.demo3.Demo3Activity
 import com.guadou.kt_demo.ui.demo4.Demo4Activity
 import com.guadou.kt_demo.ui.demo5.Demo5Activity
+import com.guadou.kt_demo.ui.demo6.Demo6Activity
+import com.guadou.kt_demo.ui.demo7.Demo7Activity
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.click
@@ -53,22 +55,22 @@ class DemoMainActivity : BaseActivity<BaseViewModel>() {
             Demo5Activity.startInstance()
         }
 
-        btn_demo_6.text = "6.权限/图库/相机"
+        btn_demo_6.text = "6.权限/图库/相机/九宫RV带分割间距"
         btn_demo_6.click {
-
+            Demo6Activity.startInstance()
         }
 
         btn_demo_7.text = "7.图片加载Glide封装"
         btn_demo_7.click {
-
+            Demo7Activity.startInstance()
         }
 
-        btn_demo_8.text = "8.RecyclerView封装"
+        btn_demo_8.text = "8.RecyclerView封装使用"
         btn_demo_8.click {
 
         }
 
-        btn_demo_9.text = "9.Kotlin倒计时"
+        btn_demo_9.text = "9.Kotlin倒计时实现"
         btn_demo_9.click {
 
         }

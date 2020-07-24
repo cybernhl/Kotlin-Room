@@ -4,7 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.guadou.kt_demo.ui.demo5.bean.Industry
 import com.guadou.kt_demo.ui.demo5.bean.SchoolBean
 import com.guadou.lib_baselib.base.BaseViewModel
-import com.guadou.lib_baselib.ext.*
+import com.guadou.lib_baselib.ext.ControlledRunner
+import com.guadou.lib_baselib.ext.SingleRunner
+import com.guadou.lib_baselib.ext.checkNet
+import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.testxiecheng.base.OkResult
@@ -118,8 +121,8 @@ class Demo5ViewModel(private val mRepository: Demo5Repository) : BaseViewModel()
     /**
      * 网络请求去重
      */
-    var controlledRunner = ControlledRunner<OkResult<List<Industry>>>()  //取消之前的
-    val singleRunner = SingleRunner()       //任务队列，排队，单独的
+    private var controlledRunner = ControlledRunner<OkResult<List<Industry>>>()  //取消之前的
+    private val singleRunner = SingleRunner()       //任务队列，排队，单独的
     fun netDuplicate() {
 
         checkNet({

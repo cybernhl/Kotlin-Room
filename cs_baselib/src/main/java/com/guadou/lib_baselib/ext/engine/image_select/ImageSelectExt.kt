@@ -33,7 +33,7 @@ import com.luck.picture.lib.tools.PictureFileUtils
 
 //开启图片选择
 fun Activity.extOpenImageSelect(
-    selected: List<LocalMedia>,
+    selected: List<LocalMedia>?,
     listener: OnResultCallbackListener<LocalMedia>,
     selectNum: Int = 1,
     canTackPhoto: Boolean = true,
