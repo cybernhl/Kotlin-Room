@@ -9,6 +9,7 @@ import com.guadou.kt_demo.ui.demo4.Demo4Activity
 import com.guadou.kt_demo.ui.demo5.Demo5Activity
 import com.guadou.kt_demo.ui.demo6.Demo6Activity
 import com.guadou.kt_demo.ui.demo7.Demo7Activity
+import com.guadou.kt_demo.ui.demo8.Demo8Activity
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.click
@@ -67,7 +68,7 @@ class DemoMainActivity : BaseActivity<BaseViewModel>() {
 
         btn_demo_8.text = "8.RecyclerView封装使用"
         btn_demo_8.click {
-
+            Demo8Activity.startInstance()
         }
 
         btn_demo_9.text = "9.Kotlin倒计时实现"

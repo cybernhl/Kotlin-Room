@@ -19,9 +19,7 @@ import kotlinx.android.synthetic.main.activity_demo6.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
- * 网络请求的实例代码
- *
- * 一定要注意 Repository和ViewModel 都要在di中注册
+ * 相机相册
  */
 class Demo6Activity : BaseActivity<BaseViewModel>() {
 

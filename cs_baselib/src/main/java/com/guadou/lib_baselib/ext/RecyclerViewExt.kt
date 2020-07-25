@@ -96,7 +96,7 @@ fun <T> RecyclerView.bindData(
 }
 
 /**
- * 必须在bindData之后调用，并且需要hasHeaderOrFooter为true才起作用
+ * 必须在bindData之后调用
  */
 fun RecyclerView.addHeader(headerView: View): RecyclerView {
     adapter?.apply {
@@ -106,7 +106,7 @@ fun RecyclerView.addHeader(headerView: View): RecyclerView {
 }
 
 /**
- * 必须在bindData之后调用，并且需要hasHeaderOrFooter为true才起作用
+ * 必须在bindData之后调用
  */
 fun RecyclerView.addFooter(footerView: View): RecyclerView {
     adapter?.apply {

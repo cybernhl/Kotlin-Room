@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:Easy_title="测试RV封装" />
+
+    <Button
+        android:id="@+id/btn_rv_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="普通的垂直列表" />
+
+    <Button
+        android:id="@+id/btn_rv_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grid效果与分割线" />
+
+    <Button
+        android:id="@+id/btn_rv_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加头布局与脚布局" />
+
+    <Button
+        android:id="@+id/btn_rv_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BRVAH标准刷新与加载模板（带网络请求）" />
+
+    <Button
+        android:id="@+id/btn_rv_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BRVAH多布局" />
+
+    <Button
+        android:id="@+id/btn_rv_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BRVAH-DIFF刷新" />
+
+</LinearLayout>

@@ -13,9 +13,8 @@ import kotlinx.android.synthetic.main.activity_demo7.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
- * 网络请求的实例代码
+ * 加载各种图片Glide
  *
- * 一定要注意 Repository和ViewModel 都要在di中注册
  */
 class Demo7Activity : BaseActivity<BaseViewModel>() {
 

@@ -48,6 +48,16 @@
 
         <activity android:name=".ui.demo7.Demo7Activity"/>
 
+        <activity android:name=".ui.demo8.Demo8Activity"/>
+
+        <activity android:name=".ui.demo8.rv1.DemoRVNormalVertalActivity"/>
+
+        <activity android:name=".ui.demo8.rv2.DemoRVNormalGridActivity"/>
+
+        <activity android:name=".ui.demo8.rv3.DemoRVHeadFoodVertalActivity"/>
+
+        <activity android:name=".ui.demo8.rv4.DemoRVMobanActivity"/>
+
     </application>
 
 </manifest>

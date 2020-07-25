@@ -109,7 +109,7 @@ dependencies {
     api deps.support.brvah
 
     //刷新布局
-    //    api deps.support.smart_refresh
+    api deps.support.smart_refresh
     //XPopup弹窗
     api project(':lib_xpopup')
 
