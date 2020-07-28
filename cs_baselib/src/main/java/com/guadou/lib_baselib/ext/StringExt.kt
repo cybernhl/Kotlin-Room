@@ -32,9 +32,9 @@ fun String.isIDCard() = "[1-9]\\d{16}[a-zA-Z0-9]".toRegex().matches(this)
 /**
  * 是否是中文字符
  */
-fun String.isChinese() = "^[\u4E00-\u9FA5]+$".toRegex().matches(this)
+fun String?.isChinese() = "^[\u4E00-\u9FA5]+$".toRegex().matches(this!!)
 
-fun String.checkEmpty(): Boolean {
+fun String?.checkEmpty(): Boolean {
 
     return !(this != null && !"".equals(
         this.trim({ it <= ' ' }),
@@ -43,24 +43,29 @@ fun String.checkEmpty(): Boolean {
 }
 
 @SuppressLint("NewApi")
-fun Collection<Any>.checkEmpty(): Boolean {
+fun Collection<Any>?.checkEmpty(): Boolean {
+    if (this == null) return true
     return isNull(this) || this.isEmpty()
 }
 
-fun ArrayList<Any>.checkEmpty(): Boolean {
-    return this == null || this.size > 0
+fun ArrayList<Any>?.checkEmpty(): Boolean {
+    if (this == null) return true
+    return this.isEmpty()
 }
 
-fun Map<Any, Any>.checkEmpty(): Boolean {
-    return this == null || this.size > 0
+fun Map<Any, Any>?.checkEmpty(): Boolean {
+    if (this == null) return false
+    return this.isEmpty()
 }
 
-fun HashMap<Any, Any>.checkEmpty(): Boolean {
-    return this == null || this.size > 0
+fun HashMap<Any, Any>?.checkEmpty(): Boolean {
+    if (this == null) return true
+    return this.isEmpty()
 }
 
-fun LinkedHashMap<Any, Any>.checkEmpty(): Boolean {
-    return this == null || this.size > 0
+fun LinkedHashMap<Any, Any>?.checkEmpty(): Boolean {
+    if (this == null) return true
+    return this.isEmpty()
 }
 
 

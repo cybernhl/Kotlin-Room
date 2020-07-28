@@ -22,6 +22,7 @@ ext {
                     "lifecycle"        : 'androidx.lifecycle:lifecycle-extensions:2.2.0',
                     "lifecycle_vm"     : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0',
                     "lifecycle_live"   : 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0',
+                    "lifecycle_scope"   : 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0',
 
                     "junit"            : 'junit:junit:4.12',
                     "test_junit"       : 'androidx.test.ext:junit:1.1.1',

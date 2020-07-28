@@ -11,12 +11,12 @@ import com.guadou.lib_baselib.utils.CommUtils
  * sp().getString("a", "default")
  * sp().getBoolean("b", false)
  *
-   sp().putString("abc","test demo")
+sp().putString("abc","test demo")
 
-   sp().edit {
-   putString("a", "1")
-   putBoolean("b", true)
- }
+sp().edit {
+putString("a", "1")
+putBoolean("b", true)
+}
 
  * sp().clear()
 }
@@ -73,6 +73,9 @@ fun SharedPreferences.putStringSet(key: String, value: Set<String>) {
     edit { putStringSet(key, value) }
 }
 
+fun SharedPreferences.remove(key: String) {
+    edit { remove(key) }
+}
 
 fun SharedPreferences.clear() {
     edit { clear() }

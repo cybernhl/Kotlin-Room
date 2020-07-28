@@ -519,7 +519,7 @@ public class ACache {
     /**
      * 缓存管理器
      */
-    public class ACacheManager {
+    private class ACacheManager {
         private final AtomicLong cacheSize;
         private final AtomicInteger cacheCount;
         private final long sizeLimit;

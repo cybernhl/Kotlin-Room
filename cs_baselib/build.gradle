@@ -81,6 +81,7 @@ dependencies {
     api deps.android.lifecycle
     api deps.android.lifecycle_vm
     api deps.android.lifecycle_live
+    api deps.android.lifecycle_scope
 
     //测试
     testImplementation deps.android.junit

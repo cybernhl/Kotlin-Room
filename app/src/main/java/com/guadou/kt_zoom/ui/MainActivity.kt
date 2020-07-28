@@ -13,8 +13,8 @@ import com.guadou.lib_baselib.base.BasePlaceHolderActivity
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.engine.extLoad
 import com.guadou.lib_baselib.ext.engine.extRequestPermission
+import com.guadou.lib_baselib.ext.formatDateString
 import com.guadou.lib_baselib.ext.gotoActivity
-import com.guadou.lib_baselib.ext.toDateString
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
@@ -65,7 +65,7 @@ class MainActivity : BasePlaceHolderActivity<MainViewModel>() {
         toast("Test Toast")
 
         btn_toast.click {
-            val dateMills = 2032934294.toDateString()
+            val dateMills = 2032934294.formatDateString()
             toast("测试成功tushi:$dateMills")
             iv_image.extLoad("https://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0")
 

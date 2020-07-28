@@ -4,9 +4,8 @@ import android.content.Intent
 import com.guadou.kt_zoom.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
-import com.guadou.lib_baselib.ext.bindFragment
-import com.guadou.lib_baselib.ext.putString
 import com.guadou.lib_baselib.ext.SP
+import com.guadou.lib_baselib.ext.bindFragment
 import com.guadou.lib_baselib.utils.CommUtils
 import kotlinx.android.synthetic.main.activity_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel

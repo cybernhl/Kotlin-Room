@@ -3,6 +3,7 @@ package com.guadou.kt_demo.ui
 import android.annotation.SuppressLint
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.ui.demo1.Demo1Activity
+import com.guadou.kt_demo.ui.demo10.Demo10Activity
 import com.guadou.kt_demo.ui.demo2.Demo2Activity
 import com.guadou.kt_demo.ui.demo3.Demo3Activity
 import com.guadou.kt_demo.ui.demo4.Demo4Activity
@@ -10,6 +11,7 @@ import com.guadou.kt_demo.ui.demo5.Demo5Activity
 import com.guadou.kt_demo.ui.demo6.Demo6Activity
 import com.guadou.kt_demo.ui.demo7.Demo7Activity
 import com.guadou.kt_demo.ui.demo8.Demo8Activity
+import com.guadou.kt_demo.ui.demo9.DemoCountDwonActivity
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.click
@@ -73,12 +75,12 @@ class DemoMainActivity : BaseActivity<BaseViewModel>() {
 
         btn_demo_9.text = "9.Kotlin倒计时实现"
         btn_demo_9.click {
-
+            DemoCountDwonActivity.startInstance()
         }
 
         btn_demo_10.text = "10.无界面功能（SP，ACache, String, Span, 时间格式化等）"
         btn_demo_10.click {
-
+            Demo10Activity.startInstance()
         }
     }
 

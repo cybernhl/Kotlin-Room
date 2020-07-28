@@ -62,6 +62,12 @@
 
         <activity android:name=".ui.demo8.rv6.DemoRVDiffActivity"/>
 
+        <activity android:name=".ui.demo9.DemoCountDwonActivity"/>
+
+        <activity android:name=".ui.demo10.Demo10Activity"/>
+
+        <activity android:name=".ui.demo10.DemoSpanActivity"/>
+
     </application>
 
 </manifest>

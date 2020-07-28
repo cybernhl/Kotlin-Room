@@ -1,7 +1,6 @@
 package com.guadou.lib_baselib.ext
 
 
-import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
@@ -12,23 +11,21 @@ import android.graphics.drawable.RippleDrawable
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.*
-
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.guadou.lib_baselib.base.BaseApplication
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -395,9 +392,8 @@ fun Any.checkNet(
 }
 
 
-/**
- * 倒计时的实现
- */
+// =======================  倒计时的实现 ↓ =========================
+
 @ExperimentalCoroutinesApi
 fun BaseViewModel.countDown(
     time: Int = 5,
@@ -435,6 +431,90 @@ fun BaseViewModel.countDown(
 
         }
 
+    }
+
+}
+
+/**
+ * 倒计时的实现
+ */
+@ExperimentalCoroutinesApi
+fun AppCompatActivity.countDown(
+    time: Int = 5,
+    start: (scop: CoroutineScope) -> Unit,
+    end: () -> Unit,
+    next: (time: Int) -> Unit
+) {
+
+    lifecycleScope.launch {
+        // 在这个范围内启动的协程会在Lifecycle被销毁的时候自动取消
+        //开启一个子协程，可以取消这个子线程，无需取消整个VewModelScop
+
+        launch {
+
+            flow {
+                (time downTo 0).forEach {
+                    delay(1000)
+                    emit(it)
+                }
+            }.onStart {
+                // 倒计时开始 ，在这里可以让Button 禁止点击状态
+                start(this@launch)
+
+            }.onCompletion {
+                // 倒计时结束 ，在这里可以让Button 恢复点击状态
+                end()
+
+            }.catch {
+                //错误
+                toast(it.message)
+
+            }.collect {
+                // 在这里 更新值来显示到UI
+                next(it)
+            }
+
+        }
+    }
+
+}
+
+@ExperimentalCoroutinesApi
+fun Fragment.countDown(
+    time: Int = 5,
+    start: (scop: CoroutineScope) -> Unit,
+    end: () -> Unit,
+    next: (time: Int) -> Unit
+) {
+
+    viewLifecycleOwner.lifecycleScope.launch {
+        // 在这个范围内启动的协程会在Lifecycle被销毁的时候自动取消
+        //开启一个子协程，可以取消这个子线程，无需取消整个VewModelScop
+
+        launch {
+            flow {
+                (time downTo 0).forEach {
+                    delay(1000)
+                    emit(it)
+                }
+            }.onStart {
+                // 倒计时开始 ，在这里可以让Button 禁止点击状态
+                start(this@launch)
+
+            }.onCompletion {
+                // 倒计时结束 ，在这里可以让Button 恢复点击状态
+                end()
+
+            }.catch {
+                //错误
+                toast(it.message)
+
+            }.collect {
+                // 在这里 更新值来显示到UI
+                next(it)
+            }
+
+        }
     }
 
 }
