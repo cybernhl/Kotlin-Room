@@ -118,8 +118,7 @@ fun RecyclerView.addFooter(footerView: View): RecyclerView {
 //Item的点击
 fun <T> RecyclerView.itemClick(block: (data: List<T>, holder: RecyclerView.ViewHolder, position: Int) -> Unit): RecyclerView {
     adapter?.apply {
-        (adapter as MultiItemTypeAdapter<*>).setOnItemClickListener(object :
-            MultiItemTypeAdapter.SimpleOnItemClickListener() {
+        (adapter as MultiItemTypeAdapter<*>).setOnItemClickListener(object : MultiItemTypeAdapter.SimpleOnItemClickListener() {
             override fun onItemClick(view: View, holder: RecyclerView.ViewHolder, position: Int) {
                 block(data as List<T>, holder, position)
             }
@@ -131,8 +130,7 @@ fun <T> RecyclerView.itemClick(block: (data: List<T>, holder: RecyclerView.ViewH
 //Item的长按回调
 fun <T> RecyclerView.itemLongClick(block: (data: List<T>, holder: RecyclerView.ViewHolder, position: Int) -> Unit): RecyclerView {
     adapter?.apply {
-        (adapter as MultiItemTypeAdapter<*>).setOnItemClickListener(object :
-            MultiItemTypeAdapter.SimpleOnItemClickListener() {
+        (adapter as MultiItemTypeAdapter<*>).setOnItemClickListener(object : MultiItemTypeAdapter.SimpleOnItemClickListener() {
             override fun onItemLongClick(
                 view: View,
                 holder: RecyclerView.ViewHolder,

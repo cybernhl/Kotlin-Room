@@ -58,6 +58,10 @@
 
         <activity android:name=".ui.demo8.rv4.DemoRVMobanActivity"/>
 
+        <activity android:name=".ui.demo8.rv5.DemoRVMuliteActivity"/>
+
+        <activity android:name=".ui.demo8.rv6.DemoRVDiffActivity"/>
+
     </application>
 
 </manifest>

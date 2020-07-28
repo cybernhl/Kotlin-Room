@@ -7,6 +7,8 @@ import com.guadou.kt_demo.ui.demo8.rv1.DemoRVNormalVertalActivity
 import com.guadou.kt_demo.ui.demo8.rv2.DemoRVNormalGridActivity
 import com.guadou.kt_demo.ui.demo8.rv3.DemoRVHeadFoodVertalActivity
 import com.guadou.kt_demo.ui.demo8.rv4.DemoRVMobanActivity
+import com.guadou.kt_demo.ui.demo8.rv5.DemoRVMuliteActivity
+import com.guadou.kt_demo.ui.demo8.rv6.DemoRVDiffActivity
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.click
@@ -70,12 +72,12 @@ class Demo8Activity : BaseActivity<BaseViewModel>() {
 
         //多布局
         btn_rv_5.click {
-
+            DemoRVMuliteActivity.startInstance()
         }
 
         //Diff
         btn_rv_6.click {
-
+            DemoRVDiffActivity.startInstance()
         }
     }
 
