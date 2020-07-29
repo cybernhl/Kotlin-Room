@@ -51,4 +51,11 @@
         android:text="Koin注入"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/btn_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gson容错处理"
+        android:textAllCaps="false" />
+
 </LinearLayout>

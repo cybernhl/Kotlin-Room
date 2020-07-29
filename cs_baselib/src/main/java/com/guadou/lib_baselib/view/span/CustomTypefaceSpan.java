@@ -1,90 +1,43 @@
-/*
- * Tencent is pleased to support the open source community by making QMUI_Android available.
- *
- * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
- *
- * Licensed under the MIT License (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
- *
- * http://opensource.org/licenses/MIT
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.guadou.lib_baselib.view.span;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.os.Parcel;
 import android.text.TextPaint;
-import android.text.style.TypefaceSpan;
-
-import androidx.annotation.Nullable;
+import android.text.style.MetricAffectingSpan;
 
 /**
- * 支持以 Typeface 的方式设置 span 的字体，实现自定义字体的效果
+ * 系统原生的TypefaceSpan只能使用原生的默认字体
+ * 如果使用自定义的字体，通过这个来实现
  */
-public class CustomTypefaceSpan extends TypefaceSpan {
+public class CustomTypefaceSpan extends MetricAffectingSpan {
 
-    /* http://stackoverflow.com/questions/6612316/how-set-spannable-object-font-with-custom-font#answer-10741161 */
+    private final Typeface typeface;
 
-    public static final Creator<CustomTypefaceSpan> CREATOR = new Creator<CustomTypefaceSpan>() {
-        @Override
-        public CustomTypefaceSpan createFromParcel(Parcel source) {
-            return null;
-        }
-
-        @Override
-        public CustomTypefaceSpan[] newArray(int size) {
-            return new CustomTypefaceSpan[size];
-        }
-    };
-    private final @Nullable Typeface newType;
-
-    /**
-     * @param family Typeface 字体的字体名
-     * @param type 该字体的 Typeface 对象
-     */
-    public CustomTypefaceSpan(String family, @Nullable Typeface type) {
-        super(family);
-        newType = type;
+    public CustomTypefaceSpan(final Typeface typeface) {
+        this.typeface = typeface;
     }
 
-    private static void applyCustomTypeFace(Paint paint, @Nullable Typeface tf) {
-        if (tf == null) {
-            return;
-        }
+    @Override
+    public void updateDrawState(final TextPaint drawState) {
+        apply(drawState);
+    }
 
-        int oldStyle;
-        Typeface old = paint.getTypeface();
-        if (old == null) {
-            oldStyle = 0;
-        } else {
-            oldStyle = old.getStyle();
-        }
+    @Override
+    public void updateMeasureState(final TextPaint paint) {
+        apply(paint);
+    }
 
-        int fake = oldStyle & ~tf.getStyle();
-        if ((fake & Typeface.BOLD) != 0) {
+    private void apply(final Paint paint) {
+        final Typeface oldTypeface = paint.getTypeface();
+        final int oldStyle = oldTypeface != null ? oldTypeface.getStyle() : 0;
+        int fakeStyle = oldStyle & ~typeface.getStyle();
+        if ((fakeStyle & Typeface.BOLD) != 0) {
             paint.setFakeBoldText(true);
         }
-
-        if ((fake & Typeface.ITALIC) != 0) {
+        if ((fakeStyle & Typeface.ITALIC) != 0) {
             paint.setTextSkewX(-0.25f);
         }
-
-        paint.setTypeface(tf);
+        paint.setTypeface(typeface);
     }
 
-    @Override
-    public void updateDrawState(TextPaint ds) {
-        applyCustomTypeFace(ds, newType);
-    }
-
-    @Override
-    public void updateMeasureState(TextPaint paint) {
-        applyCustomTypeFace(paint, newType);
-    }
 }

@@ -99,19 +99,22 @@ class Demo10Activity : BaseActivity<BaseViewModel>() {
 //            val isEmpty = listOf<String>().checkEmpty()
 //            toast("isEmpty:" + isEmpty)
 
-
 //            val list = arrayListOf("123")
 //            val isEmpty = list.checkEmpty()
 //            toast("isEmpty:" + isEmpty)
+
 
             //数组转集合，集合转数组
 //            val str = "a,b,c,d,e,f,g"
 //            val list = str.toCommaList()
 //            toast("list:" + list.toString())
 
-            val list = listOf("a", "b", "c", "d", "e", "f", "g", "h")
-            val str = list.toCommaStr()
-            toast("str:" + str)
+//            val list = listOf("a", "b", "c", "d", "e", "f", "g", "h")
+//            val str = list.toCommaStr()
+//            toast("str:" + str)
+
+            //小数点的格式化
+            toast("2312109.65473".formatMoney())
         }
 
         //Koin的注入  -- 上面成员变量注入了

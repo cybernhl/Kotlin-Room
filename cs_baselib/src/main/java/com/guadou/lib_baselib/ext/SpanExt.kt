@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.view.View
 import android.widget.TextView
+import com.guadou.lib_baselib.view.span.CustomTypefaceSpan
 
 /**
  * span相关
@@ -138,8 +139,23 @@ fun CharSequence.toStyleSpan(style: Int = Typeface.BOLD, range: IntRange): CharS
     }
 }
 
+/**
+ * 将一段文字中指定range的文字添加自定义效果
+ * @param range 要添加删除线的文字的范围
+ */
+fun CharSequence.toCustomTypeFaceSpan(typeface: Typeface, range: IntRange): CharSequence {
+    return SpannableString(this).apply {
+        setSpan(
+            CustomTypefaceSpan(typeface),
+            range.start,
+            range.endInclusive,
+            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+        )
+    }
+}
 
-/** TextView的扩展 **/
+
+/** TextView的扩展 ,本质上还是调用上面的方法**/
 fun TextView.sizeSpan(str: String = "", range: IntRange, scale: Float = 1.5f): TextView {
     text = (if (str.isEmpty()) text else str).toSizeSpan(range, scale)
     return this
@@ -212,5 +228,15 @@ fun TextView.styleSpan(str: String = "", range: IntRange, style: Int = Typeface.
 
 fun TextView.appendStyleSpan(str: String = "", style: Int = Typeface.BOLD): TextView {
     append(str.toStyleSpan(style = style, range = 0..str.length))
+    return this
+}
+
+fun TextView.customTypeFaceSpan(str: String = "", range: IntRange, typeface: Typeface): TextView {
+    text = (if (str.isEmpty()) text else str).toCustomTypeFaceSpan(typeface, range = range)
+    return this
+}
+
+fun TextView.appendCustomTypeFaceSpan(str: String = "", typeface: Typeface): TextView {
+    append(str.toCustomTypeFaceSpan(typeface, range = 0..str.length))
     return this
 }
