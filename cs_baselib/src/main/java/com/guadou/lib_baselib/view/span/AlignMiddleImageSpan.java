@@ -31,7 +31,7 @@ import androidx.annotation.NonNull;
  */
 public class AlignMiddleImageSpan extends ImageSpan {
 
-    public static final int ALIGN_MIDDLE = -100; // 不要和父类重复
+    public static final int ALIGN_MIDDLE = 4; // 不要和父类重复
 
     /**
      * 规定这个Span占几个字的宽度

@@ -23,18 +23,19 @@ import android.graphics.drawable.Drawable;
 /**
  * 支持设置图片左右间距的 ImageSpan
  * 继承与居中的imageSpan
+ * 我一般用这个，功能更多  已经用于扩展Span中
  */
-public class QMUIMarginImageSpan extends AlignMiddleImageSpan {
+public class MiddleIMarginImageSpan extends AlignMiddleImageSpan {
 
     private int mSpanMarginLeft = 0;
     private int mSpanMarginRight = 0;
     private int mOffsetY = 0;
 
-    public QMUIMarginImageSpan(Drawable d, int verticalAlignment, int marginLeft, int marginRight) {
+    public MiddleIMarginImageSpan(Drawable d, int verticalAlignment, int marginLeft, int marginRight) {
         this(d, verticalAlignment, marginLeft, marginRight, 0);
     }
 
-    public QMUIMarginImageSpan(Drawable d, int verticalAlignment, int marginLeft, int marginRight, int offsetY) {
+    public MiddleIMarginImageSpan(Drawable d, int verticalAlignment, int marginLeft, int marginRight, int offsetY) {
         super(d, verticalAlignment);
         mSpanMarginLeft = marginLeft;
         mSpanMarginRight = marginRight;

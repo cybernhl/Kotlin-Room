@@ -9,7 +9,9 @@ import android.text.method.LinkMovementMethod
 import android.text.style.*
 import android.view.View
 import android.widget.TextView
+import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.span.CustomTypefaceSpan
+import com.guadou.lib_baselib.view.span.MiddleIMarginImageSpan
 
 /**
  * span相关
@@ -155,6 +157,38 @@ fun CharSequence.toCustomTypeFaceSpan(typeface: Typeface, range: IntRange): Char
 }
 
 
+/**
+ * 将一段文字中指定range的文字添加自定义效果,可以设置对齐方式，可以设置margin
+ * @param range
+ */
+fun CharSequence.toImageSpan(
+    imageRes: Int,
+    range: IntRange,
+    verticalAlignment: Int = 0,  //默认底部
+    maginLeft: Int = 0,
+    marginRight: Int = 0,
+    width: Int = 0,
+    height: Int = 0
+): CharSequence {
+    return SpannableString(this).apply {
+        setSpan(
+            MiddleIMarginImageSpan(
+                CommUtils.getDrawable(imageRes)
+                    .apply {
+                        setBounds(0, 0, if (width == 0) getIntrinsicWidth() else width, if (height == 0) getIntrinsicHeight() else height)
+                    },
+                verticalAlignment,
+                maginLeft,
+                marginRight
+            ),
+            range.start,
+            range.endInclusive,
+            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+        )
+    }
+}
+
+
 /** TextView的扩展 ,本质上还是调用上面的方法**/
 fun TextView.sizeSpan(str: String = "", range: IntRange, scale: Float = 1.5f): TextView {
     text = (if (str.isEmpty()) text else str).toSizeSpan(range, scale)
@@ -238,5 +272,51 @@ fun TextView.customTypeFaceSpan(str: String = "", range: IntRange, typeface: Typ
 
 fun TextView.appendCustomTypeFaceSpan(str: String = "", typeface: Typeface): TextView {
     append(str.toCustomTypeFaceSpan(typeface, range = 0..str.length))
+    return this
+}
+
+fun TextView.imagepan(
+    imageRes: Int,
+    verticalAlignment: Int = 0,  //默认底部
+    range: IntRange,
+    maginLeft: Int = 0,
+    marginRight: Int = 0,
+    width: Int = 0,
+    height: Int = 0,
+    str: String = ""
+): TextView {
+    text = (if (str.isEmpty()) text else str).toImageSpan(
+        imageRes,
+        range = range,
+        verticalAlignment = verticalAlignment,
+        maginLeft = maginLeft,
+        marginRight = marginRight,
+        width = width,
+        height = height
+    )
+    return this
+}
+
+
+fun TextView.appendImageSpan(
+    imageRes: Int,
+    verticalAlignment: Int = 0,
+    str: String = "1",
+    maginLeft: Int = 0,
+    marginRight: Int = 0,
+    width: Int = 0,
+    height: Int = 0
+): TextView {
+    append(
+        str.toImageSpan(
+            imageRes,
+            range = 0..str.length,
+            verticalAlignment = verticalAlignment,
+            maginLeft = maginLeft,
+            marginRight = marginRight,
+            width = width,
+            height = height
+        )
+    )
     return this
 }
