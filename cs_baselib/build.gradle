@@ -110,9 +110,16 @@ dependencies {
     api deps.support.brvah
 
     //刷新布局
-    api deps.support.smart_refresh
+    api deps.support.smart_refresh_core
+    api deps.support.smart_refresh_head
+
     //XPopup弹窗
-    api project(':lib_xpopup')
+    api deps.support.easy_adapter
+    api(deps.support.xpopup) {
+        exclude group: 'androidx.recyclerview'
+        exclude group: 'androidx.appcompat'
+        exclude group: 'com.google.android.material'
+    }
 
     //图片选择：带luban，ucorp
     api(deps.support.picture_selector) {

@@ -19,6 +19,7 @@ open class BaseApplication : Application() {
         fun checkHasNet(): Boolean {
             return networkType != NetWorkUtil.NetworkType.NETWORK_NO && networkType != NetWorkUtil.NetworkType.NETWORK_UNKNOWN
         }
+
     }
 
     override fun onCreate() {

@@ -4,7 +4,7 @@ include ':app',
         ':cs_baselib',
         ':cs_cptServices',
 
-        ':lib_xpopup',
+//        ':lib_xpopups',
 
         ':cpt_main',
 

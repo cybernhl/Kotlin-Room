@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="293dp"
+    android:layout_height="255dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d_70dp"
+        android:background="@drawable/shape_select_dialog_top">
+
+        <TextView
+            android:id="@+id/tv_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Select Date"
+            android:textColor="@color/white"
+            android:textSize="@dimen/d_23sp" />
+
+        <ImageView
+            android:id="@+id/iv_dialog_select_delete"
+            android:layout_width="@dimen/d_35dp"
+            android:layout_height="@dimen/d_35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/d_5dp"
+            android:layout_marginRight="@dimen/d_5dp"
+            android:padding="@dimen/d_5dp"
+            android:src="@drawable/picture_icon_delete" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/contentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_select_dialog_bottom"
+        android:orientation="vertical"
+        android:padding="@dimen/d_20dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please confirm an interview date:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/d_16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_40dp"
+            android:layout_marginTop="@dimen/d_20dp"
+            android:background="@color/divider_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/d_17dp"
+                android:src="@mipmap/iv_me_red_packet" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/d_8dp"
+                android:layout_marginRight="@dimen/d_8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="Choose Interview Date"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_16sp" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/btn_y"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_40dp"
+            android:layout_marginTop="@dimen/d_23dp"
+            android:layout_weight="1"
+            android:background="#0689FB"
+            android:gravity="center"
+            android:text="Confirm"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15.5sp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

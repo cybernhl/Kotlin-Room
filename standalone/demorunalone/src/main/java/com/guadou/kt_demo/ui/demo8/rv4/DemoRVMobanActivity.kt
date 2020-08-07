@@ -7,8 +7,8 @@ import com.guadou.kt_demo.ui.demo8.rv4.mvvm.DemoJobViewModel
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.vertical
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import kotlinx.android.synthetic.main.activity_demo_rv_muban.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 

@@ -1,20 +1,18 @@
 package com.guadou.lib_baselib.ext
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-
 import com.guadou.basiclib.R
 
 
 /**
  * 吐司工具类-还是自己的布局还是自己的icon
  */
-internal object ToastUtils {
+ object ToastUtils {
 
     private const val LENGTH_SHORT = Toast.LENGTH_SHORT
 

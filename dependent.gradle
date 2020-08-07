@@ -22,7 +22,7 @@ ext {
                     "lifecycle"        : 'androidx.lifecycle:lifecycle-extensions:2.2.0',
                     "lifecycle_vm"     : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0',
                     "lifecycle_live"   : 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0',
-                    "lifecycle_scope"   : 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0',
+                    "lifecycle_scope"  : 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0',
 
                     "junit"            : 'junit:junit:4.12',
                     "test_junit"       : 'androidx.test.ext:junit:1.1.1',
@@ -32,25 +32,31 @@ ext {
 
             //第三方
             support: [
-                    "glide"            : 'com.github.bumptech.glide:glide:4.11.0',
-                    "glide_annotation" : 'com.github.bumptech.glide:annotations:4.11.0',
-                    "glide_integration": 'com.github.bumptech.glide:okhttp3-integration:4.11.0',
-                    "glide_compiler"   : 'com.github.bumptech.glide:compiler:4.11.0',
+                    "glide"             : 'com.github.bumptech.glide:glide:4.11.0',
+                    "glide_annotation"  : 'com.github.bumptech.glide:annotations:4.11.0',
+                    "glide_integration" : 'com.github.bumptech.glide:okhttp3-integration:4.11.0',
+                    "glide_compiler"    : 'com.github.bumptech.glide:compiler:4.11.0',
 
-                    "koin"             : 'org.koin:koin-android:2.0.1',
-                    "koin_scope"       : 'org.koin:koin-androidx-scope:2.0.1',
-                    "koin_vm"          : 'org.koin:koin-androidx-viewmodel:2.0.1',
+                    "koin"              : 'org.koin:koin-android:2.0.1',
+                    "koin_scope"        : 'org.koin:koin-androidx-scope:2.0.1',
+                    "koin_vm"           : 'org.koin:koin-androidx-viewmodel:2.0.1',
 
-                    "retrofit2"        : 'com.squareup.retrofit2:retrofit:2.7.1',
-                    "retrofit_gson"    : 'com.squareup.retrofit2:converter-gson:2.6.2',
-                    'cookie_jar'       : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
+                    "retrofit2"         : 'com.squareup.retrofit2:retrofit:2.7.1',
+                    "retrofit_gson"     : 'com.squareup.retrofit2:converter-gson:2.6.2',
+                    'cookie_jar'        : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
 
-                    "permission"       : 'com.yanzhenjie:permission:2.0.3',
-                    "live_bus"         : 'com.jeremyliao:live-event-bus-x:1.7.2',
-                    "brvah"            : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2',
-                    "smart_refresh"    : 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-14',
-                    "picture_selector" : 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
+                    "permission"        : 'com.yanzhenjie:permission:2.0.3',
+                    "live_bus"          : 'com.jeremyliao:live-event-bus-x:1.7.2',
+                    "brvah"             : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2',
+                    "smart_refresh_core": 'com.scwang.smart:refresh-layout-kernel:2.0.1',
+                    "smart_refresh_head": 'com.scwang.smart:refresh-header-classics:2.0.1',
+                    "picture_selector"  : 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8',  //图片选择
+                    "easy_adapter"      : 'com.lxj:easyadapter:1.2.0',  //xpopup的内置依赖库
+                    "xpopup"            : 'com.lxj:xpopup:2.0.8-rc5',
 
+                    "picker_view"       : 'com.contrarywind:Android-PickerView:4.1.9',              //PicierView (可选)
+                    "sticky_head"       : 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar',  //悬停分组 (可选)
+                    "banner"            : 'com.youth.banner:banner:2.1.0',                           //轮播 (可选)
             ]
 
     ]

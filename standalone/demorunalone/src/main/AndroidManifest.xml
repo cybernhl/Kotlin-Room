@@ -42,6 +42,12 @@
 
         <activity android:name=".ui.demo4.Demo4Activity"/>
 
+        <activity android:name=".ui.demo4.banner.DemoBannerActivity"/>
+
+        <activity android:name=".ui.demo4.popup.DemoXPopupActivity"/>
+
+        <activity android:name=".ui.demo4.popup.DemoImagePreviewActivity"/>
+
         <activity android:name=".ui.demo5.Demo5Activity"/>
 
         <activity android:name=".ui.demo6.Demo6Activity"/>
