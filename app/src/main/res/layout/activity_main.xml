@@ -5,80 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    android:orientation="vertical">
 
     <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
         android:id="@+id/easy_title"
         android:layout_width="match_parent"
-        app:Easy_hasStatusPadding="true"
         android:layout_height="wrap_content"
+        app:Easy_hasStatusPadding="true"
         app:Easy_title="Main" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btn_toast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="测试吐司" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_load_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="选择图片" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-                <ImageView
-                    android:id="@+id/iv_image"
-                    android:layout_marginRight="@dimen/d_15dp"
-                    android:layout_width="@dimen/d_60dp"
-                    android:layout_height="@dimen/d_60dp" />
-
-            </LinearLayout>
-
-
-
-            <Button
-                android:id="@+id/btn_request"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="网络请求" />
-
-            <TextView
-                android:id="@+id/tv_request_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="请求的结果" />
-
-
-            <Button
-                android:id="@+id/btn_jump_auth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="去Auth组件" />
-
-
-        </LinearLayout>
-
-    </ScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Page" />
 
 
 </LinearLayout>
