@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
 android {
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildToolsVersion
@@ -15,10 +18,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
-
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8
-        }
 
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -34,6 +33,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        freeCompilerArgs = ['-Xjvm-default=enable']
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     lintOptions {
@@ -64,10 +68,17 @@ configurations.all {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
-    //测试
+    //每个模块都要实现的依赖
+    //Test
     testImplementation deps.android.junit
     androidTestImplementation deps.android.test_junit
     androidTestImplementation deps.android.test_espresso
+    //依赖注入
+    implementation deps.support.hilt
+    kapt deps.support.hilt_kapt
+    implementation deps.support.hilt_vm
+    kapt deps.support.hilt_vm_kapt
+
 
     api project(':cs_cptServices')
 

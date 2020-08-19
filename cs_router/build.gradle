@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-
 android {
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildToolsVersion
@@ -15,10 +14,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8
-        }
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -33,6 +28,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        freeCompilerArgs = ['-Xjvm-default=enable']
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     lintOptions {

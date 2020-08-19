@@ -18,7 +18,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="Main Page" />
 
+
+    <Button
+        android:id="@+id/btn_jump_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转主页模块" />
 
 </LinearLayout>

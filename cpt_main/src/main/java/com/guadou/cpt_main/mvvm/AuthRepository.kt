@@ -5,8 +5,11 @@ import com.guadou.cpt_main.http.MainRetrofit
 import com.guadou.cs_cptservices.Constants
 import com.guadou.lib_baselib.base.BaseRepository
 import com.guadou.testxiecheng.base.OkResult
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AuthRepository : BaseRepository() {
+@Singleton
+class AuthRepository @Inject constructor() : BaseRepository() {
 
     suspend fun getServerTime(): OkResult<ServerTimeBean> {
         return handleErrorApiCall({

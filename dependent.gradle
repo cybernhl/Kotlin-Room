@@ -6,7 +6,6 @@ ext {
             'compileSdk'       : 29,
             'buildToolsVersion': '30.0.1'
     ]
-
     deps = [
             //android和kt依赖资源
             android: [
@@ -37,9 +36,10 @@ ext {
                     "glide_integration" : 'com.github.bumptech.glide:okhttp3-integration:4.11.0',
                     "glide_compiler"    : 'com.github.bumptech.glide:compiler:4.11.0',
 
-                    "koin"              : 'org.koin:koin-android:2.0.1',
-                    "koin_scope"        : 'org.koin:koin-androidx-scope:2.0.1',
-                    "koin_vm"           : 'org.koin:koin-androidx-viewmodel:2.0.1',
+                    "hilt"              : 'com.google.dagger:hilt-android:2.28-alpha',
+                    "hilt_kapt"         : 'com.google.dagger:hilt-android-compiler:2.28-alpha',
+                    "hilt_vm"           : 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02',
+                    "hilt_vm_kapt"      : 'androidx.hilt:hilt-compiler:1.0.0-alpha02',
 
                     "retrofit2"         : 'com.squareup.retrofit2:retrofit:2.7.1',
                     "retrofit_gson"     : 'com.squareup.retrofit2:converter-gson:2.6.2',
