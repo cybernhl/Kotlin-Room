@@ -4,9 +4,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.util.Log
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.checkEmpty
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
@@ -19,12 +20,11 @@ import com.lxj.xpopup.interfaces.OnSelectListener
 import com.lxj.xpopup.interfaces.SimpleCallback
 import com.lxj.xpopup.util.XPermission
 import kotlinx.android.synthetic.main.activity_demo_xpopup.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  * Xpopup的示例
  */
-class DemoXPopupActivity : BaseActivity<BaseViewModel>() {
+class DemoXPopupActivity : BaseActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -36,7 +36,10 @@ class DemoXPopupActivity : BaseActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_xpopup
 

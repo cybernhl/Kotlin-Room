@@ -2,21 +2,21 @@ package com.guadou.kt_demo.ui.demo3
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentTransaction
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import kotlinx.android.synthetic.main.activity_demo3.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  * 没有测试SuportActivity+SuportFragment的方式
  *
  * 这个类是解决了Fragment重叠的问题，Fragment的重建的问题
  */
-class Demo3Activity : BaseActivity<BaseViewModel>() {
+class Demo3Activity : BaseActivity<EmptyViewModel>() {
 
     private var mCurPosition: Int = 0
     private var isHomeActDestroy: Boolean = false
@@ -39,7 +39,10 @@ class Demo3Activity : BaseActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo3
 

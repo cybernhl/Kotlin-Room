@@ -1,21 +1,22 @@
 package com.guadou.kt_demo.ui.demo2
 
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseLazyLoadingFragment
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
 
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+
 
 /**
  * 滑动的时候最好是把真正的布局先隐藏，然后在加载完成之后再显示出来
  * 不然会有一点延时之后再加载的感觉
  */
-class LazyLoad1Fragment : BaseLazyLoadingFragment<BaseViewModel>() {
+class LazyLoad1Fragment : BaseLazyLoadingFragment<EmptyViewModel>() {
 
     companion object {
         fun obtainFragment(): LazyLoad1Fragment {
@@ -23,7 +24,10 @@ class LazyLoad1Fragment : BaseLazyLoadingFragment<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.fragment_demo2
 

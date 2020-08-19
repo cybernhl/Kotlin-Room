@@ -1,5 +1,6 @@
 package com.guadou.kt_demo.ui.demo5.mvvm
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.guadou.kt_demo.ui.demo5.bean.Industry
 import com.guadou.kt_demo.ui.demo5.bean.SchoolBean
@@ -18,7 +19,7 @@ import kotlinx.coroutines.delay
  * Repository一定要通过默认的构造方法传入进来
  * 在DI中注册之后会自动加载
  */
-class Demo5ViewModel(private val mRepository: Demo5Repository) : BaseViewModel() {
+class Demo5ViewModel @ViewModelInject constructor(private val mRepository: Demo5Repository) : BaseViewModel() {
 
     val mIndustryLiveData = MutableLiveData<List<Industry>>()
     val mSchoolliveData = MutableLiveData<List<SchoolBean>>()

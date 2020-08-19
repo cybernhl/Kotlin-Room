@@ -1,11 +1,12 @@
 package com.guadou.cpt_main
 
 import android.content.Intent
+import com.guadou.cpt_main.mvvm.AuthRepository
 import com.guadou.cpt_main.mvvm.AuthViewModel
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.utils.CommUtils
 import kotlinx.android.synthetic.main.activity_auth.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+
 
 class AuthActivity : BaseActivity<AuthViewModel>() {
 
@@ -18,7 +19,7 @@ class AuthActivity : BaseActivity<AuthViewModel>() {
         }
     }
 
-    override fun initVM(): AuthViewModel = getViewModel()
+    override fun initVM(): AuthViewModel = AuthViewModel(AuthRepository())
 
     override fun startObserve() {
     }

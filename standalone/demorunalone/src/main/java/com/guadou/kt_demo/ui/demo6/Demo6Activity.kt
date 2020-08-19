@@ -4,9 +4,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.widget.ImageView
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.ext.engine.extLoad
 import com.guadou.lib_baselib.ext.engine.extRequestPermission
@@ -16,12 +17,11 @@ import com.luck.picture.lib.decoration.GridSpacingItemDecoration
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_demo6.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  * 相机相册
  */
-class Demo6Activity : BaseActivity<BaseViewModel>() {
+class Demo6Activity : BaseActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -33,7 +33,10 @@ class Demo6Activity : BaseActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo6
 

@@ -1,15 +1,18 @@
 package com.guadou.kt_demo.ui.demo1
 
 import android.content.Intent
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BasePlaceHolderActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class PlaceHolderLoadingActivity : BasePlaceHolderActivity<BaseViewModel>() {
+@AndroidEntryPoint
+class PlaceHolderLoadingActivity : BasePlaceHolderActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -21,7 +24,10 @@ class PlaceHolderLoadingActivity : BasePlaceHolderActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
 
     override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
@@ -35,6 +41,7 @@ class PlaceHolderLoadingActivity : BasePlaceHolderActivity<BaseViewModel>() {
     }
 
     override fun init() {
+        YYLogUtils.e("viewmodel:" + mViewModel.toString())
 
         //模拟的Loading的情况
         showStateLoading()

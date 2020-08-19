@@ -1,20 +1,20 @@
 package com.guadou.kt_demo.ui.demo1
 
-import android.view.View
+import androidx.fragment.app.viewModels
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseLoadingFragment
 import com.guadou.lib_baselib.base.BasePlaceHolderFragment
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.view.gloading.Gloading
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
-import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
 
 /**
  * 设置为菊花的转动
  */
-class PlaceHolderLoadingFragment : BasePlaceHolderFragment<BaseViewModel>() {
+@AndroidEntryPoint
+class PlaceHolderLoadingFragment : BasePlaceHolderFragment<EmptyViewModel>() {
 
     companion object {
         fun obtainFragment(): PlaceHolderLoadingFragment {
@@ -22,7 +22,10 @@ class PlaceHolderLoadingFragment : BasePlaceHolderFragment<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
 
@@ -34,6 +37,7 @@ class PlaceHolderLoadingFragment : BasePlaceHolderFragment<BaseViewModel>() {
     }
 
     override fun init() {
+        YYLogUtils.e("viewmodel:" + mViewModel.toString())
 
         //模拟的Loading的情况
         showStateLoading()

@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.ui
 
 import android.annotation.SuppressLint
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.ui.demo1.Demo1Activity
 import com.guadou.kt_demo.ui.demo10.Demo10Activity
@@ -13,17 +14,22 @@ import com.guadou.kt_demo.ui.demo7.Demo7Activity
 import com.guadou.kt_demo.ui.demo8.Demo8Activity
 import com.guadou.kt_demo.ui.demo9.DemoCountDwonActivity
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_demo_main.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  * 演示Demo的首页
  */
-class DemoMainActivity : BaseActivity<BaseViewModel>() {
+@AndroidEntryPoint
+class DemoMainActivity : BaseActivity<EmptyViewModel>() {
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_main
 
@@ -32,6 +38,8 @@ class DemoMainActivity : BaseActivity<BaseViewModel>() {
 
     @SuppressLint("SetTextI18n")
     override fun init() {
+
+        YYLogUtils.e("viewmodel:" + mViewModel.toString())
 
         btn_demo_1.text = "1.基本Activity/Fragment的使用（占位图1）"
         btn_demo_1.click {

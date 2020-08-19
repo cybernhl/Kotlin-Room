@@ -6,8 +6,11 @@ import com.guadou.kt_demo.ui.demo8.rv4.bean.FullJobsPage
 import com.guadou.lib_baselib.base.BaseRepository
 import com.guadou.lib_baselib.ext.engine.extRequestHttp
 import com.guadou.testxiecheng.base.OkResult
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DemoJobRepository : BaseRepository() {
+@Singleton
+class DemoJobRepository @Inject constructor() : BaseRepository() {
 
     /**
      * 使用扩展方法，自己的引擎类请求网络

@@ -2,21 +2,23 @@ package com.guadou.kt_demo.ui.demo5
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.ui.demo5.mvvm.Demo5ViewModel
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_demo5.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  * 网络请求的实例代码
  *
  * 一定要注意 Repository和ViewModel 都要在di中注册
  */
+@AndroidEntryPoint  //注解可加可不加 因为只是用ViewModel注入的话是不需要注解的，如果还想注入别的东西 需要加
 class Demo5Activity : BaseActivity<Demo5ViewModel>() {
 
     companion object {
@@ -29,7 +31,10 @@ class Demo5Activity : BaseActivity<Demo5ViewModel>() {
         }
     }
 
-    override fun initVM(): Demo5ViewModel = getViewModel()
+    override fun initVM(): Demo5ViewModel {
+        val viewModel: Demo5ViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo5
 
@@ -54,7 +59,9 @@ class Demo5Activity : BaseActivity<Demo5ViewModel>() {
     }
 
     private fun initLitener() {
+        YYLogUtils.e("Viewmodel:" + mViewModel.toString())
         btn_net_1.click {
+
             tv_net_content.text = ""
             mViewModel.netWorkSeries()
         }

@@ -2,18 +2,25 @@ package com.guadou.kt_demo.ui.demo10
 
 import android.content.Intent
 import android.graphics.Color
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.font_text_view.TypefaceUtil
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_demo_span.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import javax.inject.Inject
 
 /**
  * Span的展示的逻辑
  */
-class DemoSpanActivity : BaseActivity<BaseViewModel>() {
+@AndroidEntryPoint  //这里用到了自定义的注入 需要加注解
+class DemoSpanActivity : BaseActivity<EmptyViewModel>() {
+
+    @Inject
+    lateinit var userServer: UserServer
 
     companion object {
         fun startInstance() {
@@ -25,7 +32,10 @@ class DemoSpanActivity : BaseActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_span
 
@@ -34,6 +44,10 @@ class DemoSpanActivity : BaseActivity<BaseViewModel>() {
     }
 
     override fun init() {
+        YYLogUtils.w("server:"+userServer.toString())
+        userServer.testUser()
+
+
         //可以直接操作TextView,如果没有文本可以直接添加带Span的文本
         tv_text_span1.text = "演示一下appendXX方法的用法\n"
         tv_text_span1.appendSizeSpan("变大变大", 1.5f)

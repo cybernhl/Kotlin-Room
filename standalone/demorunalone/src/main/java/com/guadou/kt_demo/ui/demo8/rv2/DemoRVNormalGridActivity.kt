@@ -2,9 +2,10 @@ package com.guadou.kt_demo.ui.demo8.rv2
 
 import android.content.Intent
 import android.widget.ImageView
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.bindData
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.dp2px
@@ -12,12 +13,12 @@ import com.guadou.lib_baselib.ext.engine.extLoad
 import com.guadou.lib_baselib.ext.vertical
 import com.luck.picture.lib.decoration.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+
 
 /**
  * 普通的垂直的或者水平的直接用扩展的方法
  */
-class DemoRVNormalGridActivity : BaseActivity<BaseViewModel>() {
+class DemoRVNormalGridActivity : BaseActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -29,7 +30,10 @@ class DemoRVNormalGridActivity : BaseActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_normal
 

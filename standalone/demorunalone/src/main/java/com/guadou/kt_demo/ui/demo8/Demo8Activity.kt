@@ -2,6 +2,7 @@ package com.guadou.kt_demo.ui.demo8
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.ui.demo8.rv1.DemoRVNormalVertalActivity
 import com.guadou.kt_demo.ui.demo8.rv2.DemoRVNormalGridActivity
@@ -10,18 +11,17 @@ import com.guadou.kt_demo.ui.demo8.rv4.DemoRVMobanActivity
 import com.guadou.kt_demo.ui.demo8.rv5.DemoRVMuliteActivity
 import com.guadou.kt_demo.ui.demo8.rv6.DemoRVDiffActivity
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import kotlinx.android.synthetic.main.activity_demo8.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  * 网络请求的实例代码
  *
  * 一定要注意 Repository和ViewModel 都要在di中注册
  */
-class Demo8Activity : BaseActivity<BaseViewModel>() {
+class Demo8Activity : BaseActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -33,7 +33,10 @@ class Demo8Activity : BaseActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo8
 

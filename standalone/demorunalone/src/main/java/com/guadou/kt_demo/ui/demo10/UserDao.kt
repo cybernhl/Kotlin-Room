@@ -1,6 +1,10 @@
 package com.guadou.kt_demo.ui.demo10
 
-class UserDao {
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class UserDao @Inject constructor() {
 
     fun printUser(): String {
         return "User Name"

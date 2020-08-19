@@ -8,11 +8,14 @@ import com.guadou.kt_demo.ui.demo5.http.DemoRetrofit
 import com.guadou.lib_baselib.base.BaseRepository
 import com.guadou.lib_baselib.ext.engine.extRequestHttp
 import com.guadou.testxiecheng.base.OkResult
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * 两种方式的网络请求都可以，更推荐使用扩展方法，方便统一管理
  */
-class Demo5Repository : BaseRepository() {
+@Singleton
+class Demo5Repository @Inject constructor() : BaseRepository() {
 
     /**
      * 使用扩展方法，自己的引擎类请求网络

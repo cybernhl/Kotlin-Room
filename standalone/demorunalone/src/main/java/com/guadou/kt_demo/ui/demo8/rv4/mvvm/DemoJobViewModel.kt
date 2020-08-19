@@ -1,5 +1,6 @@
 package com.guadou.kt_demo.ui.demo8.rv4.mvvm
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.guadou.kt_demo.ui.demo8.rv4.adapter.DemoJobAdapter
@@ -14,7 +15,7 @@ import com.guadou.lib_baselib.utils.CheckUtil
  * Repository一定要通过默认的构造方法传入进来
  * 在DI中注册之后会自动加载
  */
-class DemoJobViewModel(private val mRepository: DemoJobRepository) : BaseViewModel() {
+class DemoJobViewModel @ViewModelInject constructor(private val mRepository: DemoJobRepository) : BaseViewModel() {
 
     var mCurPage = 1
     private var isNeedPlaceHolder = true

@@ -1,29 +1,20 @@
 package com.guadou.cs_cptservices.ui
 
 import android.annotation.SuppressLint
-
 import android.content.Intent
-
 import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
-
 import android.widget.FrameLayout
-
 import com.guadou.cs_cptservices.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.BaseViewModel
-import com.guadou.lib_baselib.cache.ACache
 import com.guadou.lib_baselib.ext.toast
-
 import com.guadou.lib_baselib.utils.CheckUtil
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.MyWebView
-import com.guadou.lib_baselib.view.WebViewProgressBar
-import com.guadou.lib_baselib.view.titlebar.EasyTitleBar
 import kotlinx.android.synthetic.main.activity_global_web.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class GlobalWebActivity : BaseActivity<BaseViewModel>() {
 
@@ -53,7 +44,7 @@ class GlobalWebActivity : BaseActivity<BaseViewModel>() {
         return R.layout.activity_global_web
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): BaseViewModel = BaseViewModel()
 
     override fun startObserve() {
     }

@@ -1,21 +1,21 @@
 package com.guadou.kt_demo.ui.demo4.banner
 
 import android.content.Intent
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.transformer.AlphaPageTransformer
 import kotlinx.android.synthetic.main.activity_demo_banner.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  * banner
  */
-class DemoBannerActivity : BaseActivity<BaseViewModel>() {
+class DemoBannerActivity : BaseActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -27,7 +27,10 @@ class DemoBannerActivity : BaseActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_banner
 

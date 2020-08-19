@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.ui.demo8.rv4
 
 import android.content.Intent
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.ui.demo8.rv4.mvvm.DemoJobViewModel
@@ -9,12 +10,13 @@ import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.vertical
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_demo_rv_muban.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  * 网络请求模板
  */
+@AndroidEntryPoint
 class DemoRVMobanActivity : BaseActivity<DemoJobViewModel>(), OnRefreshListener {
 
     companion object {
@@ -27,7 +29,10 @@ class DemoRVMobanActivity : BaseActivity<DemoJobViewModel>(), OnRefreshListener 
         }
     }
 
-    override fun initVM(): DemoJobViewModel = getViewModel()
+    override fun initVM(): DemoJobViewModel {
+        val viewModel: DemoJobViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_muban
 

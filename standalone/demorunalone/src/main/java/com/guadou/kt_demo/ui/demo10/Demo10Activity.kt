@@ -1,22 +1,26 @@
 package com.guadou.kt_demo.ui.demo10
 
 import android.content.Intent
+import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.cache.ACache
 import com.guadou.lib_baselib.ext.*
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_demo10.*
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import javax.inject.Inject
+
 
 /**
  * 吐司 弹窗 banner
  */
-class Demo10Activity : BaseActivity<BaseViewModel>() {
+@AndroidEntryPoint  //这里用到了自定义的注入 需要加注解
+class Demo10Activity : BaseActivity<EmptyViewModel>() {
 
-    //注意要在di中注册才能使用
-    private val userServer: UserServer by inject()
+    @Inject
+    lateinit var userServer: UserServer
 
     companion object {
         fun startInstance() {
@@ -28,7 +32,10 @@ class Demo10Activity : BaseActivity<BaseViewModel>() {
         }
     }
 
-    override fun initVM(): BaseViewModel = getViewModel()
+    override fun initVM(): EmptyViewModel {
+        val viewModel: EmptyViewModel by viewModels()
+        return viewModel
+    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo10
 
@@ -119,8 +126,11 @@ class Demo10Activity : BaseActivity<BaseViewModel>() {
 
         //Koin的注入  -- 上面成员变量注入了
         btn_6.click {
+            YYLogUtils.w("server:"+userServer.toString())
             userServer.testUser()
         }
+
+
     }
 
 }
