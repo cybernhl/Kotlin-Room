@@ -12,7 +12,6 @@ import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CheckUtil
 
-
 /**
  * Repository一定要通过默认的构造方法传入进来
  * 在DI中注册之后会自动加载

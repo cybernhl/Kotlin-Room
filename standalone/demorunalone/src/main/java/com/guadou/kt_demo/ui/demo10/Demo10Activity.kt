@@ -2,12 +2,15 @@ package com.guadou.kt_demo.ui.demo10
 
 import android.content.Intent
 import androidx.activity.viewModels
+import com.google.gson.GsonBuilder
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.cache.ACache
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.interceptor.ArrayDefailtAdapter
+import com.guadou.lib_baselib.utils.interceptor.IntDefaut0Adapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_demo10.*
 import javax.inject.Inject
@@ -126,11 +129,36 @@ class Demo10Activity : BaseActivity<EmptyViewModel>() {
 
         //Koin的注入  -- 上面成员变量注入了
         btn_6.click {
-            YYLogUtils.w("server:"+userServer.toString())
+            YYLogUtils.w("server:" + userServer.toString())
             userServer.testUser()
         }
 
 
+        btn_7.click {
+            val jsonStr = """
+        {
+            "name":"Newki",
+            "age":"18",
+            "gender":"",
+            "languages":{}
+        }
+    """.trimIndent()
+
+            //加入容错处理的Gson 正常使用
+            val newUser = GsonBuilder()
+                .registerTypeAdapter(Int::class.java, IntDefaut0Adapter())
+                .registerTypeAdapter(List::class.java, ArrayDefailtAdapter())
+                .create()
+                .fromJson(jsonStr, UserBean::class.java)
+
+            //使用KGson  报错NumberFormatException
+//            val newUser = BaseApplication.mGson.fromJson<UserBean>(jsonStr)
+
+            //使用默认Gson  报错NumberFormatException
+//            val newUser = BaseApplication.mGson.fromJson(jsonStr,UserBean::class.java)
+
+            YYLogUtils.e("对象：" + newUser.toString())
+        }
     }
 
 }

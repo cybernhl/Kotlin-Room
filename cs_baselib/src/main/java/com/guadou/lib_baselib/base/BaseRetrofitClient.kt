@@ -3,9 +3,11 @@ package com.guadou.lib_baselib.base
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
-import com.guadou.lib_baselib.utils.interceptor.LoggingInterceptor
+import com.guadou.lib_baselib.utils.interceptor.*
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient
@@ -14,11 +16,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+
 /**
  * 基类的Retrofit对象
  */
 abstract class BaseRetrofitClient {
 
+    private var gson: Gson? = null
     private val cookieJar by lazy {
         //第三方Cookie管理工具
         PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(CommUtils.getContext()))
@@ -34,7 +38,8 @@ abstract class BaseRetrofitClient {
             val builder = OkHttpClient.Builder()
 
             //可以添加日志拦截和参数拦截
-            builder.addInterceptor(LoggingInterceptor())
+            builder
+                .addInterceptor(LoggingInterceptor())
                 .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
                 .writeTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
@@ -89,8 +94,21 @@ abstract class BaseRetrofitClient {
     fun <S> getService(serviceClass: Class<S>, baseUrl: String): S {
         return Retrofit.Builder()
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(buildGson()))
             .baseUrl(baseUrl)
             .build().create(serviceClass)
+    }
+
+    //容错处理
+    private fun buildGson(): Gson {
+        if (gson == null) {
+            gson = GsonBuilder()
+                .registerTypeAdapter(Int::class.java, IntDefaut0Adapter())
+                .registerTypeAdapter(Double::class.java, DoubleDefault0Adapter())
+                .registerTypeAdapter(Long::class.java, LongDefault0Adapter())
+                .registerTypeAdapter(List::class.java, ArrayDefailtAdapter())
+                .create()
+        }
+        return gson!!
     }
 }

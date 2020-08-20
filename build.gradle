@@ -21,9 +21,6 @@ buildscript {
         //字节码编辑路由器
         classpath 'io.github.prototypez:app-joint:1.7'
 
-        //在编译过程中,修改gson库的字节码,修改gson解析相关的方法
-        classpath 'com.github.LianjiaTech:gson-plugin:2.1.0'
-
         //Hilt插件
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
 
