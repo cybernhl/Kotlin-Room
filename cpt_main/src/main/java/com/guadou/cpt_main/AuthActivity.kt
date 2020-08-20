@@ -1,7 +1,6 @@
 package com.guadou.cpt_main
 
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.cpt_main.mvvm.AuthViewModel
 import com.guadou.cpt_main.others.MemberServer
 import com.guadou.lib_baselib.base.BaseActivity
@@ -26,10 +25,7 @@ class AuthActivity : BaseActivity<AuthViewModel>() {
         }
     }
 
-    override fun initVM(): AuthViewModel {
-        val viewModel: AuthViewModel by viewModels()
-        return viewModel
-    }
+    override fun initVM(): AuthViewModel = getViewModel()
 
     override fun startObserve() {
     }

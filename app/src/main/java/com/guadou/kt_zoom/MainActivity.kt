@@ -1,6 +1,5 @@
 package com.guadou.kt_zoom
 
-import androidx.activity.viewModels
 import com.guadou.cs_router.YYRouterService
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel
@@ -9,13 +8,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<EmptyViewModel>() {
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
+    override fun initVM(): EmptyViewModel = getViewModel()
 
     override fun inflateLayoutById(): Int = R.layout.activity_main
-
 
     override fun startObserve() {
 

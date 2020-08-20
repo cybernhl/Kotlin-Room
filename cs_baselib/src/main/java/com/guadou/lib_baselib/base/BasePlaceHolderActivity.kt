@@ -1,6 +1,7 @@
 package com.guadou.lib_baselib.base
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.guadou.basiclib.R
 import com.guadou.lib_baselib.bean.LoadAction
@@ -37,6 +38,11 @@ abstract class BasePlaceHolderActivity<VM : BaseViewModel> : AbsActivity() {
         startObserve()
     }
 
+    //使用这个方法简化ViewModewl的Hilt依赖注入获取
+    protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
+        val viewModel: VM by viewModels()
+        return viewModel
+    }
     abstract fun initVM(): VM
     abstract override fun inflateLayoutById(): Int
     abstract fun startObserve()

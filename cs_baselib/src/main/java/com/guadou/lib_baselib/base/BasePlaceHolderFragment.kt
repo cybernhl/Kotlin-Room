@@ -2,6 +2,7 @@ package com.guadou.lib_baselib.base
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.guadou.basiclib.R
 import com.guadou.lib_baselib.bean.LoadAction
@@ -47,6 +48,12 @@ abstract class BasePlaceHolderFragment<VM : BaseViewModel> : AbsFragment() {
     protected open fun inflatePlaceHolderLayoutRes(): Int = R.layout.layout_placeholder2
 
     protected open fun onGoadingRetry() {
+    }
+
+    //使用这个方法简化ViewModewl的Hilt依赖注入获取
+    protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
+        val viewModel: VM by viewModels()
+        return viewModel
     }
 
     abstract fun initVM(): VM

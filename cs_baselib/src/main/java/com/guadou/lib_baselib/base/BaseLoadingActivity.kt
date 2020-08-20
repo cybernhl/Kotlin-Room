@@ -1,6 +1,7 @@
 package com.guadou.lib_baselib.base
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.utils.NetWorkUtil
@@ -32,6 +33,12 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
         mViewModel.getActionLiveData().observe(this, stateObserver)
         init()
         startObserve()
+    }
+
+    //使用这个方法简化ViewModewl的Hilt依赖注入获取
+    protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
+        val viewModel: VM by viewModels()
+        return viewModel
     }
 
     abstract fun initVM(): VM
