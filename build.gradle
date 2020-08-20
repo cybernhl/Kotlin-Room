@@ -5,7 +5,6 @@ buildscript {
     ext.kotlin_version = '1.3.61'
     ext.booster_version = '1.6.0'
 
-
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         google()
@@ -18,7 +17,7 @@ buildscript {
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        //字节码编辑路由器
+        //路由
         classpath 'io.github.prototypez:app-joint:1.7'
 
         //Hilt插件
