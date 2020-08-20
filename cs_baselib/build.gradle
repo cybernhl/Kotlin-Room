@@ -98,11 +98,6 @@ dependencies {
     implementation deps.support.glide_integration
     kapt deps.support.glide_compiler
 
-    //依赖注入
-//    api deps.support.koin
-//    api deps.support.koin_scope
-//    api deps.support.koin_vm
-
     //Hilt依赖与扩展
     implementation deps.support.hilt
     kapt deps.support.hilt_kapt
@@ -114,7 +109,6 @@ dependencies {
     api deps.support.retrofit2
     api deps.support.retrofit_gson
     api deps.support.cookie_jar
-    api 'com.github.salomonbrys.kotson:kotson:2.5.0'
 
     //其他依赖
     implementation deps.support.permission
