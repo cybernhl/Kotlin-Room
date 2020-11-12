@@ -58,17 +58,25 @@
                 />
 
         <!--     画廊效果（Meizu）Radius无效       -->
+<!--            <com.youth.banner.Banner-->
+<!--                android:id="@+id/banner3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="180dp"-->
+<!--                android:layout_margin="@dimen/d_15dp"-->
+<!--                app:banner_auto_loop="true"-->
+<!--                app:banner_indicator_normal_color="@color/white"-->
+<!--                app:banner_indicator_selected_color="@color/black"-->
+<!--                app:banner_loop_time="5000"-->
+<!--                />-->
+
             <com.youth.banner.Banner
                 android:id="@+id/banner3"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_margin="@dimen/d_15dp"
-                app:banner_auto_loop="true"
-                app:banner_indicator_normal_color="@color/white"
-                app:banner_indicator_selected_color="@color/black"
-                app:banner_loop_time="5000"
+                app:banner_auto_loop="false"
+                app:banner_infinite_loop="false"
                 />
-
 
             <!--    banner自定义的指示器，未选中的圆形选中矩形        -->
             <com.youth.banner.Banner

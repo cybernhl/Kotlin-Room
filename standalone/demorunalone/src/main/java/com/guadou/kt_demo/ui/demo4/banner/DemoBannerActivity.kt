@@ -74,13 +74,13 @@ class DemoBannerActivity : BaseActivity<EmptyViewModel>() {
         //画廊效果
         banner3?.also {
             it.addBannerLifecycleObserver(this)
-            it.indicator = CircleIndicator(this)
+//            it.indicator = CircleIndicator(this)
             it.adapter = BannerImageAdapter(imageUrls, R.mipmap.item_merchants_bg)
 
             //默认画廊
-//            it.setBannerGalleryEffect(18, 10)
+            it.setBannerGalleryEffect(18, 10)
             //添加魅族效果
-            it.setBannerGalleryMZ(20)
+//            it.setBannerGalleryMZ(20)
 
             //可以和其他PageTransformer组合使用，比如AlphaPageTransformer，注意但和其他带有缩放的PageTransformer会显示冲突
             //addPageTransformer(new AlphaPageTransformer());

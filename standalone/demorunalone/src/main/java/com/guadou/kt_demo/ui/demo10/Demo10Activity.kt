@@ -127,7 +127,7 @@ class Demo10Activity : BaseActivity<EmptyViewModel>() {
             toast("2312109.65473".formatMoney())
         }
 
-        //Koin的注入  -- 上面成员变量注入了
+        //Hilt的注入  -- 上面成员变量注入了
         btn_6.click {
             YYLogUtils.w("server:" + userServer.toString())
             userServer.testUser()
