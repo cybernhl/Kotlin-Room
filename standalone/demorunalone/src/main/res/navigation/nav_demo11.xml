@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_demo11"
+    app:startDestination="@id/page1">
+
+    <fragment
+        android:id="@+id/page1"
+        android:name="com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment1"
+        android:label="Page1"
+        tools:layout="@layout/fragment_demo11_page1">
+
+        <action
+            android:id="@+id/action_page1_to_page2"
+            app:destination="@id/page2"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/page2"
+        android:name="com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment2"
+        android:label="Page2"
+        tools:layout="@layout/fragment_demo11_page2">
+
+        <action
+            android:id="@+id/action_page2_to_page1"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit"
+            app:popUpTo="@id/page1" />
+
+        <action
+            android:id="@+id/action_page2_to_page3"
+            app:destination="@id/page3"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/page3"
+        android:name="com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment3"
+        android:label="Page2"
+        tools:layout="@layout/fragment_demo11_page3">
+
+        <action
+            android:id="@+id/action_page3_to_page2"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit"
+            app:popUpTo="@id/page2" />
+
+        <action
+            android:id="@+id/action_page3_to_page1"
+            app:popUpTo="@id/page1"
+            app:enterAnim="@anim/open_enter"
+            app:exitAnim="@anim/open_exit"
+            app:popEnterAnim="@anim/close_enter"
+            app:popExitAnim="@anim/close_exit" />
+
+    </fragment>
+
+</navigation>

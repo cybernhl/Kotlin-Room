@@ -148,7 +148,10 @@ public class Gloading {
         FrameLayout.LayoutParams newLp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
         wrapper.addView(view, newLp);
-        return new Holder(mAdapter, view.getContext(), wrapper);
+        Holder holder = new Holder(mAdapter, view.getContext(), wrapper);
+        //主要添加了GLoading那么就默认显示Loading状态  2020-12-17 Newki
+        holder.showLoading();
+        return holder;
     }
 
     /**

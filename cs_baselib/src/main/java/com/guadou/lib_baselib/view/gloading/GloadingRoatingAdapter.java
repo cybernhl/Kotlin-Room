@@ -8,7 +8,7 @@ import static com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView.NEED
 
 /**
  * 默认的是上下跳动的加载动画
- * 这个是可配置菊花Loading
+ * 这是可配置自定义的三线条旋转动画
  */
 public class GloadingRoatingAdapter implements Gloading.Adapter {
 

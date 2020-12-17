@@ -46,3 +46,14 @@ fun String.encryptAES(key: String) = EncryptUtils.encryptAES(this, key)
  */
 fun String.decryptAES(key: String) = EncryptUtils.decryptAES(this, key)
 
+/**
+ * Base64编码
+ * @param str  原始数据
+ */
+fun String.encodeBase64(str: String) = EncryptUtils.encodeStrByBase64(str)
+
+/**
+ * Base64解码
+ * @param str Base64数据
+ */
+fun String.decodeBase64(str: String) = EncryptUtils.deCodeStrByBase64(str)

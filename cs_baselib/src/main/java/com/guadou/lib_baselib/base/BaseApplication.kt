@@ -1,19 +1,23 @@
 package com.guadou.lib_baselib.base
 
 import android.app.Application
+import android.content.Context
 import android.os.Handler
+import androidx.multidex.MultiDex
 import com.google.gson.Gson
 import com.guadou.lib_baselib.core.BaseLibCore
 import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.NetWorkUtil
 
-
+/**
+ * 基类的Application
+ */
 open class BaseApplication : Application() {
 
     //全局的静态Gson对象
     companion object {
         val mGson = Gson()
-        lateinit var networkType: NetWorkUtil.NetworkType
+        lateinit var networkType: NetWorkUtil.NetworkType   //此变量会在网络监听中被动态赋值
 
         //检查当前是否有网络
         fun checkHasNet(): Boolean {
@@ -34,6 +38,12 @@ open class BaseApplication : Application() {
         //网络监听
         ConnectivityReceiver.registerReceiver(this)
 
+    }
+
+    //Dex分包
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     override fun onTerminate() {

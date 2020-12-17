@@ -26,7 +26,11 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            multiDexKeepProguard file('multidex-config.pro')
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            multiDexKeepProguard file('multidex-config.pro')
         }
     }
 
@@ -77,7 +81,9 @@ dependencies {
     api deps.android.recyclerview
     api deps.android.design
     api deps.android.multidex
-    api 'androidx.fragment:fragment-ktx:1.2.5'   //Fragment与Activity的ViewModel扩展（Hilt必须）
+    api deps.android.fragment_ktx  //Fragment与Activity的ViewModel扩展（Hilt必须）
+    api deps.android.navigation    //单Activity-Fragment导航
+    api deps.android.navigation_ui
 
     //Kotlin相关
     api deps.android.kt_ktx

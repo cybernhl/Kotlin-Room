@@ -1,16 +1,16 @@
 package com.guadou.lib_baselib.ext
 
+import kotlinx.coroutines.*
 import kotlinx.coroutines.CoroutineStart.LAZY
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.yield
 import java.util.concurrent.atomic.AtomicReference
-import kotlin.DeprecationLevel.ERROR
 
+/**
+ * 不常用
+ * 单例的顺序执行-一次只能执行一个任务，一个任务执行完毕之后再执行下一个任务
+ *
+ */
 class SingleRunner {
     /**
      * A coroutine mutex implements a lock that may only be taken by one coroutine at a time.
@@ -18,6 +18,7 @@ class SingleRunner {
     private val mutex = Mutex()
 
     /**
+     * 加入到任务队列，前一个任务执行完毕再执行下一个任务
      * Ensure that the block will only be executed after all previous work has completed.
      *
      * When several coroutines call afterPrevious at the same time, they will queue up in the order
@@ -56,95 +57,15 @@ class SingleRunner {
 }
 
 /**
+ * 当运行一个新任务的时候 需要做什么操作
  * A controlled runner decides what to do when new tasks are run.
  *
- * Note: This implementation is for example only. It will not work in the presence of
- *       multi-threading and is not safe to call from Dispatchers.IO or Dispatchers.Default. In
- *       real code use the thread-safe implementation of [ControlledRunner] code listed below.
- *
- * By calling [joinPreviousOrRun], the new task will be discarded and the result of the previous task
+ * 如果旧任务正在执行那么不执行新任务，返回上一个任务的结果
+ * By calling [joinPreviousOrRun], the new task will be discarded and the result f the previous task
  * will be returned. This is useful when you want to ensure that a network request to the same
  * resource does not flood.
  *
- * By calling [cancelPreviousThenRun], the old task will *always* be cancelled and then the new task will
- * be run. This is useful in situations where a new event implies that the previous work is no
- * longer relevant such as sorting or filtering a list.
- */
-@Deprecated("This code is not thread-safe and should not be used. Use " +
-        "the ControlledRunner implementation below instead.", level = ERROR)
-class ControlledRunnerExampleImplementation<T> {
-    private var activeTask: Deferred<T>? = null
-
-    /**
-     * Cancel all previous tasks before calling block.
-     *
-     * When several coroutines call cancelPreviousThenRun at the same time, only one will run and
-     * the others will be cancelled.
-     */
-    @Deprecated("This code is not thread-safe. Use ControlledRunner below instead.",
-        level = ERROR)
-    suspend fun cancelPreviousThenRun(block: suspend () -> T): T {
-        // If there is an activeTask, cancel it because it's result is no longer needed
-        //
-        // By waiting for the cancellation to complete with `cancelAndJoin` we know that activeTask
-        // has stopped executing before continuing.
-        activeTask?.cancelAndJoin()
-
-        // use a coroutineScope builder to safely start a new coroutine in a suspend function
-        return coroutineScope {
-            // create a new task to call the block
-            val newTask = async {
-                block()
-            }
-            // when the new task completes, reset activeTask to null
-            // this will be called by cancellation as well as normal completion
-            newTask.invokeOnCompletion {
-                activeTask = null
-            }
-            // save the newTask to activeTask, then wait for it to complete and return the result
-            activeTask = newTask
-            newTask.await()
-        }
-    }
-
-    /**
-     * Don't run the new block if a previous block is running, instead wait for the previous block
-     * and return it's result.
-     *
-     * When several coroutines call joinPreviousOrRun at the same time, only one will run and
-     * the others will return the result from the winner.
-     */
-    @Deprecated("This code is not thread-safe. Use ControlledRunner below instead.", level = ERROR)
-    suspend fun joinPreviousOrRun(block: suspend () -> T): T {
-        // if there is an activeTask, return it's result and don't run the block
-        activeTask?.let {
-            return it.await()
-        }
-
-        // use a coroutineScope builder to safely start a new coroutine in a suspend function
-        return coroutineScope {
-            // create a new task to call the block
-            val newTask = async {
-                block()
-            }
-            // when the task completes, reset activeTask to null
-            newTask.invokeOnCompletion {
-                activeTask = null
-            }
-            // save newTask to activeTask, then wait for it to complete and return the result
-            activeTask = newTask
-            newTask.await()
-        }
-    }
-}
-
-/**
- * A controlled runner decides what to do when new tasks are run.
- *
- * By calling [joinPreviousOrRun], the new task will be discarded and the result of the previous task
- * will be returned. This is useful when you want to ensure that a network request to the same
- * resource does not flood.
- *
+ * 取消旧任务，执行并返回新任务的结果
  * By calling [cancelPreviousThenRun], the old task will *always* be cancelled and then the new task will
  * be run. This is useful in situations where a new event implies that the previous work is no
  * longer relevant such as sorting or filtering a list.
@@ -160,6 +81,8 @@ class ControlledRunner<T> {
     private val activeTask = AtomicReference<Deferred<T>?>(null)
 
     /**
+     * 常用任务
+     * 取消旧任务，执行并返回新任务的结果
      * Cancel all previous tasks before calling block.
      *
      * When several coroutines call cancelPreviousThenRun at the same time, only one will run and
@@ -233,6 +156,7 @@ class ControlledRunner<T> {
     }
 
     /**
+     * 不执行新任务，返回上一个任务的结果
      * Don't run the new block if a previous block is running, instead wait for the previous block
      * and return it's result.
      *

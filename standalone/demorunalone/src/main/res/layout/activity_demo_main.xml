@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.DemoMainActivity">
+    tools:context=".DemoMainActivity">
 
     <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
         android:layout_width="match_parent"
@@ -81,6 +81,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="10.无界面功能（SP，ACache, String, Span, 时间格式化等）"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_demo_11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="11.Fragment - Navigation"
         android:textAllCaps="false" />
 
 </LinearLayout>

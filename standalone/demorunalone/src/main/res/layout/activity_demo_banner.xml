@@ -75,8 +75,7 @@
                 android:layout_height="180dp"
                 android:layout_margin="@dimen/d_15dp"
                 app:banner_auto_loop="false"
-                app:banner_infinite_loop="false"
-                />
+                app:banner_infinite_loop="false" />
 
             <!--    banner自定义的指示器，未选中的圆形选中矩形        -->
             <com.youth.banner.Banner

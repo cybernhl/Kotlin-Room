@@ -20,7 +20,7 @@ import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
 
 /**
  * 默认的是上下跳动的加载动画
- * 这个是可配置菊花Loading
+ * 这是可配置自定义的三线条旋转动画
  */
 @SuppressLint("ViewConstructor")
 public class GloadingRoatingStatusView extends LinearLayout implements View.OnClickListener {

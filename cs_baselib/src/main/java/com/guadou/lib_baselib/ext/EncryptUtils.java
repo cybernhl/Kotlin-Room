@@ -415,4 +415,13 @@ final class EncryptUtils {
         return null;
     }
 
+
+    public static String encodeStrByBase64(String str) {
+        return Base64.encodeToString(str.getBytes(), 0, str.getBytes().length, Base64.DEFAULT);
+    }
+
+    public static String deCodeStrByBase64(String str) {
+        byte[] decode = Base64.decode(str, Base64.DEFAULT);
+        return new String(decode);
+    }
 }

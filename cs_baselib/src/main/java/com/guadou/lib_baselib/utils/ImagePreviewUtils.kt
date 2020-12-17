@@ -3,7 +3,7 @@ package com.guadou.lib_baselib.utils
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.guadou.lib_baselib.ext.engine.extLoad
+import com.guadou.lib_baselib.engine.extLoad
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.core.ImageViewerPopupView
 import com.lxj.xpopup.interfaces.XPopupImageLoader
