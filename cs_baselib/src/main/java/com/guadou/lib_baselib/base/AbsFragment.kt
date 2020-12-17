@@ -85,6 +85,11 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
         lastView = null
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
     /**
      * 是否需要注册监听网络变换
      */

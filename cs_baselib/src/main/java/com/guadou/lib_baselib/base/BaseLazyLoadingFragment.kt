@@ -102,9 +102,9 @@ abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
         isViewCreated = false
         isLoadData = false
         isFirstVisible = true
