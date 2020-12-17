@@ -34,17 +34,6 @@ class Demo11Activity : BaseActivity<EmptyViewModel>() {
 
     override fun init() {
 
-        //获取到Nav对象
-
-//        val navController = nav_host_fragment.findNavController()
-//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!!
-
-//        // 设置添加自定义的Tag
-//        val keepStateNavigator = KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
-//        navController.navigatorProvider.addNavigator(keepStateNavigator)
-//
-//        // 手动的在代码中指定路由文件
-//        navController.setGraph(R.navigation.nav_demo11)
     }
 
 }

@@ -33,7 +33,7 @@ class Demo11OneFragment3 : BaseFragment<EmptyViewModel>() {
     override fun init() {
 
         btn_to_page2.click {
-            Navigation.findNavController(it).navigateUp()
+            Navigation.findNavController(it).navigate(R.id.action_page3_to_page2)
         }
 
         btn_to_page1.click {
