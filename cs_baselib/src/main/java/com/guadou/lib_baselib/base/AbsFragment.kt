@@ -23,9 +23,6 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     protected lateinit var mActivity: Activity
     protected lateinit var mContext: Context
 
-    private var isNavigationViewInit = false//记录是否已经初始化过一次视图
-    private var lastView: View? = null//记录上次创建的view
-
     /**
      * 获取layout的id，具体由子类实现
      */
@@ -44,22 +41,12 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        if (lastView == null) {
-            val view = inflater.inflate(inflateLayoutById(), container, false)
-            lastView = transformRootView(view)
-        }
-
-        return lastView
+        return inflater.inflate(inflateLayoutById(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        if (!isNavigationViewInit) {//初始化过视图则不再进行view和data初始化
-            super.onViewCreated(view, savedInstanceState)
-            initViews(view)
-            isNavigationViewInit = true
-        }
+        super.onViewCreated(view, savedInstanceState)
+        initViews(view)
     }
 
     //用于转换根数图View(可以对其做一些别的操作,例如加入GLoading)
@@ -80,14 +67,6 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
             ConnectivityReceiver.unregisterObserver(this)
             ConnectivityReceiver.unregisterAnnotationObserver(this)
         }
-
-        isNavigationViewInit = false
-        lastView = null
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     /**

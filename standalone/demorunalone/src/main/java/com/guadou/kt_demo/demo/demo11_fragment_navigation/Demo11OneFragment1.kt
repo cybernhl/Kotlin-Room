@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseFragment
 import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
+import com.guadou.lib_baselib.nav.nav
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import kotlinx.android.synthetic.main.fragment_demo11_page1.*
 
@@ -37,7 +37,7 @@ class Demo11OneFragment1 : BaseFragment<EmptyViewModel>() {
     override fun init() {
 
         btn_to_page2.click {
-            Navigation.findNavController(it).navigate(R.id.action_page1_to_page2)
+           nav().navigate(R.id.action_page1_to_page2)
         }
 
     }
