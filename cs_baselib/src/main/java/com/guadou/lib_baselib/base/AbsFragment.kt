@@ -41,7 +41,8 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(inflateLayoutById(), container, false)
+        val view = inflater.inflate(inflateLayoutById(), container, false)
+        return transformRootView(view)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
