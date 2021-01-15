@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import java.lang.reflect.ParameterizedType
 
 /**
  * Fragment相关扩展
@@ -100,5 +101,9 @@ fun Fragment.removeFragment(f: Fragment) {
 //view model
 fun <T : ViewModel> Fragment.getVM(clazz: Class<T>) = ViewModelProviders.of(this).get(clazz)
 
-fun <T : ViewModel> Fragment.getActivityVM(clazz: Class<T>) =
-    ViewModelProviders.of(activity!!).get(clazz)
+fun <T : ViewModel> Fragment.getActivityVM(clazz: Class<T>) = ViewModelProviders.of(activity!!).get(clazz)
+
+//获取泛型的实例
+fun <VM> getVMCls(cls: Any): VM {
+    return (cls.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as VM
+}

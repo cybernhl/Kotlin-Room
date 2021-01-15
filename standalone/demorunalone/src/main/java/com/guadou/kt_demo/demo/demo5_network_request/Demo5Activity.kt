@@ -31,10 +31,6 @@ class Demo5Activity : BaseActivity<Demo5ViewModel>() {
         }
     }
 
-    override fun initVM(): Demo5ViewModel {
-        val viewModel: Demo5ViewModel by viewModels()
-        return viewModel
-    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo5
 

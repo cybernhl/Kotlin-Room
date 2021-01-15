@@ -25,8 +25,6 @@ class Demo11Activity : BaseActivity<Demo11ViewModel>() {
         }
     }
 
-    override fun initVM(): Demo11ViewModel = getViewModel()
-
     override fun inflateLayoutById(): Int = R.layout.activity_demo_11
 
     override fun startObserve() {

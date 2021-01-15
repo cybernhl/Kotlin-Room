@@ -23,11 +23,6 @@ import kotlinx.android.synthetic.main.activity_demo_main.*
  */
 class DemoMainActivity : BaseActivity<EmptyViewModel>() {
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
-
     override fun inflateLayoutById(): Int = R.layout.activity_demo_main
 
     override fun startObserve() {

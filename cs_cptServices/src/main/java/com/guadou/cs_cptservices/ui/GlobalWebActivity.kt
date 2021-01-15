@@ -44,8 +44,6 @@ class GlobalWebActivity : BaseActivity<BaseViewModel>() {
         return R.layout.activity_global_web
     }
 
-    override fun initVM(): BaseViewModel = BaseViewModel()
-
     override fun startObserve() {
     }
 

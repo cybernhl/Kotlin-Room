@@ -34,12 +34,6 @@ class EmptyFragmentActivity : BaseActivity<EmptyViewModel>() {
         mType = intent.getIntExtra("type", 0)
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
-
-
     override fun inflateLayoutById(): Int = R.layout.activity_empty_fragment
 
 

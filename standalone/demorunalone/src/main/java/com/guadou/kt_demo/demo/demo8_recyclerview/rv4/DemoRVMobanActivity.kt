@@ -29,10 +29,6 @@ class DemoRVMobanActivity : BaseActivity<DemoJobViewModel>(), OnRefreshListener 
         }
     }
 
-    override fun initVM(): DemoJobViewModel {
-        val viewModel: DemoJobViewModel by viewModels()
-        return viewModel
-    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_muban
 

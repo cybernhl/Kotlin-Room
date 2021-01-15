@@ -28,11 +28,6 @@ class DemoRVDiffActivity : BaseActivity<EmptyViewModel>() {
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
-
     override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_diff
 
     override fun startObserve() {
