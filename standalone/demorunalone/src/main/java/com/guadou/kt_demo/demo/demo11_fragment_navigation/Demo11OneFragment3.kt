@@ -32,12 +32,16 @@ class Demo11OneFragment3 : BaseFragment<EmptyViewModel>() {
 
     override fun init() {
 
+        btn_to_page1.click {
+            nav().navigate(R.id.action_back_page1)
+        }
+
         btn_to_page2.click {
             nav().navigate(R.id.action_page3_to_page2)
         }
 
-        btn_to_page1.click {
-            nav().navigate(R.id.action_page3_to_page1)
+        btn_to_login.click {
+            nav().navigate(R.id.action_goto_login)
         }
 
     }
