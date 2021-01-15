@@ -2,7 +2,6 @@ package com.guadou.kt_demo.demo.demo8_recyclerview
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv1.DemoRVNormalVertalActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv2.DemoRVNormalGridActivity
@@ -31,11 +30,6 @@ class Demo8Activity : BaseActivity<EmptyViewModel>() {
                 })
             }
         }
-    }
-
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
     }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo8

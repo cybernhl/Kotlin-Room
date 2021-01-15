@@ -1,11 +1,9 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
-import androidx.fragment.app.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.BaseFragment
 import com.guadou.lib_baselib.base.EmptyViewModel
-import com.guadou.lib_baselib.ext.ToastUtils
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.getActivityVM
 import com.guadou.lib_baselib.ext.toast
@@ -20,11 +18,6 @@ class Demo11OneFragment2 : BaseFragment<EmptyViewModel>() {
         fun obtainFragment(): Demo11OneFragment2 {
             return Demo11OneFragment2()
         }
-    }
-
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
     }
 
     override fun inflateLayoutById(): Int = R.layout.fragment_demo11_page2

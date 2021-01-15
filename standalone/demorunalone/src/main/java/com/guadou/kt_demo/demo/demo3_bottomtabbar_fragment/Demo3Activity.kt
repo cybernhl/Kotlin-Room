@@ -2,7 +2,6 @@ package com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.fragment.app.FragmentTransaction
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
@@ -39,10 +38,6 @@ class Demo3Activity : BaseActivity<EmptyViewModel>() {
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo3
 

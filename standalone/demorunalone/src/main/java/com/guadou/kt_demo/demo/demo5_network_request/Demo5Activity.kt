@@ -2,7 +2,6 @@ package com.guadou.kt_demo.demo.demo5_network_request
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
@@ -29,11 +28,6 @@ class Demo5Activity : BaseActivity<Demo5ViewModel>() {
                 })
             }
         }
-    }
-
-    override fun initVM(): Demo5ViewModel {
-        val viewModel: Demo5ViewModel by viewModels()
-        return viewModel
     }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo5

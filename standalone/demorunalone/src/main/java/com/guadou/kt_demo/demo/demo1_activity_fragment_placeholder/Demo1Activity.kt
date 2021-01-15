@@ -1,7 +1,6 @@
 package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel
@@ -22,11 +21,6 @@ class Demo1Activity : BaseActivity<EmptyViewModel>() {
                 })
             }
         }
-    }
-
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
     }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_1

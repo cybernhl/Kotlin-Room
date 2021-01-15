@@ -1,6 +1,5 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
-import androidx.fragment.app.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseFragment
 import com.guadou.lib_baselib.base.EmptyViewModel
@@ -17,12 +16,7 @@ class Demo11OneFragment3 : BaseFragment<EmptyViewModel>() {
             return Demo11OneFragment3()
         }
     }
-
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
-
+    
     override fun inflateLayoutById(): Int = R.layout.fragment_demo11_page3
 
 

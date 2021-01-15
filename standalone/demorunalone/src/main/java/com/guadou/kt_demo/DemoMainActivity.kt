@@ -1,7 +1,6 @@
 package com.guadou.kt_demo
 
 import android.annotation.SuppressLint
-import androidx.activity.viewModels
 import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11Activity
 import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.Demo1Activity
@@ -22,11 +21,6 @@ import kotlinx.android.synthetic.main.activity_demo_main.*
  * 演示Demo的首页
  */
 class DemoMainActivity : BaseActivity<EmptyViewModel>() {
-
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_main
 

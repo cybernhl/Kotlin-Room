@@ -26,8 +26,6 @@ class AuthActivity : BaseActivity<AuthViewModel>() {
         }
     }
 
-    override fun initVM(): AuthViewModel = getViewModel()
-
     override fun startObserve() {
     }
 

@@ -2,9 +2,10 @@ package com.guadou.lib_baselib.base
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.guadou.lib_baselib.bean.LoadAction
+import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 
@@ -18,7 +19,7 @@ abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mViewModel = initVM()
+        mViewModel = createViewModel()
         //观察网络数据状态
         mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
 
@@ -27,12 +28,16 @@ abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
     }
 
     //使用这个方法简化ViewModel的初始化
-    protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
-        val viewModel: VM by viewModels()
-        return viewModel
+//    protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
+//        val viewModel: VM by viewModels()
+//        return viewModel
+//    }
+
+    //反射获取ViewModel实例
+    private fun createViewModel(): VM {
+        return ViewModelProvider(this).get(getVMCls(this))
     }
 
-    abstract fun initVM(): VM
     abstract override fun inflateLayoutById(): Int
     abstract fun startObserve()
     abstract fun init()

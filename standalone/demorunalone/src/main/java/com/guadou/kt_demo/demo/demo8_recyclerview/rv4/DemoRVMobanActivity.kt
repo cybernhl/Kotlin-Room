@@ -1,7 +1,6 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv4
 
 import android.content.Intent
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.mvvm.DemoJobViewModel
@@ -29,10 +28,6 @@ class DemoRVMobanActivity : BaseActivity<DemoJobViewModel>(), OnRefreshListener 
         }
     }
 
-    override fun initVM(): DemoJobViewModel {
-        val viewModel: DemoJobViewModel by viewModels()
-        return viewModel
-    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_muban
 

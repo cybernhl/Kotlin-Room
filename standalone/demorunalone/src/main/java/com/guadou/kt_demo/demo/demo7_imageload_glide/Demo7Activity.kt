@@ -2,7 +2,6 @@ package com.guadou.kt_demo.demo.demo7_imageload_glide
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel
@@ -28,11 +27,6 @@ class Demo7Activity : BaseActivity<EmptyViewModel>() {
                 })
             }
         }
-    }
-
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
     }
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo7
