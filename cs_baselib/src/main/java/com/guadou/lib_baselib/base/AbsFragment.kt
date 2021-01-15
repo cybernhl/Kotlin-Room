@@ -40,7 +40,11 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(inflateLayoutById(), container, false)
         return transformRootView(view)
     }
@@ -73,8 +77,8 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     /**
      * 是否需要注册监听网络变换
      */
-    protected fun needRegisterNetworkChangeObserver(): Boolean {
-        return true
+    open protected fun needRegisterNetworkChangeObserver(): Boolean {
+        return false
     }
 
 }

@@ -6,10 +6,14 @@ import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
 @ActivityScoped
-class UserServer @Inject constructor(val userDao: UserDao) {
+class UserServer @Inject constructor(private val userDao: UserDao) {
 
     fun testUser() {
         YYLogUtils.w(userDao.printUser() + userDao.toString())
         toast(userDao.printUser())
+    }
+
+    fun getDaoContent():String{
+        return userDao.printUser()
     }
 }

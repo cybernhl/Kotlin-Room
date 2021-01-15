@@ -5,7 +5,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.guadou.lib_baselib.bean.LoadAction
+import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.Gloading
@@ -23,7 +25,7 @@ abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
         super.onViewCreated(view, savedInstanceState)
         isViewCreated = true
 
-        mViewModel = initVM()
+        mViewModel = createViewModel()
         //观察网络数据状态
         mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
 
@@ -50,7 +52,11 @@ abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
         return viewModel
     }
 
-    abstract fun initVM(): VM
+    //反射获取ViewModel实例
+    private fun createViewModel(): VM {
+        return ViewModelProvider(this).get(getVMCls(this))
+    }
+
     abstract fun startObserve()
     abstract override fun inflateLayoutById(): Int
     abstract fun init()

@@ -10,8 +10,6 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment<EmptyViewModel>() {
 
-    override fun initVM(): EmptyViewModel = getViewModel()
-
     override fun inflateLayoutById(): Int = R.layout.fragment_login
 
 

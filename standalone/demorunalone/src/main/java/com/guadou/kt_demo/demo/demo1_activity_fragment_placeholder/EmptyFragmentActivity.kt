@@ -7,6 +7,7 @@ import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.addFragment
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,7 +46,7 @@ class EmptyFragmentActivity : BaseActivity<EmptyViewModel>() {
      * 注意查看扩展方法的添加fragment
      */
     override fun init() {
-        YYLogUtils.e("viewmodel:" + mViewModel.toString())
+        toast("ViewModel: $mViewModel")
 
         when (mType) {
             1 -> addFragment(R.id.fl_content, JumpLoadingFragment.obtainFragment())

@@ -24,12 +24,6 @@ class PlaceHolderLoadingActivity : BasePlaceHolderActivity<EmptyViewModel>() {
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
-
-
     override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
 
     //可以选择重写占位布局的id-内部实现了闪光的效果

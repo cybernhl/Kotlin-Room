@@ -114,8 +114,8 @@ abstract class AbsActivity : AppCompatActivity(),
     /**
      * 是否需要注册监听网络变换
      */
-    protected fun needRegisterNetworkChangeObserver(): Boolean {
-        return true
+    open protected fun needRegisterNetworkChangeObserver(): Boolean {
+        return false
     }
 
 

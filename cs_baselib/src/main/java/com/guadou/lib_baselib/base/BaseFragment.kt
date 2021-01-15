@@ -2,6 +2,7 @@ package com.guadou.lib_baselib.base
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.guadou.lib_baselib.bean.LoadAction
@@ -28,10 +29,10 @@ abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
     }
 
     //使用这个方法简化ViewModel的初始化
-//    protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
-//        val viewModel: VM by viewModels()
-//        return viewModel
-//    }
+    protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
+        val viewModel: VM by viewModels()
+        return viewModel
+    }
 
     //反射获取ViewModel实例
     private fun createViewModel(): VM {

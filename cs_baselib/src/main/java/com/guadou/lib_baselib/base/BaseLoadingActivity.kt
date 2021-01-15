@@ -3,7 +3,9 @@ package com.guadou.lib_baselib.base
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.guadou.lib_baselib.bean.LoadAction
+import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.Gloading
@@ -27,7 +29,7 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel = initVM()
+        mViewModel = createViewModel()
 
         //观察网络数据状态
         mViewModel.getActionLiveData().observe(this, stateObserver)
@@ -41,7 +43,11 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
         return viewModel
     }
 
-    abstract fun initVM(): VM
+    //反射获取ViewModel实例
+    private fun createViewModel(): VM {
+        return ViewModelProvider(this).get(getVMCls(this))
+    }
+
     abstract override fun inflateLayoutById(): Int
     abstract fun startObserve()
     abstract fun init()

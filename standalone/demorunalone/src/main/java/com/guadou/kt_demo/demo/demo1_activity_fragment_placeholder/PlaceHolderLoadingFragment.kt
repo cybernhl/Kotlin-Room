@@ -6,6 +6,7 @@ import com.guadou.lib_baselib.base.BasePlaceHolderFragment
 import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,10 +23,6 @@ class PlaceHolderLoadingFragment : BasePlaceHolderFragment<EmptyViewModel>() {
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
 
     override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
 

@@ -20,11 +20,6 @@ class LazyLoad2Fragment : BaseLazyLoadingFragment<EmptyViewModel>() {
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
-
     override fun inflateLayoutById(): Int = R.layout.fragment_demo2
 
     override fun startObserve() {
