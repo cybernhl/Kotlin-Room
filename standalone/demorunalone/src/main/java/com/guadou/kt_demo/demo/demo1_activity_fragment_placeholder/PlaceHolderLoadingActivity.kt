@@ -6,12 +6,12 @@ import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BasePlaceHolderActivity
 import com.guadou.lib_baselib.base.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class PlaceHolderLoadingActivity : BasePlaceHolderActivity<EmptyViewModel>() {
 
     companion object {
@@ -35,7 +35,7 @@ class PlaceHolderLoadingActivity : BasePlaceHolderActivity<EmptyViewModel>() {
     }
 
     override fun init() {
-        YYLogUtils.e("viewmodel:" + mViewModel.toString())
+        toast("ViewModel: $mViewModel")
 
         //模拟的Loading的情况
         showStateLoading()

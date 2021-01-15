@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 /**
  * 默认是加载的上下跳动的动画
  */
-@AndroidEntryPoint
 class JumpLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
 
     companion object {
@@ -28,7 +27,6 @@ class JumpLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
             }
         }
     }
-
 
     override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
 

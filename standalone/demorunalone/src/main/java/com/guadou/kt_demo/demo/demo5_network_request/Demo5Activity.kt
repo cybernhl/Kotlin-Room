@@ -9,6 +9,7 @@ import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_demo5.*
@@ -30,7 +31,6 @@ class Demo5Activity : BaseActivity<Demo5ViewModel>() {
             }
         }
     }
-
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo5
 
@@ -55,7 +55,8 @@ class Demo5Activity : BaseActivity<Demo5ViewModel>() {
     }
 
     private fun initLitener() {
-        YYLogUtils.e("Viewmodel:" + mViewModel.toString())
+        toast("ViewModel: $mViewModel")
+
         btn_net_1.click {
 
             tv_net_content.text = ""

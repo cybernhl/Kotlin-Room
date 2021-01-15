@@ -34,7 +34,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
         return viewModel
     }
 
-    private fun createViewModel(): VM {
+    open protected fun createViewModel(): VM {
         return ViewModelProvider(this).get(getVMCls(this))
     }
 
@@ -42,7 +42,10 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
     abstract fun startObserve()
     abstract fun init()
 
-    override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
+    override fun onNetworkConnectionChanged(
+        isConnected: Boolean,
+        networkType: NetWorkUtil.NetworkType?
+    ) {
     }
 
     // ================== 网络状态的监听 ======================

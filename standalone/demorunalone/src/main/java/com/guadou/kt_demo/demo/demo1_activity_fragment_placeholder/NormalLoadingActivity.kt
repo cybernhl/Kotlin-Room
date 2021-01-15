@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 /**
  * 换成一种菊花转动的Loading加载
  */
-@AndroidEntryPoint
 class NormalLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
 
     companion object {

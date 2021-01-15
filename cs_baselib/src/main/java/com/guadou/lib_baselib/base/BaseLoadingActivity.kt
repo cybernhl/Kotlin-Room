@@ -44,7 +44,7 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
     }
 
     //反射获取ViewModel实例
-    private fun createViewModel(): VM {
+    open protected fun createViewModel(): VM {
         return ViewModelProvider(this).get(getVMCls(this))
     }
 
@@ -54,7 +54,10 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
     protected open fun onGoadingRetry() {
     }
 
-    override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
+    override fun onNetworkConnectionChanged(
+        isConnected: Boolean,
+        networkType: NetWorkUtil.NetworkType?
+    ) {
     }
 
     // ================== 网络状态的监听 ======================

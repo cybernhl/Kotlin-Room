@@ -64,6 +64,10 @@ android {
         preDexLibraries true
         maxProcessCount 8
     }
+
+    dataBinding{
+        enabled = true
+    }
 }
 
 configurations.all {

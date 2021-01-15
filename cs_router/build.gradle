@@ -44,6 +44,10 @@ android {
         maxProcessCount 8
     }
 
+    dataBinding{
+        enabled = true
+    }
+
 }
 
 configurations.all {
