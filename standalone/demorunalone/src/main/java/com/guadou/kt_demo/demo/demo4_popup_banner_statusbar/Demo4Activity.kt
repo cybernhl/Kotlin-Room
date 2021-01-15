@@ -1,7 +1,6 @@
 package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar
 
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity

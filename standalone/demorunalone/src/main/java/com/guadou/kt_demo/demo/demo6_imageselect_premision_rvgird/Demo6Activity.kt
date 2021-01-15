@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.widget.ImageView
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel

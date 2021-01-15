@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
@@ -12,9 +11,9 @@ import androidx.viewpager.widget.ViewPager
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.engine.extLoad
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.engine.extLoad
 import com.guadou.lib_baselib.utils.ImagePreviewUtils
 import com.lxj.easyadapter.EasyAdapter
 import com.lxj.easyadapter.ViewHolder

@@ -2,7 +2,6 @@ package com.guadou.kt_demo.demo.demo8_recyclerview
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv1.DemoRVNormalVertalActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv2.DemoRVNormalGridActivity

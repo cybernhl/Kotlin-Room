@@ -2,7 +2,6 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv1
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel

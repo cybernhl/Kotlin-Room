@@ -2,14 +2,13 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv2
 
 import android.content.Intent
 import android.widget.ImageView
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.BaseActivity
 import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.engine.extLoad
 import com.guadou.lib_baselib.ext.bindData
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.dp2px
-import com.guadou.lib_baselib.engine.extLoad
 import com.guadou.lib_baselib.ext.vertical
 import com.luck.picture.lib.decoration.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
