@@ -1,6 +1,7 @@
-package com.guadou.cpt_main
+package com.guadou.cpt_main.ui
 
 import android.content.Intent
+import com.guadou.cpt_main.R
 import com.guadou.cpt_main.mvvm.AuthViewModel
 import com.guadou.cpt_main.others.MemberServer
 import com.guadou.lib_baselib.base.BaseActivity
@@ -30,7 +31,8 @@ class AuthActivity : BaseActivity<AuthViewModel>() {
     override fun startObserve() {
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_auth
+    override fun inflateLayoutById(): Int =
+        R.layout.activity_auth
 
     override fun init() {
 

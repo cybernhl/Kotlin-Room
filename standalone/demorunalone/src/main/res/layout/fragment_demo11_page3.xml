@@ -35,4 +35,11 @@
         android:layout_marginTop="@dimen/d_20dp"
         android:text="去第二个页面" />
 
+    <Button
+        android:id="@+id/btn_to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_20dp"
+        android:text="去登录" />
+
 </LinearLayout>

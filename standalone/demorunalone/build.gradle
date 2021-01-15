@@ -99,6 +99,7 @@ dependencies {
 
 
     api project(':cs_cptServices')
+    api project(':cpt_main')
 
     //Banner库 需要的时候就导
     api deps.support.banner

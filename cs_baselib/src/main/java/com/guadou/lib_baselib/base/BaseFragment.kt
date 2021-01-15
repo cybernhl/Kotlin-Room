@@ -23,7 +23,7 @@ abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
         startObserve()
     }
 
-    //使用这个方法简化ViewModewl的Hilt依赖注入获取
+    //使用这个方法简化ViewModel的初始化
     protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
         val viewModel: VM by viewModels()
         return viewModel
