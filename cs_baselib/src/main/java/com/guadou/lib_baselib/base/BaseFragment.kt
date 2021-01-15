@@ -8,6 +8,9 @@ import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 
+/**
+ * 加入ViewModel与LoadState
+ */
 abstract class BaseFragment<VM : BaseViewModel> : AbsFragment() {
 
     protected lateinit var mViewModel: VM

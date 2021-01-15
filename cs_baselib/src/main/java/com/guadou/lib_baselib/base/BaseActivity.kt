@@ -7,6 +7,9 @@ import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 
+/**
+ * 加入ViewModel与LoadState
+ */
 abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
@@ -34,11 +37,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
     abstract fun startObserve()
     abstract fun init()
 
-    override fun onNetworkConnectionChanged(
-        isConnected: Boolean,
-        networkType: NetWorkUtil.NetworkType?
-    ) {
-
+    override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }
 
     // ================== 网络状态的监听 ======================
@@ -46,14 +45,14 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
     private var stateObserver: Observer<LoadAction> = Observer { loadAction ->
         if (loadAction != null) {
 
-            when {
-                LoadAction.STATE_NORMAL == loadAction.action -> showStateNormal()
-                LoadAction.STATE_ERROR == loadAction.action -> showStateError(loadAction.message)
-                LoadAction.STATE_SUCCESS == loadAction.action -> showStateSuccess()
-                LoadAction.STATE_LOADING == loadAction.action -> showStateLoading()
-                LoadAction.STATE_NO_DATA == loadAction.action -> showStateNoData()
-                LoadAction.STATE_PROGRESS == loadAction.action -> showStateProgress()
-                LoadAction.STATE_HIDE_PROGRESS == loadAction.action -> hideStateProgress()
+            when (loadAction.action) {
+                LoadAction.STATE_NORMAL -> showStateNormal()
+                LoadAction.STATE_ERROR -> showStateError(loadAction.message)
+                LoadAction.STATE_SUCCESS -> showStateSuccess()
+                LoadAction.STATE_LOADING -> showStateLoading()
+                LoadAction.STATE_NO_DATA -> showStateNoData()
+                LoadAction.STATE_PROGRESS -> showStateProgress()
+                LoadAction.STATE_HIDE_PROGRESS -> hideStateProgress()
             }
 
         }

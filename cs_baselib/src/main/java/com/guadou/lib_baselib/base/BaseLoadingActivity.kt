@@ -48,10 +48,7 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
     protected open fun onGoadingRetry() {
     }
 
-    override fun onNetworkConnectionChanged(
-        isConnected: Boolean,
-        networkType: NetWorkUtil.NetworkType?
-    ) {
+    override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }
 
     // ================== 网络状态的监听 ======================
