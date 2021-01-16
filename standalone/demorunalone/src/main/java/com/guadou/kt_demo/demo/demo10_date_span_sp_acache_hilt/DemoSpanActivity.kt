@@ -3,8 +3,8 @@ package com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt
 import android.content.Intent
 import android.graphics.Color
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.font_text_view.TypefaceUtil
 import com.guadou.lib_baselib.utils.Log.YYLogUtils

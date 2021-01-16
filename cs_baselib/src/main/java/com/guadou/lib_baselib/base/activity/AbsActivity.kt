@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.activity
 
 import android.app.Activity
 import android.content.Context
@@ -9,6 +9,8 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.ActivityManage
 import com.guadou.lib_baselib.utils.StatusBarUtils
@@ -17,8 +19,7 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 /**
  * 最底层的Activity,不带MVP和MVVM,一般不用这个
  */
-
-abstract class AbsActivity : AppCompatActivity(),
+abstract class AbsActivity(useDataBinding: Boolean = false) : AppCompatActivity(),
     ConnectivityReceiver.ConnectivityReceiverListener {
 
     /**
@@ -26,7 +27,8 @@ abstract class AbsActivity : AppCompatActivity(),
      */
     protected lateinit var mActivity: Activity
     protected lateinit var mContext: Context
-
+    private val _useBinding = useDataBinding
+    protected lateinit var mBinding: ViewDataBinding
 
     /**
      * 获取layout的id，具体由子类实现
@@ -85,8 +87,14 @@ abstract class AbsActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val view = layoutInflater.inflate(inflateLayoutById(), null)
-        setContentView(view)
+        if (_useBinding) {
+            mBinding = DataBindingUtil.setContentView<ViewDataBinding>(this, inflateLayoutById())
+            mBinding.lifecycleOwner = this
+        } else {
+            val view = layoutInflater.inflate(inflateLayoutById(), null)
+            setContentView(view)
+        }
+
         mActivity = this
         mContext = this.applicationContext
 

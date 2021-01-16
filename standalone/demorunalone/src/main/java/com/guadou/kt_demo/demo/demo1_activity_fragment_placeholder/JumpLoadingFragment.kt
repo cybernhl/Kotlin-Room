@@ -1,9 +1,8 @@
 package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 
-import androidx.fragment.app.viewModels
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseLoadingFragment
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.fragment.BaseLoadingFragment
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView

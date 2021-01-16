@@ -1,9 +1,10 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
@@ -11,6 +12,7 @@ import com.guadou.lib_baselib.view.LoadingDialogManager
 
 /**
  * 加入ViewModel与LoadState
+ * 默认为Loading弹窗的加载方式
  */
 abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
 
@@ -42,10 +44,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
     abstract fun startObserve()
     abstract fun init()
 
-    override fun onNetworkConnectionChanged(
-        isConnected: Boolean,
-        networkType: NetWorkUtil.NetworkType?
-    ) {
+    override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }
 
     // ================== 网络状态的监听 ======================

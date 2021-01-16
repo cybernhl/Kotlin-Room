@@ -149,7 +149,8 @@ public class Gloading {
                 FrameLayout.LayoutParams.MATCH_PARENT);
         wrapper.addView(view, newLp);
         Holder holder = new Holder(mAdapter, view.getContext(), wrapper);
-        //主要添加了GLoading那么就默认显示Loading状态  2020-12-17 Newki
+        //2020-12-17 Newki修改
+        //主要添加了GLoading那么就默认显示Loading状态 ，不然会先出现默认布局，然后一闪之后再出现GLoading的加载
         holder.showLoading();
         return holder;
     }

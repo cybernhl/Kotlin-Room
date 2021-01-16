@@ -1,9 +1,8 @@
 package com.guadou.cpt_main.ui
 
-import android.net.Uri
 import com.guadou.cpt_main.R
-import com.guadou.lib_baselib.base.BaseFragment
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.fragment.BaseFragment
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.nav.nav
 import kotlinx.android.synthetic.main.fragment_login.*

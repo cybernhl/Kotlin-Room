@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -44,8 +43,9 @@ android {
         maxProcessCount 8
     }
 
-    dataBinding{
-        enabled = true
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 
 }

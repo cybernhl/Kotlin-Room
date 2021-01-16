@@ -1,16 +1,20 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.Gloading
 
-
+/**
+ * 加入ViewModel与LoadState
+ * 默认为布局加载的方式
+ */
 abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
@@ -54,10 +58,7 @@ abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
     protected open fun onGoadingRetry() {
     }
 
-    override fun onNetworkConnectionChanged(
-        isConnected: Boolean,
-        networkType: NetWorkUtil.NetworkType?
-    ) {
+    override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }
 
     // ================== 网络状态的监听 ======================

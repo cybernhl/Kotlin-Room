@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.fragment
 
 import android.app.Activity
 import android.content.Context

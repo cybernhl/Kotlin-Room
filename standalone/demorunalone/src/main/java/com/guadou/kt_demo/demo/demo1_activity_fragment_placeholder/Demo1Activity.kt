@@ -3,12 +3,11 @@ package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 import android.content.Intent
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.UserServer
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_demo_1.*
 import javax.inject.Inject

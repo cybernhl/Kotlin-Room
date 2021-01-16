@@ -1,19 +1,22 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.guadou.basiclib.R
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.Gloading
-import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderlAdapter
 
-abstract class BasePlaceHolderFragment<VM : BaseViewModel> : AbsFragment() {
+/**
+ * 加入ViewModel与LoadState
+ * 默认为Loading布局的加载方式
+ */
+abstract class BaseLoadingFragment<VM : BaseViewModel> : AbsFragment() {
 
     protected lateinit var mViewModel: VM
 
@@ -33,19 +36,18 @@ abstract class BasePlaceHolderFragment<VM : BaseViewModel> : AbsFragment() {
 
 
     override fun transformRootView(view: View): View {
+
         mGLoadingHolder = generateGLoading(view)
+
         return mGLoadingHolder.wrapper
     }
 
     //如果要替换GLoading，重写次方法
-    private fun generateGLoading(view: View): Gloading.Holder {
-        return Gloading.from(GloadingPlaceHolderlAdapter(inflatePlaceHolderLayoutRes())).wrap(view)
-            .withRetry {
-                onGoadingRetry()
-            }
+    open protected fun generateGLoading(view: View): Gloading.Holder {
+        return Gloading.getDefault().wrap(view).withRetry {
+            onGoadingRetry()
+        }
     }
-
-    protected open fun inflatePlaceHolderLayoutRes(): Int = R.layout.layout_placeholder2
 
     protected open fun onGoadingRetry() {
     }

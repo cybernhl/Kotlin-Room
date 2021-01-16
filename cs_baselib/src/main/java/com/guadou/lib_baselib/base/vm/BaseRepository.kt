@@ -1,8 +1,7 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.vm
 
 import android.text.TextUtils
 import com.google.gson.JsonParseException
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.testxiecheng.base.BaseBean
 import com.guadou.testxiecheng.base.OkResult
 import kotlinx.coroutines.CoroutineScope

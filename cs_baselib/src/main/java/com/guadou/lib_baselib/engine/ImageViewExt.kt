@@ -36,7 +36,7 @@ fun ImageView.extLoad(
     isCircle: Boolean = false,
     isCenterCrop: Boolean = false,
     roundRadius: Int = 0,
-    isCrossFade: Boolean = true,
+    isCrossFade: Boolean = false,
     isForceOriginalSize: Boolean = false
 ) {
 

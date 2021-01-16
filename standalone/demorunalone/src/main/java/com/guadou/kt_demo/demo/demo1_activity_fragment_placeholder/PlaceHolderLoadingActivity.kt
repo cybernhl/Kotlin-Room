@@ -1,18 +1,20 @@
 package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BasePlaceHolderActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseLoadingActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
-import dagger.hilt.android.AndroidEntryPoint
+import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderlAdapter
 
-class PlaceHolderLoadingActivity : BasePlaceHolderActivity<EmptyViewModel>() {
+/**
+ * 重写生成GLoading的方法就行了
+ */
+class PlaceHolderLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -26,9 +28,13 @@ class PlaceHolderLoadingActivity : BasePlaceHolderActivity<EmptyViewModel>() {
 
     override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
 
-    //可以选择重写占位布局的id-内部实现了闪光的效果
-    override fun inflatePlaceHolderLayoutRes(): Int = R.layout.layout_placeholder1
 
+    override fun generateGLoading(): Gloading.Holder {
+        return Gloading.from(GloadingPlaceHolderlAdapter(R.layout.layout_placeholder1)).wrap(this)
+            .withRetry {
+                onGoadingRetry()
+            }
+    }
 
     override fun startObserve() {
 

@@ -9,8 +9,8 @@ import com.guadou.kt_demo.demo.demo8_recyclerview.rv3.DemoRVHeadFoodVertalActivi
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.DemoRVMobanActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv5.DemoRVMuliteActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv6.DemoRVDiffActivity
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import kotlinx.android.synthetic.main.activity_demo8.*

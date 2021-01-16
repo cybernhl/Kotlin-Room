@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.guadou.cs_cptservices.R
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CheckUtil
 import com.guadou.lib_baselib.utils.CommUtils

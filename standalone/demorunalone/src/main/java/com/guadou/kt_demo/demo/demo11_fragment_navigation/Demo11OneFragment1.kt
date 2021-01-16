@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
-import com.guadou.lib_baselib.base.BaseFragment
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.fragment.BaseFragment
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.getActivityVM
 import com.guadou.lib_baselib.ext.toast

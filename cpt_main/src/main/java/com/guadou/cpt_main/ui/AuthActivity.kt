@@ -4,7 +4,7 @@ import android.content.Intent
 import com.guadou.cpt_main.R
 import com.guadou.cpt_main.mvvm.AuthViewModel
 import com.guadou.cpt_main.others.MemberServer
-import com.guadou.lib_baselib.base.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseActivity
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint

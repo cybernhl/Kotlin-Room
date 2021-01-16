@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.guadou.lib_baselib.base.BaseApplication
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import kotlinx.coroutines.*

@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.mvvm.DemoJobViewModel
-import com.guadou.lib_baselib.base.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseActivity
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.vertical
 import com.scwang.smart.refresh.layout.api.RefreshLayout

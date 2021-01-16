@@ -21,7 +21,6 @@ android {
         applicationId "com.guadou.kt_demo"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -67,8 +66,9 @@ android {
         maxProcessCount 8
     }
 
-    dataBinding{
-        enabled = true
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 
 }

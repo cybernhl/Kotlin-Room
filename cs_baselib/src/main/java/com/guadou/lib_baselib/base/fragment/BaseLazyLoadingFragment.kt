@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -6,13 +6,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.Gloading
 
-
+/**
+ * 加入ViewModel与LoadState
+ * 默认为Loading布局的懒加载
+ */
 abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
 
     protected lateinit var mViewModel: VM
@@ -64,9 +68,7 @@ abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
 
     //Loading Create Root View
     override fun transformRootView(view: View): View {
-
         mGLoadingHolder = generateGLoading(view)
-
         return mGLoadingHolder.wrapper
     }
 

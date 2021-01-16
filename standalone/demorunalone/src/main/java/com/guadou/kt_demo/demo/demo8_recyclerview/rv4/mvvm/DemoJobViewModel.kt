@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.adapter.DemoJobAdapter
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.FullJobsPage
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CheckUtil
