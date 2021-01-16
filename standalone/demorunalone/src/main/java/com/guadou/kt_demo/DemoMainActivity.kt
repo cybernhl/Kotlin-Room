@@ -12,7 +12,7 @@ import com.guadou.kt_demo.demo.demo6_imageselect_premision_rvgird.Demo6Activity
 import com.guadou.kt_demo.demo.demo7_imageload_glide.Demo7Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.Demo8Activity
 import com.guadou.kt_demo.demo.demo9_ktfollow.DemoCountDwonActivity
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import kotlinx.android.synthetic.main.activity_demo_main.*
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_demo_main.*
 /**
  * 演示Demo的首页
  */
-class DemoMainActivity : BaseActivity<EmptyViewModel>() {
+class DemoMainActivity : BaseVMActivity<EmptyViewModel>() {
 
     override fun inflateLayoutById(): Int = R.layout.activity_demo_main
 

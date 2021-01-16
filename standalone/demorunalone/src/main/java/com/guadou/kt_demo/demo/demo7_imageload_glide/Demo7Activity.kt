@@ -3,7 +3,7 @@ package com.guadou.kt_demo.demo.demo7_imageload_glide
 import android.annotation.SuppressLint
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.engine.extDownloadImage
 import com.guadou.lib_baselib.engine.extLoad
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_demo7.*
  * 加载各种图片Glide
  *
  */
-class Demo7Activity : BaseActivity<EmptyViewModel>() {
+class Demo7Activity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

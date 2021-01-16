@@ -2,7 +2,7 @@ package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseLoadingActivity
+import com.guadou.lib_baselib.base.activity.BaseVMLoadingActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
@@ -13,7 +13,7 @@ import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
 /**
  * 默认是加载的上下跳动的动画
  */
-class JumpLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
+class JumpLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

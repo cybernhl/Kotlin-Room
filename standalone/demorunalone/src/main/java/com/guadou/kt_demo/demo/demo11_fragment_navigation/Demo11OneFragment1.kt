@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
-import com.guadou.lib_baselib.base.fragment.BaseFragment
+import com.guadou.lib_baselib.base.fragment.BaseVMFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.getActivityVM
@@ -17,7 +17,7 @@ import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import kotlinx.android.synthetic.main.fragment_demo11_page1.*
 
 
-class Demo11OneFragment1 : BaseFragment<EmptyViewModel>() {
+class Demo11OneFragment1 : BaseVMFragment<EmptyViewModel>() {
 
     companion object {
         fun obtainFragment(): Demo11OneFragment1 {

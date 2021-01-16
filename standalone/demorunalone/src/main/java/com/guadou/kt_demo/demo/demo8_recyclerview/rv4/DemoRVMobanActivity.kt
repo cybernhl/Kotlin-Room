@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.mvvm.DemoJobViewModel
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.vertical
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_demo_rv_muban.*
  * 网络请求模板
  */
 @AndroidEntryPoint
-class DemoRVMobanActivity : BaseActivity<DemoJobViewModel>(), OnRefreshListener {
+class DemoRVMobanActivity : BaseVMActivity<DemoJobViewModel>(), OnRefreshListener {
 
     companion object {
         fun startInstance() {

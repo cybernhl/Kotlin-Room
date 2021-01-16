@@ -3,14 +3,14 @@ package com.guadou.kt_demo.demo.demo11_fragment_navigation
 import android.content.Intent
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 
 /**
  * Fragment导航
  */
-class Demo11Activity : BaseActivity<Demo11ViewModel>() {
+class Demo11Activity : BaseVMActivity<Demo11ViewModel>() {
 
     companion object {
         fun startInstance() {

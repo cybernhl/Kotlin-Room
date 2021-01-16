@@ -2,7 +2,7 @@ package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 
 import android.view.View
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.fragment.BaseLoadingFragment
+import com.guadou.lib_baselib.base.fragment.BaseVMLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * 设置为菊花的转动
  */
 @AndroidEntryPoint
-class NormalLoadingFragment : BaseLoadingFragment<EmptyViewModel>() {
+class NormalLoadingFragment : BaseVMLoadingFragment<EmptyViewModel>() {
 
     companion object {
         fun obtainFragment(): NormalLoadingFragment {

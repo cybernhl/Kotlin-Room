@@ -5,7 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.widget.ImageView
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.engine.extLoad
 import com.guadou.lib_baselib.engine.extRequestPermission
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_demo6.*
 /**
  * 相机相册
  */
-class Demo6Activity : BaseActivity<EmptyViewModel>() {
+class Demo6Activity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

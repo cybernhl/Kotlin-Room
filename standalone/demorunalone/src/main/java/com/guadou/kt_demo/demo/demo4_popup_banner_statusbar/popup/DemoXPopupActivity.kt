@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.checkEmpty
 import com.guadou.lib_baselib.ext.click
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_demo_xpopup.*
 /**
  * Xpopup的示例
  */
-class DemoXPopupActivity : BaseActivity<EmptyViewModel>() {
+class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

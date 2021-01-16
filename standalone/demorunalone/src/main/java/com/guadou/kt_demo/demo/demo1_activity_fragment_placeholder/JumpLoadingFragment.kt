@@ -1,7 +1,7 @@
 package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.fragment.BaseLoadingFragment
+import com.guadou.lib_baselib.base.fragment.BaseVMLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * 默认是跳动动画
  */
 @AndroidEntryPoint
-class JumpLoadingFragment : BaseLoadingFragment<EmptyViewModel>() {
+class JumpLoadingFragment : BaseVMLoadingFragment<EmptyViewModel>() {
 
     companion object {
         fun obtainFragment(): JumpLoadingFragment {

@@ -2,7 +2,7 @@ package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.addFragment
 import com.guadou.lib_baselib.ext.commContext
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * 加载空的fragment
  */
 @AndroidEntryPoint
-class EmptyFragmentActivity : BaseActivity<EmptyViewModel>() {
+class EmptyFragmentActivity : BaseVMActivity<EmptyViewModel>() {
 
     private var mType: Int = 0
 

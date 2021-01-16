@@ -2,7 +2,7 @@ package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_demo_banner.*
 /**
  * banner
  */
-class DemoBannerActivity : BaseActivity<EmptyViewModel>() {
+class DemoBannerActivity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

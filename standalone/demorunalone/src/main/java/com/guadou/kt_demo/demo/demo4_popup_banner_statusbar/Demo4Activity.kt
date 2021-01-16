@@ -4,7 +4,7 @@ import android.content.Intent
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_demo4.*
 /**
  * 吐司 弹窗 banner
  */
-class Demo4Activity : BaseActivity<EmptyViewModel>() {
+class Demo4Activity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

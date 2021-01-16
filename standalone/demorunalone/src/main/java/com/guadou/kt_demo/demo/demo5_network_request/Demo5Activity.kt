@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_demo5.*
  * 一定要注意 Repository和ViewModel 都要在di中注册
  */
 @AndroidEntryPoint  //注解可加可不加 因为只是用ViewModel注入的话是不需要注解的，如果还想注入别的东西 需要加
-class Demo5Activity : BaseActivity<Demo5ViewModel>() {
+class Demo5Activity : BaseVMActivity<Demo5ViewModel>() {
 
     companion object {
         fun startInstance() {

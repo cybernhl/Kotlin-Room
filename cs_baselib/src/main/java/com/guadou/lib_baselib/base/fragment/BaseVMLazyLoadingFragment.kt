@@ -17,7 +17,7 @@ import com.guadou.lib_baselib.view.gloading.Gloading
  * 加入ViewModel与LoadState
  * 默认为Loading布局的懒加载
  */
-abstract class BaseLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
+abstract class BaseVMLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
 
     protected lateinit var mViewModel: VM
     private var isViewCreated = false//布局是否被创建

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_demo3.*
  *
  * 这个类是解决了Fragment重叠的问题，Fragment的重建的问题
  */
-class Demo3Activity : BaseActivity<EmptyViewModel>() {
+class Demo3Activity : BaseVMActivity<EmptyViewModel>() {
 
     private var mCurPosition: Int = 0
     private var isHomeActDestroy: Boolean = false

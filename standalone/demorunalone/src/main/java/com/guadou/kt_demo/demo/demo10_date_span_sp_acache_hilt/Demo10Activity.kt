@@ -1,9 +1,10 @@
 package com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt
 
+import android.app.Activity
 import android.content.Intent
 import com.google.gson.GsonBuilder
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.cache.ACache
 import com.guadou.lib_baselib.ext.*
@@ -19,7 +20,7 @@ import javax.inject.Inject
  * 吐司 弹窗 banner
  */
 @AndroidEntryPoint  //这里用到了自定义的注入 需要加注解
-class Demo10Activity : BaseActivity<EmptyViewModel>() {
+class Demo10Activity : BaseVMActivity<EmptyViewModel>() {
 
     @Inject
     lateinit var userServer: UserServer
@@ -129,14 +130,12 @@ class Demo10Activity : BaseActivity<EmptyViewModel>() {
 
 
         btn_7.click {
-            val jsonStr = """
-        {
+            val jsonStr = """{
             "name":"Newki",
             "age":"18",
             "gender":"",
             "languages":{}
-        }
-    """.trimIndent()
+            }""".trimIndent()
 
             //加入容错处理的Gson 正常使用
             val newUser = GsonBuilder()
@@ -152,6 +151,11 @@ class Demo10Activity : BaseActivity<EmptyViewModel>() {
 //            val newUser = BaseApplication.mGson.fromJson(jsonStr,UserBean::class.java)
 
             YYLogUtils.e("对象：" + newUser.toString())
+        }
+
+        btn_8.click {
+            setResult(-1, Intent().putExtra("text", "测试返回的数据"))
+            finish()
         }
     }
 

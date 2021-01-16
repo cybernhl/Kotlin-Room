@@ -15,7 +15,7 @@ import com.guadou.lib_baselib.view.gloading.Gloading
  * 加入ViewModel与LoadState
  * 默认为布局加载的方式
  */
-abstract class BaseLoadingActivity<VM : BaseViewModel> : AbsActivity() {
+abstract class BaseVMLoadingActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
 

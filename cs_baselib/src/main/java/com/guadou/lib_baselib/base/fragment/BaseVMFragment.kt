@@ -1,7 +1,8 @@
-package com.guadou.lib_baselib.base.activity
+package com.guadou.lib_baselib.base.fragment
 
 import android.os.Bundle
-import androidx.activity.viewModels
+import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.guadou.lib_baselib.base.vm.BaseViewModel
@@ -12,19 +13,18 @@ import com.guadou.lib_baselib.view.LoadingDialogManager
 
 /**
  * 加入ViewModel与LoadState
- * 默认为Loading弹窗的加载方式
+ * 默认为Loading的加载
  */
-abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
+abstract class BaseVMFragment<VM : BaseViewModel> : AbsFragment() {
 
     protected lateinit var mViewModel: VM
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         mViewModel = createViewModel()
-
         //观察网络数据状态
-        mViewModel.getActionLiveData().observe(this, stateObserver)
+        mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
 
         init()
         startObserve()
@@ -36,7 +36,8 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
         return viewModel
     }
 
-    open protected fun createViewModel(): VM {
+    //反射获取ViewModel实例
+    private fun createViewModel(): VM {
         return ViewModelProvider(this).get(getVMCls(this))
     }
 
@@ -65,21 +66,21 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
         }
     }
 
-    protected open fun showStateNormal() {}
+    protected fun showStateNormal() {}
 
-    protected open fun showStateError(message: String?) {
+    protected fun showStateError(message: String?) {
         LoadingDialogManager.get().dismissLoading()
     }
 
-    protected open fun showStateSuccess() {
+    protected fun showStateSuccess() {
         LoadingDialogManager.get().dismissLoading()
     }
 
-    protected open fun showStateLoading() {
-        LoadingDialogManager.get().showLoading(this)
+    protected fun showStateLoading() {
+        LoadingDialogManager.get().showLoading(mActivity)
     }
 
-    protected open fun showStateNoData() {
+    protected fun showStateNoData() {
         LoadingDialogManager.get().dismissLoading()
     }
 
@@ -90,5 +91,4 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
     protected fun hideStateProgress() {
         LoadingDialogManager.get().dismissLoading()
     }
-
 }

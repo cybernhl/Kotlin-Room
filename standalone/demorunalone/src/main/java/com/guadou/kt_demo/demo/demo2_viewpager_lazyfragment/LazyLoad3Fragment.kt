@@ -1,14 +1,14 @@
 package com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment
 
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.fragment.BaseLazyLoadingFragment
+import com.guadou.lib_baselib.base.fragment.BaseVMLazyLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 
 
 
-class LazyLoad3Fragment : BaseLazyLoadingFragment<EmptyViewModel>() {
+class LazyLoad3Fragment : BaseVMLazyLoadingFragment<EmptyViewModel>() {
 
     companion object {
         fun obtainFragment(): LazyLoad3Fragment {

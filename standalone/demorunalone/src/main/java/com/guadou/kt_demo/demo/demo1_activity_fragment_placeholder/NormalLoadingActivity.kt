@@ -2,7 +2,7 @@ package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseLoadingActivity
+import com.guadou.lib_baselib.base.activity.BaseVMLoadingActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
@@ -14,7 +14,7 @@ import com.guadou.lib_baselib.view.gloading.GloadingLoadingAdapter
 /**
  * 换成一种菊花转动的Loading加载
  */
-class NormalLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
+class NormalLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

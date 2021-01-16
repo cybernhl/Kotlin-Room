@@ -2,7 +2,7 @@ package com.guadou.kt_demo.demo.demo9_ktfollow
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
@@ -17,7 +17,7 @@ import kotlinx.coroutines.cancel
 /**
  * 倒计时的实现 Kotlin-Flow流
  */
-class DemoCountDwonActivity : BaseActivity<EmptyViewModel>() {
+class DemoCountDwonActivity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

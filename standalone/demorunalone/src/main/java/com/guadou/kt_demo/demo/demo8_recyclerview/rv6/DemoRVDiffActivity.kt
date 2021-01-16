@@ -2,7 +2,7 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv6
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_demo_rv_diff.*
 /**
  * 差分刷新
  */
-class DemoRVDiffActivity : BaseActivity<EmptyViewModel>() {
+class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
 
     private lateinit var mAdapter: DemoDiffAdapter
     val mDatas = mutableListOf<DemoDiffBean>()

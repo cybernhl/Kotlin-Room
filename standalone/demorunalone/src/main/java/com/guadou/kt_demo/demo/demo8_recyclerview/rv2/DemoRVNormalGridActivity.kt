@@ -3,7 +3,7 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv2
 import android.content.Intent
 import android.widget.ImageView
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.engine.extLoad
 import com.guadou.lib_baselib.ext.bindData
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
 /**
  * 普通的垂直的或者水平的直接用扩展的方法
  */
-class DemoRVNormalGridActivity : BaseActivity<EmptyViewModel>() {
+class DemoRVNormalGridActivity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {

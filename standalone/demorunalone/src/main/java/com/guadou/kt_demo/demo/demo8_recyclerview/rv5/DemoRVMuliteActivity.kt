@@ -2,7 +2,7 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv5
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.vertical
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
 /**
  * 多布局
  */
-class DemoRVMuliteActivity : BaseActivity<EmptyViewModel>() {
+class DemoRVMuliteActivity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
