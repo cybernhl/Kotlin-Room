@@ -27,7 +27,7 @@ class DemoBannerActivity : BaseVMActivity<EmptyViewModel>() {
     }
 
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_banner
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_banner
 
     override fun startObserve() {
 

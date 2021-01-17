@@ -40,7 +40,7 @@ class GlobalWebActivity : BaseVMActivity<BaseViewModel>() {
         mWeburl = intent.getStringExtra("webUrl")
     }
 
-    override fun inflateLayoutById(): Int {
+    override fun getLayoutIdRes(): Int {
         return R.layout.activity_global_web
     }
 

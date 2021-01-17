@@ -27,7 +27,7 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_diff
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_diff
 
     override fun startObserve() {
 

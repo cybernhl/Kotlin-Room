@@ -29,7 +29,7 @@ class AuthActivity : BaseVMActivity<AuthViewModel>() {
     override fun startObserve() {
     }
 
-    override fun inflateLayoutById(): Int =
+    override fun getLayoutIdRes(): Int =
         R.layout.activity_auth
 
     override fun init() {

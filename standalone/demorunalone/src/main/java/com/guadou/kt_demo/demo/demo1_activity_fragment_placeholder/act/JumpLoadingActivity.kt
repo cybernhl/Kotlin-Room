@@ -1,4 +1,4 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.act
 
 import android.content.Intent
 import com.guadou.kt_demo.R
@@ -7,34 +7,26 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
-import com.guadou.lib_baselib.view.gloading.GloadingLoadingAdapter
+
 
 /**
- * 换成一种菊花转动的Loading加载
+ * 默认是加载的上下跳动的动画
  */
-class NormalLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
+class JumpLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
             commContext().let {
-                it.startActivity(Intent(it, NormalLoadingActivity::class.java).apply {
+                it.startActivity(Intent(it, JumpLoadingActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 })
             }
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
+    override fun getLayoutIdRes(): Int = R.layout.activity_loading_normal
 
-    //重新生成GLoading对象
-    override fun generateGLoading(): Gloading.Holder {
-
-        return Gloading.from(GloadingLoadingAdapter()).wrap(this).withRetry {
-            onGoadingRetry()
-        }
-    }
 
     override fun startObserve() {
 
@@ -43,7 +35,6 @@ class NormalLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
     override fun init() {
         toast("ViewModel: $mViewModel")
 
-        //其他的使用的方法和默认的GLoading很类似
         //模拟的Loading的情况
         showStateLoading()
 

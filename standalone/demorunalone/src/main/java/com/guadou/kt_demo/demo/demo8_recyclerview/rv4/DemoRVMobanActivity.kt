@@ -29,7 +29,7 @@ class DemoRVMobanActivity : BaseVMActivity<DemoJobViewModel>(), OnRefreshListene
     }
 
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_muban
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_muban
 
     override fun startObserve() {
 

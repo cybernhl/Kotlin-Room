@@ -1,4 +1,4 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.act
 
 import android.content.Intent
 import com.guadou.kt_demo.R
@@ -28,7 +28,7 @@ class Demo1Activity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_1
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_1
 
     override fun startObserve() {
     }
@@ -49,15 +49,21 @@ class Demo1Activity : BaseVMActivity<EmptyViewModel>() {
         }
 
         btn_demo_4.click {
-            EmptyFragmentActivity.startInstance(1)
+            EmptyFragmentActivity.startInstance(
+                1
+            )
         }
 
         btn_demo_5.click {
-            EmptyFragmentActivity.startInstance(2)
+            EmptyFragmentActivity.startInstance(
+                2
+            )
         }
 
         btn_demo_6.click {
-            EmptyFragmentActivity.startInstance(3)
+            EmptyFragmentActivity.startInstance(
+                3
+            )
         }
     }
 }

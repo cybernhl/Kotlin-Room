@@ -34,9 +34,9 @@ abstract class BaseVMLoadingActivity<VM : BaseViewModel> : AbsActivity() {
         super.onCreate(savedInstanceState)
 
         mViewModel = createViewModel()
-
         //观察网络数据状态
         mViewModel.getActionLiveData().observe(this, stateObserver)
+
         init()
         startObserve()
     }
@@ -52,7 +52,11 @@ abstract class BaseVMLoadingActivity<VM : BaseViewModel> : AbsActivity() {
         return ViewModelProvider(this).get(getVMCls(this))
     }
 
-    abstract override fun inflateLayoutById(): Int
+    override fun setContentView() {
+        setContentView(getLayoutIdRes())
+    }
+
+    abstract fun getLayoutIdRes(): Int
     abstract fun startObserve()
     abstract fun init()
     protected open fun onGoadingRetry() {

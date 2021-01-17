@@ -2,50 +2,85 @@ package com.guadou.lib_baselib.base.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.util.forEach
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.guadou.lib_baselib.base.vm.BaseViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
+import com.guadou.lib_baselib.view.gloading.Gloading
 
 /**
  * 加入ViewModel与LoadState
- * 默认为Loading弹窗的加载方式
+ * 默认为布局加载的方式
  */
-abstract class BaseVMActivity<VM : BaseViewModel> : AbsActivity() {
+abstract class BaseVDBLoadingActivity<VM : BaseViewModel, VDB : ViewDataBinding> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
+    protected lateinit var mBinding: VDB
+
+    protected val mGLoadingHolder by lazy {
+        generateGLoading()
+    }
+
+    //如果要替换GLoading，重写次方法
+    open protected fun generateGLoading(): Gloading.Holder {
+        return Gloading.getDefault().wrap(this).withRetry {
+            onGoadingRetry()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel = createViewModel()
-        //观察网络数据状态
-        mViewModel.getActionLiveData().observe(this, stateObserver)
-
         init()
+
         startObserve()
     }
 
-    //使用这个方法简化ViewModel的初始化
+    //使用这个方法简化ViewModewl的Hilt依赖注入获取
     protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
         val viewModel: VM by viewModels()
         return viewModel
     }
 
+    //反射获取ViewModel实例
     open protected fun createViewModel(): VM {
         return ViewModelProvider(this).get(getVMCls(this))
     }
 
     override fun setContentView() {
-        setContentView(getLayoutIdRes())
+        mViewModel = createViewModel()
+        //观察网络数据状态
+        mViewModel.getActionLiveData().observe(this, stateObserver)
+
+        val config = getDataBindingConfig()
+        mBinding = DataBindingUtil.setContentView(this, config.getLayout())
+        mBinding.lifecycleOwner = this
+
+        if (config.getVmVariableId() != 0) {
+            mBinding.setVariable(
+                config.getVmVariableId(),
+                config.getViewModel()
+            )
+        }
+
+        val bindingParams = config.getBindingParams()
+        bindingParams.forEach { key, value ->
+            mBinding.setVariable(key, value)
+        }
     }
 
-    abstract fun getLayoutIdRes(): Int
+    abstract fun getDataBindingConfig(): DataBindingConfig
     abstract fun startObserve()
     abstract fun init()
+    protected open fun onGoadingRetry() {
+    }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }
@@ -70,20 +105,20 @@ abstract class BaseVMActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected open fun showStateNormal() {}
 
-    protected open fun showStateError(message: String?) {
-        LoadingDialogManager.get().dismissLoading()
+    protected open fun showStateLoading() {
+        mGLoadingHolder.showLoading()
     }
 
     protected open fun showStateSuccess() {
-        LoadingDialogManager.get().dismissLoading()
+        mGLoadingHolder.showLoadSuccess()
     }
 
-    protected open fun showStateLoading() {
-        LoadingDialogManager.get().showLoading(this)
+    protected open fun showStateError(message: String?) {
+        mGLoadingHolder.showLoadFailed(message)
     }
 
     protected open fun showStateNoData() {
-        LoadingDialogManager.get().dismissLoading()
+        mGLoadingHolder.showEmpty()
     }
 
     protected fun showStateProgress() {

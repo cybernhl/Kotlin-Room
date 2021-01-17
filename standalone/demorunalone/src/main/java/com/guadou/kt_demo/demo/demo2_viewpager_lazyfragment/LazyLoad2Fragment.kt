@@ -2,8 +2,10 @@ package com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment
 
 import android.view.View
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.fragment.BaseVMLazyLoadingFragment
+import com.guadou.kt_demo.databinding.FragmentDemo2Binding
+import com.guadou.lib_baselib.base.fragment.BaseVDBLazyLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
@@ -11,7 +13,7 @@ import com.guadou.lib_baselib.view.gloading.GloadingLoadingAdapter
 
 
 
-class LazyLoad2Fragment : BaseVMLazyLoadingFragment<EmptyViewModel>() {
+class LazyLoad2Fragment : BaseVDBLazyLoadingFragment<EmptyViewModel, FragmentDemo2Binding>() {
 
     companion object {
         fun obtainFragment(): LazyLoad2Fragment {
@@ -19,7 +21,9 @@ class LazyLoad2Fragment : BaseVMLazyLoadingFragment<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.fragment_demo2
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.fragment_demo2)
+    }
 
     override fun startObserve() {
 

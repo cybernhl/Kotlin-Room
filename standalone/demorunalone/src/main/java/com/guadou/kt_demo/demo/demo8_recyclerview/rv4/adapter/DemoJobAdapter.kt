@@ -13,7 +13,7 @@ class DemoJobAdapter(list: MutableList<FullJobsPage.FullJobs>) :
 
     override fun convert(holder: BaseViewHolder, item: FullJobsPage.FullJobs) {
 
-        holder.getView<ImageView>(R.id.iv_job_img).extLoad(item.employer_logo, R.mipmap.home_list_plachholder)
+        holder.getView<ImageView>(R.id.iv_job_img).extLoad(item.employer_logo, R.drawable.home_list_plachholder)
         holder.setText(R.id.tv_job_text, item.title)
     }
 }

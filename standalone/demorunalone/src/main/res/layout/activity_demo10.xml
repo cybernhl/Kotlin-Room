@@ -1,68 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.guadou.lib_baselib.base.vm.EmptyViewModel" />
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="测试其他功能" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Acache"
-        android:textAllCaps="false" />
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_title="测试其他功能" />
 
-    <Button
-        android:id="@+id/btn_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SP" />
+        <!--    原生的onClick方法-带1个参数的View函数可以直接::表达   -->
+        <Button
+            android:id="@+id/btn_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{click::putACache}"
+            android:text="Acache"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="时间格式化" />
+        <!--    原生的onClick方法-使用（）->表达式调用方法类型    -->
+        <Button
+            android:id="@+id/btn_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> click.putSP()}"
+            android:text="SP" />
 
-    <Button
-        android:id="@+id/btn_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="富文本Span"
-        android:textAllCaps="false" />
+        <!--    原生的onClick方法-使用函数类型需要带1个参数的View函数才可以   -->
+        <Button
+            android:id="@+id/btn_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{click.formatDate}"
+            android:text="时间格式化" />
 
-    <Button
-        android:id="@+id/btn_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="String扩展"
-        android:textAllCaps="false" />
+        <!--    自定义点击方法-使用（）->表达式调用方法类型    -->
+        <Button
+            android:id="@+id/btn_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="富文本Span"
+            android:textAllCaps="false"
+            binding:clicks="@{() -> click.navSpanActivity()}" />
 
-    <Button
-        android:id="@+id/btn_6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="依赖注入"
-        android:textAllCaps="false" />
+        <!--    自定义点击方法-直接使用表达式调用函数   -->
+        <Button
+            android:id="@+id/btn_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="String扩展"
+            android:textAllCaps="false"
+            binding:clicks="@{click.formatString}" />
 
-    <Button
-        android:id="@+id/btn_7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gson容错处理"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="依赖注入"
+            android:textAllCaps="false"
+            binding:clicks="@{click.printHilt}" />
 
-    <Button
-        android:id="@+id/btn_8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="返回数据"
-        android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gson容错处理"
+            android:textAllCaps="false"
+            binding:clicks="@{click.printGson}" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="返回数据"
+            android:textAllCaps="false"
+            binding:clicks="@{click.testBackResule}"
+            binding:isVisibleGone="@{true}" />
+
+        <EditText
+            binding:onTextChanged="@{click.onEditTextChangeListener}"
+            android:layout_margin="@dimen/d_15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</layout>

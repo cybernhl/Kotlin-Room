@@ -2,6 +2,7 @@ package com.guadou.lib_baselib.base.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -63,7 +64,14 @@ abstract class BaseVMLoadingFragment<VM : BaseViewModel> : AbsFragment() {
         return ViewModelProvider(this).get(getVMCls(this))
     }
 
-    abstract override fun inflateLayoutById(): Int
+    override fun setContentView(container: ViewGroup?): View {
+        return layoutInflater.inflate(getLayoutIdRes(), container, false)
+    }
+
+    /**
+     * 获取layout的id，具体由子类实现
+     */
+    abstract fun getLayoutIdRes(): Int
     abstract fun startObserve()
     abstract fun init()
 

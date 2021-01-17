@@ -23,11 +23,8 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     protected lateinit var mActivity: Activity
     protected lateinit var mContext: Context
 
-    /**
-     * 获取layout的id，具体由子类实现
-     */
-    abstract fun inflateLayoutById(): Int
 
+    abstract fun setContentView(container: ViewGroup?): View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +37,8 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(inflateLayoutById(), container, false)
-        return transformRootView(view)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return transformRootView(setContentView(container))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

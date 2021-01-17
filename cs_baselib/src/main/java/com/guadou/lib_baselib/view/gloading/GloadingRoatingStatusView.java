@@ -17,10 +17,10 @@ import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_EMPTY_DATA;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_FAILED;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
+import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_NORMAL;
 
 /**
- * 默认的是上下跳动的加载动画
- * 这是可配置自定义的三线条旋转动画
+ * 这是自定义的三色圈动画
  */
 @SuppressLint("ViewConstructor")
 public class GloadingRoatingStatusView extends LinearLayout implements View.OnClickListener {
@@ -72,6 +72,12 @@ public class GloadingRoatingStatusView extends LinearLayout implements View.OnCl
                 loading_view.stopAnimation();
                 mImageView.setVisibility(GONE);
                 show = false;
+                break;
+
+            case STATUS_NORMAL:
+                loading_view.setVisibility(VISIBLE);
+                mImageView.setVisibility(GONE);
+                str = "Loading...";
                 break;
 
             case STATUS_LOADING:

@@ -1,26 +1,28 @@
 package com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt
 
-import android.app.Activity
 import android.content.Intent
+import android.view.View
 import com.google.gson.GsonBuilder
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.databinding.ActivityDemo10Binding
+import com.guadou.lib_baselib.base.activity.BaseVDBLoadingActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.cache.ACache
 import com.guadou.lib_baselib.ext.*
+import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.interceptor.ArrayDefailtAdapter
 import com.guadou.lib_baselib.utils.interceptor.IntDefaut0Adapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_demo10.*
 import javax.inject.Inject
-
 
 /**
  * 吐司 弹窗 banner
  */
 @AndroidEntryPoint  //这里用到了自定义的注入 需要加注解
-class Demo10Activity : BaseVMActivity<EmptyViewModel>() {
+class Demo10Activity : BaseVDBLoadingActivity<EmptyViewModel, ActivityDemo10Binding>() {
 
     @Inject
     lateinit var userServer: UserServer
@@ -35,29 +37,38 @@ class Demo10Activity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo10
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo10, BR.viewModel, mViewModel)
+            .addBindingParams(BR.click, ClickProxy())
+    }
 
     override fun startObserve() {
 
     }
 
     override fun init() {
-
-        initLitener()
+        initData()
     }
 
-    private fun initLitener() {
+    private fun initData() {
+        showStateLoading()
 
-        //Acache
-        btn_1.click {
-            //还是和原来一样的用法
+        CommUtils.getHandler().postDelayed({
+            showStateSuccess()
+        }, 1500)
+    }
+
+
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
+
+        fun putACache(view: View) {
             ACache.get().put("demo1", "test")
         }
 
-
-        //SP用法全部在这里
-        btn_2.click {
-
+        fun putSP() {
             SP().getString("a", "default")
             SP().getBoolean("b", false)
 
@@ -73,29 +84,11 @@ class Demo10Activity : BaseVMActivity<EmptyViewModel>() {
             SP().clear()
         }
 
-
-        //时间格式化
-        btn_3.click {
-            //时间戳转换为格式化对象
-//            val dateFormat = 1595930618000.formatDateString()
-//            toast(dateFormat)
-
-//            val dateFormat = 1595930618.formatDateString("EE, MMM dd yyyy")
-//            toast(dateFormat)
-
-            //指定格式字符串转换为时间戳
-            val dateMilles = "2020 09 20".toDateMills("yyyy MM dd")
-            toast(dateMilles.toString())
-        }
-
-
-        //富文本的页面展示
-        btn_4.click {
+        fun navSpanActivity() {
             DemoSpanActivity.startInstance()
         }
 
-        //String的功能展示
-        btn_5.click {
+        fun formatString() {
             //判断字符串
 //            val isEmpty = "".checkEmpty()
 //            toast("isEmpty:" + isEmpty)
@@ -122,14 +115,25 @@ class Demo10Activity : BaseVMActivity<EmptyViewModel>() {
             toast("2312109.65473".formatMoney())
         }
 
-        //Hilt的注入  -- 上面成员变量注入了
-        btn_6.click {
+        fun formatDate(view: View) {
+            //时间戳转换为格式化对象
+//            val dateFormat = 1595930618000.formatDateString()
+//            toast(dateFormat)
+
+//            val dateFormat = 1595930618.formatDateString("EE, MMM dd yyyy")
+//            toast(dateFormat)
+
+            //指定格式字符串转换为时间戳
+            val dateMilles = "2020 09 20".toDateMills("yyyy MM dd")
+            toast(dateMilles.toString())
+        }
+
+        val printHilt: () -> Unit = {
             YYLogUtils.w("server:" + userServer.toString())
             userServer.testUser()
         }
 
-
-        btn_7.click {
+        fun printGson() {
             val jsonStr = """{
             "name":"Newki",
             "age":"18",
@@ -150,13 +154,18 @@ class Demo10Activity : BaseVMActivity<EmptyViewModel>() {
             //使用默认Gson  报错NumberFormatException
 //            val newUser = BaseApplication.mGson.fromJson(jsonStr,UserBean::class.java)
 
-            YYLogUtils.e("对象：" + newUser.toString())
+            toast(newUser.toString())
         }
 
-        btn_8.click {
+        fun testBackResule() {
             setResult(-1, Intent().putExtra("text", "测试返回的数据"))
             finish()
         }
-    }
 
+        //EditText的文字监听
+        val onEditTextChangeListener: (String) -> Unit = {
+            toast(it)
+        }
+
+    }
 }

@@ -28,7 +28,7 @@ class Demo4Activity : BaseVMActivity<EmptyViewModel>() {
     }
 
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo4
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo4
 
     override fun startObserve() {
 

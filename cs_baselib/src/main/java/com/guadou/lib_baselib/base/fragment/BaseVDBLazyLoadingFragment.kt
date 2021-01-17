@@ -3,11 +3,15 @@ package com.guadou.lib_baselib.base.fragment
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.util.forEach
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.guadou.lib_baselib.base.vm.BaseViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
@@ -18,9 +22,10 @@ import com.guadou.lib_baselib.view.gloading.Gloading
  * 加入ViewModel与LoadState
  * 默认为Loading布局的懒加载
  */
-abstract class BaseVMLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
+abstract class BaseVDBLazyLoadingFragment<VM : BaseViewModel, VDB : ViewDataBinding> : AbsFragment() {
 
     protected lateinit var mViewModel: VM
+    protected lateinit var mBinding: VDB
     private var isViewCreated = false//布局是否被创建
     private var isLoadData = false//数据是否加载
     private var isFirstVisible = true//是否第一次可见
@@ -29,10 +34,6 @@ abstract class BaseVMLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isViewCreated = true
-
-        mViewModel = createViewModel()
-        //观察网络数据状态
-        mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
 
         init()
         startObserve()
@@ -63,13 +64,31 @@ abstract class BaseVMLazyLoadingFragment<VM : BaseViewModel> : AbsFragment() {
     }
 
     override fun setContentView(container: ViewGroup?): View {
-        return layoutInflater.inflate(getLayoutIdRes(), container, false)
+        mViewModel = createViewModel()
+        //观察网络数据状态
+        mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
+
+        val config = getDataBindingConfig()
+        mBinding = DataBindingUtil.inflate(layoutInflater, config.getLayout(), container, false)
+        mBinding.lifecycleOwner = viewLifecycleOwner
+
+        if (config.getVmVariableId() != 0) {
+            mBinding.setVariable(
+                config.getVmVariableId(),
+                config.getViewModel()
+            )
+        }
+
+        val bindingParams = config.getBindingParams()
+        bindingParams.forEach { key, value ->
+            mBinding.setVariable(key, value)
+        }
+
+        return mBinding.root
     }
 
-    /**
-     * 获取layout的id，具体由子类实现
-     */
-    abstract fun getLayoutIdRes(): Int
+    abstract fun getDataBindingConfig(): DataBindingConfig
+
     abstract fun startObserve()
     abstract fun init()
     abstract fun onLazyInitData()

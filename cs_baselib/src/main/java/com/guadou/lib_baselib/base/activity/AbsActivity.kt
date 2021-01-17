@@ -19,21 +19,15 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 /**
  * 最底层的Activity,不带MVP和MVVM,一般不用这个
  */
-abstract class AbsActivity(useDataBinding: Boolean = false) : AppCompatActivity(),
-    ConnectivityReceiver.ConnectivityReceiverListener {
+abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
 
     /**
      * 获取Context对象
      */
     protected lateinit var mActivity: Activity
     protected lateinit var mContext: Context
-    private val _useBinding = useDataBinding
-    protected lateinit var mBinding: ViewDataBinding
 
-    /**
-     * 获取layout的id，具体由子类实现
-     */
-    abstract fun inflateLayoutById(): Int
+    abstract fun setContentView()
 
     /**
      * 从intent中解析数据，具体子类来实现
@@ -87,13 +81,7 @@ abstract class AbsActivity(useDataBinding: Boolean = false) : AppCompatActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (_useBinding) {
-            mBinding = DataBindingUtil.setContentView<ViewDataBinding>(this, inflateLayoutById())
-            mBinding.lifecycleOwner = this
-        } else {
-            val view = layoutInflater.inflate(inflateLayoutById(), null)
-            setContentView(view)
-        }
+        setContentView()
 
         mActivity = this
         mContext = this.applicationContext

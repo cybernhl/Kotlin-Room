@@ -50,7 +50,7 @@ class DemoImagePreviewActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_image_preview
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_image_preview
 
     override fun startObserve() {
 

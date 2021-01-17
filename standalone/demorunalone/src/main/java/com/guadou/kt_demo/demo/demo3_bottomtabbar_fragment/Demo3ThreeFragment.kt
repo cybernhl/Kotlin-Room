@@ -16,7 +16,7 @@ class Demo3ThreeFragment :
         }
     }
 
-    override fun inflateLayoutById(): Int  = R.layout.fragment_demo3_page
+    override fun getLayoutIdRes(): Int  = R.layout.fragment_demo3_page
 
 
     override fun startObserve() {

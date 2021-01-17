@@ -30,7 +30,7 @@ class DemoCountDwonActivity : BaseVMActivity<EmptyViewModel>() {
     }
 
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_count_down
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_count_down
 
     override fun startObserve() {
 

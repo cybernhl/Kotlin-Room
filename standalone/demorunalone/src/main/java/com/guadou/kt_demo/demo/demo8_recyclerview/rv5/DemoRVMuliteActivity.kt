@@ -23,7 +23,7 @@ class DemoRVMuliteActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_normal
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_normal
 
     override fun startObserve() {
 

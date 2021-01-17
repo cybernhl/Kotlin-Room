@@ -35,7 +35,7 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_xpopup
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_xpopup
 
     override fun startObserve() {
 

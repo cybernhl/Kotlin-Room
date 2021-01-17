@@ -30,7 +30,7 @@ class Demo5Activity : BaseVMActivity<Demo5ViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo5
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo5
 
     @SuppressLint("SetTextI18n")
     override fun startObserve() {

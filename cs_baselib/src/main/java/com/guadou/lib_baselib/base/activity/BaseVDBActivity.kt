@@ -2,30 +2,32 @@ package com.guadou.lib_baselib.base.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.util.forEach
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.guadou.lib_baselib.base.vm.BaseViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 
 /**
- * 加入ViewModel与LoadState
+ * 加入ViewModel与LoadState与DataBinding
  * 默认为Loading弹窗的加载方式
  */
-abstract class BaseVMActivity<VM : BaseViewModel> : AbsActivity() {
+abstract class BaseVDBActivity<VM : BaseViewModel, VDB : ViewDataBinding> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
+    protected lateinit var mBinding: VDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel = createViewModel()
-        //观察网络数据状态
-        mViewModel.getActionLiveData().observe(this, stateObserver)
-
         init()
+
         startObserve()
     }
 
@@ -40,10 +42,28 @@ abstract class BaseVMActivity<VM : BaseViewModel> : AbsActivity() {
     }
 
     override fun setContentView() {
-        setContentView(getLayoutIdRes())
+        mViewModel = createViewModel()
+        //观察网络数据状态
+        mViewModel.getActionLiveData().observe(this, stateObserver)
+
+        val config = getDataBindingConfig()
+        mBinding = DataBindingUtil.setContentView(this, config.getLayout())
+        mBinding.lifecycleOwner = this
+
+        if (config.getVmVariableId() != 0) {
+            mBinding.setVariable(
+                config.getVmVariableId(),
+                config.getViewModel()
+            )
+        }
+
+        val bindingParams = config.getBindingParams()
+        bindingParams.forEach { key, value ->
+            mBinding.setVariable(key, value)
+        }
     }
 
-    abstract fun getLayoutIdRes(): Int
+    abstract fun getDataBindingConfig(): DataBindingConfig
     abstract fun startObserve()
     abstract fun init()
 

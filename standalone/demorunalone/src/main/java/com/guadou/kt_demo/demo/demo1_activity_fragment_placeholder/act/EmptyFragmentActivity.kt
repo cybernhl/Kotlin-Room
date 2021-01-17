@@ -1,7 +1,10 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.act
 
 import android.content.Intent
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment.JumpLoadingFragment
+import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment.RoteLoadingFragment
+import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment.PlaceHolderLoadingFragment
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.addFragment
@@ -33,7 +36,7 @@ class EmptyFragmentActivity : BaseVMActivity<EmptyViewModel>() {
         mType = intent.getIntExtra("type", 0)
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_empty_fragment
+    override fun getLayoutIdRes(): Int = R.layout.activity_empty_fragment
 
 
     override fun startObserve() {
@@ -47,10 +50,18 @@ class EmptyFragmentActivity : BaseVMActivity<EmptyViewModel>() {
         toast("ViewModel: $mViewModel")
 
         when (mType) {
-            1 -> addFragment(R.id.fl_content, JumpLoadingFragment.obtainFragment())
-            2 -> addFragment(R.id.fl_content, NormalLoadingFragment.obtainFragment())
-            3 -> addFragment(R.id.fl_content, PlaceHolderLoadingFragment.obtainFragment())
-            else -> addFragment(R.id.fl_content, JumpLoadingFragment.obtainFragment())
+            1 -> addFragment(R.id.fl_content,
+                JumpLoadingFragment.obtainFragment()
+            )
+            2 -> addFragment(R.id.fl_content,
+                RoteLoadingFragment.obtainFragment()
+            )
+            3 -> addFragment(R.id.fl_content,
+                PlaceHolderLoadingFragment.obtainFragment()
+            )
+            else -> addFragment(R.id.fl_content,
+                JumpLoadingFragment.obtainFragment()
+            )
         }
 
 

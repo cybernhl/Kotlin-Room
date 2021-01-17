@@ -1,39 +1,36 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment
 
-import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMLoadingActivity
+import com.guadou.kt_demo.databinding.ActivityLoadingNormalBinding
+import com.guadou.lib_baselib.base.fragment.BaseVDBLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
-import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.toast
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
+import dagger.hilt.android.AndroidEntryPoint
 
 
 /**
- * 默认是加载的上下跳动的动画
+ * 默认是跳动动画
  */
-class JumpLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
+@AndroidEntryPoint
+class JumpLoadingFragment : BaseVDBLoadingFragment<EmptyViewModel, ActivityLoadingNormalBinding>() {
 
     companion object {
-        fun startInstance() {
-            commContext().let {
-                it.startActivity(Intent(it, JumpLoadingActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                })
-            }
+        fun obtainFragment(): JumpLoadingFragment {
+            return JumpLoadingFragment()
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
-
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_loading_normal)
+    }
 
     override fun startObserve() {
 
     }
 
     override fun init() {
-        toast("ViewModel: $mViewModel")
 
         //模拟的Loading的情况
         showStateLoading()
@@ -52,5 +49,6 @@ class JumpLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
         mGLoadingHolder.withData(GloadingGlobalStatusView.NEED_LOADING_STATUS_MAGRIN_TITLE)
         mGLoadingHolder.showLoading()
     }
+
 
 }

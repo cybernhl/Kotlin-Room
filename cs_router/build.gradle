@@ -43,11 +43,6 @@ android {
         maxProcessCount 8
     }
 
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
-
 }
 
 configurations.all {

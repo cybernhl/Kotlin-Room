@@ -45,6 +45,7 @@ public class Gloading {
     public static final int STATUS_LOAD_SUCCESS = 2;
     public static final int STATUS_LOAD_FAILED = 3;
     public static final int STATUS_EMPTY_DATA = 4;
+    public static final int STATUS_NORMAL = 5;  //和Loading状态一样 默认先展示Loading的布局
 
     private static volatile Gloading mDefault;
     private Adapter mAdapter;
@@ -151,7 +152,7 @@ public class Gloading {
         Holder holder = new Holder(mAdapter, view.getContext(), wrapper);
         //2020-12-17 Newki修改
         //主要添加了GLoading那么就默认显示Loading状态 ，不然会先出现默认布局，然后一闪之后再出现GLoading的加载
-        holder.showLoading();
+        holder.showNormal();
         return holder;
     }
 
@@ -214,6 +215,13 @@ public class Gloading {
         public Holder withData(Object data) {
             this.mData = data;
             return this;
+        }
+
+        /**
+         * show UI for status: {@link #STATUS_NORMAL}
+         */
+        public void showNormal() {
+            showLoadingStatus(STATUS_NORMAL, null);
         }
 
         /**

@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseVMActivity<EmptyViewModel>() {
 
-    override fun inflateLayoutById(): Int = R.layout.activity_main
+    override fun getLayoutIdRes(): Int = R.layout.activity_main
 
     override fun startObserve() {
 

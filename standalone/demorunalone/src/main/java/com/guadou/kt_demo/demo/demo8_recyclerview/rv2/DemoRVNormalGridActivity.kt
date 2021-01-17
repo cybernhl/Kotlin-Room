@@ -29,7 +29,7 @@ class DemoRVNormalGridActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_normal
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_normal
 
 
     override fun startObserve() {
@@ -51,7 +51,7 @@ class DemoRVNormalGridActivity : BaseVMActivity<EmptyViewModel>() {
         //默认的Grid
         recyclerView.vertical(3)
             .bindData(datas, R.layout.item_local_image) { holder, t, _ ->
-                holder.getView<ImageView>(R.id.iv_img).extLoad(t, R.mipmap.home_list_plachholder, isCenterCrop = true)
+                holder.getView<ImageView>(R.id.iv_img).extLoad(t, R.drawable.home_list_plachholder, isCenterCrop = true)
             }
             .addItemDecoration(GridSpacingItemDecoration(3, dp2px(10f), true))
 
