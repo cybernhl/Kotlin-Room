@@ -21,7 +21,9 @@ import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
 class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
 
     private val mDatas = mutableListOf<DemoDiffBean>()
-    private val mAdapter by lazy { BaseDataBindingAdapter(R.layout.item_diff_jobs, BR.item, mDatas) }
+
+        private val mAdapter by lazy { BaseDataBindingAdapter(R.layout.item_diff_jobs, BR.item, mDatas) }
+//    private lateinit var mAdapter: DemoDiffAdapter
 
     companion object {
         fun startInstance() {

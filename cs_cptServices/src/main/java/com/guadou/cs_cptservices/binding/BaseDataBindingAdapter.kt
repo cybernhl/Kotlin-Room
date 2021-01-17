@@ -19,6 +19,10 @@ open class BaseDataBindingAdapter<T>(layoutResId: Int, br: Int, list: MutableLis
         DataBindingUtil.bind<ViewDataBinding>(viewHolder.itemView)
     }
 
+    override fun convert(holder: BaseViewHolder, item: T, payloads: List<Any>) {
+        super.convert(holder, item, payloads)
+    }
+
     override fun convert(holder: BaseViewHolder, item: T) {
         if (item == null) {
             return
