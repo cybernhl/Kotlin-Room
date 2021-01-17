@@ -50,7 +50,7 @@ ext {
 
                     "permission"        : 'com.yanzhenjie:permission:2.0.3',
                     "live_bus"          : 'com.jeremyliao:live-event-bus-x:1.7.2',
-                    "brvah"             : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2',
+                    "brvah"             : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6',
                     "smart_refresh_core": 'com.scwang.smart:refresh-layout-kernel:2.0.1',
                     "smart_refresh_head": 'com.scwang.smart:refresh-header-classics:2.0.1',
                     "picture_selector"  : 'com.github.LuckSiege.PictureSelector:picture_library:v2.6.0',  //图片选择

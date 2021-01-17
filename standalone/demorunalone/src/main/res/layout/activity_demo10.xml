@@ -30,6 +30,7 @@
         <!--    原生的onClick方法-带1个参数的View函数可以直接::表达   -->
         <Button
             android:id="@+id/btn_1"
+            tools:viewBindingIgnore="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{click::putACache}"
@@ -39,6 +40,7 @@
         <!--    原生的onClick方法-使用（）->表达式调用方法类型    -->
         <Button
             android:id="@+id/btn_2"
+            tools:viewBindingIgnore="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{() -> click.putSP()}"
@@ -47,6 +49,7 @@
         <!--    原生的onClick方法-使用函数类型需要带1个参数的View函数才可以   -->
         <Button
             android:id="@+id/btn_3"
+            tools:viewBindingIgnore="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{click.formatDate}"
@@ -55,6 +58,7 @@
         <!--    自定义点击方法-使用（）->表达式调用方法类型    -->
         <Button
             android:id="@+id/btn_4"
+            tools:viewBindingIgnore="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="富文本Span"
@@ -64,6 +68,7 @@
         <!--    自定义点击方法-直接使用表达式调用函数   -->
         <Button
             android:id="@+id/btn_5"
+            tools:viewBindingIgnore="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="String扩展"
@@ -72,6 +77,7 @@
 
         <Button
             android:id="@+id/btn_6"
+            tools:viewBindingIgnore="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="依赖注入"
@@ -80,6 +86,7 @@
 
         <Button
             android:id="@+id/btn_7"
+            tools:viewBindingIgnore="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Gson容错处理"

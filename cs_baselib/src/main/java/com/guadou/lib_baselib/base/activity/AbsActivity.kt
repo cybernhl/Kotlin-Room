@@ -9,8 +9,6 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.ActivityManage
 import com.guadou.lib_baselib.utils.StatusBarUtils

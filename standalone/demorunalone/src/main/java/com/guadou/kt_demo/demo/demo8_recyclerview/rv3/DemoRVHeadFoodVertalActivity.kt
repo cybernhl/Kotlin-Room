@@ -2,6 +2,8 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv3
 
 import android.content.Intent
 import android.graphics.Color
+import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
+import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
@@ -16,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
  */
 @AndroidEntryPoint
 class DemoRVHeadFoodVertalActivity : BaseVMActivity<EmptyViewModel>() {
+
+    private val mAdapter by lazy { BaseDataBindingAdapter<String>(R.layout.item_vertal_text, BR.text) }
 
     companion object {
         fun startInstance() {
@@ -38,14 +42,25 @@ class DemoRVHeadFoodVertalActivity : BaseVMActivity<EmptyViewModel>() {
 
         val datas = listOf("关羽", "刘备", "张飞", "吕布", "刘邦", "鲁班", "赵云", "韩信", "孙策")
 
-        recyclerView.vertical()
-            .bindData(datas, R.layout.item_vertal_text) { holder, t, _ ->
-                holder.setText(R.id.tv_vertal_text, t)
-            }
-            .divider(Color.BLACK)
-            .addHeader(CommUtils.inflate(R.layout.item_vertal_header))
-            .addFooter(CommUtils.inflate(R.layout.item_vertal_fooder))
-            .addFooter(CommUtils.inflate(R.layout.item_vertal_fooder))
+        //使用RecyclerView的扩展方法
+//        recyclerView.vertical()
+//            .bindData(datas, R.layout.item_vertal_text) { holder, t, _ ->
+//                holder.setText(R.id.tv_vertal_text, t)
+//            }
+//            .divider(Color.BLACK)
+//            .addHeader(CommUtils.inflate(R.layout.item_vertal_header))
+//            .addFooter(CommUtils.inflate(R.layout.item_vertal_fooder))
+//            .addFooter(CommUtils.inflate(R.layout.item_vertal_fooder))
 
+        //使用DataBinding的方式
+        recyclerView.vertical().apply {
+            adapter = mAdapter.apply {
+                addHeaderView(CommUtils.inflate(R.layout.item_vertal_header))
+                addFooterView(CommUtils.inflate(R.layout.item_vertal_fooder))
+                addFooterView(CommUtils.inflate(R.layout.item_vertal_fooder))
+            }
+            divider(Color.BLACK)
+        }
+        mAdapter.addData(datas)
     }
 }

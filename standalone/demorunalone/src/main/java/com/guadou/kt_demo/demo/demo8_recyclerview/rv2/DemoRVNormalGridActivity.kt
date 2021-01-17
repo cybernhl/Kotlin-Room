@@ -1,15 +1,15 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv2
 
 import android.content.Intent
+import android.graphics.Color
 import android.widget.ImageView
+import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
+import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.engine.extLoad
-import com.guadou.lib_baselib.ext.bindData
-import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.dp2px
-import com.guadou.lib_baselib.ext.vertical
+import com.guadou.lib_baselib.ext.*
 import com.luck.picture.lib.decoration.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
 
@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
  * 普通的垂直的或者水平的直接用扩展的方法
  */
 class DemoRVNormalGridActivity : BaseVMActivity<EmptyViewModel>() {
+
+    private val mAdapter by lazy { BaseDataBindingAdapter<String>(R.layout.item_local_image, BR.text) }
 
     companion object {
         fun startInstance() {
@@ -48,12 +50,19 @@ class DemoRVNormalGridActivity : BaseVMActivity<EmptyViewModel>() {
             "https://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0"
         )
 
-        //默认的Grid
-        recyclerView.vertical(3)
-            .bindData(datas, R.layout.item_local_image) { holder, t, _ ->
-                holder.getView<ImageView>(R.id.iv_img).extLoad(t, R.drawable.home_list_plachholder, isCenterCrop = true)
-            }
-            .addItemDecoration(GridSpacingItemDecoration(3, dp2px(10f), true))
+        //使用RecyclerView的扩展方法
+//        recyclerView.vertical(3)
+//            .bindData(datas, R.layout.item_local_image) { holder, t, _ ->
+//                holder.getView<ImageView>(R.id.iv_img).extLoad(t, R.drawable.home_list_plachholder, isCenterCrop = true)
+//            }
+//            .addItemDecoration(GridSpacingItemDecoration(3, dp2px(10f), true))
+
+        //使用DataBinding的方式
+        recyclerView.vertical(3).apply {
+            adapter = mAdapter
+            addItemDecoration(GridSpacingItemDecoration(3, dp2px(10f), true))
+        }
+        mAdapter.addData(datas)
 
     }
 }

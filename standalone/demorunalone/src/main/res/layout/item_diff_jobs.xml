@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.FullJobsPage.FullJobs" />
+            type="com.guadou.kt_demo.demo.demo8_recyclerview.rv6.DemoDiffBean" />
 
     </data>
 
@@ -26,16 +26,14 @@
             android:layout_width="@dimen/d_80dp"
             android:layout_height="@dimen/d_80dp"
             android:scaleType="centerCrop"
-            binding:imgUrl="@{item.employer_logo}"
-            binding:placeholder="@{@drawable/home_list_plachholder}"
-            tools:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/tv_job_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/d_15dp"
-            android:text="@{item.title}"
+            android:text="@{item.content}"
             tools:text="Title" />
 
     </LinearLayout>
