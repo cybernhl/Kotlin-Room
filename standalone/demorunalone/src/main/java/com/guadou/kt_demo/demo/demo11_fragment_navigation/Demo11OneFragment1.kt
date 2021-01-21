@@ -43,14 +43,31 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
 
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        YYLogUtils.w("Page1 - onCreateView")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        YYLogUtils.w("Page1 - onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        YYLogUtils.w("Page1 - onPause")
+    }
+
     override fun onStart() {
         super.onStart()
         YYLogUtils.w("Page1 - onStart")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        YYLogUtils.w("Page1 - onCreateView")
-        return super.onCreateView(inflater, container, savedInstanceState)
+
+    override fun onStop() {
+        super.onStop()
+        YYLogUtils.w("Page1 - onStop")
     }
 
     override fun onDestroy() {

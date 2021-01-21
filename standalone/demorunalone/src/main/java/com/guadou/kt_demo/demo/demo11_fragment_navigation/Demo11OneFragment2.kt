@@ -35,6 +35,28 @@ class Demo11OneFragment2 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Bi
         toast(bundleText)
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        YYLogUtils.w("Page2 - onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        YYLogUtils.w("Page2 - onPause")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        YYLogUtils.w("Page2 - onStart")
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        YYLogUtils.w("Page2 - onStop")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         YYLogUtils.w("Page2 - onDestroy")
