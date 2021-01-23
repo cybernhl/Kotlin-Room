@@ -2,15 +2,18 @@ package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.databinding.ActivityDemo11Binding
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
-import com.guadou.lib_baselib.base.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 
 /**
  * Fragment导航
  */
-class Demo11Activity : BaseActivity<Demo11ViewModel>() {
+class Demo11Activity : BaseVDBActivity<Demo11ViewModel, ActivityDemo11Binding>() {
 
     companion object {
         fun startInstance() {
@@ -22,7 +25,9 @@ class Demo11Activity : BaseActivity<Demo11ViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_11
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_11, BR.viewModel, mViewModel)
+    }
 
     override fun startObserve() {
     }
@@ -30,5 +35,6 @@ class Demo11Activity : BaseActivity<Demo11ViewModel>() {
     override fun init() {
         toast(mViewModel.testToast())
     }
+
 
 }

@@ -21,7 +21,6 @@ android {
         applicationId "com.guadou.kt_demo"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -65,6 +64,11 @@ android {
     dexOptions {
         preDexLibraries true
         maxProcessCount 8
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 
 }

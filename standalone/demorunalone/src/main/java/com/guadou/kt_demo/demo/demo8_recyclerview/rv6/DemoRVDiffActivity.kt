@@ -1,22 +1,29 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv6
 
 import android.content.Intent
-import androidx.activity.viewModels
+import android.graphics.Color
+import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
+import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.divider
 import com.guadou.lib_baselib.ext.vertical
 import kotlinx.android.synthetic.main.activity_demo_rv_diff.*
+import kotlinx.android.synthetic.main.activity_demo_rv_diff.recyclerView
+import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
 
 /**
  * 差分刷新
  */
-class DemoRVDiffActivity : BaseActivity<EmptyViewModel>() {
+class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
 
-    private lateinit var mAdapter: DemoDiffAdapter
-    val mDatas = mutableListOf<DemoDiffBean>()
+    private val mDatas = mutableListOf<DemoDiffBean>()
+
+        private val mAdapter by lazy { BaseDataBindingAdapter(R.layout.item_diff_jobs, BR.item, mDatas) }
+//    private lateinit var mAdapter: DemoDiffAdapter
 
     companion object {
         fun startInstance() {
@@ -28,7 +35,7 @@ class DemoRVDiffActivity : BaseActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_diff
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_diff
 
     override fun startObserve() {
 
@@ -50,11 +57,17 @@ class DemoRVDiffActivity : BaseActivity<EmptyViewModel>() {
     }
 
     private fun initRV() {
-        mAdapter = DemoDiffAdapter(mDatas)
+//        mAdapter = DemoDiffAdapter(mDatas)
         // 设置Diff Callback,只需要设置一次就行了！建议初始化Adapter的时候就设置好
         mAdapter.setDiffCallback(DiffDemoCallback())
 
-        recyclerView.vertical().adapter = mAdapter
+//        recyclerView.vertical().adapter = mAdapter
+
+        //使用DataBinding的方式
+        recyclerView.vertical().apply {
+            adapter = mAdapter
+            divider(Color.BLACK)
+        }
     }
 
     //差分刷新效果点击
@@ -64,7 +77,6 @@ class DemoRVDiffActivity : BaseActivity<EmptyViewModel>() {
         btn_diff_1.click {
 
             //全部替换数据-数据地址变换了
-
             val list = mutableListOf<DemoDiffBean>()
             for (i in 1..10) {
                 list.add(DemoDiffBean(i, "Diff1 conetnt:$i"))
@@ -86,10 +98,8 @@ class DemoRVDiffActivity : BaseActivity<EmptyViewModel>() {
         btn_diff_2.click {
             //局部替换
             //如果不替换内存地址 直接删减 直接notifyDataSetChanged得了
-            mDatas[0].content = "Diff 2 content:0"
-            mDatas.removeAt(1)
-            mDatas.removeAt(2)
-            mDatas.removeAt(3)
+            mAdapter.data[0].content = "Diff 2 content:0"
+            mAdapter.data.removeAt(1)
 
             mAdapter.notifyDataSetChanged()
         }

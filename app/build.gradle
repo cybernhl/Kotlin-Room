@@ -16,11 +16,11 @@ android {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
 
-        versionCode 1
-        versionName "1.0"
+        versionCode 100
+        versionName "1.0.0"
         applicationId "com.guadou.kt_zoom"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
         kotlinOptions {
             jvmTarget = JavaVersion.VERSION_1_8
@@ -64,6 +64,12 @@ android {
         preDexLibraries true
         maxProcessCount 8
     }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
 }
 
 configurations.all {

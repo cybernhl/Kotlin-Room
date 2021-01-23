@@ -1,10 +1,9 @@
 package com.guadou.kt_demo.demo.demo9_ktfollow
 
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.countDown
@@ -18,7 +17,7 @@ import kotlinx.coroutines.cancel
 /**
  * 倒计时的实现 Kotlin-Flow流
  */
-class DemoCountDwonActivity : BaseActivity<EmptyViewModel>() {
+class DemoCountDwonActivity : BaseVMActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -31,7 +30,7 @@ class DemoCountDwonActivity : BaseActivity<EmptyViewModel>() {
     }
 
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_count_down
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_count_down
 
     override fun startObserve() {
 

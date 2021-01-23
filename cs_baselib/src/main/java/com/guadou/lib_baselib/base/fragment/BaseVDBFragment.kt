@@ -1,9 +1,16 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.fragment
 
 import android.os.Bundle
-import androidx.activity.viewModels
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.util.forEach
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.guadou.lib_baselib.base.vm.BaseViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
@@ -11,18 +18,15 @@ import com.guadou.lib_baselib.view.LoadingDialogManager
 
 /**
  * 加入ViewModel与LoadState
+ * 默认为Loading的加载
  */
-abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
+abstract class BaseVDBFragment<VM : BaseViewModel, VDB : ViewDataBinding> : AbsFragment() {
 
     protected lateinit var mViewModel: VM
+    protected lateinit var mBinding: VDB
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        mViewModel = createViewModel()
-
-        //观察网络数据状态
-        mViewModel.getActionLiveData().observe(this, stateObserver)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         init()
         startObserve()
@@ -34,11 +38,36 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
         return viewModel
     }
 
+    //反射获取ViewModel实例
     private fun createViewModel(): VM {
         return ViewModelProvider(this).get(getVMCls(this))
     }
 
-    abstract override fun inflateLayoutById(): Int
+    override fun setContentView(container: ViewGroup?): View {
+        mViewModel = createViewModel()
+        //观察网络数据状态
+        mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
+
+        val config = getDataBindingConfig()
+        mBinding = DataBindingUtil.inflate(layoutInflater, config.getLayout(), container, false)
+        mBinding.lifecycleOwner = viewLifecycleOwner
+
+        if (config.getVmVariableId() != 0) {
+            mBinding.setVariable(
+                config.getVmVariableId(),
+                config.getViewModel()
+            )
+        }
+
+        val bindingParams = config.getBindingParams()
+        bindingParams.forEach { key, value ->
+            mBinding.setVariable(key, value)
+        }
+
+        return mBinding.root
+    }
+
+    abstract fun getDataBindingConfig(): DataBindingConfig
     abstract fun startObserve()
     abstract fun init()
 
@@ -63,21 +92,21 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
         }
     }
 
-    protected open fun showStateNormal() {}
+    protected fun showStateNormal() {}
 
-    protected open fun showStateError(message: String?) {
+    protected fun showStateError(message: String?) {
         LoadingDialogManager.get().dismissLoading()
     }
 
-    protected open fun showStateSuccess() {
+    protected fun showStateSuccess() {
         LoadingDialogManager.get().dismissLoading()
     }
 
-    protected open fun showStateLoading() {
-        LoadingDialogManager.get().showLoading(this)
+    protected fun showStateLoading() {
+        LoadingDialogManager.get().showLoading(mActivity)
     }
 
-    protected open fun showStateNoData() {
+    protected fun showStateNoData() {
         LoadingDialogManager.get().dismissLoading()
     }
 
@@ -88,5 +117,4 @@ abstract class BaseActivity<VM : BaseViewModel> : AbsActivity() {
     protected fun hideStateProgress() {
         LoadingDialogManager.get().dismissLoading()
     }
-
 }

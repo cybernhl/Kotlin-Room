@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.engine.extLoad
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
@@ -20,7 +20,7 @@ import com.lxj.easyadapter.ViewHolder
 import kotlinx.android.synthetic.main.activity_demo_image_preview.*
 
 
-class DemoImagePreviewActivity : BaseActivity<EmptyViewModel>() {
+class DemoImagePreviewActivity : BaseVMActivity<EmptyViewModel>() {
 
     var url1 =
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549382334&di=332b0aa1ec4ccd293f176164d998e5ab&imgtype=jpg&er=1&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D121ef3421a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eedb4502606d7912397dd8c96.jpg"
@@ -50,7 +50,7 @@ class DemoImagePreviewActivity : BaseActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_image_preview
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_image_preview
 
     override fun startObserve() {
 

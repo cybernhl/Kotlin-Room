@@ -16,10 +16,10 @@ import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_EMPTY_DATA;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_FAILED;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
+import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_NORMAL;
 
 /**
- * 默认的是上下跳动的加载动画
- * 这是可配置菊花Loading
+ * 这是菊花Loading
  */
 @SuppressLint("ViewConstructor")
 public class GloadingLoadingStatusView extends LinearLayout implements View.OnClickListener {
@@ -69,6 +69,7 @@ public class GloadingLoadingStatusView extends LinearLayout implements View.OnCl
                 break;
 
             case STATUS_LOADING:
+            case STATUS_NORMAL:
                 mImageView.setVisibility(VISIBLE);
                 str = "Loading...";
                 break;

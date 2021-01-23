@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.activity
 
 import android.app.Activity
 import android.content.Context
@@ -17,9 +17,7 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 /**
  * 最底层的Activity,不带MVP和MVVM,一般不用这个
  */
-
-abstract class AbsActivity : AppCompatActivity(),
-    ConnectivityReceiver.ConnectivityReceiverListener {
+abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
 
     /**
      * 获取Context对象
@@ -27,11 +25,7 @@ abstract class AbsActivity : AppCompatActivity(),
     protected lateinit var mActivity: Activity
     protected lateinit var mContext: Context
 
-
-    /**
-     * 获取layout的id，具体由子类实现
-     */
-    abstract fun inflateLayoutById(): Int
+    abstract fun setContentView()
 
     /**
      * 从intent中解析数据，具体子类来实现
@@ -85,8 +79,8 @@ abstract class AbsActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val view = layoutInflater.inflate(inflateLayoutById(), null)
-        setContentView(view)
+        setContentView()
+
         mActivity = this
         mContext = this.applicationContext
 
@@ -114,8 +108,8 @@ abstract class AbsActivity : AppCompatActivity(),
     /**
      * 是否需要注册监听网络变换
      */
-    protected fun needRegisterNetworkChangeObserver(): Boolean {
-        return true
+    open protected fun needRegisterNetworkChangeObserver(): Boolean {
+        return false
     }
 
 

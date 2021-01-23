@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.guadou.cs_cptservices.R
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CheckUtil
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.MyWebView
 import kotlinx.android.synthetic.main.activity_global_web.*
 
-class GlobalWebActivity : BaseActivity<BaseViewModel>() {
+class GlobalWebActivity : BaseVMActivity<BaseViewModel>() {
 
     private var mWebtitle: String? = null
     private var mWeburl: String? = null
@@ -40,7 +40,7 @@ class GlobalWebActivity : BaseActivity<BaseViewModel>() {
         mWeburl = intent.getStringExtra("webUrl")
     }
 
-    override fun inflateLayoutById(): Int {
+    override fun getLayoutIdRes(): Int {
         return R.layout.activity_global_web
     }
 

@@ -1,23 +1,20 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.act
 
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseLoadingActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMLoadingActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
 import com.guadou.lib_baselib.view.gloading.GloadingLoadingAdapter
-import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * 换成一种菊花转动的Loading加载
  */
-@AndroidEntryPoint
-class NormalLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
+class NormalLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -29,12 +26,7 @@ class NormalLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
-    }
-
-    override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
+    override fun getLayoutIdRes(): Int = R.layout.activity_loading_normal
 
     //重新生成GLoading对象
     override fun generateGLoading(): Gloading.Holder {
@@ -49,7 +41,7 @@ class NormalLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
     }
 
     override fun init() {
-        YYLogUtils.e("viewmodel:" + mViewModel.toString())
+        toast("ViewModel: $mViewModel")
 
         //其他的使用的方法和默认的GLoading很类似
         //模拟的Loading的情况

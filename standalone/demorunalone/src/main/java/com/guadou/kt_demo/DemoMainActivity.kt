@@ -3,7 +3,7 @@ package com.guadou.kt_demo
 import android.annotation.SuppressLint
 import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11Activity
-import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.Demo1Activity
+import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.act.Demo1Activity
 import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.Demo2Activity
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.Demo3Activity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.Demo4Activity
@@ -12,17 +12,17 @@ import com.guadou.kt_demo.demo.demo6_imageselect_premision_rvgird.Demo6Activity
 import com.guadou.kt_demo.demo.demo7_imageload_glide.Demo7Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.Demo8Activity
 import com.guadou.kt_demo.demo.demo9_ktfollow.DemoCountDwonActivity
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import kotlinx.android.synthetic.main.activity_demo_main.*
 
 /**
  * 演示Demo的首页
  */
-class DemoMainActivity : BaseActivity<EmptyViewModel>() {
+class DemoMainActivity : BaseVMActivity<EmptyViewModel>() {
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_main
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_main
 
     override fun startObserve() {
     }

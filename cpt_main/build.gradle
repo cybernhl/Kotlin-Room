@@ -17,7 +17,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -47,6 +46,11 @@ android {
     dexOptions {
         preDexLibraries true
         maxProcessCount 8
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 
 }

@@ -1,48 +1,47 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.act
 
 import android.content.Intent
-import androidx.activity.viewModels
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseLoadingActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMLoadingActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
-import dagger.hilt.android.AndroidEntryPoint
-
+import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderlAdapter
 
 /**
- * 默认是加载的上下跳动的动画
+ * 重写生成GLoading的方法就行了
  */
-@AndroidEntryPoint
-class JumpLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
+class PlaceHolderLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
             commContext().let {
-                it.startActivity(Intent(it, JumpLoadingActivity::class.java).apply {
+                it.startActivity(Intent(it, PlaceHolderLoadingActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 })
             }
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
+    override fun getLayoutIdRes(): Int = R.layout.activity_loading_normal
+
+
+    override fun generateGLoading(): Gloading.Holder {
+        return Gloading.from(GloadingPlaceHolderlAdapter(R.layout.layout_placeholder1)).wrap(this)
+            .withRetry {
+                onGoadingRetry()
+            }
     }
-
-
-    override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
-
 
     override fun startObserve() {
 
     }
 
     override fun init() {
-        YYLogUtils.e("viewmodel:" + mViewModel.toString())
+        toast("ViewModel: $mViewModel")
 
         //模拟的Loading的情况
         showStateLoading()
@@ -52,7 +51,6 @@ class JumpLoadingActivity : BaseLoadingActivity<EmptyViewModel>() {
             showStateSuccess()
 
         }, 2500)
-
     }
 
     //可选的实现

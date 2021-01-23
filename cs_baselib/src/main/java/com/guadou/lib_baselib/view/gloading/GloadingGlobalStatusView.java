@@ -19,6 +19,7 @@ import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_FAILED;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_EMPTY_DATA;
+import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_NORMAL;
 
 /**
  * 默认的是上下跳动的加载动画
@@ -72,6 +73,12 @@ public class GloadingGlobalStatusView extends LinearLayout implements View.OnCli
                 loading_view.stopLoading();
                 mImageView.setVisibility(GONE);
                 show = false;
+                break;
+
+            case STATUS_NORMAL:
+                loading_view.setVisibility(VISIBLE);
+                mImageView.setVisibility(GONE);
+                str = "Loading...";
                 break;
 
             case STATUS_LOADING:

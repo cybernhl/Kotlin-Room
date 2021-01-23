@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.fragment
 
 import android.app.Activity
 import android.content.Context
@@ -23,11 +23,8 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     protected lateinit var mActivity: Activity
     protected lateinit var mContext: Context
 
-    /**
-     * 获取layout的id，具体由子类实现
-     */
-    abstract fun inflateLayoutById(): Int
 
+    abstract fun setContentView(container: ViewGroup?): View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +38,7 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(inflateLayoutById(), container, false)
-        return transformRootView(view)
+        return transformRootView(setContentView(container))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,8 +69,8 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
     /**
      * 是否需要注册监听网络变换
      */
-    protected fun needRegisterNetworkChangeObserver(): Boolean {
-        return true
+    open protected fun needRegisterNetworkChangeObserver(): Boolean {
+        return false
     }
 
 }

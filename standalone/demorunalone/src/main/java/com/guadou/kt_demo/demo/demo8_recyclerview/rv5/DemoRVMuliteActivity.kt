@@ -1,17 +1,37 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv5
 
 import android.content.Intent
+import android.graphics.Color
+import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
+import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseActivity
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.divider
 import com.guadou.lib_baselib.ext.vertical
 import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
 
 /**
  * 多布局
  */
-class DemoRVMuliteActivity : BaseActivity<EmptyViewModel>() {
+class DemoRVMuliteActivity : BaseVMActivity<EmptyViewModel>() {
+
+    val datas = mutableListOf(
+        MuliteTestBean("MuliteTestBean1", "", 0),
+        MuliteTestBean("MuliteTestBean2", "http://pic73.nipic.com/file/20150723/455997_210818004000_2.jpg", 1),
+        MuliteTestBean("MuliteTestBean3", "", 0),
+        MuliteTestBean("MuliteTestBean4", "", 0),
+        MuliteTestBean("MuliteTestBean5", "http://i02piccdn.sogoucdn.com/438750e61adc26dc", 1),
+        MuliteTestBean("MuliteTestBean6", "1.6", 0),
+        MuliteTestBean("MuliteTestBean7", "1.7", 0),
+        MuliteTestBean("MuliteTestBean8", "http://i03piccdn.sogoucdn.com/965cc2a9ea62fc08", 1),
+        MuliteTestBean("MuliteTestBean9", "1.9", 0),
+        MuliteTestBean("MuliteTestBean10", "1.1", 0),
+        MuliteTestBean("MuliteTestBean11", "http://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0", 1),
+        MuliteTestBean("MuliteTestBean12", "1.3", 0)
+    )
+    private val mAdapter by lazy { DemoMuliteAdapter(BR.item, datas) }
 
     companion object {
         fun startInstance() {
@@ -23,7 +43,7 @@ class DemoRVMuliteActivity : BaseActivity<EmptyViewModel>() {
         }
     }
 
-    override fun inflateLayoutById(): Int = R.layout.activity_demo_rv_normal
+    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_normal
 
     override fun startObserve() {
 
@@ -31,22 +51,12 @@ class DemoRVMuliteActivity : BaseActivity<EmptyViewModel>() {
 
     override fun init() {
 
-        val datas = mutableListOf(
-            MuliteTestBean("1", "1.1", 0),
-            MuliteTestBean("2", "1.2", 1),
-            MuliteTestBean("3", "1.3", 0),
-            MuliteTestBean("4", "1.4", 0),
-            MuliteTestBean("5", "1.5", 1),
-            MuliteTestBean("6", "1.6", 0),
-            MuliteTestBean("7", "1.7", 0),
-            MuliteTestBean("8", "1.8", 1),
-            MuliteTestBean("9", "1.9", 0),
-            MuliteTestBean("10", "1.1", 0),
-            MuliteTestBean("11", "1.2", 1),
-            MuliteTestBean("12", "1.3", 0)
-        )
+//        recyclerView.vertical().adapter = DemoMuliteAdapter(datas)
 
-        recyclerView.vertical().adapter = DemoMuliteAdapter(datas)
-
+        //使用DataBinding的方式
+        recyclerView.vertical().apply {
+            adapter = mAdapter
+            divider(Color.BLACK)
+        }
     }
 }

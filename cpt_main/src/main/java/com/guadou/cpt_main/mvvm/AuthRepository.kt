@@ -3,7 +3,7 @@ package com.guadou.cpt_main.mvvm
 import com.guadou.cpt_main.bean.ServerTimeBean
 import com.guadou.cpt_main.http.MainRetrofit
 import com.guadou.cs_cptservices.Constants
-import com.guadou.lib_baselib.base.BaseRepository
+import com.guadou.lib_baselib.base.vm.BaseRepository
 import com.guadou.testxiecheng.base.OkResult
 import javax.inject.Inject
 import javax.inject.Singleton

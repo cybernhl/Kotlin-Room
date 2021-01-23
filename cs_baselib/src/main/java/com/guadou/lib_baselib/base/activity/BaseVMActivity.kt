@@ -1,62 +1,53 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.guadou.basiclib.R
+import androidx.lifecycle.ViewModelProvider
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.LoadAction
+import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
-import com.guadou.lib_baselib.view.gloading.Gloading
-import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderlAdapter
 
-
-abstract class BasePlaceHolderActivity<VM : BaseViewModel> : AbsActivity() {
+/**
+ * 加入ViewModel与LoadState
+ * 默认为Loading弹窗的加载方式
+ */
+abstract class BaseVMActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
-
-    protected val mGLoadingHolder by lazy {
-        generateGLoading()
-    }
-
-    //如果要替换GLoading，重写次方法
-    open protected fun generateGLoading(): Gloading.Holder {
-        return Gloading.from(GloadingPlaceHolderlAdapter(inflatePlaceHolderLayoutRes())).wrap(this)
-            .withRetry {
-                onGoadingRetry()
-            }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel = initVM()
-
+        mViewModel = createViewModel()
         //观察网络数据状态
         mViewModel.getActionLiveData().observe(this, stateObserver)
+
         init()
         startObserve()
     }
 
-    //使用这个方法简化ViewModewl的Hilt依赖注入获取
+    //使用这个方法简化ViewModel的初始化
     protected inline fun <reified VM : BaseViewModel> getViewModel(): VM {
         val viewModel: VM by viewModels()
         return viewModel
     }
-    abstract fun initVM(): VM
-    abstract override fun inflateLayoutById(): Int
-    abstract fun startObserve()
-    abstract fun init()
-    protected open fun onGoadingRetry() {
+
+    open protected fun createViewModel(): VM {
+        return ViewModelProvider(this).get(getVMCls(this))
     }
 
-    protected open fun inflatePlaceHolderLayoutRes(): Int = R.layout.layout_placeholder2
+    override fun setContentView() {
+        setContentView(getLayoutIdRes())
+    }
 
+    abstract fun getLayoutIdRes(): Int
+    abstract fun startObserve()
+    abstract fun init()
 
-    override fun onNetworkConnectionChanged(
-        isConnected: Boolean,
-        networkType: NetWorkUtil.NetworkType?
-    ) {
+    override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }
 
     // ================== 网络状态的监听 ======================
@@ -79,20 +70,20 @@ abstract class BasePlaceHolderActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected open fun showStateNormal() {}
 
-    protected open fun showStateLoading() {
-        mGLoadingHolder.showLoading()
+    protected open fun showStateError(message: String?) {
+        LoadingDialogManager.get().dismissLoading()
     }
 
     protected open fun showStateSuccess() {
-        mGLoadingHolder.showLoadSuccess()
+        LoadingDialogManager.get().dismissLoading()
     }
 
-    protected open fun showStateError(message: String?) {
-        mGLoadingHolder.showLoadFailed(message)
+    protected open fun showStateLoading() {
+        LoadingDialogManager.get().showLoading(this)
     }
 
     protected open fun showStateNoData() {
-        mGLoadingHolder.showEmpty()
+        LoadingDialogManager.get().dismissLoading()
     }
 
     protected fun showStateProgress() {

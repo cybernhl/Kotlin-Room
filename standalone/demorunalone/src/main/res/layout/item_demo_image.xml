@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#fefefe"
-    android:gravity="center_vertical"
-    android:padding="@dimen/d_10dp"
-    tools:ignore="MissingDefaultResource">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <ImageView
-        android:src="@mipmap/ic_launcher"
+        <variable
+            name="item"
+            type="com.guadou.kt_demo.demo.demo8_recyclerview.rv5.MuliteTestBean" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d_150dp" />
+        android:layout_height="wrap_content"
+        android:background="#fefefe"
+        android:gravity="center_vertical"
+        android:padding="@dimen/d_10dp">
 
 
-</LinearLayout>
+        <ImageView
+            tools:src="@mipmap/ic_launcher"
+            binding:imgUrl="@{item.iamge}"
+            binding:placeholder="@{@drawable/home_list_plachholder}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_150dp" />
+
+
+    </LinearLayout>
+
+</layout>

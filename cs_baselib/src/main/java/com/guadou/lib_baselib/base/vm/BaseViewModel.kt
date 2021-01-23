@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,7 +22,6 @@ open class BaseViewModel : ViewModel() {
             block
         }
     }
-
 
     /**
      * 设置并发射加载状态

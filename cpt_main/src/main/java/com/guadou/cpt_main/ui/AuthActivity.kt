@@ -4,7 +4,7 @@ import android.content.Intent
 import com.guadou.cpt_main.R
 import com.guadou.cpt_main.mvvm.AuthViewModel
 import com.guadou.cpt_main.others.MemberServer
-import com.guadou.lib_baselib.base.BaseActivity
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AuthActivity : BaseActivity<AuthViewModel>() {
+class AuthActivity : BaseVMActivity<AuthViewModel>() {
 
     @Inject
     lateinit var userServer: MemberServer
@@ -29,7 +29,7 @@ class AuthActivity : BaseActivity<AuthViewModel>() {
     override fun startObserve() {
     }
 
-    override fun inflateLayoutById(): Int =
+    override fun getLayoutIdRes(): Int =
         R.layout.activity_auth
 
     override fun init() {

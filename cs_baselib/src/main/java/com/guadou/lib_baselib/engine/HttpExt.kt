@@ -1,6 +1,6 @@
 package com.guadou.lib_baselib.engine
 
-import com.guadou.lib_baselib.base.BaseRepository
+import com.guadou.lib_baselib.base.vm.BaseRepository
 import com.guadou.testxiecheng.base.BaseBean
 import com.guadou.testxiecheng.base.OkResult
 import java.io.IOException

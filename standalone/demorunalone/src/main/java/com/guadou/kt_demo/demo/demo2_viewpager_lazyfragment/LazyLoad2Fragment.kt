@@ -1,10 +1,11 @@
 package com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment
 
 import android.view.View
-import androidx.fragment.app.viewModels
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseLazyLoadingFragment
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.kt_demo.databinding.FragmentDemo2Binding
+import com.guadou.lib_baselib.base.fragment.BaseVDBLazyLoadingFragment
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
@@ -12,7 +13,7 @@ import com.guadou.lib_baselib.view.gloading.GloadingLoadingAdapter
 
 
 
-class LazyLoad2Fragment : BaseLazyLoadingFragment<EmptyViewModel>() {
+class LazyLoad2Fragment : BaseVDBLazyLoadingFragment<EmptyViewModel, FragmentDemo2Binding>() {
 
     companion object {
         fun obtainFragment(): LazyLoad2Fragment {
@@ -20,12 +21,9 @@ class LazyLoad2Fragment : BaseLazyLoadingFragment<EmptyViewModel>() {
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.fragment_demo2)
     }
-
-    override fun inflateLayoutById(): Int = R.layout.fragment_demo2
 
     override fun startObserve() {
 

@@ -24,7 +24,11 @@ import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_FAILED;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_EMPTY_DATA;
+import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_NORMAL;
 
+/**
+ * 占位布局的动画
+ */
 @SuppressLint("ViewConstructor")
 public class GloadingPlaceHolderView extends LinearLayout implements View.OnClickListener {
 
@@ -73,6 +77,12 @@ public class GloadingPlaceHolderView extends LinearLayout implements View.OnClic
 
                 break;
 
+            case STATUS_NORMAL:
+                setVisibility(VISIBLE);
+                mFlPlaceholderBox.setVisibility(VISIBLE);
+                mllErrorBox.setVisibility(GONE);
+                break;
+
             case STATUS_LOADING:
                 setVisibility(VISIBLE);
                 mFlPlaceholderBox.setVisibility(VISIBLE);
@@ -80,7 +90,6 @@ public class GloadingPlaceHolderView extends LinearLayout implements View.OnClic
                 if (placeHolderFirstView instanceof ShimmerFrameLayout) {
                     ((ShimmerFrameLayout) placeHolderFirstView).startShimmer();
                 }
-
                 break;
 
             case STATUS_LOAD_FAILED:
@@ -97,8 +106,8 @@ public class GloadingPlaceHolderView extends LinearLayout implements View.OnClic
 //                    str = "NetWork Error";
 //                    image = R.mipmap.page_icon_network;
 //                } else {
-                    str = TextUtils.isEmpty(msg) ? "Load Error" : msg;
-                    image = R.mipmap.loading_error;
+                str = TextUtils.isEmpty(msg) ? "Load Error" : msg;
+                image = R.mipmap.loading_error;
 //                }
 
                 onClickListener = this;

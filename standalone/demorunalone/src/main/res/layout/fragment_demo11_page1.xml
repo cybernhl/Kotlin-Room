@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:background="@color/white">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment1.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d_48dp"
-        android:gravity="center"
-        android:text="第一个页面" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:background="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_48dp"
+            android:gravity="center"
+            android:text="第一个页面" />
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d_10dp"
-        android:hint="Enter"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_10dp"
+            android:hint="Enter"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
-    <Button
-        android:id="@+id/btn_to_page2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d_20dp"
-        android:text="去第二个页面" />
+        <Button
+            android:id="@+id/btn_to_page2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_20dp"
+            android:text="去第二个页面"
+            binding:clicks="@{click.nav2Page2}" />
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

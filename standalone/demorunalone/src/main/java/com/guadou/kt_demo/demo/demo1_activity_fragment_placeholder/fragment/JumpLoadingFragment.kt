@@ -1,11 +1,11 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment
 
-import androidx.fragment.app.viewModels
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.BaseLoadingFragment
-import com.guadou.lib_baselib.base.EmptyViewModel
+import com.guadou.kt_demo.databinding.ActivityLoadingNormalBinding
+import com.guadou.lib_baselib.base.fragment.BaseVDBLoadingFragment
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * 默认是跳动动画
  */
 @AndroidEntryPoint
-class JumpLoadingFragment : BaseLoadingFragment<EmptyViewModel>() {
+class JumpLoadingFragment : BaseVDBLoadingFragment<EmptyViewModel, ActivityLoadingNormalBinding>() {
 
     companion object {
         fun obtainFragment(): JumpLoadingFragment {
@@ -22,19 +22,15 @@ class JumpLoadingFragment : BaseLoadingFragment<EmptyViewModel>() {
         }
     }
 
-    override fun initVM(): EmptyViewModel {
-        val viewModel: EmptyViewModel by viewModels()
-        return viewModel
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_loading_normal)
     }
-
-    override fun inflateLayoutById(): Int = R.layout.activity_loading_normal
 
     override fun startObserve() {
 
     }
 
     override fun init() {
-        YYLogUtils.e("viewmodel:" + mViewModel.toString())
 
         //模拟的Loading的情况
         showStateLoading()

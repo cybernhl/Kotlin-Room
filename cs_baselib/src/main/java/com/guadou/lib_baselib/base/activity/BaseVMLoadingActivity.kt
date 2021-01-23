@@ -1,48 +1,44 @@
-package com.guadou.lib_baselib.base
+package com.guadou.lib_baselib.base.activity
 
 import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.LoadAction
+import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.guadou.lib_baselib.view.gloading.Gloading
 
-abstract class BaseLoadingFragment<VM : BaseViewModel> : AbsFragment() {
+/**
+ * 加入ViewModel与LoadState
+ * 默认为布局加载的方式
+ */
+abstract class BaseVMLoadingActivity<VM : BaseViewModel> : AbsActivity() {
 
     protected lateinit var mViewModel: VM
 
-    protected lateinit var mGLoadingHolder: Gloading.Holder
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        mViewModel = initVM()
-        //观察网络数据状态
-        mViewModel.getActionLiveData().observe(viewLifecycleOwner, stateObserver)
-
-        init()
-        startObserve()
-    }
-
-
-    override fun transformRootView(view: View): View {
-
-        mGLoadingHolder = generateGLoading(view)
-
-        return mGLoadingHolder.wrapper
+    protected val mGLoadingHolder by lazy {
+        generateGLoading()
     }
 
     //如果要替换GLoading，重写次方法
-    open protected fun generateGLoading(view: View): Gloading.Holder {
-        return Gloading.getDefault().wrap(view).withRetry {
+    open protected fun generateGLoading(): Gloading.Holder {
+        return Gloading.getDefault().wrap(this).withRetry {
             onGoadingRetry()
         }
     }
 
-    protected open fun onGoadingRetry() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mViewModel = createViewModel()
+        //观察网络数据状态
+        mViewModel.getActionLiveData().observe(this, stateObserver)
+
+        init()
+        startObserve()
     }
 
     //使用这个方法简化ViewModewl的Hilt依赖注入获取
@@ -51,10 +47,20 @@ abstract class BaseLoadingFragment<VM : BaseViewModel> : AbsFragment() {
         return viewModel
     }
 
-    abstract fun initVM(): VM
-    abstract override fun inflateLayoutById(): Int
+    //反射获取ViewModel实例
+    open protected fun createViewModel(): VM {
+        return ViewModelProvider(this).get(getVMCls(this))
+    }
+
+    override fun setContentView() {
+        setContentView(getLayoutIdRes())
+    }
+
+    abstract fun getLayoutIdRes(): Int
     abstract fun startObserve()
     abstract fun init()
+    protected open fun onGoadingRetry() {
+    }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }

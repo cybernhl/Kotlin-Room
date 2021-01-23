@@ -5,9 +5,11 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.adapter.DemoJobAdapter
+import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
+import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.FullJobsPage
-import com.guadou.lib_baselib.base.BaseViewModel
+import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CheckUtil
@@ -25,7 +27,9 @@ class DemoJobViewModel @ViewModelInject constructor(
     private var isNeedPlaceHolder = true
     var isNeedCleanAllData = true
     var mDatas = mutableListOf<FullJobsPage.FullJobs>()
-    var mAdapter = DemoJobAdapter(mDatas)
+    val mAdapter by lazy {
+        BaseDataBindingAdapter(R.layout.item_demo_jobs, BR.item, mDatas)
+    }
 
     fun getAllJobs(): LiveData<Boolean> {
 

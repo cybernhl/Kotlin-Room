@@ -3,7 +3,7 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv4.mvvm
 import com.guadou.cs_cptservices.Constants
 import com.guadou.kt_demo.demo.demo5_network_request.http.DemoRetrofit
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.FullJobsPage
-import com.guadou.lib_baselib.base.BaseRepository
+import com.guadou.lib_baselib.base.vm.BaseRepository
 import com.guadou.lib_baselib.engine.extRequestHttp
 import com.guadou.testxiecheng.base.OkResult
 import javax.inject.Inject
