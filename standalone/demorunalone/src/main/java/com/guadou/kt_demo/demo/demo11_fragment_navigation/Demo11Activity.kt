@@ -1,8 +1,10 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
-import com.guadou.kt_demo.R
+import androidx.navigation.fragment.NavHostFragment
+import com.github.fragivity.loadRoot
 import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo11Binding
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -34,6 +36,9 @@ class Demo11Activity : BaseVDBActivity<Demo11ViewModel, ActivityDemo11Binding>()
 
     override fun init() {
         toast(mViewModel.testToast())
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        navHostFragment.loadRoot(Demo11OneFragment1::class)
     }
 
 

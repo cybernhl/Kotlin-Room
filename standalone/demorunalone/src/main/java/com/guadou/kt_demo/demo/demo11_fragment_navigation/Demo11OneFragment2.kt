@@ -1,25 +1,20 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
-import com.guadou.kt_demo.R
+import com.github.fragivity.navigator
+import com.github.fragivity.pop
+import com.github.fragivity.push
 import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page2Binding
-import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.ext.getActivityVM
+import com.guadou.lib_baselib.ext.applySlideInOut
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.nav.nav
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 
 
-class Demo11OneFragment2 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Binding>() {
-
-    companion object {
-        fun obtainFragment(): Demo11OneFragment2 {
-            return Demo11OneFragment2()
-        }
-    }
+class Demo11OneFragment2(private val _callback: (Int, String) -> Unit) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Binding>() {
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_demo11_page2)
@@ -65,15 +60,20 @@ class Demo11OneFragment2 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Bi
     inner class ClickProxy {
 
         fun back2Page1() {
-            //设置回调
-            val viewModel = getActivityVM(Demo11ViewModel::class.java)
-            viewModel.mBackOneLiveData.value = "返回给One Page的数据"
+            //ViewModel回调
+//            val viewModel = getActivityVM(Demo11ViewModel::class.java)
+//            viewModel.mBackOneLiveData.value = "返回给One Page的数据"
 
-            nav().navigateUp()
+            //高阶函数回调
+            _callback(10, "返回给One Page的数据")
+
+            navigator.pop()
         }
 
         fun nav2Page3() {
-            nav().navigate(R.id.action_page2_to_page3)
+            navigator.push(Demo11OneFragment3::class) {
+                applySlideInOut()
+            }
         }
     }
 }
