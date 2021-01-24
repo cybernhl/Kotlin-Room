@@ -30,7 +30,7 @@ class PlaceHolderLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
 
 
     override fun generateGLoading(): Gloading.Holder {
-        return Gloading.from(GloadingPlaceHolderlAdapter(R.layout.layout_placeholder1)).wrap(this)
+        return Gloading.from(GloadingPlaceHolderlAdapter(R.layout.layout_placeholder_normal)).wrap(this)
             .withRetry {
                 onGoadingRetry()
             }

@@ -4,7 +4,6 @@ import android.view.View
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityLoadingNormalBinding
 import com.guadou.lib_baselib.base.fragment.BaseVDBLoadingFragment
-import com.guadou.lib_baselib.base.fragment.BaseVMLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.utils.CommUtils
@@ -32,7 +31,7 @@ class PlaceHolderLoadingFragment : BaseVDBLoadingFragment<EmptyViewModel, Activi
     }
 
     override fun generateGLoading(view: View): Gloading.Holder {
-        return Gloading.from(GloadingPlaceHolderlAdapter(R.layout.layout_placeholder1)).wrap(view)
+        return Gloading.from(GloadingPlaceHolderlAdapter(R.layout.layout_placeholder_normal)).wrap(view)
             .withRetry {
                 onGoadingRetry()
             }
