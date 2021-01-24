@@ -70,7 +70,7 @@ configurations.all {
     resolutionStrategy.force 'androidx.lifecycle:lifecycle-livedata:2.2.0'
     resolutionStrategy.force 'androidx.lifecycle:lifecycle-livedata-core:2.2.0'
 
-    resolutionStrategy.force 'androidx.databinding:databinding-adapters:4.1.1'
+//    resolutionStrategy.force 'androidx.databinding:databinding-adapters:4.1.1'
 }
 
 dependencies {
@@ -114,7 +114,6 @@ dependencies {
     kapt deps.support.hilt_kapt
     implementation deps.support.hilt_vm
     kapt deps.support.hilt_vm_kapt
-
 
     //网络相关
     api deps.support.retrofit2

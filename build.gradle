@@ -3,7 +3,7 @@ apply from: "dependent.gradle"
 
 buildscript {
     ext.kotlin_version = '1.4.21'
-    ext.booster_version = '1.6.0'
+    ext.booster_version = '2.4.0'
 
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.0.1'
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 

@@ -55,7 +55,7 @@ ext {
                     "smart_refresh_core": 'com.scwang.smart:refresh-layout-kernel:2.0.1',
                     "smart_refresh_head": 'com.scwang.smart:refresh-header-classics:2.0.1',
                     "picture_selector"  : 'com.github.LuckSiege.PictureSelector:picture_library:v2.6.0',  //图片选择
-                    "easy_adapter"      : 'com.lxj:easyadapter:1.2.0',  //xpopup的内置依赖库
+                    "easy_adapter"      : 'com.lxj:easyadapter:1.2.3',  //xpopup的内置依赖库
                     "xpopup"            : 'com.lxj:xpopup:2.2.10',
 
                     "picker_view"       : 'com.contrarywind:Android-PickerView:4.1.9',              //PicierView (可选)
