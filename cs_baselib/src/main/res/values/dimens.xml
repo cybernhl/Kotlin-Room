@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="d_8sp">8sp</dimen>
     <dimen name="d_9sp">9sp</dimen>
     <dimen name="d_10sp">10sp</dimen>
@@ -23,6 +24,8 @@
     <dimen name="d_28sp">28sp</dimen>
     <dimen name="d_30sp">30sp</dimen>
 
+    <dimen name="d_0.5dp">0.5dp</dimen>
+    <dimen name="d_0.7dp">0.7dp</dimen>
     <dimen name="d_1dp">1dp</dimen>
     <dimen name="d_2dp">2dp</dimen>
     <dimen name="d_3dp">3dp</dimen>

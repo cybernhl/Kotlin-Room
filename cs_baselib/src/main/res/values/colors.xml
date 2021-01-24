@@ -12,5 +12,6 @@
     <color name="divider_color">#F4F4F4</color>
     <color name="gray">#ccc</color>
 
+    <color name="shimmer_background_color">#dedede</color>
 
 </resources>

@@ -2,13 +2,11 @@ package com.guadou.lib_baselib.view.gloading;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,9 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.guadou.basiclib.R;
-import com.guadou.lib_baselib.utils.Log.YYLogUtils;
-import com.guadou.lib_baselib.utils.NetWorkUtil;
-import com.guadou.lib_baselib.view.shimmer.ShimmerFrameLayout;
+import com.guadou.lib_baselib.view.shimmer.ShimmerLayout;
 
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOAD_SUCCESS;
@@ -71,8 +67,8 @@ public class GloadingPlaceHolderView extends LinearLayout implements View.OnClic
                 setVisibility(GONE);
                 mFlPlaceholderBox.setVisibility(GONE);
                 mllErrorBox.setVisibility(GONE);
-                if (placeHolderFirstView instanceof ShimmerFrameLayout) {
-                    ((ShimmerFrameLayout) placeHolderFirstView).stopShimmer();
+                if (placeHolderFirstView instanceof ShimmerLayout) {
+                    ((ShimmerLayout) placeHolderFirstView).stopShimmerAnimation();
                 }
 
                 break;
@@ -87,8 +83,8 @@ public class GloadingPlaceHolderView extends LinearLayout implements View.OnClic
                 setVisibility(VISIBLE);
                 mFlPlaceholderBox.setVisibility(VISIBLE);
                 mllErrorBox.setVisibility(GONE);
-                if (placeHolderFirstView instanceof ShimmerFrameLayout) {
-                    ((ShimmerFrameLayout) placeHolderFirstView).startShimmer();
+                if (placeHolderFirstView instanceof ShimmerLayout) {
+                    ((ShimmerLayout) placeHolderFirstView).startShimmerAnimation();
                 }
                 break;
 
@@ -96,8 +92,8 @@ public class GloadingPlaceHolderView extends LinearLayout implements View.OnClic
                 setVisibility(VISIBLE);
                 mFlPlaceholderBox.setVisibility(GONE);
                 mllErrorBox.setVisibility(VISIBLE);
-                if (placeHolderFirstView instanceof ShimmerFrameLayout) {
-                    ((ShimmerFrameLayout) placeHolderFirstView).stopShimmer();
+                if (placeHolderFirstView instanceof ShimmerLayout) {
+                    ((ShimmerLayout) placeHolderFirstView).stopShimmerAnimation();
                 }
 
                 //是否需要加网络状态判断
@@ -117,8 +113,8 @@ public class GloadingPlaceHolderView extends LinearLayout implements View.OnClic
                 setVisibility(VISIBLE);
                 mFlPlaceholderBox.setVisibility(GONE);
                 mllErrorBox.setVisibility(VISIBLE);
-                if (placeHolderFirstView instanceof ShimmerFrameLayout) {
-                    ((ShimmerFrameLayout) placeHolderFirstView).stopShimmer();
+                if (placeHolderFirstView instanceof ShimmerLayout) {
+                    ((ShimmerLayout) placeHolderFirstView).stopShimmerAnimation();
                 }
 
                 str = "No Data";
