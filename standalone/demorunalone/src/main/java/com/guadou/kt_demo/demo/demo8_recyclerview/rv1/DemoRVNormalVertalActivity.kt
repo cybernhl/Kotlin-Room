@@ -10,7 +10,6 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.*
 import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
 
-
 /**
  * 普通的垂直的或者水平的直接用扩展的方法
  */
@@ -27,7 +26,6 @@ class DemoRVNormalVertalActivity : BaseVMActivity<EmptyViewModel>() {
             }
         }
     }
-
 
     override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_normal
 
@@ -53,5 +51,12 @@ class DemoRVNormalVertalActivity : BaseVMActivity<EmptyViewModel>() {
             divider(Color.BLACK)
         }
         mAdapter.addData(datas)
+
+        //测试局部刷新
+        easy_title.addRightText("Refresh") {
+            mAdapter.data[0] = "关平"
+            mAdapter.notifyItemChanged(0)
+        }
+
     }
 }

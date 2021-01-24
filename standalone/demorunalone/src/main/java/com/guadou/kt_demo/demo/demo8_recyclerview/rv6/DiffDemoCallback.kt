@@ -38,6 +38,9 @@ class DiffDemoCallback : DiffUtil.ItemCallback<DemoDiffBean>() {
      * @return Payload info. if return null, the entire item will be refreshed.
      */
     override fun getChangePayload(oldItem: DemoDiffBean, newItem: DemoDiffBean): Any? {
+        if (oldItem.content != newItem.content) {
+            return "text"
+        }
         return null
     }
 }

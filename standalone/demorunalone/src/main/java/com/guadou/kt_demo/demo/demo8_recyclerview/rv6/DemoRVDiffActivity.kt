@@ -22,8 +22,8 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
 
     private val mDatas = mutableListOf<DemoDiffBean>()
 
-        private val mAdapter by lazy { BaseDataBindingAdapter(R.layout.item_diff_jobs, BR.item, mDatas) }
-//    private lateinit var mAdapter: DemoDiffAdapter
+    //        private val mAdapter by lazy { BaseDataBindingAdapter(R.layout.item_diff_jobs, BR.item, mDatas) }
+    private val mAdapter: DemoDiffAdapter by lazy { DemoDiffAdapter(mDatas) }
 
     companion object {
         fun startInstance() {
@@ -57,17 +57,17 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
     }
 
     private fun initRV() {
-//        mAdapter = DemoDiffAdapter(mDatas)
-        // 设置Diff Callback,只需要设置一次就行了！建议初始化Adapter的时候就设置好
+        //设置BRVAH
         mAdapter.setDiffCallback(DiffDemoCallback())
+        recyclerView.vertical().adapter = mAdapter
 
-//        recyclerView.vertical().adapter = mAdapter
 
         //使用DataBinding的方式
-        recyclerView.vertical().apply {
-            adapter = mAdapter
-            divider(Color.BLACK)
-        }
+//        mAdapter.setDiffCallback(DiffDemoCallback())
+//        recyclerView.vertical().apply {
+//            adapter = mAdapter
+//            divider(Color.BLACK)
+//        }
     }
 
     //差分刷新效果点击

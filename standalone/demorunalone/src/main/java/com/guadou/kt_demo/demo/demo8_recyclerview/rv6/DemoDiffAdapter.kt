@@ -4,16 +4,21 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.guadou.kt_demo.R
+import com.guadou.lib_baselib.utils.CheckUtil
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 
+/**
+ * 原生的BRVAH
+ */
 class DemoDiffAdapter(list: MutableList<DemoDiffBean>) :
     BaseQuickAdapter<DemoDiffBean, BaseViewHolder>(R.layout.item_diff_jobs, list), LoadMoreModule {
 
-
     //差分刷新的精准刷新调用到这里
     override fun convert(holder: BaseViewHolder, item: DemoDiffBean, payloads: List<Any>) {
-        YYLogUtils.w("差分刷新 --------")
-        holder.setText(R.id.tv_job_text, item.content)
+        if (!CheckUtil.isEmpty(payloads) && (payloads[0] as String) == "text") {
+            YYLogUtils.w("差分刷新 -------- 文本更新")
+            holder.setText(R.id.tv_job_text, item.content)
+        }
     }
 
     //默认数据赋值到这里
