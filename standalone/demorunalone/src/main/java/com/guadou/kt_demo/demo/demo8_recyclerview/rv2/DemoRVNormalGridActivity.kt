@@ -1,23 +1,21 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv2
 
 import android.content.Intent
-import android.graphics.Color
-import android.widget.ImageView
 import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityDemoRvNormalBinding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
-import com.guadou.lib_baselib.engine.extLoad
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.*
 import com.luck.picture.lib.decoration.GridSpacingItemDecoration
-import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
 
 
 /**
  * 普通的垂直的或者水平的直接用扩展的方法
  */
-class DemoRVNormalGridActivity : BaseVMActivity<EmptyViewModel>() {
+class DemoRVNormalGridActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoRvNormalBinding>() {
 
     private val mAdapter by lazy { BaseDataBindingAdapter<String>(R.layout.item_local_image, BR.text) }
 
@@ -31,8 +29,9 @@ class DemoRVNormalGridActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_normal
-
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_rv_normal)
+    }
 
     override fun startObserve() {
 
@@ -58,7 +57,7 @@ class DemoRVNormalGridActivity : BaseVMActivity<EmptyViewModel>() {
 //            .addItemDecoration(GridSpacingItemDecoration(3, dp2px(10f), true))
 
         //使用DataBinding的方式
-        recyclerView.vertical(3).apply {
+        mBinding.recyclerView.vertical(3).apply {
             adapter = mAdapter
             addItemDecoration(GridSpacingItemDecoration(3, dp2px(10f), true))
         }

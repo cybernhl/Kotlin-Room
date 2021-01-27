@@ -5,15 +5,17 @@ import android.graphics.Color
 import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityDemoRvNormalBinding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.*
-import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
+
 
 /**
  * 普通的垂直的或者水平的直接用扩展的方法
  */
-class DemoRVNormalVertalActivity : BaseVMActivity<EmptyViewModel>() {
+class DemoRVNormalVertalActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoRvNormalBinding>() {
 
     private val mAdapter by lazy { BaseDataBindingAdapter<String>(R.layout.item_vertal_text, BR.text) }
 
@@ -27,7 +29,9 @@ class DemoRVNormalVertalActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_normal
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_rv_normal)
+    }
 
 
     override fun startObserve() {
@@ -46,14 +50,14 @@ class DemoRVNormalVertalActivity : BaseVMActivity<EmptyViewModel>() {
 //            .divider(Color.BLACK)
 
         //使用DataBinding的方式
-        recyclerView.vertical().apply {
+        mBinding.recyclerView.vertical().apply {
             adapter = mAdapter
             divider(Color.BLACK)
         }
         mAdapter.addData(datas)
 
         //测试局部刷新
-        easy_title.addRightText("Refresh") {
+        mBinding.easyTitle.addRightText("Refresh") {
             mAdapter.data[0] = "关平"
             mAdapter.notifyItemChanged(0)
         }
