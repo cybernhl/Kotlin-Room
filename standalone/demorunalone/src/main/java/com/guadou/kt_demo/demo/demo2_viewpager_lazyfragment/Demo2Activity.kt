@@ -2,17 +2,18 @@ package com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityDemo2Binding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.bindFragment
 import com.guadou.lib_baselib.ext.commContext
-import kotlinx.android.synthetic.main.activity_demo_2.*
 
 
 /**
  * ViewPager+LazyFragment
  */
-class Demo2Activity : BaseVMActivity<EmptyViewModel>() {
+class Demo2Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo2Binding>() {
 
     companion object {
         fun startInstance() {
@@ -24,19 +25,23 @@ class Demo2Activity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_2
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_2)
+
+    }
 
     override fun startObserve() {
     }
 
     override fun init() {
 
-        viewPager.bindFragment(
+        mBinding.viewPager.bindFragment(
             supportFragmentManager,
             listOf(LazyLoad1Fragment.obtainFragment(), LazyLoad2Fragment.obtainFragment(), LazyLoad3Fragment.obtainFragment()),
             listOf("Demo1", "Demo2", "Demo3")
         )
 
-        tabLayout.setupWithViewPager(viewPager)
+        mBinding.tabLayout.setupWithViewPager(mBinding.viewPager)
     }
+
 }

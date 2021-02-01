@@ -11,9 +11,7 @@ import com.guadou.lib_baselib.ext.commContext
 import kotlinx.android.synthetic.main.activity_demo3.*
 
 /**
- * 没有测试SuportActivity+SuportFragment的方式
- *
- * 这个类是解决了Fragment重叠的问题，Fragment的重建的问题
+ * 一般App的首页参考这个类
  */
 class Demo3Activity : BaseVMActivity<EmptyViewModel>() {
 

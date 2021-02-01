@@ -1,10 +1,10 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.act
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.activity
 
 import android.content.Intent
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment.JumpLoadingFragment
-import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment.RoteLoadingFragment
 import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment.PlaceHolderLoadingFragment
+import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.fragment.RoteLoadingFragment
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.addFragment
@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * 加载空的fragment
+ * (忽略xml的databing生成)
  */
 @AndroidEntryPoint
 class EmptyFragmentActivity : BaseVMActivity<EmptyViewModel>() {

@@ -1,4 +1,4 @@
-package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.act
+package com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.activity
 
 import android.content.Intent
 import com.guadou.kt_demo.R
@@ -7,19 +7,18 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
-import com.guadou.lib_baselib.view.gloading.GloadingPlaceHolderlAdapter
+
 
 /**
- * 重写生成GLoading的方法就行了
+ * 默认是加载的上下跳动的动画
  */
-class PlaceHolderLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
+class JumpLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
 
     companion object {
         fun startInstance() {
             commContext().let {
-                it.startActivity(Intent(it, PlaceHolderLoadingActivity::class.java).apply {
+                it.startActivity(Intent(it, JumpLoadingActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 })
             }
@@ -28,13 +27,6 @@ class PlaceHolderLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
 
     override fun getLayoutIdRes(): Int = R.layout.activity_loading_normal
 
-
-    override fun generateGLoading(): Gloading.Holder {
-        return Gloading.from(GloadingPlaceHolderlAdapter(R.layout.layout_placeholder_normal)).wrap(this)
-            .withRetry {
-                onGoadingRetry()
-            }
-    }
 
     override fun startObserve() {
 
@@ -51,6 +43,7 @@ class PlaceHolderLoadingActivity : BaseVMLoadingActivity<EmptyViewModel>() {
             showStateSuccess()
 
         }, 2500)
+
     }
 
     //可选的实现
