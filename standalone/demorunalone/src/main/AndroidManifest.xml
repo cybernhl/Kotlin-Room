@@ -76,6 +76,8 @@
 
         <activity android:name=".demo.demo11_fragment_navigation.Demo11Activity"/>
 
+        <activity android:name=".demo.demo12_databinding_texing.Demo12Activity"/>
+
     </application>
 
 </manifest>

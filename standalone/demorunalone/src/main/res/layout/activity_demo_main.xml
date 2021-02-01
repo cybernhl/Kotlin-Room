@@ -100,6 +100,13 @@
             android:text="11.Fragment - Navigation"
             android:textAllCaps="false" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo12}"
+            android:text="12.DataBinding 高级特效"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
 </layout>
