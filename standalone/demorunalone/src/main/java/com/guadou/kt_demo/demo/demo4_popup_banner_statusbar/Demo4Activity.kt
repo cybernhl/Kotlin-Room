@@ -2,20 +2,22 @@ package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar
 
 import android.content.Intent
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.databinding.ActivityDemo4Binding
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
-import com.guadou.lib_baselib.ext.click
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toastSuccess
 import com.guadou.lib_baselib.utils.StatusBarUtils
-import kotlinx.android.synthetic.main.activity_demo4.*
+
 
 /**
  * 吐司 弹窗 banner
  */
-class Demo4Activity : BaseVMActivity<EmptyViewModel>() {
+class Demo4Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo4Binding>() {
 
     companion object {
         fun startInstance() {
@@ -27,8 +29,11 @@ class Demo4Activity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo4)
+            .addBindingParams(BR.click, ClickProxy())
+    }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo4
 
     override fun startObserve() {
 
@@ -41,22 +46,26 @@ class Demo4Activity : BaseVMActivity<EmptyViewModel>() {
         StatusBarUtils.setStatusBarWhiteText(this)
         StatusBarUtils.immersive(this)
 
-        initLitener()
     }
 
-    private fun initLitener() {
 
-        btn_shot_toast.click {
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
+
+        fun testToast(){
             toastSuccess("Test Tosast")
         }
 
-        btn_shot_alert.click {
+        fun navPopupPage(){
             DemoXPopupActivity.startInstance()
         }
 
-        btn_shot_banner.click {
+        fun navBannerPage(){
             DemoBannerActivity.startInstance()
         }
+
     }
 
 }

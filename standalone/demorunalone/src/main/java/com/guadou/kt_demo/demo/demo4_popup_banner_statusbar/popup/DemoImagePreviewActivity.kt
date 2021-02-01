@@ -8,19 +8,24 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityDemoImagePreviewBinding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.engine.extLoad
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.ImagePreviewUtils
 import com.lxj.easyadapter.EasyAdapter
 import com.lxj.easyadapter.ViewHolder
-import kotlinx.android.synthetic.main.activity_demo_image_preview.*
 
 
-class DemoImagePreviewActivity : BaseVMActivity<EmptyViewModel>() {
+/**
+ * 图片的展示页面
+ */
+class DemoImagePreviewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoImagePreviewBinding>() {
 
     var url1 =
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549382334&di=332b0aa1ec4ccd293f176164d998e5ab&imgtype=jpg&er=1&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D121ef3421a38534398c28f62fb7ada0b%2Ffaf2b2119313b07eedb4502606d7912397dd8c96.jpg"
@@ -50,7 +55,12 @@ class DemoImagePreviewActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_image_preview
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_image_preview)
+            .addBindingParams(BR.click, ClickProxy())
+            .addBindingParams(BR.url1, url1)
+            .addBindingParams(BR.url2, url2)
+    }
 
     override fun startObserve() {
 
@@ -58,25 +68,13 @@ class DemoImagePreviewActivity : BaseVMActivity<EmptyViewModel>() {
 
     override fun init() {
 
-        //默认的单独图片预览
-        image1.extLoad(url1, R.mipmap.ic_launcher, isForceOriginalSize = true, isCenterCrop = true)
-        image1.click {
-            ImagePreviewUtils.singleImagePreview(this, image1, url1, R.mipmap.ic_launcher)
-        }
-
-        //带圆角的单图片预览
-        image2.extLoad(url2, R.mipmap.ic_launcher, roundRadius = 50, isForceOriginalSize = true, isCenterCrop = true)
-        image2.click {
-            ImagePreviewUtils.singleImagePreview(this, image2, url2, R.mipmap.ic_launcher, roundRadius = 50)
-        }
-
         //在RV中的多图片预览
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
-        recyclerView.adapter = ImageAdapter(list)
+        mBinding.recyclerView.layoutManager = GridLayoutManager(this, 3)
+        mBinding.recyclerView.adapter = ImageAdapter(list)
 
         //在ViewPager中的展示
-        viewPager.offscreenPageLimit = list.size
-        viewPager.adapter = ImagePagerAdapter(list, viewPager)
+        mBinding.viewPager.offscreenPageLimit = list.size
+        mBinding.viewPager.adapter = ImagePagerAdapter(list, mBinding.viewPager)
     }
 
     //RV的数据适配器
@@ -153,6 +151,27 @@ class DemoImagePreviewActivity : BaseVMActivity<EmptyViewModel>() {
             container.removeView(`object` as View)
         }
     }
+
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
+
+        fun image1Preview() {
+            ImagePreviewUtils.singleImagePreview(mActivity, mBinding.image1, url1, R.mipmap.ic_launcher)
+        }
+
+        fun image2Preview() {
+            ImagePreviewUtils.singleImagePreview(
+                mActivity,
+                mBinding.image2,
+                url2,
+                R.mipmap.ic_launcher,
+                roundRadius = 50
+            )
+        }
+    }
+
 }
 
 

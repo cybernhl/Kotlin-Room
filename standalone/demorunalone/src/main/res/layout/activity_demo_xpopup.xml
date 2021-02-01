@@ -1,99 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="Xpopup的使用" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <ScrollView
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_center_normal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="居中的默认弹窗" />
-
-                <Button
-                    android:id="@+id/btn_center_custom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="居中的自定义弹窗" />
-
-                <Button
-                    android:id="@+id/btn_bottom_custom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="底部的弹窗" />
-
-
-                <Button
-                    android:id="@+id/btn_attch_custom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="依附View的弹窗" />
-
-                <Button
-                    android:id="@+id/btn_full_scheen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="底部全屏弹窗" />
-
-                <Button
-                    android:id="@+id/btn_bottom_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="输入法之上的弹窗" />
-
-
-                <Button
-                    android:id="@+id/btn_cutsom_parent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="指定自定义容器" />
-
-                <Button
-                    android:id="@+id/btn_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="图片浏览" />
-
-                <Button
-                    android:id="@+id/btn_background"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="后台运行权限" />
-
-            </LinearLayout>
-
-        </ScrollView>
-
+            android:layout_height="wrap_content"
+            app:Easy_title="Xpopup的使用" />
 
         <FrameLayout
-            android:id="@+id/fl_custom_parent"
             android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/d_100dp"
-            android:layout_gravity="bottom"
-            android:layout_height="1dp"/>
-
-    </FrameLayout>
+            android:layout_height="match_parent">
 
 
-</LinearLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="居中的默认弹窗"
+                        binding:clicks="@{click.normalPopup}" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="居中的自定义弹窗"
+                        binding:clicks="@{click.centerPopup}" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="底部的弹窗"
+                        binding:clicks="@{click.bottomPopup}" />
+
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{click.attchPopup}"
+                        android:text="依附View的弹窗" />
+
+                    <Button
+                        binding:clicks="@{click.fullBottomPopup}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="底部全屏弹窗" />
+
+                    <Button
+                        binding:clicks="@{click.softInputPopup}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="输入法之上的弹窗" />
+
+
+                    <Button
+                        binding:clicks="@{click.customPopup}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="指定自定义容器" />
+
+
+                    <Button
+                        binding:clicks="@{click.backgoundPopup}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="后台运行权限" />
+
+                    <Button
+                        binding:clicks="@{click.bigImagePopup}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="图片浏览" />
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+            <FrameLayout
+                android:id="@+id/fl_custom_parent"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/d_100dp" />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</layout>

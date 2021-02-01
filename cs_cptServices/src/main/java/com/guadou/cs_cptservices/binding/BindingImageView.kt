@@ -9,12 +9,11 @@ import com.guadou.lib_baselib.utils.CommUtils
 /**
  * 设置图片的加载
  */
-@BindingAdapter("imgUrl", "placeholder", "placeholderRes", "roundRadius", "isCircle", requireAll = false)
+@BindingAdapter("imgUrl", "placeholder", "roundRadius", "isCircle", requireAll = false)
 fun loadImg(
     view: ImageView,
     url: Any?,
     placeholder: Drawable? = null,
-    placeholderRes: Int = 0,
     roundRadius: Int = 0,
     isCircle: Boolean = false
 ) {
@@ -22,7 +21,6 @@ fun loadImg(
         view.extLoad(
             it,
             placeholder = placeholder,
-            placeholderRes = placeholderRes,
             roundRadius = CommUtils.dip2px(roundRadius),
             isCircle = isCircle
         )

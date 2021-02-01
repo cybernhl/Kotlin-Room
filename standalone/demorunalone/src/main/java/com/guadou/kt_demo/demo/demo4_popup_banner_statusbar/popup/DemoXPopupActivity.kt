@@ -4,11 +4,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.util.Log
+import android.view.View
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.databinding.ActivityDemoXpopupBinding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.checkEmpty
-import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
@@ -18,12 +21,11 @@ import com.lxj.xpopup.interfaces.OnConfirmListener
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.lxj.xpopup.interfaces.SimpleCallback
 import com.lxj.xpopup.util.XPermission
-import kotlinx.android.synthetic.main.activity_demo_xpopup.*
 
 /**
  * Xpopup的示例
  */
-class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
+class DemoXPopupActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoXpopupBinding>() {
 
     companion object {
         fun startInstance() {
@@ -35,16 +37,26 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_xpopup
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_xpopup)
+            .addBindingParams(BR.click, ClickProxy())
+    }
+
 
     override fun startObserve() {
 
     }
 
     override fun init() {
+    }
 
-        //默认的弹窗
-        btn_center_normal.click {
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
+
+        //默认弹窗
+        fun normalPopup() {
 
             val popupView = XPopup.Builder(mActivity)
                 .autoOpenSoftInput(false)
@@ -83,10 +95,8 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
             popupView.show()
         }
 
-
-        //自定义的中间弹窗
-        btn_center_custom.click {
-
+        //居中弹窗
+        fun centerPopup() {
             XPopup.Builder(mActivity)
                 .autoOpenSoftInput(false)
                 .hasShadowBg(true)
@@ -99,10 +109,8 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
                 .show()
         }
 
-
-        //自定义的底部弹窗
-        btn_bottom_custom.click {
-
+        //底部的弹窗
+        fun bottomPopup() {
             XPopup.Builder(mActivity)
                 .autoOpenSoftInput(false)
                 .hasShadowBg(true)
@@ -115,10 +123,10 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
 
         }
 
-        //依附布局，一般用于下拉选
-        btn_attch_custom.click {
+        //依附布局
+        fun attchPopup(view: View) {
 
-            XPopup.Builder(this)
+            XPopup.Builder(mActivity)
                 .hasShadowBg(false)
                 .isDestroyOnDismiss(true) //对于只使用一次的弹窗，推荐设置这个
                 //                        .isDarkTheme(true)
@@ -127,7 +135,7 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
                 //                        .offsetY(-60)
                 //                        .offsetX(80)
                 //                        .popupPosition(PopupPosition.Top) //手动指定弹窗的位置
-                .atView(it) // 依附于所点击的View，内部会自动判断在上方或者下方显示
+                .atView(view) // 依附于所点击的View，内部会自动判断在上方或者下方显示
                 .asAttachList(arrayOf("分享", "编辑编辑编辑编辑编", "不带icon", "分享"),
                     intArrayOf(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round),
                     object : OnSelectListener {
@@ -138,26 +146,23 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
                 .show()
         }
 
-        //底部弹起全屏的弹窗
-        btn_full_scheen.click {
-
-            XPopup.Builder(this)
+        //底部全屏弹窗
+        fun fullBottomPopup() {
+            XPopup.Builder(mActivity)
                 .hasShadowBg(false)
                 .hasStatusBarShadow(true)
                 .isDestroyOnDismiss(true) //对于只使用一次的弹窗，推荐设置这个
                 .autoOpenSoftInput(true)  //自动打开软键盘
                 .moveUpToKeyboard(false) //在软键盘上面
-                .asCustom(CustomFullScreenPopup(this))
+                .asCustom(CustomFullScreenPopup(mActivity))
                 .show()
-
         }
 
-        //自动在输入法上面的弹窗
-        btn_bottom_input.click {
-
+        //输入法布局上面弹窗
+        fun softInputPopup() {
             // 弹出新的弹窗用来输入
-            val textBottomPopup = CustomEditTextBottomPopup(this)
-            XPopup.Builder(this)
+            val textBottomPopup = CustomEditTextBottomPopup(mActivity)
+            XPopup.Builder(mActivity)
                 .isDestroyOnDismiss(true) //对于只使用一次的弹窗，推荐设置这个
                 .autoOpenSoftInput(true) //自动打开软键盘
                 .moveUpToKeyboard(true) //在软键盘上面
@@ -176,11 +181,9 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
                 .show()
         }
 
-
-        //自定义父容器内部展示
-        btn_cutsom_parent.click {
-
-            XPopup.Builder(this)
+        //自定义父容器展示
+        fun customPopup() {
+            XPopup.Builder(mActivity)
                 .hasShadowBg(false)
                 .hasStatusBarShadow(false) //启用状态栏阴影
                 .hasBlurBg(false)  //高斯模糊背景
@@ -189,16 +192,14 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
                 .isDestroyOnDismiss(true) //对于只使用一次的弹窗，推荐设置这个
                 .enableDrag(false)
                 .offsetY(-CommUtils.dip2px(100))
-                .asCustom(BottomCartPopup(this))
+                .asCustom(BottomCartPopup(mActivity))
                 .show()
-
         }
 
-
-        //打开后台运行权限
-        btn_background.click {
+        //最上层显示的权限
+        fun backgoundPopup() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                XPopup.requestOverlayPermission(this, object : XPermission.SimpleCallback {
+                XPopup.requestOverlayPermission(mActivity, object : XPermission.SimpleCallback {
                     override fun onGranted() {
 
                     }
@@ -210,11 +211,11 @@ class DemoXPopupActivity : BaseVMActivity<EmptyViewModel>() {
             }
         }
 
-
         //大图的浏览相册模式
-        btn_image.click {
+        fun bigImagePopup() {
             DemoImagePreviewActivity.startInstance()
         }
+
     }
 
 }

@@ -2,19 +2,21 @@ package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner
 
 import android.content.Intent
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityDemoBannerBinding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.transformer.AlphaPageTransformer
-import kotlinx.android.synthetic.main.activity_demo_banner.*
+
 
 /**
  * banner
  */
-class DemoBannerActivity : BaseVMActivity<EmptyViewModel>() {
+class DemoBannerActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoBannerBinding>() {
 
     companion object {
         fun startInstance() {
@@ -26,8 +28,10 @@ class DemoBannerActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_banner)
+    }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_banner
 
     override fun startObserve() {
 
@@ -44,7 +48,7 @@ class DemoBannerActivity : BaseVMActivity<EmptyViewModel>() {
         )
 
         //默认的Banner
-        banner1?.also {
+        mBinding.banner1.also {
             it.addBannerLifecycleObserver(this)
             it.indicator = CircleIndicator(this)
             it.adapter = BannerImageAdapter(imageUrls, R.mipmap.item_merchants_bg)
@@ -53,7 +57,7 @@ class DemoBannerActivity : BaseVMActivity<EmptyViewModel>() {
 
 
         //矩形的指示器
-        banner2?.also {
+        mBinding.banner2.also {
             it.addBannerLifecycleObserver(this)
             it.indicator = RectangleIndicator(this)
             it.adapter = BannerImageAdapter(imageUrls, R.mipmap.item_merchants_bg)
@@ -67,7 +71,7 @@ class DemoBannerActivity : BaseVMActivity<EmptyViewModel>() {
 
 
         //画廊效果
-        banner3?.also {
+        mBinding.banner3.also {
             it.addBannerLifecycleObserver(this)
 //            it.indicator = CircleIndicator(this)
             it.adapter = BannerImageAdapter(imageUrls, R.mipmap.item_merchants_bg)
@@ -83,7 +87,7 @@ class DemoBannerActivity : BaseVMActivity<EmptyViewModel>() {
 
 
         //自定义的指示器
-        banner4?.also {
+        mBinding.banner4.also {
             it.addBannerLifecycleObserver(this)
             it.indicator = RectangleCircleIndicator(this)
             it.adapter = BannerImageAdapter(imageUrls, R.mipmap.item_merchants_bg)

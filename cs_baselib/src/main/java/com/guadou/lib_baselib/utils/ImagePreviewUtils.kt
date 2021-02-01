@@ -51,11 +51,23 @@ object ImagePreviewUtils {
         list: List<Any>,
         position: Int = 0,
         placeholderRes: Int = 0,
+        isInfinite: Boolean = false,
+        isShowSaveBtn: Boolean = false,
         block: (popupView: ImageViewerPopupView, position: Int) -> Unit
     ) {
         //Xpopup的弹窗
         XPopup.Builder(context).asImageViewer(
-            img, position, list, block, ImageLoader(placeholderRes)
+            img,
+            position,
+            list,
+            isInfinite,
+            true,
+            placeholderRes,
+            0,
+            0,
+            isShowSaveBtn,
+            block,
+            ImageLoader(placeholderRes)
         ).show()
     }
 

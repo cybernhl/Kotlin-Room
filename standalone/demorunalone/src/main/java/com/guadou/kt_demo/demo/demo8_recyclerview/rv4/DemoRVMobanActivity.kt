@@ -3,8 +3,9 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv4
 import android.content.Intent
 import android.graphics.Color
 import androidx.lifecycle.Observer
-import com.guadou.kt_demo.R
+import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemoRvMubanBinding
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.mvvm.DemoJobViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -20,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
  * 网络请求模板
  */
 @AndroidEntryPoint
-class DemoRVMobanActivity : BaseVDBActivity<DemoJobViewModel, ActivityDemoRvMubanBinding>(), OnRefreshListener {
+class DemoRVMobanActivity : BaseVDBActivity<DemoJobViewModel, ActivityDemoRvMubanBinding>(), OnRefreshListener,
+    OnLoadMoreListener {
 
     companion object {
         fun startInstance() {
@@ -72,11 +74,7 @@ class DemoRVMobanActivity : BaseVDBActivity<DemoJobViewModel, ActivityDemoRvMuba
         //Adapter的滑动监听，监听加载更多
         mViewModel.mAdapter.loadMoreModule.isEnableLoadMore = false
         mViewModel.mAdapter.loadMoreModule.preLoadNumber = 4
-        mViewModel.mAdapter.loadMoreModule.setOnLoadMoreListener {
-            mViewModel.isNeedCleanAllData = false
-            mViewModel.mCurPage++
-            initData()
-        }
+        mViewModel.mAdapter.loadMoreModule.setOnLoadMoreListener(this)
 
         //刷新控件初始化
         mBinding.refreshLayout.setEnableNestedScroll(true)
@@ -92,6 +90,12 @@ class DemoRVMobanActivity : BaseVDBActivity<DemoJobViewModel, ActivityDemoRvMuba
         mViewModel.mAdapter.loadMoreModule.isEnableLoadMore = false
         //直接调用，参数从成员变量中获取
         mViewModel.mCurPage = 1
+        initData()
+    }
+
+    override fun onLoadMore() {
+        mViewModel.isNeedCleanAllData = false
+        mViewModel.mCurPage++
         initData()
     }
 

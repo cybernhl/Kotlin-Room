@@ -1,65 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="url1"
+            type="String" />
+
+        <variable
+            name="url2"
+            type="String" />
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoImagePreviewActivity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="图片的预览" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:Easy_title="图片的预览" />
 
-            <ImageView
-                android:id="@+id/image1"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_gravity="right"
-                android:layout_margin="10dp" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/image2"
-                android:layout_width="168dp"
-                android:layout_height="168dp"
-                android:layout_margin="30dp" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RecyclerView展示" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ViewPager展示" />
+                android:orientation="vertical">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="@dimen/d_20dp"
-                android:layout_marginBottom="@dimen/d_20dp" />
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:scaleType="centerCrop"
+                    binding:clicks="@{click.image1Preview}"
+                    binding:imgUrl="@{url1}"
+                    binding:placeholder="@{@drawable/home_list_plachholder}" />
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="168dp"
+                    android:layout_height="168dp"
+                    android:layout_margin="30dp"
+                    android:scaleType="centerCrop"
+                    binding:clicks="@{click.image2Preview}"
+                    binding:imgUrl="@{url2}"
+                    binding:placeholder="@{@drawable/home_list_plachholder}"
+                    binding:roundRadius="@{50}" />
 
 
-    </androidx.core.widget.NestedScrollView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RecyclerView展示" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ViewPager展示" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="@dimen/d_20dp"
+                    android:layout_marginBottom="@dimen/d_20dp" />
+
+            </LinearLayout>
 
 
-</LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </LinearLayout>
+
+</layout>

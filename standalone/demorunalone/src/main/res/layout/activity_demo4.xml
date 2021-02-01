@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ff00ff"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.Demo4Activity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_titleBarBackground="#ff0000"
-        app:Easy_hasStatusPadding="true"
-        app:Easy_title="测试一下沉浸式标题栏" />
+        android:layout_height="match_parent"
+        android:background="#ff00ff"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_shot_toast"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="吐司" />
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_hasStatusPadding="true"
+            app:Easy_title="测试一下沉浸式标题栏"
+            app:Easy_titleBarBackground="#ff0000" />
 
-    <Button
-        android:id="@+id/btn_shot_alert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="弹窗" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="吐司"
+            binding:clicks="@{click.testToast}" />
 
-    <Button
-        android:id="@+id/btn_shot_banner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="轮播" />
+        <Button
+            android:id="@+id/btn_shot_alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="弹窗"
+            binding:clicks="@{click.navPopupPage}" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_shot_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="轮播"
+            binding:clicks="@{click.navBannerPage}" />
+
+    </LinearLayout>
+
+</layout>
