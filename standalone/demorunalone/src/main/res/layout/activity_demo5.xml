@@ -1,57 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel" />
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo5_network_request.Demo5Activity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="测试网络请求" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <LinearLayout
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:Easy_title="测试网络请求" />
 
-            <Button
-                android:id="@+id/btn_net_1"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="单独的请求-串联" />
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_net_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="合并的请求-并发" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="单独的请求-串联"
+                    binding:clicks="@{click.networkChuan}" />
 
-            <Button
-                android:id="@+id/btn_net_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="加载策略-去重" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="合并的请求-并发"
+                    binding:clicks="@{click.networkBing}" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="展示请求的内容" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="加载策略-去重"
+                    binding:clicks="@{click.networkDup}" />
 
-            <TextView
-                android:id="@+id/tv_net_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="展示请求的内容" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_net_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.mContentLiveData}" />
 
-    </ScrollView>
+            </LinearLayout>
+
+        </ScrollView>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

@@ -4,21 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.databinding.ActivityDemo5Binding
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
-import com.guadou.lib_baselib.ext.click
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.toast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_demo5.*
 
 /**
  * 网络请求的实例代码
  *
  * 一定要注意 Repository和ViewModel 都要在di中注册
  */
-@AndroidEntryPoint  //注解可加可不加 因为只是用ViewModel注入的话是不需要注解的，如果还想注入别的东西 需要加
-class Demo5Activity : BaseVMActivity<Demo5ViewModel>() {
+@AndroidEntryPoint
+class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 
     companion object {
         fun startInstance() {
@@ -30,43 +30,58 @@ class Demo5Activity : BaseVMActivity<Demo5ViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo5
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo5, BR.viewModel, mViewModel)
+            .addBindingParams(BR.click, ClickProxy())
+    }
+
 
     @SuppressLint("SetTextI18n")
     override fun startObserve() {
         //行业回调
         mViewModel.mIndustryLiveData.observe(this, Observer {
-            tv_net_content.text = it.toString()
+            mViewModel.mContentLiveData.value = it.toString()
+
         })
 
         //学校回调
         mViewModel.mSchoolliveData.observe(this, Observer {
-            tv_net_content.text = tv_net_content.text.toString() + "\n" + "学校的数据===>：" + "\n"
-            tv_net_content.text = tv_net_content.text.toString() + it.toString()
+            mViewModel.mContentLiveData.value = mBinding.tvNetContent.text.toString() + "\n" + "学校的数据===>：" + "\n"
+            mViewModel.mContentLiveData.value = mBinding.tvNetContent.text.toString() + it.toString()
         })
 
     }
 
     override fun init() {
 
-        initLitener()
     }
 
-    private fun initLitener() {
-        toast("ViewModel: $mViewModel")
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
 
-        btn_net_1.click {
-
-            tv_net_content.text = ""
+        /**
+         * 串联顺序执行
+         */
+        fun networkChuan() {
+            mViewModel.mContentLiveData.value = ""
             mViewModel.netWorkSeries()
         }
 
-        btn_net_2.click {
-            tv_net_content.text = ""
+        /**
+         * 并发
+         */
+        fun networkBing() {
+            mViewModel.mContentLiveData.value = ""
             mViewModel.netSupervene()
         }
 
-        btn_net_3.setOnClickListener {
+        /**
+         * 去重
+         */
+        fun networkDup() {
+            mViewModel.mContentLiveData.value = ""
             //没有防抖动-狂点试试看Log
             mViewModel.netDuplicate()
         }

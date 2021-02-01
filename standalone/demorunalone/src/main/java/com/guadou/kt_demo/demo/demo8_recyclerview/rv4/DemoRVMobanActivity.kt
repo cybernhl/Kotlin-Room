@@ -4,21 +4,23 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.lifecycle.Observer
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.databinding.ActivityDemoRvMubanBinding
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.mvvm.DemoJobViewModel
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.divider
 import com.guadou.lib_baselib.ext.vertical
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_demo_rv_muban.*
 
 /**
  * 网络请求模板
  */
 @AndroidEntryPoint
-class DemoRVMobanActivity : BaseVMActivity<DemoJobViewModel>(), OnRefreshListener {
+class DemoRVMobanActivity : BaseVDBActivity<DemoJobViewModel, ActivityDemoRvMubanBinding>(), OnRefreshListener {
 
     companion object {
         fun startInstance() {
@@ -30,10 +32,11 @@ class DemoRVMobanActivity : BaseVMActivity<DemoJobViewModel>(), OnRefreshListene
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_muban
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_rv_muban, BR.viewModel, mViewModel)
+    }
 
     override fun startObserve() {
-
     }
 
     override fun init() {
@@ -49,7 +52,7 @@ class DemoRVMobanActivity : BaseVMActivity<DemoJobViewModel>(), OnRefreshListene
 //        recycler_view.vertical().adapter = mViewModel.mAdapter
 
         //使用DataBinding的方式
-        recycler_view.vertical().apply {
+        mBinding.recyclerView.vertical().apply {
             adapter = mViewModel.mAdapter
             divider(Color.BLACK)
         }
@@ -58,7 +61,7 @@ class DemoRVMobanActivity : BaseVMActivity<DemoJobViewModel>(), OnRefreshListene
     private fun initData() {
 
         mViewModel.getAllJobs().observe(this, Observer {
-            refresh_layout.finishRefresh()
+            mBinding.refreshLayout.finishRefresh()
             mViewModel.mAdapter.loadMoreModule.isEnableLoadMore = true
         })
 
@@ -76,10 +79,10 @@ class DemoRVMobanActivity : BaseVMActivity<DemoJobViewModel>(), OnRefreshListene
         }
 
         //刷新控件初始化
-        refresh_layout.setEnableNestedScroll(true)
-        refresh_layout.setEnableLoadMore(false)
-        refresh_layout.setEnableRefresh(true)
-        refresh_layout.setOnRefreshListener(this)
+        mBinding.refreshLayout.setEnableNestedScroll(true)
+        mBinding.refreshLayout.setEnableLoadMore(false)
+        mBinding.refreshLayout.setEnableRefresh(true)
+        mBinding.refreshLayout.setOnRefreshListener(this)
     }
 
 

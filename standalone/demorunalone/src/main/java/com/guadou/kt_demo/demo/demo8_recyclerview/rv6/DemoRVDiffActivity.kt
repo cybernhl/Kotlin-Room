@@ -1,24 +1,20 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv6
 
 import android.content.Intent
-import android.graphics.Color
-import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityDemoRvDiffBinding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
-import com.guadou.lib_baselib.ext.click
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.divider
 import com.guadou.lib_baselib.ext.vertical
-import kotlinx.android.synthetic.main.activity_demo_rv_diff.*
-import kotlinx.android.synthetic.main.activity_demo_rv_diff.recyclerView
-import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
+
 
 /**
  * 差分刷新
  */
-class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
+class DemoRVDiffActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoRvDiffBinding>() {
 
     private val mDatas = mutableListOf<DemoDiffBean>()
 
@@ -35,7 +31,10 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_diff
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_rv_diff)
+            .addBindingParams(BR.click, ClickProxy())
+    }
 
     override fun startObserve() {
 
@@ -45,7 +44,6 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
 
         initRV()
         initData()
-        initListener()
     }
 
     private fun initData() {
@@ -59,7 +57,7 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
     private fun initRV() {
         //设置BRVAH
         mAdapter.setDiffCallback(DiffDemoCallback())
-        recyclerView.vertical().adapter = mAdapter
+        mBinding.recyclerView.vertical().adapter = mAdapter
 
 
         //使用DataBinding的方式
@@ -70,11 +68,15 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
 //        }
     }
 
-    //差分刷新效果点击
-    //一定要注意 设置差分数据的时候 不要是一个内存地址的，你copy一份集合出来再设置都行
-    private fun initListener() {
 
-        btn_diff_1.click {
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
+
+        //差分刷新效果点击
+        //一定要注意 设置差分数据的时候 不要是一个内存地址的，你copy一份集合出来再设置都行
+        fun handleDiff1() {
 
             //全部替换数据-数据地址变换了
             val list = mutableListOf<DemoDiffBean>()
@@ -95,7 +97,7 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
 //            mAdapter.setDiffNewData(mDatas)
         }
 
-        btn_diff_2.click {
+        fun handleDiff2() {
             //局部替换
             //如果不替换内存地址 直接删减 直接notifyDataSetChanged得了
             mAdapter.data[0].content = "Diff 2 content:0"
@@ -104,7 +106,7 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
             mAdapter.notifyDataSetChanged()
         }
 
-        btn_diff_3.click {
+        fun handleDiff3() {
 
             val list = mutableListOf<DemoDiffBean>()
             for (i in 1..10) {
@@ -116,9 +118,8 @@ class DemoRVDiffActivity : BaseVMActivity<EmptyViewModel>() {
             list[3].content = "自定义乱改的数据"
 
             mAdapter.setDiffNewData(list)
-
         }
-    }
 
+    }
 
 }

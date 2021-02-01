@@ -1,93 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".DemoMainActivity">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.DemoMainActivity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="Demo演示" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_demo_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1.基本Activity/Fragment的使用（占位图1）"
-        android:textAllCaps="false" />
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_title="Demo演示" />
 
-    <Button
-        android:id="@+id/btn_demo_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2.ViewPager/LazyFragment（占位图2）"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo1}"
+            android:text="1.基本Activity/Fragment的使用（占位图1）"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="3.BottomTab/LazyFragment"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo2}"
+            android:text="2.ViewPager/LazyFragment（占位图2）"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="4.吐司/弹窗/banner"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo3}"
+            android:text="3.BottomTab/LazyFragment"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="5.网络请求（带去重策略）"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo4}"
+            android:text="4.吐司/弹窗/banner"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="6.权限/图库/相机"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo5}"
+            android:text="5.网络请求（带去重策略）"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="7.图片加载Glide封装"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo6}"
+            android:text="6.权限/图库/相机"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="8.RecyclerView封装"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo7}"
+            android:text="7.图片加载Glide封装"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="9.Kotlin倒计时"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo8}"
+            android:text="8.RecyclerView封装"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="10.无界面功能（SP，ACache, String, Span, 时间格式化等）"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo9}"
+            android:text="9.Kotlin倒计时"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_demo_11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="11.Fragment - Navigation"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo10}"
+            android:text="10.无界面功能（SP，ACache, String, Span, 时间格式化等）"
+            android:textAllCaps="false" />
 
-</LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clicks="@{click.navDemo11}"
+            android:text="11.Fragment - Navigation"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</layout>

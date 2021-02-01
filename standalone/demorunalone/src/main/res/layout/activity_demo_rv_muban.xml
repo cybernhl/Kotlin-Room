@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="列表展示" />
+    <data>
 
+        <variable
+            name="viewModel"
+            type="com.guadou.kt_demo.demo.demo8_recyclerview.rv4.mvvm.DemoJobViewModel" />
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/refresh_layout"
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srlEnablePreviewInEditMode="true"
-        app:srlPrimaryColor="#f1f1f1">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <com.scwang.smart.refresh.header.ClassicsHeader
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srlAccentColor="#202020" />
+            app:Easy_title="列表展示" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            app:srlEnablePreviewInEditMode="true"
+            app:srlPrimaryColor="#f1f1f1">
 
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="#202020" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

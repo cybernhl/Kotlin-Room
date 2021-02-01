@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo9_ktfollow.DemoCountDwonActivity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="倒计时" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_title="倒计时" />
 
-    <Button
-        android:id="@+id/btn_send"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="点击发送验证码" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击发送验证码"
+            binding:clicks="@{click.startCountDown}" />
 
-    <TextView
-        android:id="@+id/tv_show_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ccc"
-        android:paddingLeft="@dimen/d_10dp"
-        android:paddingTop="@dimen/d_2dp"
-        android:paddingRight="@dimen/d_10dp"
-        android:paddingBottom="@dimen/d_2dp"
-        android:text="1">
+        <TextView
+            android:id="@+id/tv_show_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ccc"
+            android:paddingLeft="@dimen/d_10dp"
+            android:paddingTop="@dimen/d_2dp"
+            android:paddingRight="@dimen/d_10dp"
+            android:paddingBottom="@dimen/d_2dp"
+            android:text="@{click.MTimeLiveData}">
 
+        </TextView>
 
-    </TextView>
+    </LinearLayout>
 
-
-</LinearLayout>
+</layout>

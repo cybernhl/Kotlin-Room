@@ -1,46 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="列表展示" />
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo8_recyclerview.rv6.DemoRVDiffActivity.ClickProxy" />
+
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_diff_1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Diff刷新1" />
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_title="列表展示" />
 
-        <Button
-            android:id="@+id/btn_diff_2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Diff刷新2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_diff_3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Diff刷新3" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Diff刷新1"
+                binding:clicks="@{click.handleDiff1}" />
+
+            <Button
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Diff刷新2"
+                binding:clicks="@{click.handleDiff2}" />
+
+            <Button
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Diff刷新3"
+                binding:clicks="@{click.handleDiff3}" />
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</layout>

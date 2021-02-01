@@ -2,20 +2,21 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv5
 
 import android.content.Intent
 import android.graphics.Color
-import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityDemoRvNormalBinding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.divider
 import com.guadou.lib_baselib.ext.vertical
-import kotlinx.android.synthetic.main.activity_demo_rv_normal.*
+
 
 /**
  * 多布局
  */
-class DemoRVMuliteActivity : BaseVMActivity<EmptyViewModel>() {
+class DemoRVMuliteActivity : BaseVDBActivity<EmptyViewModel,ActivityDemoRvNormalBinding >() {
 
     val datas = mutableListOf(
         MuliteTestBean("MuliteTestBean1", "", 0),
@@ -43,7 +44,9 @@ class DemoRVMuliteActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo_rv_normal
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo_rv_normal)
+    }
 
     override fun startObserve() {
 
@@ -54,7 +57,7 @@ class DemoRVMuliteActivity : BaseVMActivity<EmptyViewModel>() {
 //        recyclerView.vertical().adapter = DemoMuliteAdapter(datas)
 
         //使用DataBinding的方式
-        recyclerView.vertical().apply {
+        mBinding.recyclerView.vertical().apply {
             adapter = mAdapter
             divider(Color.BLACK)
         }
