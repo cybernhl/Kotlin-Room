@@ -9,7 +9,9 @@ import com.guadou.kt_demo.databinding.ActivityDemoRvNormalBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.ext.*
+import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.divider
+import com.guadou.lib_baselib.ext.vertical
 
 
 /**

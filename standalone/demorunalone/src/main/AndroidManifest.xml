@@ -26,15 +26,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.act.Demo1Activity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.Demo1Activity"/>
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.act.NormalLoadingActivity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.NormalLoadingActivity"/>
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.act.JumpLoadingActivity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.JumpLoadingActivity"/>
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.act.PlaceHolderLoadingActivity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.PlaceHolderLoadingActivity"/>
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.act.EmptyFragmentActivity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.EmptyFragmentActivity"/>
 
         <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Activity"/>
 

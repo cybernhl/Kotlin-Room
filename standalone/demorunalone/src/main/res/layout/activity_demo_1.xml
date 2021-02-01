@@ -1,67 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.activity.Demo1Activity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="测试加载" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/d_10dp"
-        android:text="Activity的加载方式与动画" />
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_title="测试加载" />
 
-    <Button
-        android:id="@+id/btn_demo_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1.默认的Loading方式加载"
-        android:textAllCaps="false" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d_10dp"
+            android:text="Activity的加载方式与动画" />
 
-    <Button
-        android:id="@+id/btn_demo_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2.菊花的Loading方式加载"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.默认的Loading方式加载"
+            android:textAllCaps="false"
+            binding:clicks="@{click.jumpLoadingActivity}" />
 
-    <Button
-        android:id="@+id/btn_demo_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="3.PlaceHolder的方式加载"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.菊花的Loading方式加载"
+            android:textAllCaps="false"
+            binding:clicks="@{click.LoadingActivity}" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/d_10dp"
-        android:text="Fragment的加载方式与动画" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3.PlaceHolder的方式加载"
+            android:textAllCaps="false"
+            binding:clicks="@{click.placeholderActivity}" />
 
-    <Button
-        android:id="@+id/btn_demo_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1.默认的Loading方式加载"
-        android:textAllCaps="false" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d_10dp"
+            android:text="Fragment的加载方式与动画" />
 
-    <Button
-        android:id="@+id/btn_demo_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2.菊花的Loading方式加载"
-        android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.默认的Loading方式加载"
+            android:textAllCaps="false"
+            binding:clicks="@{click.jumpLoadingFragment}" />
 
-    <Button
-        android:id="@+id/btn_demo_6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="3.PlaceHolder的方式加载"
-        android:textAllCaps="false" />
-</LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.菊花的Loading方式加载"
+            android:textAllCaps="false"
+            binding:clicks="@{click.roteLoadingFragment}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3.PlaceHolder的方式加载"
+            android:textAllCaps="false"
+            binding:clicks="@{click.placeholderFragment}" />
+    </LinearLayout>
+
+</layout>
