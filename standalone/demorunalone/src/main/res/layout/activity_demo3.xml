@@ -1,126 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
-        android:id="@+id/fl_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    <data>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_gravity="bottom"
-        android:background="#FEFEFE" />
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.Demo3Activity.ClickProxy" />
+
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/d_3dp"
-        android:paddingBottom="@dimen/d_3dp">
+        android:orientation="vertical">
 
-        <!--home-->
-        <LinearLayout
-            android:id="@+id/tab_main_one"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/fl_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/selector_tab_main_demo3_icoc" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/d_3dp"
-                android:text="One"
-                android:textColor="#222222"
-                android:textSize="@dimen/d_12sp" />
-
-        </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_gravity="bottom"
+            android:background="#FEFEFE" />
 
         <LinearLayout
-            android:id="@+id/tab_main_two"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/d_3dp"
+            android:paddingBottom="@dimen/d_3dp">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/selector_tab_main_demo3_icoc" />
+            <!--home-->
+            <LinearLayout
+                android:id="@+id/tab_main_one"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                binding:clicks="@{click.switchPage0}">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/d_3dp"
-                android:text="Two"
-                android:textColor="#222222"
-                android:textSize="@dimen/d_12sp" />
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/selector_tab_main_demo3_icoc" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_3dp"
+                    android:text="One"
+                    android:textColor="#222222"
+                    android:textSize="@dimen/d_12sp" />
+
+            </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/tab_main_three"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/tab_main_two"
+                binding:clicks="@{click.switchPage1}"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/selector_tab_main_demo3_icoc" />
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/selector_tab_main_demo3_icoc" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/d_3dp"
-                android:text="Three"
-                android:textColor="#222222"
-                android:textSize="@dimen/d_12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_3dp"
+                    android:text="Two"
+                    android:textColor="#222222"
+                    android:textSize="@dimen/d_12sp" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/tab_main_four"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/selector_tab_main_demo3_icoc" />
+            <LinearLayout
+                android:id="@+id/tab_main_three"
+                binding:clicks="@{click.switchPage2}"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/d_3dp"
-                android:text="Four"
-                android:textColor="#222222"
-                android:textSize="@dimen/d_12sp" />
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/selector_tab_main_demo3_icoc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_3dp"
+                    android:text="Three"
+                    android:textColor="#222222"
+                    android:textSize="@dimen/d_12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tab_main_four"
+                binding:clicks="@{click.switchPage3}"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/selector_tab_main_demo3_icoc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_3dp"
+                    android:text="Four"
+                    android:textColor="#222222"
+                    android:textSize="@dimen/d_12sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</layout>

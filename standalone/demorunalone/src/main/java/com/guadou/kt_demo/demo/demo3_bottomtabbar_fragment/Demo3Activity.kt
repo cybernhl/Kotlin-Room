@@ -3,17 +3,18 @@ package com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
+import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityDemo3Binding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
-import com.guadou.lib_baselib.ext.click
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
-import kotlinx.android.synthetic.main.activity_demo3.*
 
 /**
  * 一般App的首页参考这个类
  */
-class Demo3Activity : BaseVMActivity<EmptyViewModel>() {
+class Demo3Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo3Binding>() {
 
     private var mCurPosition: Int = 0
     private var isHomeActDestroy: Boolean = false
@@ -36,7 +37,11 @@ class Demo3Activity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_demo3
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_demo3)
+            .addBindingParams(BR.click, ClickProxy())
+    }
+
 
     override fun startObserve() {
 
@@ -67,21 +72,7 @@ class Demo3Activity : BaseVMActivity<EmptyViewModel>() {
     }
 
     private fun initListener() {
-        tab_main_one.click {
-            switchFragment(0)
-        }
 
-        tab_main_two.click {
-            switchFragment(1)
-        }
-
-        tab_main_three.click {
-            switchFragment(2)
-        }
-
-        tab_main_four.click {
-            switchFragment(3)
-        }
     }
 
     //初始化默认的Fragment
@@ -145,28 +136,28 @@ class Demo3Activity : BaseVMActivity<EmptyViewModel>() {
         //传递进来的Position设置为选中：
         when (position) {
             3 -> {
-                tab_main_one.isSelected = false
-                tab_main_two.isSelected = false
-                tab_main_three.isSelected = false
-                tab_main_four.isSelected = true
+                mBinding.tabMainOne.isSelected = false
+                mBinding.tabMainTwo.isSelected = false
+                mBinding.tabMainThree.isSelected = false
+                mBinding.tabMainFour.isSelected = true
             }
             2 -> {
-                tab_main_one.isSelected = false
-                tab_main_two.isSelected = false
-                tab_main_three.isSelected = true
-                tab_main_four.isSelected = false
+                mBinding.tabMainOne.isSelected = false
+                mBinding.tabMainTwo.isSelected = false
+                mBinding.tabMainThree.isSelected = true
+                mBinding.tabMainFour.isSelected = false
             }
             1 -> {
-                tab_main_one.isSelected = false
-                tab_main_two.isSelected = true
-                tab_main_three.isSelected = false
-                tab_main_four.isSelected = false
+                mBinding.tabMainOne.isSelected = false
+                mBinding.tabMainTwo.isSelected = true
+                mBinding.tabMainThree.isSelected = false
+                mBinding.tabMainFour.isSelected = false
             }
             else -> {
-                tab_main_one.isSelected = true
-                tab_main_two.isSelected = false
-                tab_main_three.isSelected = false
-                tab_main_four.isSelected = false
+                mBinding.tabMainOne.isSelected = true
+                mBinding.tabMainTwo.isSelected = false
+                mBinding.tabMainThree.isSelected = false
+                mBinding.tabMainFour.isSelected = false
             }
         }
     }
@@ -215,6 +206,29 @@ class Demo3Activity : BaseVMActivity<EmptyViewModel>() {
         outState.putInt(EXTRA_SAVE_INDEX, mCurPosition)
         outState.putBoolean(EXTRA_IS_HOME_ACT_DESTROY, true)
         super.onSaveInstanceState(outState)
+    }
+
+
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
+
+        fun switchPage0() {
+            switchFragment(0)
+        }
+
+        fun switchPage1() {
+            switchFragment(1)
+        }
+
+        fun switchPage2() {
+            switchFragment(2)
+        }
+
+        fun switchPage3() {
+            switchFragment(3)
+        }
     }
 
 }

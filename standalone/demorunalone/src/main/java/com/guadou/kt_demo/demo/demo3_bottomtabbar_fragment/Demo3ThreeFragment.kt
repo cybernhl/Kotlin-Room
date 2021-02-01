@@ -4,7 +4,6 @@ import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.fragment.BaseVMFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.toast
-import kotlinx.android.synthetic.main.fragment_demo3_page.*
 
 
 class Demo3ThreeFragment :
@@ -24,7 +23,6 @@ class Demo3ThreeFragment :
     }
 
     override fun init() {
-        tv_content.text = "Three Page"
         toast("Three Page")
     }
 }

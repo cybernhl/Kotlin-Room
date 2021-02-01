@@ -1,50 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+    <data>
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo8_recyclerview.Demo8Activity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="测试RV封装" />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_rv_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="普通的垂直列表" />
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_title="测试RV封装" />
 
-    <Button
-        android:id="@+id/btn_rv_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Grid效果与分割线" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="普通的垂直列表"
+            binding:clicks="@{click.rvVertical}" />
 
-    <Button
-        android:id="@+id/btn_rv_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="添加头布局与脚布局" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grid效果与分割线"
+            binding:clicks="@{click.rvGrid}" />
 
-    <Button
-        android:id="@+id/btn_rv_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BRVAH标准刷新与加载模板（带网络请求）" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加头布局与脚布局"
+            binding:clicks="@{click.rvHeaderFooter}" />
 
-    <Button
-        android:id="@+id/btn_rv_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BRVAH多布局" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BRVAH标准刷新与加载模板（带网络请求）"
+            binding:clicks="@{click.rvNetworkLoadMore}" />
 
-    <Button
-        android:id="@+id/btn_rv_6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BRVAH-DIFF刷新" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BRVAH多布局"
+            binding:clicks="@{click.rvMuiltType}" />
 
-</LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BRVAH-DIFF刷新"
+            binding:clicks="@{click.rvDiff}" />
+
+    </LinearLayout>
+
+</layout>

@@ -30,7 +30,7 @@ class Demo1Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo1Binding>() {
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
-        return DataBindingConfig(R.layout.activity_demo_1, BR.viewModel, mViewModel)
+        return DataBindingConfig(R.layout.activity_demo_1)
             .addBindingParams(BR.click, ClickProxy())
     }
 
