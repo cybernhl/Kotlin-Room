@@ -22,6 +22,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_marginTop="15dp"
             android:text="下面是赋值的数据"
             binding:clicks="@{click.testToast}"
             android:layout_width="match_parent"
