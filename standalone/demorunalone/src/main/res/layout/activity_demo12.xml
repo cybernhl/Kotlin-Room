@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="testBean"
+            type="com.guadou.kt_demo.demo.demo12_databinding_texing.TestBindingBean" />
+
+        <variable
             name="click"
             type="com.guadou.kt_demo.demo.demo12_databinding_texing.Demo12Activity.ClickProxy" />
 
@@ -23,15 +27,50 @@
             android:layout_height="wrap_content"
             app:Easy_title="DataBinding Test" />
 
-        <Button
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="测试数据的双向绑定" />
+            android:text="@={click.etLiveData}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="双向绑定(获取值)"
+                binding:clicks="@{click.showETText}" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/d_20dp"
+                android:layout_weight="1"
+                android:text="双向绑定(赋值)"
+                binding:clicks="@{click.setData2ET}" />
+
+        </LinearLayout>
+
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="测试incudle布局的赋值" />
+            android:layout_marginTop="@dimen/d_20dp"
+            android:text="测试incudle布局的赋值"
+            binding:clicks="@{click.inflateXml}" />
+
+        <include
+            layout="@layout/include_databinding_test"
+            binding:click="@{click}"
+            binding:testBean="@{testBean}" />
+
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:layout_width="wrap_content"
