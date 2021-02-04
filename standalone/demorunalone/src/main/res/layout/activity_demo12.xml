@@ -73,9 +73,22 @@
             android:layout_height="wrap_content" />
 
         <Button
+            binding:clicks="@{click.customView}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="测试自定义View的DataBinding赋值" />
+
+        <com.guadou.kt_demo.demo.demo12_databinding_texing.CustomTestView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:clickProxy="@{click}"
+            binding:testBean="@{testBean}" />
+
+        <FrameLayout
+            android:id="@+id/fl_content2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
