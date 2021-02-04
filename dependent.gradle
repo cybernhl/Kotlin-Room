@@ -59,7 +59,6 @@ ext {
                     "xpopup"            : 'com.lxj:xpopup:2.2.10',
 
                     "picker_view"       : 'com.contrarywind:Android-PickerView:4.1.9',              //PicierView (可选)
-                    "sticky_head"       : 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar',  //悬停分组 (可选)
                     "banner"            : 'com.youth.banner:banner:2.1.0',                           //轮播 (可选)
             ]
 
