@@ -43,7 +43,6 @@ class Demo12Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo12Binding>() 
     }
 
     override fun init() {
-
     }
 
     /**
