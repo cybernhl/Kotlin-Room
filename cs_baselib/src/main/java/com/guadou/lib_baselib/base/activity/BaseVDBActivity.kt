@@ -26,8 +26,6 @@ abstract class BaseVDBActivity<VM : BaseViewModel, VDB : ViewDataBinding> : AbsA
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        init()
-
         startObserve()
     }
 
@@ -65,7 +63,6 @@ abstract class BaseVDBActivity<VM : BaseViewModel, VDB : ViewDataBinding> : AbsA
 
     abstract fun getDataBindingConfig(): DataBindingConfig
     abstract fun startObserve()
-    abstract fun init()
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }

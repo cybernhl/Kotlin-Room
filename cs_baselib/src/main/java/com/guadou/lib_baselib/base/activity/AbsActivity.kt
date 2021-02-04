@@ -27,6 +27,8 @@ abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.Connect
 
     abstract fun setContentView()
 
+    abstract fun init()
+
     /**
      * 从intent中解析数据，具体子类来实现
      */
@@ -103,6 +105,7 @@ abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.Connect
             ConnectivityReceiver.registerAnnotationObserver(this)
         }
 
+        init()
     }
 
     /**

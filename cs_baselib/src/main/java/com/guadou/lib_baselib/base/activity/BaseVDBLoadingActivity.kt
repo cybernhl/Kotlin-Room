@@ -38,8 +38,6 @@ abstract class BaseVDBLoadingActivity<VM : BaseViewModel, VDB : ViewDataBinding>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        init()
-
         startObserve()
     }
 
@@ -78,7 +76,6 @@ abstract class BaseVDBLoadingActivity<VM : BaseViewModel, VDB : ViewDataBinding>
 
     abstract fun getDataBindingConfig(): DataBindingConfig
     abstract fun startObserve()
-    abstract fun init()
     protected open fun onGoadingRetry() {
     }
 
