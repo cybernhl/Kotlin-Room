@@ -6,12 +6,13 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.utils.CheckUtil
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import javax.inject.Inject
 
 /**
  * 原生的BRVAH
  */
-class DemoDiffAdapter(list: MutableList<DemoDiffBean>) :
-    BaseQuickAdapter<DemoDiffBean, BaseViewHolder>(R.layout.item_diff_jobs, list), LoadMoreModule {
+class DemoDiffAdapter @Inject constructor() :
+    BaseQuickAdapter<DemoDiffBean, BaseViewHolder>(R.layout.item_diff_jobs), LoadMoreModule {
 
     //差分刷新的精准刷新调用到这里
     override fun convert(holder: BaseViewHolder, item: DemoDiffBean, payloads: List<Any>) {

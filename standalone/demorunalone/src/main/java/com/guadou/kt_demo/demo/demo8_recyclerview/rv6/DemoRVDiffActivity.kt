@@ -9,17 +9,21 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.vertical
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 /**
  * 差分刷新
  */
+@AndroidEntryPoint
 class DemoRVDiffActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoRvDiffBinding>() {
 
     private val mDatas = mutableListOf<DemoDiffBean>()
 
     //        private val mAdapter by lazy { BaseDataBindingAdapter(R.layout.item_diff_jobs, BR.item, mDatas) }
-    private val mAdapter: DemoDiffAdapter by lazy { DemoDiffAdapter(mDatas) }
+    @Inject
+    lateinit var mAdapter: DemoDiffAdapter
 
     companion object {
         fun startInstance() {
