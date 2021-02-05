@@ -92,7 +92,8 @@ dependencies {
 
     //Kotlin相关
     api deps.android.kt_ktx
-    api deps.android.ktx_coroutines
+    api deps.android.ktx_coroutines_core
+    api deps.android.ktx_coroutines_android
     api deps.android.lifecycle
     api deps.android.lifecycle_vm
     api deps.android.lifecycle_live

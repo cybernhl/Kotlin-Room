@@ -7,7 +7,6 @@ import androidx.lifecycle.SavedStateHandle
 import com.guadou.kt_demo.demo.demo5_network_request.bean.Industry
 import com.guadou.kt_demo.demo.demo5_network_request.bean.SchoolBean
 import com.guadou.lib_baselib.base.vm.BaseViewModel
-import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.ControlledRunner
 import com.guadou.lib_baselib.ext.SingleRunner
 import com.guadou.lib_baselib.ext.checkNet
@@ -156,5 +155,9 @@ class Demo5ViewModel @ViewModelInject constructor(
             }
 
         })
+    }
+
+    fun testRepository(): String {
+        return mRepository.toString()
     }
 }

@@ -1,5 +1,6 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv4.mvvm
 
+import android.app.Activity
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -8,11 +9,13 @@ import androidx.lifecycle.SavedStateHandle
 import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5Repository
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.FullJobsPage
 import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CheckUtil
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 
 /**
  * Repository一定要通过默认的构造方法传入进来
@@ -20,6 +23,8 @@ import com.guadou.lib_baselib.utils.CheckUtil
  */
 class DemoJobViewModel @ViewModelInject constructor(
     private val mRepository: DemoJobRepository,
+    private val mDemo5Repository: Demo5Repository,
+    private val activity: Activity,
     @Assisted val savedState: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -95,6 +100,11 @@ class DemoJobViewModel @ViewModelInject constructor(
         }
         isNeedPlaceHolder = false
         isNeedCleanAllData = false
+    }
+
+    fun testRepository(): String {
+        YYLogUtils.w("ViewModel-activity: $activity")
+        return mDemo5Repository.toString()
     }
 
 }

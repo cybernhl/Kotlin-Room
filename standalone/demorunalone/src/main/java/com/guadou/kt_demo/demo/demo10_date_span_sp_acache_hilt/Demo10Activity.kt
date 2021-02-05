@@ -3,8 +3,8 @@ package com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt
 import android.content.Intent
 import android.view.View
 import com.google.gson.GsonBuilder
-import com.guadou.kt_demo.R
 import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo10Binding
 import com.guadou.lib_baselib.base.activity.BaseVDBLoadingActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
@@ -129,7 +129,7 @@ class Demo10Activity : BaseVDBLoadingActivity<EmptyViewModel, ActivityDemo10Bind
         }
 
         val printHilt: () -> Unit = {
-            YYLogUtils.w("server:" + userServer.toString())
+            YYLogUtils.w("server:" + userServer.toString() + "Dao:"+userServer.getDaoContent())
             userServer.testUser()
         }
 

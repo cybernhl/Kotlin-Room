@@ -9,6 +9,7 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.font_text_view.TypefaceUtil
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +44,7 @@ class DemoSpanActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoSpanBinding
 
     override fun init() {
         //测试Hilt
-        userServer.testUser()
+        YYLogUtils.w("server:" + userServer.toString() + "Dao:"+userServer.getDaoContent())
 
 
         //可以直接操作TextView,如果没有文本可以直接添加带Span的文本

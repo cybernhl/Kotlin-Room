@@ -2,7 +2,6 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv4
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.lifecycle.Observer
 import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -13,6 +12,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.divider
 import com.guadou.lib_baselib.ext.vertical
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,11 +42,11 @@ class DemoRVMobanActivity : BaseVDBActivity<DemoJobViewModel, ActivityDemoRvMuba
     }
 
     override fun init() {
+        YYLogUtils.w("ViewModel: $mViewModel Repository:${mViewModel.testRepository()}")
 
         initRV()
         initData()
         initListener()
-
     }
 
     private fun initRV() {
@@ -62,7 +62,7 @@ class DemoRVMobanActivity : BaseVDBActivity<DemoJobViewModel, ActivityDemoRvMuba
 
     private fun initData() {
 
-        mViewModel.getAllJobs().observe(this, Observer {
+        mViewModel.getAllJobs().observe(this, {
             mBinding.refreshLayout.finishRefresh()
             mViewModel.mAdapter.loadMoreModule.isEnableLoadMore = true
         })

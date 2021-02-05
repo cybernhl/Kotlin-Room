@@ -3,13 +3,14 @@ package com.guadou.kt_demo.demo.demo5_network_request
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.lifecycle.Observer
-import com.guadou.kt_demo.R
 import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo5Binding
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -54,6 +55,7 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 
     override fun init() {
 
+        YYLogUtils.w("ViewModel: $mViewModel Repository:${mViewModel.testRepository()}")
     }
 
     /**

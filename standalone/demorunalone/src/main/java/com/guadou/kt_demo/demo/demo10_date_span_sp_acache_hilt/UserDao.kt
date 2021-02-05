@@ -7,6 +7,6 @@ import javax.inject.Singleton
 class UserDao @Inject constructor() {
 
     fun printUser(): String {
-        return "User Name"
+        return this.toString()
     }
 }
