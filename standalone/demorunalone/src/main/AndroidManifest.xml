@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.guadou.kt_demo">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".DemoApplication"
@@ -26,57 +26,66 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.Demo1Activity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.Demo1Activity" />
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.NormalLoadingActivity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.NormalLoadingActivity" />
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.JumpLoadingActivity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.JumpLoadingActivity" />
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.PlaceHolderLoadingActivity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.PlaceHolderLoadingActivity" />
 
-        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.EmptyFragmentActivity"/>
+        <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.EmptyFragmentActivity" />
 
-        <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Activity"/>
+        <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Activity" />
 
-        <activity android:name=".demo.demo3_bottomtabbar_fragment.Demo3Activity"/>
+        <activity android:name=".demo.demo3_bottomtabbar_fragment.Demo3Activity" />
 
-        <activity android:name=".demo.demo4_popup_banner_statusbar.Demo4Activity"/>
+        <activity android:name=".demo.demo4_popup_banner_statusbar.Demo4Activity" />
 
-        <activity android:name=".demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity"/>
+        <activity android:name=".demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity" />
 
-        <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity"/>
+        <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity" />
 
-        <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoImagePreviewActivity"/>
+        <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoImagePreviewActivity" />
 
-        <activity android:name=".demo.demo5_network_request.Demo5Activity"/>
+        <activity android:name=".demo.demo5_network_request.Demo5Activity" />
 
-        <activity android:name=".demo.demo6_imageselect_premision_rvgird.Demo6Activity"/>
+        <activity android:name=".demo.demo6_imageselect_premision_rvgird.Demo6Activity" />
 
-        <activity android:name=".demo.demo7_imageload_glide.Demo7Activity"/>
+        <activity android:name=".demo.demo7_imageload_glide.Demo7Activity" />
 
-        <activity android:name=".demo.demo8_recyclerview.Demo8Activity"/>
+        <activity android:name=".demo.demo8_recyclerview.Demo8Activity" />
 
-        <activity android:name=".demo.demo8_recyclerview.rv1.DemoRVNormalVertalActivity"/>
+        <activity android:name=".demo.demo8_recyclerview.rv1.DemoRVNormalVertalActivity" />
 
-        <activity android:name=".demo.demo8_recyclerview.rv2.DemoRVNormalGridActivity"/>
+        <activity android:name=".demo.demo8_recyclerview.rv2.DemoRVNormalGridActivity" />
 
-        <activity android:name=".demo.demo8_recyclerview.rv3.DemoRVHeadFoodVertalActivity"/>
+        <activity android:name=".demo.demo8_recyclerview.rv3.DemoRVHeadFoodVertalActivity" />
 
-        <activity android:name=".demo.demo8_recyclerview.rv4.DemoRVMobanActivity"/>
+        <activity android:name=".demo.demo8_recyclerview.rv4.DemoRVMobanActivity" />
 
-        <activity android:name=".demo.demo8_recyclerview.rv5.DemoRVMuliteActivity"/>
+        <activity android:name=".demo.demo8_recyclerview.rv5.DemoRVMuliteActivity" />
 
-        <activity android:name=".demo.demo8_recyclerview.rv6.DemoRVDiffActivity"/>
+        <activity android:name=".demo.demo8_recyclerview.rv6.DemoRVDiffActivity" />
 
-        <activity android:name=".demo.demo9_ktfollow.DemoCountDwonActivity"/>
+        <activity android:name=".demo.demo9_ktfollow.DemoCountDwonActivity" />
 
-        <activity android:name=".demo.demo10_date_span_sp_acache_hilt.Demo10Activity"/>
+        <activity android:name=".demo.demo10_date_span_sp_acache_hilt.Demo10Activity" />
 
-        <activity android:name=".demo.demo10_date_span_sp_acache_hilt.DemoSpanActivity"/>
+        <activity android:name=".demo.demo10_date_span_sp_acache_hilt.DemoSpanActivity" />
 
-        <activity android:name=".demo.demo11_fragment_navigation.Demo11Activity"/>
+        <activity android:name=".demo.demo11_fragment_navigation.Demo11Activity"
+            android:launchMode="singleTask">
 
-        <activity android:name=".demo.demo12_databinding_texing.Demo12Activity"/>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="demo11" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".demo.demo12_databinding_texing.Demo12Activity" />
 
     </application>
 

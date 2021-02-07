@@ -2,6 +2,7 @@ package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
 import androidx.navigation.fragment.NavHostFragment
+import com.github.fragivity.deeplink.handleDeepLink
 import com.github.fragivity.loadRoot
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.activity.AbsActivity
@@ -30,6 +31,7 @@ class Demo11Activity : AbsActivity() {
     override fun init() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navHostFragment.loadRoot(Demo11OneFragment1::class)
+        navHostFragment.handleDeepLink(intent)
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {

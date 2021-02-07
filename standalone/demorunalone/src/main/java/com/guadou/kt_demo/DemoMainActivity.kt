@@ -1,7 +1,8 @@
 package com.guadou.kt_demo
+import android.content.Intent
+import android.net.Uri
 import com.guadou.kt_demo.databinding.ActivityDemoMainBinding
 import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity
-import com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11Activity
 import com.guadou.kt_demo.demo.demo12_databinding_texing.Demo12Activity
 import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.activity.Demo1Activity
 import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.Demo2Activity
@@ -78,7 +79,11 @@ class DemoMainActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoMainBinding
         }
 
         fun navDemo11(){
-            Demo11Activity.startInstance()
+//            Demo11Activity.startInstance()
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("demo11://com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment3/"))
+            startActivity(intent)
+
         }
 
         fun navDemo12(){

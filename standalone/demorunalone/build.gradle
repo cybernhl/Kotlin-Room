@@ -85,7 +85,7 @@ dependencies {
     kapt deps.support.hilt_kapt
     implementation deps.support.hilt_vm
     kapt deps.support.hilt_vm_kapt
-
+    kapt deps.android.fragivity_processor
 
     api project(':cs_cptServices')
     api project(':cpt_main')
