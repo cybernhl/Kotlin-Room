@@ -35,7 +35,6 @@ class Demo11OneFragment3 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Bi
     }
 
     override fun init() {
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
