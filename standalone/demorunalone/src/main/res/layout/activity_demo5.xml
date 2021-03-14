@@ -40,6 +40,12 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="请求结果为空的测试"
+                    binding:clicks="@{click.testnull}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="单独的请求-串联"
                     binding:clicks="@{click.networkChuan}" />
 

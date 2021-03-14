@@ -20,7 +20,7 @@ class AuthViewModel @ViewModelInject constructor(
             val serverTime = mAuthRepository.getServerTime()
 
             serverTime.checkSuccess {
-                toast(it.timestamps.toString())
+                toast(it?.timestamps.toString())
             }
 
             loadSuccess()

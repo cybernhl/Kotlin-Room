@@ -2,8 +2,8 @@ package com.guadou.lib_baselib.base.vm
 
 import android.text.TextUtils
 import com.google.gson.JsonParseException
+import com.guadou.lib_baselib.bean.OkResult
 import com.guadou.testxiecheng.base.BaseBean
-import com.guadou.testxiecheng.base.OkResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import retrofit2.HttpException

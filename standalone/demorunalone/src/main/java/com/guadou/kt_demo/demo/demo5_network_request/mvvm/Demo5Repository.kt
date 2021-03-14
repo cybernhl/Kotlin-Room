@@ -4,10 +4,9 @@ import com.guadou.cs_cptservices.Constants
 import com.guadou.kt_demo.demo.demo5_network_request.bean.Industry
 import com.guadou.kt_demo.demo.demo5_network_request.bean.SchoolBean
 import com.guadou.kt_demo.demo.demo5_network_request.http.DemoRetrofit
-
 import com.guadou.lib_baselib.base.vm.BaseRepository
+import com.guadou.lib_baselib.bean.OkResult
 import com.guadou.lib_baselib.engine.extRequestHttp
-import com.guadou.testxiecheng.base.OkResult
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -37,17 +36,27 @@ class Demo5Repository @Inject constructor() : BaseRepository() {
     suspend inline fun getSchool(): OkResult<List<SchoolBean>> {
 
         return handleErrorApiCall(call = {
-
             handleApiErrorResponse(
-
                 DemoRetrofit.apiService.getSchool(
                     Constants.NETWORK_CONTENT_TYPE,
                     Constants.NETWORK_ACCEPT_V1
                 )
             )
-
         })
     }
 
+    /**
+     * 银行卡提现已预约信息
+     */
+    suspend fun getGiroAppointmentData(token: String?): OkResult<Long> {
+
+        return extRequestHttp {
+            DemoRetrofit.apiService.getGiroAppointmentData(
+                Constants.NETWORK_CONTENT_TYPE,
+                Constants.NETWORK_ACCEPT_V4,
+                token
+            )
+        }
+    }
 
 }
