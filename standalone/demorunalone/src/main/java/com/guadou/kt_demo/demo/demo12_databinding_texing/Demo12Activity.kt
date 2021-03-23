@@ -20,7 +20,7 @@ import com.guadou.lib_baselib.utils.CommUtils
 class Demo12Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo12Binding>() {
 
     private val clickProxy: ClickProxy by lazy { ClickProxy() }
-    private val mTestBindingBean: TestBindingBean by lazy { TestBindingBean("第一个文本", "第二个文本", "第三个文本") }
+//    private val mTestBindingBean: TestBindingBean by lazy { TestBindingBean("第一个文本", "第二个文本", "第三个文本") }
 
     companion object {
         fun startInstance() {
@@ -35,7 +35,7 @@ class Demo12Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo12Binding>() 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.activity_demo12)
             .addBindingParams(BR.click, clickProxy)
-            .addBindingParams(BR.testBean, mTestBindingBean)
+//            .addBindingParams(BR.testBean, mTestBindingBean)
     }
 
     override fun startObserve() {

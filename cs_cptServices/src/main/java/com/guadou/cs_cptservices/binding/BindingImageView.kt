@@ -1,5 +1,6 @@
 package com.guadou.cs_cptservices.binding
 
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -25,4 +26,10 @@ fun loadImg(
             isCircle = isCircle
         )
     }
+}
+
+
+@BindingAdapter("loadBitmap")
+fun loadBitmap(view: ImageView, bitmap: Bitmap?) {
+    view.setImageBitmap(bitmap)
 }
