@@ -87,6 +87,12 @@
 
         <activity android:name=".demo.demo12_databinding_texing.Demo12Activity" />
 
+        <activity android:name=".demo.demo13_motionlayout.Demo13MotionActivity" />
+
+        <activity android:name=".demo.demo13_motionlayout.Demo13JavaActivity" />
+
+        <activity android:name=".demo.demo13_motionlayout.Demo13XmlActivity" />
+
     </application>
 
 </manifest>

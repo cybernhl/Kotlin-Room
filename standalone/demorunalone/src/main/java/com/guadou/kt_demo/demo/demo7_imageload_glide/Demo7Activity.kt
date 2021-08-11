@@ -6,7 +6,6 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.databinding.ActivityDemo7Binding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 
 /**

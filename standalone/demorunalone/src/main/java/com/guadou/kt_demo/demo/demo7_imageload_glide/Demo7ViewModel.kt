@@ -14,7 +14,8 @@ class Demo7ViewModel @ViewModelInject constructor() : BaseViewModel() {
 
 
     fun setImage1() {
-        img1LiveData.value = "http://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0"
+//        img1LiveData.value = "http://i01piccdn.sogoucdn.com/5f7f3dcff67f89c0"
+        img1LiveData.value = "http://www.guophone.com.cn/v1/files/cccc26ae0aa24aaf958b4974d337c6dc/download"
     }
 
     fun setImage2() {

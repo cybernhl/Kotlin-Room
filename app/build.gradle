@@ -80,6 +80,7 @@ dependencies {
     testImplementation deps.android.junit
     androidTestImplementation deps.android.test_junit
     androidTestImplementation deps.android.test_espresso
+
     //依赖注入
     implementation deps.support.hilt
     kapt deps.support.hilt_kapt

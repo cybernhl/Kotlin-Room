@@ -149,5 +149,6 @@ dependencies {
 
     //Banner库
     api deps.support.banner
+    api 'com.gavin.com.library:stickyDecoration:1.5.3'
 
 }
