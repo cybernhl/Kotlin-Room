@@ -2,7 +2,6 @@ package com.guadou.kt_demo.demo.demo5_network_request
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.lifecycle.Observer
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo5Binding
@@ -40,13 +39,13 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
     @SuppressLint("SetTextI18n")
     override fun startObserve() {
         //行业回调
-        mViewModel.mIndustryLiveData.observe(this, Observer {
+        mViewModel.mIndustryLiveData.observe(this, {
             mViewModel.mContentLiveData.value = it.toString()
 
         })
 
         //学校回调
-        mViewModel.mSchoolliveData.observe(this, Observer {
+        mViewModel.mSchoolliveData.observe(this, {
             mViewModel.mContentLiveData.value = mBinding.tvNetContent.text.toString() + "\n" + "学校的数据===>：" + "\n"
             mViewModel.mContentLiveData.value = mBinding.tvNetContent.text.toString() + it.toString()
         })
@@ -62,6 +61,10 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
      * DataBinding事件处理
      */
     inner class ClickProxy {
+
+        fun testnull() {
+            mViewModel.testNullNet()
+        }
 
         /**
          * 串联顺序执行

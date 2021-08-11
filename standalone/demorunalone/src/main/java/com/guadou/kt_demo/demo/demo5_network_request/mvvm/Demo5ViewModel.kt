@@ -7,13 +7,13 @@ import androidx.lifecycle.SavedStateHandle
 import com.guadou.kt_demo.demo.demo5_network_request.bean.Industry
 import com.guadou.kt_demo.demo.demo5_network_request.bean.SchoolBean
 import com.guadou.lib_baselib.base.vm.BaseViewModel
+import com.guadou.lib_baselib.bean.OkResult
 import com.guadou.lib_baselib.ext.ControlledRunner
 import com.guadou.lib_baselib.ext.SingleRunner
 import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
-import com.guadou.testxiecheng.base.OkResult
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 
@@ -160,4 +160,24 @@ class Demo5ViewModel @ViewModelInject constructor(
     fun testRepository(): String {
         return mRepository.toString()
     }
+
+    /**
+     * 测试返回为null
+     */
+    fun testNullNet() {
+
+        launchOnUI {
+            loadStartProgress()
+            val result =
+                mRepository.getGiroAppointmentData("bearereyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC95eWpvYnMtYXBpLWRldi5ndWFiZWFuLmNvbVwvaW5kZXgucGhwXC9hcGlcL2VtcGxveWVlXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxNTY5OTA3NiwiZXhwIjoxNjUxNjk5MDc2LCJuYmYiOjE2MTU2OTkwNzYsImp0aSI6IkpsZVRuVkNGeUFaeFhmZloiLCJzdWIiOjExNjU0LCJwcnYiOiI4NjY1YWU5Nzc1Y2YyNmY2YjhlNDk2Zjg2ZmE1MzZkNjhkZDcxODE4In0.2NIA9HATAxJYGPwrWqRfxtEZZW4GTbj7SQzkG1krAD0")
+            loadHideProgress()
+
+            result.checkResult({
+                YYLogUtils.w("testNullNet - success :" + it)
+            }, {
+                YYLogUtils.w("testNullNet - error :" + it)
+            })
+        }
+    }
+
 }

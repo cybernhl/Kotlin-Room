@@ -54,6 +54,22 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:text="@{`text:`+testBean.text1}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:default="@{@string/app_name}"
+            binding:text="@{`text:`+testBean.text2}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            binding:default="@{`placeholder`}"
+            binding:text="@{testBean.text3}" />
 
         <Button
             android:layout_width="wrap_content"
@@ -73,10 +89,10 @@
             android:layout_height="wrap_content" />
 
         <Button
-            binding:clicks="@{click.customView}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="测试自定义View的DataBinding赋值" />
+            android:text="测试自定义View的DataBinding赋值"
+            binding:clicks="@{click.customView}" />
 
         <com.guadou.kt_demo.demo.demo12_databinding_texing.CustomTestView
             android:layout_width="match_parent"

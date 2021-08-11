@@ -1,4 +1,4 @@
-package com.guadou.testxiecheng.base
+package com.guadou.lib_baselib.bean
 
 /**
  * 自定义网络返回结果
@@ -6,11 +6,11 @@ package com.guadou.testxiecheng.base
  */
 sealed class OkResult<out T : Any> {
 
-    data class Success<out T : Any>(val data: T) : OkResult<T>()
+    data class Success<out T : Any>(val data: T?) : OkResult<T>()
     data class Error(val exception: Exception) : OkResult<Nothing>()
 
     //检测成功与失败
-    fun checkResult(success: (T) -> Unit, error: (String?) -> Unit) {
+    fun checkResult(success: (T?) -> Unit, error: (String?) -> Unit) {
         if (this is Success) {
             success(data)
         } else if (this is Error) {
@@ -19,12 +19,11 @@ sealed class OkResult<out T : Any> {
     }
 
     //只是检测成功
-    fun checkSuccess(success: (T) -> Unit) {
+    fun checkSuccess(success: (T?) -> Unit) {
         if (this is Success) {
             success(data)
         }
     }
-
 
     override fun toString(): String {
         return when (this) {

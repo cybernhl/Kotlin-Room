@@ -54,7 +54,7 @@ class DemoJobViewModel @ViewModelInject constructor(
                 //返回的数据是封装过的，检查是否成功
                 jobs.checkResult({
                     //成功
-                    handleData(it.list)
+                    handleData(it?.list)
                     liveData.postValue(true)
                 }, {
                     //失败
@@ -72,18 +72,18 @@ class DemoJobViewModel @ViewModelInject constructor(
     }
 
     //处理数据-添加或刷新
-    private fun handleData(list: List<FullJobsPage.FullJobs>) {
+    private fun handleData(list: List<FullJobsPage.FullJobs>?) {
         if (!CheckUtil.isEmpty(list)) {
             //有数据，判断是刷新还是加载更多的数据
             if (isNeedCleanAllData) {
                 //刷新的方式
                 mDatas.clear()
-                mDatas.addAll(list)
+                mDatas.addAll(list!!)
                 mAdapter.notifyDataSetChanged()
             } else {
                 //加载更多
-                mDatas.addAll(list)
-                mAdapter.notifyItemRangeInserted(mDatas.size - list.size, list.size)
+                mDatas.addAll(list!!)
+                mAdapter.notifyItemRangeInserted(mDatas.size - list!!.size, list!!.size)
                 mAdapter.loadMoreModule.loadMoreComplete()
             }
         } else {

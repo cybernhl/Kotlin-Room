@@ -9,6 +9,7 @@ class Constants {
         val NETWORK_CONTENT_TYPE = "application/x-www-form-urlencoded"
 
         val NETWORK_ACCEPT_V1 = "application/x.yyjobs-api.v1+json"
+        val NETWORK_ACCEPT_V4 = "application/x.yyjobs-api.v4+json"
         val NETWORK_ACCEPT_V9 = "application/x.yyjobs-api.v9+json"
 
     }

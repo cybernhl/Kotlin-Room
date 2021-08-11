@@ -1,9 +1,9 @@
 package com.guadou.lib_baselib.engine
 
+import com.guadou.lib_baselib.base.ApiException
 import com.guadou.lib_baselib.base.vm.BaseRepository
+import com.guadou.lib_baselib.bean.OkResult
 import com.guadou.testxiecheng.base.BaseBean
-import com.guadou.testxiecheng.base.OkResult
-import java.io.IOException
 
 /**
  * 引擎类
@@ -20,7 +20,7 @@ suspend fun <T : Any> BaseRepository.extRequestHttp(call: suspend () -> BaseBean
         if (response.code == 200) {
             OkResult.Success(response.data)
         } else {
-            OkResult.Error(IOException(response.message))
+            OkResult.Error(ApiException(response.code, response.message))
         }
 
     } catch (e: Exception) {

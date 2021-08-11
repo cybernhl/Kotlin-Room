@@ -12,8 +12,9 @@ import android.text.method.DigitsKeyListener;
  */
 public class ETMoneyValueFilter extends DigitsKeyListener {
 
-    public ETMoneyValueFilter() {
+    public ETMoneyValueFilter(int d) {
         super(false, true);
+        digits = d;
     }
 
     private int digits = 2;  //默认显示二位数的小数点

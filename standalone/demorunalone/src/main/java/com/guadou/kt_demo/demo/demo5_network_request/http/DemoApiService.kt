@@ -34,4 +34,14 @@ interface DemoApiService {
         @Header("Accept") accept: String
     ): BaseBean<FullJobsPage>
 
+    /**
+     * 银行卡提现已预约信息
+     */
+    @GET("/index.php/api/employee/giro/index")
+    suspend fun getGiroAppointmentData(
+        @Header("Content-Type") contentType: String?,
+        @Header("Accept") accept: String?,
+        @Header("Authorization") token: String?
+    ): BaseBean<Long>
+
 }
