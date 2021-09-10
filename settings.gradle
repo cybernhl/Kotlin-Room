@@ -1,3 +1,4 @@
+includeBuild("version")
 
 include ':app',
         ':cs_router',
