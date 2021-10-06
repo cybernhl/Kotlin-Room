@@ -28,8 +28,8 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mActivity = activity!!
-        mContext = activity!!.applicationContext
+        mActivity = requireActivity()
+        mContext = requireActivity().applicationContext
 
         if (needRegisterNetworkChangeObserver()) {
             ConnectivityReceiver.registerObserver(this)
