@@ -20,6 +20,14 @@ open class BaseRepository {
         return call.invoke()
     }
 
+    /**
+     * 推荐使用拓展函数extRequestHttp
+     * 如果要使用Base里面的方法请求网络这么使用
+     *   return handleErrorApiCall(call = {
+                    handleApiErrorResponse()
+                })
+     * 都可以实现网络请求
+     */
     //处理Http错误-内部再处理Api错误
     suspend fun <T : Any> handleErrorApiCall(call: suspend () -> OkResult<T>, errorMessage: String = ""): OkResult<T> {
         return try {
