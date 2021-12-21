@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--CircleImageView-->
+    <declare-styleable name="FloatLinearLayout_Layout">
+
+        <attr name="layout_pin" format="boolean" />
+
+    </declare-styleable>
+
+
+</resources>

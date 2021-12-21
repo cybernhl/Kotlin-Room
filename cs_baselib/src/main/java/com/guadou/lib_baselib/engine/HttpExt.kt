@@ -23,7 +23,6 @@ suspend fun <T : Any> BaseRepository.extRequestHttp(call: suspend () -> BaseBean
 //            OkResult.Error(ApiException(response.code, response.message))
 //        }
 //    }.onFailure { e ->
-//
 //        e.printStackTrace()
 //        OkResult.Error(handleExceptionMessage(Exception(e.message, e)))
 //    }
