@@ -13,7 +13,6 @@ import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.ActivityManage
 import com.guadou.lib_baselib.utils.StatusBarUtils
 
-
 /**
  * 最底层的Activity,不带MVP和MVVM,一般不用这个
  */

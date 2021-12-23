@@ -79,6 +79,7 @@ configurations.all {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
+    //noinspection GradleDependency
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api project(':cs_router')
 
@@ -91,7 +92,13 @@ dependencies {
     api deps.android.fragment_ktx  //Fragment与Activity的ViewModel扩展（Hilt必须）
     api deps.android.navigation    //单Activity-Fragment导航
     api deps.android.navigation_ui
-    api deps.android.fragivity    //封装navigation库
+    //封装navigation库
+    api(deps.android.fragivity) {
+        exclude group: 'androidx.fragment'
+        exclude group: 'androidx.appcompat'
+        exclude group: 'androidx.activity'
+        exclude group: 'org.jetbrains.kotlin'
+    }
     api deps.android.fragivity_processor
     kapt deps.android.fragivity_processor
 

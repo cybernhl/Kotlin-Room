@@ -1,12 +1,14 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
+import android.os.Build
 import androidx.navigation.fragment.NavHostFragment
 import com.github.fragivity.deeplink.handleDeepLink
 import com.github.fragivity.loadRoot
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.activity.AbsActivity
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 
 /**
@@ -32,6 +34,8 @@ class Demo11Activity : AbsActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navHostFragment.loadRoot(Demo11OneFragment1::class)
         navHostFragment.handleDeepLink(intent)
+
+        YYLogUtils.w("当前设备Android系统：" + Build.VERSION.SDK_INT)
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {

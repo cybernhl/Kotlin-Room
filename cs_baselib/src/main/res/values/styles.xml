@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowAnimationStyle">@style/My_AnimationActivity</item>
+        <item name="android:windowAnimationStyle">@style/activity_left_right_anim</item>
         <item name="android:windowBackground">@null</item>
     </style>
 
@@ -15,20 +15,20 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowAnimationStyle">@style/My_AnimationActivity</item>
+        <item name="android:windowAnimationStyle">@style/activity_left_right_anim</item>
     </style>
 
     <!--app-splash的启动theme，不带状态栏-->
-<!--    <style name="AppTheme_welcome" parent="@android:style/Theme.NoTitleBar.Fullscreen">-->
-<!--        <item name="android:windowBackground">@drawable/layer_start_window</item>-->
-<!--        <item name="windowActionBar">false</item>-->
-<!--        <item name="windowNoTitle">true</item>-->
-<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-<!--        <item name="colorAccent">@color/colorAccent</item>-->
-<!--        <item name="android:windowAnimationStyle">@style/My_AnimationActivity</item>-->
-<!--        &lt;!&ndash;        <item name="android:windowBackground">@null</item>&ndash;&gt;-->
-<!--    </style>-->
+    <!--    <style name="AppTheme_welcome" parent="@android:style/Theme.NoTitleBar.Fullscreen">-->
+    <!--        <item name="android:windowBackground">@drawable/layer_start_window</item>-->
+    <!--        <item name="windowActionBar">false</item>-->
+    <!--        <item name="windowNoTitle">true</item>-->
+    <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+    <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--        <item name="colorAccent">@color/colorAccent</item>-->
+    <!--        <item name="android:windowAnimationStyle">@style/My_AnimationActivity</item>-->
+    <!--        &lt;!&ndash;        <item name="android:windowBackground">@null</item>&ndash;&gt;-->
+    <!--    </style>-->
 
 
     <style name="AppThemeLightDialog" parent="Theme.AppCompat.Light.Dialog">
@@ -60,7 +60,7 @@
     </style>
 
     <!--全程的Activity跳转动画 统一管理-->
-    <style name="My_AnimationActivity" mce_bogus="1" parent="@android:style/Animation.Activity">
+    <style name="activity_left_right_anim" mce_bogus="1" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/open_exit</item>
         <item name="android:activityCloseEnterAnimation">@anim/close_enter</item>
