@@ -46,7 +46,7 @@ class Demo5Repository @Inject constructor() : BaseRepository() {
     }
 
     /**
-     * 银行卡提现已预约信息
+     * 网络请求使用扩展函数的方式-推荐这种，便于引擎类集中管理
      */
     suspend fun getGiroAppointmentData(token: String?): OkResult<Long> {
 

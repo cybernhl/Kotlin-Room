@@ -74,7 +74,8 @@
 
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.DemoSpanActivity" />
 
-        <activity android:name=".demo.demo11_fragment_navigation.Demo11Activity"
+        <activity
+            android:name=".demo.demo11_fragment_navigation.Demo11Activity"
             android:launchMode="singleTask">
 
             <intent-filter>
@@ -92,6 +93,8 @@
         <activity android:name=".demo.demo13_motionlayout.Demo13JavaActivity" />
 
         <activity android:name=".demo.demo13_motionlayout.Demo13XmlActivity" />
+
+        <activity android:name=".demo.demo14_mvi.Demo14Activity" />
 
     </application>
 
