@@ -54,7 +54,7 @@ class GlobalWebActivity : BaseVMActivity<BaseViewModel>() {
 
     private fun initTitles() {
         if (!CheckUtil.isEmpty(mWebtitle)) {
-            easy_title.title = mWebtitle
+            easy_title.setTitle(mWebtitle)
         }
     }
 
@@ -70,7 +70,7 @@ class GlobalWebActivity : BaseVMActivity<BaseViewModel>() {
         mWebView!!.setOnWebChangeListener(object : MyWebView.OnWebChangeListener {
             override fun titleChange(title: String) {
                 if (CheckUtil.isEmpty(mWebtitle)) {
-                    easy_title.title = title
+                    easy_title.setTitle(mWebtitle)
                 }
             }
 

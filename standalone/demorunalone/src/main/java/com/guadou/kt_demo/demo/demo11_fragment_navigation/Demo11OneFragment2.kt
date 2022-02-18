@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import com.github.fragivity.annotation.DeepLink
+import com.github.fragivity.applySlideInOut
 import com.github.fragivity.navigator
 import com.github.fragivity.pop
 import com.github.fragivity.push
@@ -10,7 +11,6 @@ import com.guadou.kt_demo.databinding.FragmentDemo11Page2Binding
 import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.ext.applySlideInOut
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 
@@ -73,8 +73,12 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
         }
 
         fun nav2Page3() {
-            navigator.push(Demo11OneFragment3::class) {
-                applySlideInOut()
+//            navigator.push(Demo11OneFragment3::class) {
+//                applySlideInOut()
+//            }
+
+            navigator.push({ applySlideInOut() }) {
+                Demo11OneFragment3()
             }
         }
     }

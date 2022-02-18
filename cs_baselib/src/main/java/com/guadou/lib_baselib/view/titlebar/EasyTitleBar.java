@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -26,11 +28,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.guadou.basiclib.R;
+import com.guadou.lib_baselib.utils.CommUtils;
 import com.guadou.lib_baselib.utils.ThreadPoolUtils;
 
 
 /**
- * 通用标题栏,封装的TitleBar
+ * 通用标题栏
  */
 public class EasyTitleBar extends RelativeLayout {
 
@@ -40,7 +43,7 @@ public class EasyTitleBar extends RelativeLayout {
     private LinearLayout titleLayout;
     private ConstraintLayout fit_cl;
     //返回箭头图片
-    private ImageView backImage;
+    public ImageView backImage;
     //返回箭头的父布局
     private LinearLayout backLayout;
     private ViewGroup rightLayout;
@@ -260,7 +263,11 @@ public class EasyTitleBar extends RelativeLayout {
 
             fitColor = titleBarBackGround;
             fitColor = ta.getColor(R.styleable.EasyTitleBar_Easy_fitColor, fitColor);
-            status_view.setBackgroundColor(fitColor);
+            if (fitColor == Color.WHITE || fitColor == CommUtils.getColor(R.color.white)) {
+                fitColor = Build.VERSION.SDK_INT < 23 ? CommUtils.getColor(R.color.status_bar_gray_bg) : Color.WHITE;
+            }
+            //设置EasyTitleBar中状态栏的颜色
+            setFitColor(fitColor);
 
             //标题
             title = ta.getString(R.styleable.EasyTitleBar_Easy_title);
@@ -525,7 +532,7 @@ public class EasyTitleBar extends RelativeLayout {
     /**
      * 设置标题文字
      */
-    public void setTitle(String title) {
+    public void setTitle(CharSequence title) {
         title_tv.setText(title);
     }
 
@@ -619,6 +626,7 @@ public class EasyTitleBar extends RelativeLayout {
             }
         });
     }
+
 
     //双击事件
     public interface OnDoubleClickListener {
@@ -729,7 +737,7 @@ public class EasyTitleBar extends RelativeLayout {
             return this;
         }
 
-        public MenuBuilder onItemClickListener(MenuBuilder.OnMenuClickListener onMenuClickListener) {
+        public MenuBuilder onItemClickListener(OnMenuClickListener onMenuClickListener) {
             this.onMenuClickListener = onMenuClickListener;
             return this;
         }
@@ -765,8 +773,14 @@ public class EasyTitleBar extends RelativeLayout {
             } else {
                 imageView.setImageBitmap(null);
             }
-            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            imageParams.width = (int) (menuImgSize + paddingleft + paddingright);
+
+            LinearLayout.LayoutParams imageParams;
+            if (menuImgSize < 0) {
+                imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            } else {
+                imageParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                imageParams.width = (int) (menuImgSize + paddingleft + paddingright);
+            }
             imageView.setLayoutParams(imageParams);
             imageView.setPadding(paddingleft, 0, paddingright, 0);
 

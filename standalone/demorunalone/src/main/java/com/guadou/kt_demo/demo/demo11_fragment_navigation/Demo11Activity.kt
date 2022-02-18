@@ -6,7 +6,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.github.fragivity.deeplink.handleDeepLink
 import com.github.fragivity.loadRoot
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.AbsActivity
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
+import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
@@ -14,7 +15,7 @@ import com.guadou.lib_baselib.utils.NetWorkUtil
 /**
  * Fragment导航
  */
-class Demo11Activity : AbsActivity() {
+class Demo11Activity : BaseVMActivity<Demo11ViewModel>() {
 
     companion object {
         fun startInstance() {
@@ -26,8 +27,8 @@ class Demo11Activity : AbsActivity() {
         }
     }
 
-    override fun setContentView() {
-        setContentView(R.layout.activity_demo_11)
+    override fun getLayoutIdRes(): Int {
+        return R.layout.activity_demo_11
     }
 
     override fun init() {
@@ -39,6 +40,10 @@ class Demo11Activity : AbsActivity() {
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
+    }
+
+    override fun startObserve() {
+
     }
 
 

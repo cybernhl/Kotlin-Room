@@ -6,10 +6,11 @@ import com.guadou.basiclib.R;
 
 
 /**
- * EastTitle的设置类
+ * Created by Administrator on 2018/6/23.
  */
 
 public class TitleBarSetting {
+
 
     private static TitleBarSetting setting;
 

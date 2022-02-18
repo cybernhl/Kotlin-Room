@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.github.fragivity.applySlideInOut
 import com.github.fragivity.navigator
 import com.github.fragivity.push
 import com.guadou.kt_demo.BR
@@ -14,7 +15,6 @@ import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.ext.applySlideInOut
 import com.guadou.lib_baselib.ext.getActivityVM
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
@@ -85,12 +85,9 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
 
         fun nav2Page2() {
             //跳转的几种方式，跳转Class文件
-//            navigator.push(Demo11OneFragment2::class, bundleOf("text" to "携带数据给Page Two")) {
-//                applySlideInOut()
-//            }
 
 //            navigator.push {
-//                return@push Demo11OneFragment2(callback)
+//                Demo11OneFragment2(callback)
 //            }
 
             //可以直接跳转实例对象
@@ -99,6 +96,7 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
 //            }, block = {
 //                return@push Demo11OneFragment2(callback)
 //            })
+
             //简化
             navigator.push({ applySlideInOut() }) {
                 Demo11OneFragment2(callback)

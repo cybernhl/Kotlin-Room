@@ -19,11 +19,6 @@ import com.guadou.lib_baselib.utils.Log.YYLogUtils
 @DeepLink(uri = "demo11://com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment3/")
 class Demo11OneFragment3 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Binding>() {
 
-    companion object {
-        fun obtainFragment(): Demo11OneFragment3 {
-            return Demo11OneFragment3()
-        }
-    }
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_demo11_page3)

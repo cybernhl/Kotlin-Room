@@ -19,6 +19,7 @@ import com.guadou.kt_demo.demo.demo9_ktfollow.DemoCountDwonActivity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
+import com.guadou.lib_baselib.ext.toast
 
 /**
  * 演示Demo的首页
@@ -84,9 +85,11 @@ class DemoMainActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoMainBinding
         fun navDemo11() {
 //            Demo11Activity.startInstance()
 
+            //可以直接跳转到Fragment3页面  在Demo11Activity下面 并且还load了root的fragment
             val intent =
                 Intent(Intent.ACTION_VIEW, Uri.parse("demo11://com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment3/"))
             startActivity(intent)
+            toast("以路由的方式直接跳转到demo3所在的activity,并且在下面压一个root-demo1")
 
         }
 
