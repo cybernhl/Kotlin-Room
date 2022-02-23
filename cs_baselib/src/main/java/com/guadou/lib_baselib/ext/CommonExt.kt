@@ -24,6 +24,7 @@ import com.guadou.lib_baselib.base.BaseApplication
 import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
+import com.guadou.lib_baselib.utils.interceptor.LoginInterceptorTask
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.io.File
@@ -517,4 +518,33 @@ fun Fragment.countDown(
         }
     }
 
+}
+
+/**
+ * 登录的校验
+ */
+fun Any.extLoginCheck(loginBlock: () -> Unit, taskBlock: () -> Unit) {
+
+    object : LoginInterceptorTask() {
+
+        override fun isLogin(): Boolean {
+//            return BaseApplication.isUserLogin
+            return false
+        }
+
+        override fun gotoLogin() {
+            loginBlock()
+        }
+
+    }.execute {
+        taskBlock()
+    }
+}
+
+/**
+ * 刷新登录的状态-通知给任务器
+ */
+fun Any.extLoginEnd() {
+    //不管登录成功还是失败，完成登录通知一下登录拦截器放行
+    LoginInterceptorTask.loginEnded()
 }
