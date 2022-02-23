@@ -37,6 +37,25 @@ public class StatusbarGrayView extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec); //得到宽度设置模式
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec); //得到宽度设置模式
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec); //得到高度设置模式
+
+        //如果设置高度为wrap-content自适应 那么固定设置为状态栏高度
+        if (heightMode == MeasureSpec.AT_MOST) {
+            if (widthMode == MeasureSpec.EXACTLY) {
+                setMeasuredDimension(widthSize, EasyUtil.getStateBarHeight(getContext()));
+            } else {
+                setMeasuredDimension(1, EasyUtil.getStateBarHeight(getContext()));
+            }
+        } else {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 

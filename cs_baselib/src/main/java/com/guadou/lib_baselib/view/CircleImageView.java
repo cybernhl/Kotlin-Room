@@ -75,7 +75,6 @@ public class CircleImageView extends ImageView {
 
     public CircleImageView(Context context) {
         super(context);
-
         init();
     }
 

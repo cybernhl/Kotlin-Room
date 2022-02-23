@@ -11,6 +11,7 @@ import com.guadou.lib_baselib.base.mvi.observeState
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.StatusBarUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,6 +51,7 @@ class Demo14Activity : BaseVDBActivity<Damo14ViewModel, ActivityDemo14Binding>()
     }
 
     override fun init() {
+        StatusBarUtils.immersive(this)
         mViewModel.fetchDatas()
     }
 
