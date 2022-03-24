@@ -10,6 +10,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.font_text_view.TypefaceUtil
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.view.span.dsl.buildSpannableString
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,7 +45,7 @@ class DemoSpanActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoSpanBinding
 
     override fun init() {
         //测试Hilt
-        YYLogUtils.w("server:" + userServer.toString() + "Dao:"+userServer.getDaoContent())
+        YYLogUtils.w("server:" + userServer.toString() + "Dao:" + userServer.getDaoContent())
 
 
         //可以直接操作TextView,如果没有文本可以直接添加带Span的文本
@@ -56,15 +57,13 @@ class DemoSpanActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoSpanBinding
             .appendClickSpan("来点我一下试试啊", isUnderlineText = true, clickAction = {
                 toast("哎呀，您点到我了呢，嘿嘿")
             })
-            .appendImageSpan(R.mipmap.ic_launcher)  //默认的大图什么都不加
-            .appendStyleSpan("我是粗体的")
-            .appendImageSpan(R.mipmap.ic_launcher_round, 4, width = dp2px(35f), height = dp2px(35f))  //居中的,限制Drawable
-            .appendCustomTypeFaceSpan("Xiao mi Hua wei", TypefaceUtil.getSFFlower(mActivity))
-            .appendImageSpan(
-                R.mipmap.iv_me_red_packet,
-                maginLeft = dp2px(10f),
-                marginRight = dp2px(10f)
-            )  //默认底部对齐，加margin
+            .appendImageSpan(R.mipmap.ic_launcher)  //默认的大图什么都不加 默认在底部对齐
+            .appendStyleSpan("我是粗体的") //可以是默认粗体 斜体等
+            .appendImageSpan(R.mipmap.ic_launcher_round, 4, width = dp2px(35f), height = dp2px(35f))//4是居中的,限制Drawable
+            .appendCustomTypeFaceSpan("Xiao mi Hua wei", TypefaceUtil.getSFFlower(mActivity))  //自定义字体文件
+            //默认底部对齐，加左右margin
+            .appendImageSpan(R.mipmap.iv_me_red_packet, maginLeft = dp2px(10f), marginRight = dp2px(10f))
+            //添加删除线
             .appendStrikeThrougthSpan("添加删除线哦哦哦哦添加删除线哦哦哦哦")
 
 
@@ -86,8 +85,37 @@ class DemoSpanActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoSpanBinding
         strSpan = strSpan.toSizeSpan(0..20, 1.4f)
         //指定的文本换成图片
         strSpan = strSpan.toImageSpan(R.mipmap.iv_me_red_packet, 31..32)
-
         mBinding.tvTextSpan3.text = strSpan
+
+
+        //使用DSL的方式添加Span
+        mBinding.tvTextSpan4.buildSpannableString {
+            addText("我已详细阅读并同意")
+            addText("测试红色的文字颜色") {
+                setColor(Color.RED)
+            }
+            addText("测试白色文字加上灰色背景") {
+                setColor(Color.WHITE)
+                setBackground(Color.GRAY)
+            }
+            addText("测试文本变大了") {
+                setColor(Color.DKGRAY)
+                setScale(1.5f)
+            }
+            addImage(R.mipmap.ic_launcher)
+            addText("测试可以点击的文本") {
+                setClick(true) {
+                    toast("点击文本拉啦啦")
+                }
+            }
+            addImage(R.mipmap.ic_launcher_round, 5, dp2px(10f), dp2px(10f), dp2px(35f), dp2px(35f))
+            addText("Test Custom Typeface Font is't Success?") {
+                setTypeface(TypefaceUtil.getSFFlower(mActivity))
+            }
+            addText("测试中划线是否生效") {
+                setStrikethrough(true)
+            }
+        }
     }
 
 }

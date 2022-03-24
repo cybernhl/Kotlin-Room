@@ -29,7 +29,9 @@ open class BaseDataBindingAdapter<T>(layoutResId: Int, br: Int, list: MutableLis
         }
 
         holder.getBinding<ViewDataBinding>()?.run {
-            setVariable(_br, item)
+            if (_br > 0) {
+                setVariable(_br, item)
+            }
             executePendingBindings()
         }
 

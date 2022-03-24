@@ -4,8 +4,8 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
 import android.widget.TextView
+import com.guadou.lib_baselib.view.dsl.TextWatcherDslImpl
 
 /**
  * TextView的图标拓展使用
@@ -54,7 +54,7 @@ fun TextView.sizeDrawable(
 /**
  * EditText的监听
  */
-fun EditText.textChangeCallback(block: (str: String) -> Unit) {
+fun TextView.addTextChangedListenerClosure(block: (str: String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
 
         override fun afterTextChanged(p0: Editable?) {
@@ -68,4 +68,11 @@ fun EditText.textChangeCallback(block: (str: String) -> Unit) {
         }
 
     })
+}
+
+//使用DSL的方式监听文本变化
+fun TextView.addTextChangedListenerDsl(init: TextWatcherDslImpl.() -> Unit) {
+    val listener = TextWatcherDslImpl()
+    listener.init()
+    this.addTextChangedListener(listener)
 }

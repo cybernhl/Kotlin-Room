@@ -109,12 +109,12 @@ fun CharSequence.toClickSpan(
     range: IntRange,
     color: Int = Color.RED,
     isUnderlineText: Boolean = false,
-    clickAction: () -> Unit
+    clickAction: (() -> Unit)?
 ): CharSequence {
     return SpannableString(this).apply {
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                clickAction()
+                clickAction?.invoke()
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -164,7 +164,7 @@ fun CharSequence.toCustomTypeFaceSpan(typeface: Typeface, range: IntRange): Char
 fun CharSequence.toImageSpan(
     imageRes: Int,
     range: IntRange,
-    verticalAlignment: Int = 0,  //默认底部
+    verticalAlignment: Int = 0,  //默认底部  4是垂直居中
     maginLeft: Int = 0,
     marginRight: Int = 0,
     width: Int = 0,

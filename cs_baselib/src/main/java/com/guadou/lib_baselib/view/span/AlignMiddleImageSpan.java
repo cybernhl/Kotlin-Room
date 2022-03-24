@@ -24,14 +24,12 @@ import android.text.style.ImageSpan;
 
 import androidx.annotation.NonNull;
 
-
-
 /**
  * 支持垂直居中的ImageSpan
  */
 public class AlignMiddleImageSpan extends ImageSpan {
 
-    public static final int ALIGN_MIDDLE = 4; // 不要和父类重复
+    public static final int ALIGN_MIDDLE = 4; // 默认垂直居中
 
     /**
      * 规定这个Span占几个字的宽度

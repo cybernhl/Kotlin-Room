@@ -20,36 +20,58 @@
             app:Easy_title="各种Span的展示" />
 
 
-        <TextView
-            android:id="@+id/tv_text_span1"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_text_span1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
 
 
-        <TextView
-            android:id="@+id/tv_text_span2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_20dp"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_text_span2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_20dp"
+                    android:textSize="16sp" />
 
 
-        <com.guadou.lib_baselib.font_text_view.TextViewFlower
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_20dp"
-            android:text="IOS Ziti Test Custom TypeFace"
-            android:textColor="@color/black"
-            android:textSize="@dimen/d_16sp" />
+                <com.guadou.lib_baselib.font_text_view.TextViewFlower
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_20dp"
+                    android:text="IOS Ziti Test Custom TypeFace"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/d_16sp" />
 
 
-        <TextView
-            android:id="@+id/tv_text_span3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_20dp"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_text_span3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_20dp"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_text_span4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d_20dp"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
 
     </LinearLayout>
 

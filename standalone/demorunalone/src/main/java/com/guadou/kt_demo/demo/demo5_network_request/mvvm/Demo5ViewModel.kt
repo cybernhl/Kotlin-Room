@@ -113,8 +113,8 @@ class Demo5ViewModel @ViewModelInject constructor(
                 if (industry is OkResult.Success && school is OkResult.Success) {
                     loadHideProgress()
 
-                    mIndustryLiveData.postValue(industry.data)
-                    mSchoolliveData.postValue(school.data)
+                    mIndustryLiveData.postValue(industry.data!!)
+                    mSchoolliveData.postValue(school.data!!)
                 }
 
 
