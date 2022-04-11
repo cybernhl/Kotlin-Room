@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import com.github.fragivity.LaunchMode
 import com.github.fragivity.applySlideInOut
 import com.github.fragivity.navigator
 import com.github.fragivity.push
@@ -98,7 +100,11 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
 //            })
 
             //简化
-            navigator.push({ applySlideInOut() }) {
+            navigator.push({
+                applySlideInOut()
+                launchMode = LaunchMode.STANDARD
+                arguments = bundleOf("KEY_ARGUMENT1" to "arg1", "KEY_ARGUMENT2" to "arg2")
+            }) {
                 Demo11OneFragment2(callback)
             }
 
