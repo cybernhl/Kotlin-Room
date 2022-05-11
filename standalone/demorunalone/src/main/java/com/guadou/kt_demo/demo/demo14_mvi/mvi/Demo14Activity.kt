@@ -1,17 +1,15 @@
-package com.guadou.kt_demo.demo.demo14_mvi
+package com.guadou.kt_demo.demo.demo14_mvi.mvi
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo14Binding
-import com.guadou.kt_demo.demo.demo14_mvi.mvi.Damo14ViewModel
-import com.guadou.kt_demo.demo.demo14_mvi.mvi.Demo14ViewState
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.mvi.observeState
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
-import com.guadou.lib_baselib.utils.StatusBarUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,25 +32,32 @@ class Demo14Activity : BaseVDBActivity<Damo14ViewModel, ActivityDemo14Binding>()
             .addBindingParams(BR.click, clickProxy)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun startObserve() {
-        mViewModel.viewStates.observeState(this, Demo14ViewState::industrys, Demo14ViewState::schools) { industry, school ->
+        //监听两者数据变化
+        mViewModel.viewStates.observeState(
+            this,
+            Damo14ViewModel.Demo14ViewState::industrys,
+            Damo14ViewModel.Demo14ViewState::schools
+        ) { industry, school ->
 
-            YYLogUtils.w("industry: " + industry + " ; school: " + school)
+            YYLogUtils.w("industry: $industry ; school: $school")
         }
 
-        mViewModel.viewStates.observeState(this, Demo14ViewState::isChanged) {
+        //只监听changed的变换
+        mViewModel.viewStates.observeState(this, Damo14ViewModel.Demo14ViewState::isChanged) {
             if (it) {
-              val industry =  mViewModel.viewStates.value?.industrys
-              val school =  mViewModel.viewStates.value?.schools
-                mBinding.tvMessage.text = "industry: " + industry + " ; school: " + school
+                val industry = mViewModel.viewStates.value?.industrys
+                val school = mViewModel.viewStates.value?.schools
+                mBinding.tvMessage.text = "industry: $industry ; school: $school"
             }
         }
 
     }
 
     override fun init() {
-        StatusBarUtils.immersive(this)
-        mViewModel.fetchDatas()
+        //发送Intent指令，具体的实现由ViewModel实现
+        mViewModel.dispatch(Damo14ViewModel.DemoAction.RequestAllData)
     }
 
     /**
@@ -61,7 +66,11 @@ class Demo14Activity : BaseVDBActivity<Damo14ViewModel, ActivityDemo14Binding>()
     inner class ClickProxy {
 
         fun getData() {
-            mViewModel.changeData()
+            //发送Intent指令，具体的实现由ViewModel实现
+//            mViewModel.dispatch(Damo14ViewModel.DemoAction.RequestIndustry)
+//            mViewModel.dispatch(Damo14ViewModel.DemoAction.RequestSchool)
+            mViewModel.dispatch(Damo14ViewModel.DemoAction.UpdateChanged(true))
+
         }
     }
 

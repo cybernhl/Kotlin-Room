@@ -94,7 +94,7 @@
 
         <activity android:name=".demo.demo13_motionlayout.Demo13XmlActivity" />
 
-        <activity android:name=".demo.demo14_mvi.Demo14Activity" />
+        <activity android:name=".demo.demo14_mvi.mvi.Demo14Activity" />
 
     </application>
 

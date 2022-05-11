@@ -7,8 +7,12 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.guadou.kt_demo.demo.demo14_mvi.mvvm1.DemoViewModel" />
+
+        <variable
             name="click"
-            type="com.guadou.kt_demo.demo.demo14_mvi.mvi.Demo14Activity.ClickProxy" />
+            type="com.guadou.kt_demo.demo.demo14_mvi.mvvm2.MVVM2Activity.ClickProxy" />
 
     </data>
 
@@ -70,7 +74,8 @@
         <TextView
             android:id="@+id/tv_message"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.liveData.toString()}" />
 
     </LinearLayout>
 
