@@ -114,6 +114,7 @@ class Damo14ViewModel @ViewModelInject constructor(
         }
     }
 
+    //当前页面所需的数据与状态
     data class Demo14ViewState(
         val industrys: List<Industry> = emptyList(),
         val schools: List<SchoolBean> = emptyList(),
@@ -128,6 +129,7 @@ class Damo14ViewModel @ViewModelInject constructor(
 //        data class ErrorMessage(val message: String) : DemoEvent()
 //    }
 
+    //当前页面需要的事件定义
     sealed class DemoAction {
         object RequestIndustry : DemoAction()
         object RequestSchool : DemoAction()

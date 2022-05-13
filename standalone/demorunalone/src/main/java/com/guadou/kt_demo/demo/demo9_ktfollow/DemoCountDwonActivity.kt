@@ -12,9 +12,7 @@ import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.countDown
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 
 /**
  * 倒计时的实现 Kotlin-Flow流
@@ -38,6 +36,26 @@ class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountD
 
     override fun init() {
 
+//        testCoroutine1()
+        testCoroutine2()
+    }
+
+    private fun testCoroutine2() {
+        runBlocking {
+            delay(500)
+            YYLogUtils.w("协程2作用域内部执行")
+        }
+        YYLogUtils.w("协程2作用域wai部执行")
+    }
+
+    private fun testCoroutine1() {
+
+
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(500)
+            YYLogUtils.w("协程1作用域内部执行")
+        }
+        YYLogUtils.w("协程1作用域wai部执行")
     }
 
     override fun startObserve() {

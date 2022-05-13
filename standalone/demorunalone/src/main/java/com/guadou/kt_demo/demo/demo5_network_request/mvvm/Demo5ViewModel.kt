@@ -2,8 +2,10 @@ package com.guadou.kt_demo.demo.demo5_network_request.mvvm
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.guadou.kt_demo.demo.demo5_network_request.bean.Industry
 import com.guadou.kt_demo.demo.demo5_network_request.bean.SchoolBean
 import com.guadou.lib_baselib.base.vm.BaseViewModel
@@ -14,8 +16,7 @@ import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 
 /**
  * Repository一定要通过默认的构造方法传入进来
@@ -26,8 +27,11 @@ class Demo5ViewModel @ViewModelInject constructor(
     @Assisted val savedState: SavedStateHandle
 ) : BaseViewModel() {
 
-    val mIndustryLiveData = MutableLiveData<List<Industry>>()
-    val mSchoolliveData = MutableLiveData<List<SchoolBean>>()
+    private val _industryLD = MutableLiveData<List<Industry>>()
+    val mIndustryLD: LiveData<List<Industry>> = _industryLD
+
+    private val _schoollLD = MutableLiveData<List<SchoolBean>>()
+    val mSchoolLD: LiveData<List<Industry>> = _industryLD
 
     var mContentLiveData: MutableLiveData<String> = MutableLiveData()
 
@@ -39,18 +43,26 @@ class Demo5ViewModel @ViewModelInject constructor(
         //检查网络的状态，可选用
         checkNet({
 
-            //默认执行在主线程的协程-必须用（可选择默认执行在IO线程的协程）
-            launchOnUI {
-
+            viewModelScope.launch {
                 //开始Loading
                 loadStartProgress()
 
+                val startTimeStamp = System.currentTimeMillis()
+                val res = withContext(Dispatchers.Default) {
+                    //异步执行
+                    delay(1000)
+                    return@withContext "1234"
+                }
+                val endTimeStamp = System.currentTimeMillis()
+                YYLogUtils.w("res: $res  time: ${endTimeStamp - startTimeStamp}")
+
+                //网络请求获取行业数据
                 val industrys = mRepository.getIndustry()
 
                 //返回的数据是封装过的，检查是否成功
                 industrys.checkResult({
                     //成功
-                    mIndustryLiveData.postValue(it)
+                    _industryLD.postValue(it)
                 }, {
                     //失败
                     toastError(it)
@@ -60,12 +72,8 @@ class Demo5ViewModel @ViewModelInject constructor(
                 val schools = mRepository.getSchool()
                 //返回的数据是封装过的，检查是否成功
                 schools.checkSuccess {
-                    mSchoolliveData.postValue(it)
+                    _schoollLD.postValue(it)
                 }
-                //只是返回成功的 2种方式都可以
-//                if (schools is OkResult.Success) {
-//                    mSchoolliveData.postValue(schools.data)
-//                }
 
                 //完成Loading
                 loadHideProgress()
@@ -75,7 +83,6 @@ class Demo5ViewModel @ViewModelInject constructor(
 
     }
 
-
     /**
      * 网络请求的并发处理，一同发出请求，等待对方一起返回数据
      */
@@ -83,8 +90,8 @@ class Demo5ViewModel @ViewModelInject constructor(
         //检查网络的状态，可选用
         checkNet({
 
-            //默认执行在主线程的协程-必须用（可选择默认执行在IO线程的协程）
-            launchOnUI {
+
+            viewModelScope.launch {
 
                 //开始Loading
                 loadStartProgress()
@@ -99,7 +106,7 @@ class Demo5ViewModel @ViewModelInject constructor(
 
 
                 val localDBResult = async {
-                    //loadDB()    //加上aync就是非阻塞的 并发的  ，也可以不定义方法直接用aync包裹代码
+                    //loadDB()
                     YYLogUtils.w("thread:" + CommUtils.isRunOnUIThread())
 
                     delay(10000)
@@ -113,8 +120,8 @@ class Demo5ViewModel @ViewModelInject constructor(
                 if (industry is OkResult.Success && school is OkResult.Success) {
                     loadHideProgress()
 
-                    mIndustryLiveData.postValue(industry.data!!)
-                    mSchoolliveData.postValue(school.data!!)
+                    _industryLD.postValue(industry.data!!)
+                    _schoollLD.postValue(school.data!!)
                 }
 
 
@@ -133,28 +140,25 @@ class Demo5ViewModel @ViewModelInject constructor(
     private val singleRunner = SingleRunner()       //任务队列，排队，单独的
     fun netDuplicate() {
 
-        checkNet({
+        viewModelScope.launch {
+            //比较常用
+            //取消上一次的，执行这一次的
+            controlledRunner.cancelPreviousThenRun {
+                return@cancelPreviousThenRun mRepository.getIndustry()
+            }.checkSuccess {
+                YYLogUtils.e("请求成功：")
+                _industryLD.postValue(it)
+            }
 
-            launchOnUI {
-                //就用它 最好用
-                //取消上一次的，执行这一次的
-                controlledRunner.cancelPreviousThenRun {
-                    return@cancelPreviousThenRun mRepository.getIndustry()
-                }.checkSuccess {
-                    YYLogUtils.e("请求成功：")
-                    mIndustryLiveData.postValue(it)
-                }
-
-                //前一个执行完毕了，再执行下一个
+            //前一个执行完毕了，再执行下一个
 //                singleRunner.afterPrevious {
 //                    mMainRepository.getIndustry()
 //                }.checkSuccess {
 //                    YYLogUtils.e("测试重复的数据:" + it.toString())
 //                }
 
-            }
+        }
 
-        })
     }
 
     fun testRepository(): String {
@@ -173,9 +177,9 @@ class Demo5ViewModel @ViewModelInject constructor(
             loadHideProgress()
 
             result.checkResult({
-                YYLogUtils.w("testNullNet - success :" + it)
+                YYLogUtils.w("testNullNet - success :$it")
             }, {
-                YYLogUtils.w("testNullNet - error :" + it)
+                YYLogUtils.w("testNullNet - error :$it")
             })
         }
     }

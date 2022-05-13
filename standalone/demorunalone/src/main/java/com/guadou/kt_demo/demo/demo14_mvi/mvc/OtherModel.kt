@@ -21,7 +21,5 @@ class OtherModel : BaseRepository() {
                 Constants.NETWORK_ACCEPT_V1
             )
         }
-
     }
-
 }

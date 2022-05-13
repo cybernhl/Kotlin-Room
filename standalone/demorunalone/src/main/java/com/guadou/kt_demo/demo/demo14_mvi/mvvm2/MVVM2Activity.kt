@@ -19,6 +19,7 @@ class MVVM2Activity : BaseVDBActivity<DemoViewModel, ActivityDemo142Binding>() {
     }
 
     override fun init() {
+
     }
 
     override fun startObserve() {

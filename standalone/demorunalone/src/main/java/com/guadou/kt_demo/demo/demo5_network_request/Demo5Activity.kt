@@ -39,13 +39,13 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
     @SuppressLint("SetTextI18n")
     override fun startObserve() {
         //行业回调
-        mViewModel.mIndustryLiveData.observe(this, {
+        mViewModel.mIndustryLD.observe(this, {
             mViewModel.mContentLiveData.value = it.toString()
 
         })
 
         //学校回调
-        mViewModel.mSchoolliveData.observe(this, {
+        mViewModel.mSchoolLD.observe(this, {
             mViewModel.mContentLiveData.value = mBinding.tvNetContent.text.toString() + "\n" + "学校的数据===>：" + "\n"
             mViewModel.mContentLiveData.value = mBinding.tvNetContent.text.toString() + it.toString()
         })

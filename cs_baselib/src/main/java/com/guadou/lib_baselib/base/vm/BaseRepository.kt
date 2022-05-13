@@ -41,7 +41,7 @@ open class BaseRepository {
         }
     }
 
-    //处理Api错误，例如403Token过期 ；把BaseBean的数据转换为自定义的Result数据
+    //处理Api错误，例如403Token过期 把BaseBean的数据转换为自定义的Result数据
     suspend fun <T : Any> handleApiErrorResponse(
         response: BaseBean<T>,
         successBlock: (suspend CoroutineScope.() -> Unit)? = null,
