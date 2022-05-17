@@ -9,7 +9,7 @@ buildscript {
 }
 
 apply plugin: 'kotlin'
-apply plugin: 'java-gradle-plugin'
+apply plugin: 'java-gradle-plugin'  //既不是lib也不是application,指定类型为gradle插件
 
 repositories {
     jcenter()

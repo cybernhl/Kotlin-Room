@@ -50,7 +50,7 @@
                 android:layout_marginLeft="@dimen/d_20dp"
                 android:layout_weight="1"
                 android:text="双向绑定(赋值)"
-                binding:clicks="@{click.setData2ET}" />
+                android:onClick="@{click::setData2ET}" />
 
         </LinearLayout>
 

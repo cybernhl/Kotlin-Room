@@ -1,6 +1,6 @@
-@Suppress("SpellCheckingInspection")
+
 object AndroidX {
-    const val appcompat = "androidx.appcompat:appcompat:1.3.0-alpha01"
+    const val appcompat = "androidx.appcompat:appcompat:1.3.1"
     const val recyclerView = "androidx.recyclerview:recyclerview:1.2.0-alpha03"
     const val coreKtx = "androidx.core:core-ktx:1.2.0"
     const val activityKtx = "androidx.activity:activity-ktx:1.2.0-alpha04"

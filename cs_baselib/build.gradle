@@ -9,14 +9,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
-    compileSdkVersion versions.compileSdk
-    buildToolsVersion versions.buildToolsVersion
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
+        minSdkVersion versions.minSdk   //使用dependent.gradle的依赖无法跳转
+        targetSdkVersion versions.targetSdk  //修改gradle文件中的值，需要build
 
-        versionCode 1
-        versionName "1.0"
+        versionCode BuildConfig.versionCode   //使用version方式管理的依赖，可以跳转
+        versionName BuildConfig.versionName   //修改其中的值，无需build
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -83,7 +83,7 @@ dependencies {
     api project(':cs_router')
 
     //AndroidX
-    api deps.android.appcompat
+    api AndroidX.appcompat
     api deps.android.constraint_layout
     api deps.android.recyclerview
     api deps.android.design
@@ -116,7 +116,7 @@ dependencies {
     androidTestImplementation deps.android.test_espresso
 
     //图片
-    implementation deps.support.glide
+    implementation Support.glide
     implementation deps.support.glide_annotation
     implementation deps.support.glide_integration
     kapt deps.support.glide_compiler

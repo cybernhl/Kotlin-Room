@@ -11,7 +11,6 @@ import com.guadou.lib_baselib.utils.CommUtils
 class CustomTestView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     LinearLayout(context, attrs, defStyleAttr) {
 
-
     init {
         orientation = VERTICAL
 
@@ -29,7 +28,6 @@ class CustomTestView @JvmOverloads constructor(context: Context?, attrs: Attribu
             findViewById<TextView>(R.id.tv_custom_test2).text = it.text2
             findViewById<TextView>(R.id.tv_custom_test3).text = it.text3
         }
-
 
     }
 
