@@ -6,8 +6,10 @@ import com.guadou.kt_demo.databinding.FragmentDemo2Binding
 import com.guadou.lib_baselib.base.fragment.BaseVDBLazyLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
+import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
 
@@ -34,6 +36,11 @@ class LazyLoad1Fragment : BaseVDBLazyLoadingFragment<EmptyViewModel, FragmentDem
 
     override fun init() {
 
+        YYLogUtils.w("LazyLoad1Fragment - init")
+
+        mBinding.tvPage2.click {
+            Demo2Pager2Activity.startInstance()
+        }
     }
 
     //重新生成GLoading对象
@@ -43,12 +50,19 @@ class LazyLoad1Fragment : BaseVDBLazyLoadingFragment<EmptyViewModel, FragmentDem
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        YYLogUtils.w("LazyLoad1Fragment - onResume")
+    }
+
     override fun onGoadingRetry() {
         toast("重试一个请求")
         onLazyInitData()
     }
 
     override fun onLazyInitData() {
+        YYLogUtils.w("LazyLoad1Fragment - initData")
         //模拟的Loading的情况
         showStateLoading()
 

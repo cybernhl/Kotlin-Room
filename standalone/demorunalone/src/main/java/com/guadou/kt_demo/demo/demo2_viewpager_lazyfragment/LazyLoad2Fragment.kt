@@ -8,6 +8,7 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingLoadingAdapter
 
@@ -30,7 +31,7 @@ class LazyLoad2Fragment : BaseVDBLazyLoadingFragment<EmptyViewModel, FragmentDem
     }
 
     override fun init() {
-
+        YYLogUtils.w("LazyLoad2Fragment - init")
     }
 
     //重新生成GLoading对象
@@ -40,12 +41,19 @@ class LazyLoad2Fragment : BaseVDBLazyLoadingFragment<EmptyViewModel, FragmentDem
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        YYLogUtils.w("LazyLoad2Fragment - onResume")
+    }
+
     override fun onGoadingRetry() {
         toast("重试一个请求")
         onLazyInitData()
     }
 
     override fun onLazyInitData() {
+        YYLogUtils.w("LazyLoad2Fragment - initData")
         //模拟的Loading的情况
         showStateLoading()
 

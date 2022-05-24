@@ -51,6 +51,7 @@ class DemoMainActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoMainBinding
         }
 
         fun navDemo3() {
+//            Demo2Pager2Activity.startInstance()
             Demo3Activity.startInstance()
         }
 

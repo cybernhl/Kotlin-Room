@@ -38,6 +38,8 @@
 
         <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Activity" />
 
+        <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Pager2Activity" />
+
         <activity android:name=".demo.demo3_bottomtabbar_fragment.Demo3Activity" />
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.Demo4Activity" />

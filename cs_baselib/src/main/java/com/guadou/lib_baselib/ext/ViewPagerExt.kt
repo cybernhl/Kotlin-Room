@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 
 /**
 ViewPager相关
@@ -48,14 +50,32 @@ fun ViewPager.bind(count: Int, bindView: (container: ViewGroup, position: Int) -
 fun ViewPager.bindFragment(
     fm: FragmentManager,
     fragments: List<Fragment>,
-    pageTitles: List<String>? = null
+    pageTitles: List<String>? = null,
+    behavior: Int = 0
 ): ViewPager {
-    adapter = object : FragmentStatePagerAdapter(fm) {
+    offscreenPageLimit = fragments.size - 1
+    adapter = object : FragmentStatePagerAdapter(fm, behavior) {
         override fun getItem(p: Int) = fragments[p]
         override fun getCount() = fragments.size
         override fun getPageTitle(p: Int) = if (pageTitles == null) null else pageTitles[p]
     }
+    return this
+}
+
+/**
+ * 给ViewPager2绑定Fragment
+ */
+fun ViewPager2.bindFragment(
+    fm: FragmentManager,
+    lifecycle: Lifecycle,
+    fragments: List<Fragment>
+): ViewPager2 {
     offscreenPageLimit = fragments.size - 1
+
+    adapter = object : FragmentStateAdapter(fm, lifecycle) {
+        override fun getItemCount(): Int = fragments.size
+        override fun createFragment(position: Int): Fragment = fragments[position]
+    }
     return this
 }
 

@@ -1,5 +1,4 @@
 ext {
-
     versions = [
             'minSdk'           : 21,
             'targetSdk'        : 29,

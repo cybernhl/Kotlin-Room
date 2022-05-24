@@ -38,7 +38,8 @@ class Demo2Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo2Binding>() {
         mBinding.viewPager.bindFragment(
             supportFragmentManager,
             listOf(LazyLoad1Fragment.obtainFragment(), LazyLoad2Fragment.obtainFragment(), LazyLoad3Fragment.obtainFragment()),
-            listOf("Demo1", "Demo2", "Demo3")
+            listOf("Demo1", "Demo2", "Demo3"),
+            behavior = 1
         )
 
         mBinding.tabLayout.setupWithViewPager(mBinding.viewPager)
