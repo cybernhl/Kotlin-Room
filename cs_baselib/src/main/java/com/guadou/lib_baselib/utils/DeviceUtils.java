@@ -18,6 +18,7 @@ package com.guadou.lib_baselib.utils;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -29,11 +30,11 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -297,4 +298,43 @@ public class DeviceUtils {
             return id;
         }
     }
+
+
+    public static void killProcess(String killName) {
+        // 获取一个ActivityManager 对象
+        ActivityManager activityManager = (ActivityManager) CommUtils.getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        // 获取系统中所有正在运行的进程
+        List<ActivityManager.RunningAppProcessInfo> appProcessInfos = activityManager
+                .getRunningAppProcesses();
+        // 对系统中所有正在运行的进程进行迭代，如果进程名所要杀死的进程，则Kill掉
+        for (ActivityManager.RunningAppProcessInfo appProcessInfo : appProcessInfos) {
+            String processName = appProcessInfo.processName;
+            if (processName.equals(killName)) {
+                killProcessByPid(appProcessInfo.pid);
+            }
+        }
+    }
+
+    /**
+     * 根据要杀死的进程id执行Shell命令已达到杀死特定进程的效果
+     *
+     * @param pid
+     */
+    private static void killProcessByPid(int pid) {
+        String command = "kill -9 " + pid + "\n";
+        Runtime runtime = Runtime.getRuntime();
+        Process proc;
+        try {
+            proc = runtime.exec(command);
+            if (proc.waitFor() != 0) {
+                System.err.println("exit value = " + proc.exitValue());
+            }
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (InterruptedException e) {
+            System.err.println(e);
+        }
+
+    }
+
 }

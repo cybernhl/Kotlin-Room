@@ -98,6 +98,22 @@
 
         <activity android:name=".demo.demo14_mvi.mvi.Demo14Activity" />
 
+        <activity android:name=".demo.demo15_aidl.Demo15OptionActivity" />
+        <activity android:name=".demo.demo15_aidl.service1.Service1Activity" />
+        <activity android:name=".demo.demo15_aidl.service2.Service2Activity" />
+        <activity android:name=".demo.demo15_aidl.service3.Service3Activity" />
+
+        <service
+            android:name=".demo.demo15_aidl.service1.MyService1" />
+
+        <service
+            android:name=".demo.demo15_aidl.service2.MyService2"
+            android:process=":test" />
+
+        <service
+            android:name=".demo.demo15_aidl.service3.MyService3"
+            android:process=":test"/>
+
     </application>
 
 </manifest>

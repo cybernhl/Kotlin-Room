@@ -130,6 +130,13 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.navDemo14}" />
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="15.AIDL"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.navDemo15}" />
+
             </LinearLayout>
 
         </ScrollView>
