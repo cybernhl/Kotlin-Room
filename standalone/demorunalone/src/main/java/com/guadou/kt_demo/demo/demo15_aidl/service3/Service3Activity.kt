@@ -19,6 +19,7 @@ import com.guadou.lib_baselib.utils.Log.YYLogUtils
  */
 class Service3Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo15Service1Binding>() {
 
+    //Service的Messenger
     private var mMessenger: Messenger? = null
 
     private val mConnection: ServiceConnection = object : ServiceConnection {
@@ -68,16 +69,18 @@ class Service3Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo15Service1B
         //发送数据触发事件
         mBinding.btnSend.click {
 
-            val msg = Message()
-            msg.what = 1
-            msg.data = Bundle().apply {
+            val message = Message()
+            message.what = 1
+            message.data = Bundle().apply {
                 putString("string", "Hello service3")
             }
-            msg.replyTo = Messenger(mReplyHandler)
+            //这里传递的是Client对应的Messenger
+            message.replyTo = Messenger(mReplyHandler)
 
             try {
+                //这里使用的mMessenger是对应的Service
                 // Activity里面使用这个Messenger对象给Service发消息
-                mMessenger?.send(msg)
+                mMessenger?.send(message)
             } catch (e: RemoteException) {
                 e.printStackTrace()
             }

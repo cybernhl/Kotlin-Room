@@ -17,8 +17,8 @@ class MyService3 : Service() {
                 val msg = bundle.getString("string")
                 YYLogUtils.w("MyService3 - Recive Message: $msg")
 
-                //收到消息之后立马处理回复消息的逻辑
-                // 取出消息中的Messenger对象 用于给Activity发消息
+                // 收到消息之后立马处理回复消息的逻辑
+                // 取出消息中的Messenger对象 对应的是Activity Client
                 val replyMessenger: Messenger = message.replyTo
                 val replyMsg = Message()
                 replyMsg.what = 2
@@ -40,6 +40,5 @@ class MyService3 : Service() {
         //用处理消息的Handler构建一个Messenger 作为一个IBinder返回
         return Messenger(mHandler).binder
     }
-
 
 }
