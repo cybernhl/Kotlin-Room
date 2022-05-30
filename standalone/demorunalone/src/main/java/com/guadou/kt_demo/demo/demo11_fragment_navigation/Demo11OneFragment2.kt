@@ -27,6 +27,7 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
 
     }
 
+
     override fun init() {
         val bundleText = arguments?.getString("age")
         toast(bundleText)
@@ -35,6 +36,7 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
     override fun onResume() {
         super.onResume()
         YYLogUtils.w("Page2 - onResume")
+
     }
 
     override fun onPause() {

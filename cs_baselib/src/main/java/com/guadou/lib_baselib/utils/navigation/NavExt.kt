@@ -147,6 +147,6 @@ val View.navigator
 
 
 //让Activity直接finish
-fun Fragment.finish() {
+fun Fragment.finishActivity() {
     requireActivity().finish()
 }

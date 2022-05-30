@@ -16,12 +16,10 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.getActivityVM
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
-import com.guadou.lib_baselib.utils.navigation.applySlideInOut
-import com.guadou.lib_baselib.utils.navigation.navigator
-import com.guadou.lib_baselib.utils.navigation.push
+import com.guadou.lib_baselib.utils.navigation.*
 
 
-class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Binding>() {
+class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Binding>() , IOnBackPressed {
 
     val callback: (Int, String) -> Unit = { int, str ->
         toast("int : $int ; str: $str")
@@ -38,12 +36,22 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
             .addBindingParams(BR.click, ClickProxy())
     }
 
-
     override fun startObserve() {
         //通过Activity中的LiveData来接收返回的数据
         getActivityVM(Demo11ViewModel::class.java).mBackOneLiveData.observe(this, Observer {
             toast(it)
         })
+    }
+
+    private var firstTime: Long = 0
+
+    private fun finishCurActivity() {
+        if (System.currentTimeMillis() - firstTime > 2000) {
+            toast("再按一次,退出该页面")
+            firstTime = System.currentTimeMillis()
+        } else {
+            finishActivity()
+        }
     }
 
     override fun init() {
@@ -59,6 +67,7 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
     override fun onResume() {
         super.onResume()
         YYLogUtils.w("Page1 - onResume")
+
     }
 
     override fun onPause() {
@@ -104,4 +113,12 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
 
         }
     }
+
+    //返回事件- 不穿透交给自己处理
+    override fun onBackPressed(): Boolean {
+        finishCurActivity()
+        return false
+    }
+
+
 }

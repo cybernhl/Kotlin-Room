@@ -24,7 +24,7 @@ internal class NavContainerFragment : Fragment() {
     }
 
 
-    private val mRealFragment: Fragment
+    internal val mRealFragment: Fragment
         get() {
             return _vm.fragment ?: run {
                 val frag = FragmentCaches[className]?.invoke()
