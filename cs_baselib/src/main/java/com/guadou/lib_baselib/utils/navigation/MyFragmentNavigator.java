@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.NavContainerFragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.navigation.NavDestination;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigator;
@@ -136,7 +137,21 @@ public class MyFragmentNavigator extends FragmentNavigator {
             ft.setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim);
         }
 
-        ft.replace(mContainerId, frag);
+//        ft.replace(mContainerId, frag);
+        //Add的方式替换replace方式，并处理生命周期
+        if (mFragmentManager.getFragments().size() > 0) {
+            Fragment lastFragment = mFragmentManager.getFragments().get(mFragmentManager.getFragments().size() - 1);
+            ft.hide(lastFragment);
+            ft.setMaxLifecycle(lastFragment, Lifecycle.State.STARTED);
+            if (frag.isAdded()) {
+                ft.show(frag);
+            } else {
+                ft.add(mContainerId, frag);
+            }
+        } else {
+            ft.replace(mContainerId, frag);
+        }
+
         ft.setPrimaryNavigationFragment(frag);
 
         final @IdRes int destId = destination.getId();

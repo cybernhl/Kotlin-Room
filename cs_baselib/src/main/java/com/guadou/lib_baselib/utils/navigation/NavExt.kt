@@ -3,14 +3,15 @@ package com.guadou.lib_baselib.utils.navigation
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.collection.valueIterator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.*
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorDestinationBuilder
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import kotlin.reflect.KClass
 
 /**
@@ -50,15 +51,13 @@ fun NavHostFragment.loadRoot(root: KClass<out Fragment>) {
                     label = "home"
                 })
 
+        }.also { graph ->
+            val vm = ViewModelProvider(requireActivity()).get(NavViewModel::class.java)
+            vm.nodes.valueIterator().forEach {
+                it.removeFromParent()
+                graph += it
+            }
         }
-//            .also { graph ->
-        //for NavController #mBackStackToRestore
-//            val vm = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
-//            vm.nodes.valueIterator().forEach {
-//                it.removeFromParent()
-//                graph += it
-//            }
-//        }
 
     }
 }
@@ -81,7 +80,7 @@ fun MyNavHost.push(
     extras: Navigator.Extras? = null,
     optionsBuilder: NavOptions.() -> Unit = {}
 ) = with(navController) {
-    val node = putFragment(/*requireActivity(),*/ clazz)
+    val node = putFragment(requireActivity(), clazz)
     navigate(
         node.id, arguments,
         convertNavOptions(clazz, NavOptions().apply(optionsBuilder)),
@@ -103,7 +102,7 @@ inline fun <reified T : Fragment> MyNavHost.push(
 //存入Fragment到导航图
 @PublishedApi
 internal fun NavController.putFragment(
-//    activity: FragmentActivity,
+    activity: FragmentActivity,
     clazz: KClass<out Fragment>
 ): FragmentNavigator.Destination {
     val destId = clazz.hashCode()
@@ -115,14 +114,9 @@ internal fun NavController.putFragment(
             clazz
         ).apply {
             label = clazz.qualifiedName
-//            getRouteUri(clazz)?.let {
-//                deepLink {
-//                    uriPattern = it
-//                }
-//            }
         }).build()
         graph.plusAssign(destination)
-//        activity.saveToViewModel(destination)
+        activity.saveToViewModel(destination)
     } else {
         destination = graph.findNode(destId) as FragmentNavigator.Destination
     }
@@ -136,7 +130,6 @@ fun MyNavHost.pop() {
 
 //返回到指定栈
 fun NavHost.popTo(clazz: KClass<out Fragment>, include: Boolean = false) {
-    YYLogUtils.w("返回到指定栈: include-$include")
     navController.popBackStack(clazz.hashCode(), include)
 }
 
@@ -145,7 +138,7 @@ val Fragment.navigator
     get() = MyNavHost(requireContext()) {
         val clazz = this::class
         requireParentFragment().findNavController().apply {
-            putFragment(/*requireActivity(),*/ clazz) //make sure the fragment in back stack
+            putFragment(requireActivity(), clazz)
         }
     }
 
