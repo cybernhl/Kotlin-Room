@@ -12,7 +12,7 @@ import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.applySlideInOut
 import com.guadou.lib_baselib.utils.navigation.navigator
 import com.guadou.lib_baselib.utils.navigation.pop
-import com.guadou.lib_baselib.utils.navigation.push
+import com.guadou.lib_baselib.utils.navigation.start
 
 class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Binding>() {
 
@@ -75,11 +75,11 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
 
         fun nav2Page3() {
 
-//            navigator.push(Demo11OneFragment3::class) {
+//            navigator.start(Demo11OneFragment3::class) {
 //                applySlideInOut()
 //            }
 
-            navigator.push({ applySlideInOut() }) {
+            navigator.start({ applySlideInOut() }) {
                 Demo11OneFragment3(arguments?.getString("name"))
             }
         }

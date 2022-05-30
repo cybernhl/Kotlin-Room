@@ -19,16 +19,11 @@ import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.*
 
 
-class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Binding>() , IOnBackPressed {
+class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Binding>(),
+    IOnBackPressed {
 
     val callback: (Int, String) -> Unit = { int, str ->
         toast("int : $int ; str: $str")
-    }
-
-    companion object {
-        fun obtainFragment(): Demo11OneFragment1 {
-            return Demo11OneFragment1()
-        }
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
@@ -55,7 +50,7 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
     }
 
     override fun init() {
-
+        toast(test)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -94,22 +89,22 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
 
         fun nav2Page2() {
             //跳转的几种方式，跳转Class文件
-            navigator.push(
-                Demo11OneFragment2::class,
-                arguments = bundleOf("name" to "zhangsan", "age" to "18"),
-            ) {
-                applySlideInOut()
-            }
+//            navigator.start(
+//                Demo11OneFragment2::class,
+//                arguments = bundleOf("name" to "zhangsan", "age" to "18"),
+//            ) {
+//                applySlideInOut()
+//            }
 
             //方式二
-//            navigator.push({
-//                applySlideInOut()
-//                launchMode = LaunchMode.STANDARD
-//                arguments = bundleOf("KEY_ARGUMENT1" to "arg1", "KEY_ARGUMENT2" to "arg2")
-//            }) {
-//                //直接创建实例的的方式
-//                Demo11OneFragment2(callback)
-//            }
+            navigator.start({
+                applySlideInOut()
+                launchMode = LaunchMode.STANDARD
+                arguments = bundleOf("KEY_ARGUMENT1" to "arg1", "KEY_ARGUMENT2" to "arg2")
+            }) {
+                //直接创建实例的的方式
+                Demo11OneFragment2(callback)
+            }
 
         }
     }

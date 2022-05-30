@@ -11,7 +11,7 @@ import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.navigation.IOnBackPressed
-import com.guadou.lib_baselib.utils.navigation.loadRoot
+import com.guadou.lib_baselib.utils.navigation.loadRootFragment
 
 /**
  * Fragment导航
@@ -34,7 +34,10 @@ class Demo11Activity : BaseVMActivity<Demo11ViewModel>() {
 
     override fun init() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-        navHostFragment.loadRoot(Demo11OneFragment1::class)
+//        navHostFragment.loadRootFragment(Demo11OneFragment1::class)
+        navHostFragment.loadRootFragment {
+            Demo11OneFragment1("测试直接构造方法初始化")
+        }
 
         YYLogUtils.w("当前设备Android系统：" + Build.VERSION.SDK_INT)
     }
@@ -58,7 +61,6 @@ class Demo11Activity : BaseVMActivity<Demo11ViewModel>() {
                 super.onBackPressed()
             }
         }
-
 
     }
 

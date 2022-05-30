@@ -77,7 +77,7 @@ class Demo11OneFragment3() : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3
         }
 
         fun nav2Login() {
-            navigator.push(LoginFragment::class) {
+            navigator.start(LoginFragment::class) {
                 applySlideInOut()
             }
         }

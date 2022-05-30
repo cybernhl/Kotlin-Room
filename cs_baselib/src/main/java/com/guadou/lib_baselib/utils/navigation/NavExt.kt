@@ -28,7 +28,7 @@ class MyNavHost(
 internal fun MyNavHost.requireActivity(): FragmentActivity = context as FragmentActivity
 
 //重点方法 根据传入的Fragment-Class 创建导航图，并绑定自己自定义的FragmentNavigator
-fun NavHostFragment.loadRoot(root: KClass<out Fragment>) {
+fun NavHostFragment.loadRootFragment(root: KClass<out Fragment>) {
     val context = activity ?: return
 
     navController.apply {
@@ -63,18 +63,18 @@ fun NavHostFragment.loadRoot(root: KClass<out Fragment>) {
 }
 
 //通过Fragment的构造对象来实现loadRoot
-inline fun <reified T : Fragment> NavHostFragment.loadRoot(
+inline fun <reified T : Fragment> NavHostFragment.loadRootFragment(
     noinline returnFragmentBlock: () -> T
 ) {
     val clazz = T::class
     FragmentCaches[clazz.qualifiedName!!] = returnFragmentBlock
-    loadRoot(T::class)
+    loadRootFragment(T::class)
 }
 
 //重点方法
 //主要执行次方法，在push中手动注册目的地并绑定路由图 并通过navigate的方法手动跳转到目的地
 //这种方法只能通过args传递参数
-fun MyNavHost.push(
+fun MyNavHost.start(
     clazz: KClass<out Fragment>,
     arguments: Bundle? = null,
     extras: Navigator.Extras? = null,
@@ -90,13 +90,13 @@ fun MyNavHost.push(
 
 //通过factory的方式实现Fragment
 //这种方式可以通过构造传递参数
-inline fun <reified T : Fragment> MyNavHost.push(
+inline fun <reified T : Fragment> MyNavHost.start(
     noinline optionsBuilder: NavOptions.() -> Unit = {},
     noinline returnFragmentBlock: () -> T
 ) {
     val clazz = T::class
     FragmentCaches[clazz.qualifiedName!!] = returnFragmentBlock
-    push(clazz, optionsBuilder = optionsBuilder)
+    start(clazz, optionsBuilder = optionsBuilder)
 }
 
 //存入Fragment到导航图
