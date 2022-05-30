@@ -16,8 +16,6 @@ import com.guadou.lib_baselib.utils.navigation.start
 
 class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Binding>() {
 
-    constructor() : this(null)
-
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_demo11_page2)
             .addBindingParams(BR.click, ClickProxy())
@@ -27,10 +25,9 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
 
     }
 
-
     override fun init() {
         val bundleText = arguments?.getString("age")
-        toast(bundleText)
+        toast("age:$bundleText")
     }
 
     override fun onResume() {

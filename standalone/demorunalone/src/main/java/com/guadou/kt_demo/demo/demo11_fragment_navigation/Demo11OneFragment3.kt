@@ -13,13 +13,7 @@ import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.*
 
-class Demo11OneFragment3() : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Binding>() {
-
-    var name: String? = null
-
-    constructor(name: String?) : this() {
-        this.name = name
-    }
+class Demo11OneFragment3(private val name: String?) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Binding>() {
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_demo11_page3)

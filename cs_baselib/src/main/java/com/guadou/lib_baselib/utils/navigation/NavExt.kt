@@ -92,11 +92,12 @@ fun MyNavHost.start(
 //这种方式可以通过构造传递参数
 inline fun <reified T : Fragment> MyNavHost.start(
     noinline optionsBuilder: NavOptions.() -> Unit = {},
+    arguments: Bundle? = null,
     noinline returnFragmentBlock: () -> T
 ) {
     val clazz = T::class
     FragmentCaches[clazz.qualifiedName!!] = returnFragmentBlock
-    start(clazz, optionsBuilder = optionsBuilder)
+    start(clazz, arguments = arguments, optionsBuilder = optionsBuilder)
 }
 
 //存入Fragment到导航图

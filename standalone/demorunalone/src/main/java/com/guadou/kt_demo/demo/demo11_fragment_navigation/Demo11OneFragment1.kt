@@ -97,11 +97,15 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
 //            }
 
             //方式二
-            navigator.start({
-                applySlideInOut()
-                launchMode = LaunchMode.STANDARD
-                arguments = bundleOf("KEY_ARGUMENT1" to "arg1", "KEY_ARGUMENT2" to "arg2")
-            }) {
+            navigator.start(
+                //启动选项
+                {
+                    applySlideInOut()
+                    launchMode = LaunchMode.STANDARD
+                },
+                //参数
+                arguments = bundleOf("name" to "zhangsan", "age" to "18")
+            ) {
                 //直接创建实例的的方式
                 Demo11OneFragment2(callback)
             }
