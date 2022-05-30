@@ -1,10 +1,6 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
-import com.github.fragivity.annotation.DeepLink
-import com.github.fragivity.applySlideInOut
-import com.github.fragivity.navigator
-import com.github.fragivity.pop
-import com.github.fragivity.push
+
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page2Binding
@@ -13,8 +9,11 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.navigation.applySlideInOut
+import com.guadou.lib_baselib.utils.navigation.navigator
+import com.guadou.lib_baselib.utils.navigation.pop
+import com.guadou.lib_baselib.utils.navigation.push
 
-@DeepLink(uri = "demo11://com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment2/")
 class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Binding>() {
 
     constructor() : this(null)
@@ -29,7 +28,7 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
     }
 
     override fun init() {
-        val bundleText = arguments?.getString("text")
+        val bundleText = arguments?.getString("age")
         toast(bundleText)
     }
 
@@ -73,12 +72,13 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
         }
 
         fun nav2Page3() {
+
 //            navigator.push(Demo11OneFragment3::class) {
 //                applySlideInOut()
 //            }
 
             navigator.push({ applySlideInOut() }) {
-                Demo11OneFragment3()
+                Demo11OneFragment3(arguments?.getString("name"))
             }
         }
     }

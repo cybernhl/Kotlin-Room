@@ -6,10 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import com.github.fragivity.LaunchMode
-import com.github.fragivity.applySlideInOut
-import com.github.fragivity.navigator
-import com.github.fragivity.push
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page1Binding
@@ -20,6 +16,9 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.getActivityVM
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.navigation.applySlideInOut
+import com.guadou.lib_baselib.utils.navigation.navigator
+import com.guadou.lib_baselib.utils.navigation.push
 
 
 class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Binding>() {
@@ -72,7 +71,6 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
         YYLogUtils.w("Page1 - onStart")
     }
 
-
     override fun onStop() {
         super.onStop()
         YYLogUtils.w("Page1 - onStop")
@@ -87,26 +85,22 @@ class Demo11OneFragment1 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Bi
 
         fun nav2Page2() {
             //跳转的几种方式，跳转Class文件
+            navigator.push(
+                Demo11OneFragment2::class,
+                arguments = bundleOf("name" to "zhangsan", "age" to "18"),
+            ) {
+                applySlideInOut()
+            }
 
-//            navigator.push {
+            //方式二
+//            navigator.push({
+//                applySlideInOut()
+//                launchMode = LaunchMode.STANDARD
+//                arguments = bundleOf("KEY_ARGUMENT1" to "arg1", "KEY_ARGUMENT2" to "arg2")
+//            }) {
+//                //直接创建实例的的方式
 //                Demo11OneFragment2(callback)
 //            }
-
-            //可以直接跳转实例对象
-//            navigator.push(optionsBuilder = {
-//                applySlideInOut()
-//            }, block = {
-//                return@push Demo11OneFragment2(callback)
-//            })
-
-            //简化
-            navigator.push({
-                applySlideInOut()
-                launchMode = LaunchMode.STANDARD
-                arguments = bundleOf("KEY_ARGUMENT1" to "arg1", "KEY_ARGUMENT2" to "arg2")
-            }) {
-                Demo11OneFragment2(callback)
-            }
 
         }
     }

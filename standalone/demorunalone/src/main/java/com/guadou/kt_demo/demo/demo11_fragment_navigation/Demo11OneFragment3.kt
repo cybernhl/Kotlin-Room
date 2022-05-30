@@ -1,11 +1,7 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
-import android.net.Uri
-import com.github.fragivity.annotation.DeepLink
-import com.github.fragivity.navigator
-import com.github.fragivity.pop
-import com.github.fragivity.popTo
+import com.guadou.cpt_main.ui.LoginFragment
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page3Binding
@@ -15,10 +11,15 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.navigation.*
 
-@DeepLink(uri = "demo11://com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment3/")
-class Demo11OneFragment3 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Binding>() {
+class Demo11OneFragment3() : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Binding>() {
 
+    var name: String? = null
+
+    constructor(name: String?) : this() {
+        this.name = name
+    }
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_demo11_page3)
@@ -30,6 +31,8 @@ class Demo11OneFragment3 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Bi
     }
 
     override fun init() {
+
+        toast("name:$name")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -66,7 +69,7 @@ class Demo11OneFragment3 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Bi
 
     inner class ClickProxy {
         fun back2Page1() {
-            navigator.popTo(Demo11OneFragment1::class)
+            navigator.popTo(Demo11OneFragment1::class, true)
         }
 
         fun back2Page2() {
@@ -74,13 +77,9 @@ class Demo11OneFragment3 : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Bi
         }
 
         fun nav2Login() {
-
-//            navigator.push(LoginFragment::class){
-//                applySlideInOut()
-//            }
-
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("demo11://com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11OneFragment2/"))
-            startActivity(intent)
+            navigator.push(LoginFragment::class) {
+                applySlideInOut()
+            }
         }
 
         fun receiveBackData() {

@@ -92,14 +92,14 @@ dependencies {
     api deps.android.navigation    //单Activity-Fragment导航
     api deps.android.navigation_ui
     //封装navigation库
-    api(deps.android.fragivity) {
-        exclude group: 'androidx.fragment'
-        exclude group: 'androidx.appcompat'
-        exclude group: 'androidx.activity'
-        exclude group: 'org.jetbrains.kotlin'
-    }
-    api deps.android.fragivity_processor
-    kapt deps.android.fragivity_processor
+//    api(deps.android.fragivity) {
+//        exclude group: 'androidx.fragment'
+//        exclude group: 'androidx.appcompat'
+//        exclude group: 'androidx.activity'
+//        exclude group: 'org.jetbrains.kotlin'
+//    }
+//    api deps.android.fragivity_processor
+//    kapt deps.android.fragivity_processor
 
     //Kotlin相关
     api deps.android.kt_ktx
