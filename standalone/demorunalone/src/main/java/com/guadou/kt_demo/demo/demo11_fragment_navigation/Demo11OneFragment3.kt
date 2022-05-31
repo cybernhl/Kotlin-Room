@@ -25,7 +25,6 @@ class Demo11OneFragment3(private val name: String?) : BaseVDBFragment<EmptyViewM
     }
 
     override fun init() {
-
         toast("name:$name")
     }
 

@@ -80,7 +80,7 @@ fun MyNavHost.start(
     extras: Navigator.Extras? = null,
     optionsBuilder: NavOptions.() -> Unit = {}
 ) = with(navController) {
-    val node = putFragment(requireActivity(), clazz)
+    val node = putFragment(requireActivity(), clazz)  //因为其他地方也用到putFragment，这里抽出来做为方法
     navigate(
         node.id, arguments,
         convertNavOptions(clazz, NavOptions().apply(optionsBuilder)),
@@ -88,7 +88,6 @@ fun MyNavHost.start(
     )
 }
 
-//通过factory的方式实现Fragment
 //这种方式可以通过构造传递参数
 inline fun <reified T : Fragment> MyNavHost.start(
     noinline optionsBuilder: NavOptions.() -> Unit = {},
