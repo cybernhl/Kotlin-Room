@@ -68,9 +68,20 @@
                     android:layout_marginTop="@dimen/d_20dp"
                     android:textSize="16sp" />
 
+
+                <TextView
+                    android:id="@+id/tv_html_text"
+                    android:layout_marginTop="@dimen/d_20dp"
+                    android:textSize="@dimen/d_16sp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
+
         </ScrollView>
+
 
 
     </LinearLayout>

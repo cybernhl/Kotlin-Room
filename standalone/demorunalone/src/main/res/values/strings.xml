@@ -2,4 +2,12 @@
 
     <string name="app_name">kt_demo</string>
 
+    <string name="hr_view_resume"> <![CDATA[ <font color=\"#000000\">HR from </font>
+    <face><font color=\"#0689FB\">%1$s</font></face>
+    <font color=\"#000000\"> has viewed your resume.</font>
+    <font><icon>1</icon> from Company</font>
+    <font color=\"#ff6c00\"><size value=\"25\">1500/day</size></font> <del><font color=\"#808080\"><size value=\"18\">org:20000</size></font></del>
+
+]]> </string>
+
 </resources>

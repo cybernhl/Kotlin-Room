@@ -2,6 +2,7 @@ package com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt
 
 import android.content.Intent
 import android.graphics.Color
+import android.text.Html
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemoSpanBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -46,6 +47,28 @@ class DemoSpanActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoSpanBinding
     override fun init() {
         //测试Hilt
         YYLogUtils.w("server:" + userServer.toString() + "Dao:" + userServer.getDaoContent())
+
+        val content = String.format(getString(R.string.hr_view_resume), "Custom Company")
+
+
+
+        //Html的文本展示
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            mBinding.tvHtmlText.text =
+                Html.fromHtml(content, Html.FROM_HTML_MODE_LEGACY, null,
+                    CustomerLableHandler(
+                        TypefaceUtil.getSFFlower(mContext),
+                        R.mipmap.iv_me_red_packet
+                    )
+                )
+        } else {
+            mBinding.tvHtmlText.text = Html.fromHtml(content, null,
+                CustomerLableHandler(
+                    TypefaceUtil.getSFFlower(mContext),
+                    R.mipmap.iv_me_red_packet
+                )
+            )
+        }
 
 
         //可以直接操作TextView,如果没有文本可以直接添加带Span的文本

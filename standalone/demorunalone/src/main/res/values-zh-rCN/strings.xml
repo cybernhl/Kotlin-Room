@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="app_name">kt_demo</string>
+
+    <string name="hr_view_resume"> <![CDATA[ <face><font color=\"#0689FB\">%1$s</font></face>
+    <font color=\"#000000\">的人事专员</font>
+    <font color=\"#000000\">查看了你的简历</font>
+    <font>来自公司的<icon>1</icon></font>
+    <font color=\"#ff6c00\"><size value=\"25\">1500/天</size></font> <del><font color=\"#808080\"><size value=\"18\">原价:20000元</size></font></del>
+
+     ]]> </string>
+</resources>
