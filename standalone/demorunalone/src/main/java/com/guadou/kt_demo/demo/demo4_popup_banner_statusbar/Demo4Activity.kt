@@ -1,8 +1,8 @@
 package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar
 
 import android.content.Intent
-import com.guadou.kt_demo.R
 import com.guadou.kt_demo.BR
+import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo4Binding
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity
@@ -63,6 +63,10 @@ class Demo4Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo4Binding>() {
         }
 
         fun navBannerPage(){
+            DemoBannerActivity.startInstance()
+        }
+
+        fun navIntercept(){
             DemoBannerActivity.startInstance()
         }
 
