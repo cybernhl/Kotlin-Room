@@ -5,19 +5,26 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo4Binding
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity
+import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.InterceptChain
+import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.lai.*
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toastSuccess
+import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.StatusBarUtils
+import com.guadou.lib_baselib.view.LoadingDialogManager
+import com.jeremyliao.liveeventbus.LiveEventBus
 
 
 /**
  * 吐司 弹窗 banner
  */
 class Demo4Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo4Binding>() {
+
+    lateinit var newMemberIntercept: InterceptNewMember
 
     companion object {
         fun startInstance() {
@@ -36,7 +43,9 @@ class Demo4Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo4Binding>() {
 
 
     override fun startObserve() {
-
+        LiveEventBus.get("newMember",Boolean::class.java).observe(this){
+            newMemberIntercept.resetNewMember()
+        }
     }
 
     override fun init() {
@@ -54,20 +63,48 @@ class Demo4Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo4Binding>() {
      */
     inner class ClickProxy {
 
-        fun testToast(){
+        fun testToast() {
             toastSuccess("Test Tosast")
         }
 
-        fun navPopupPage(){
+        fun navPopupPage() {
             DemoXPopupActivity.startInstance()
         }
 
-        fun navBannerPage(){
+        fun navBannerPage() {
             DemoBannerActivity.startInstance()
         }
 
-        fun navIntercept(){
-            DemoBannerActivity.startInstance()
+        fun navIntercept() {
+
+            //模拟网络请求
+            LoadingDialogManager.get().showLoading(this@Demo4Activity)
+            CommUtils.getHandler().postDelayed({
+                LoadingDialogManager.get().dismissLoading()
+
+                val bean = JobInterceptBean(true, false, false, false, true, true, true, true, true, true)
+
+                createIntercept(bean)
+            }, 1500)
+
+
+        }
+
+        //创建拦截弹窗
+        private fun createIntercept(bean: JobInterceptBean) {
+            newMemberIntercept = InterceptNewMember(bean)
+
+            val chain = InterceptChain.create(4)
+                .attach(this@Demo4Activity)
+                .addInterceptor(newMemberIntercept)
+                .addInterceptor(InterceptFillInfo(bean))
+                .addInterceptor(InterceptMemberApprove(bean))
+                .addInterceptor(InterceptSkill(bean))
+                .build()
+
+            //开始执行
+            chain.process()
+
         }
 
     }

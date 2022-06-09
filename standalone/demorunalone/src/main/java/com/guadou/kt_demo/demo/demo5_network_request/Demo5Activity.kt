@@ -9,7 +9,9 @@ import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.jeremyliao.liveeventbus.LiveEventBus
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -53,7 +55,7 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
     }
 
     override fun init() {
-
+        toast("测试-跳转到新页面")
         YYLogUtils.w("ViewModel: $mViewModel Repository:${mViewModel.testRepository()}")
     }
 
@@ -64,6 +66,7 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 
         fun testnull() {
             mViewModel.testNullNet()
+            LiveEventBus.get("newMember").post(true)
         }
 
         /**
