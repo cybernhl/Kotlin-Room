@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page1Binding
@@ -16,6 +17,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.getActivityVM
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.bus.FlowBus
 import com.guadou.lib_baselib.utils.navigation.*
 
 
@@ -23,7 +25,7 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
     IOnBackPressed {
 
     val callback: (Int, String) -> Unit = { int, str ->
-        toast("int : $int ; str: $str")
+//        toast("int : $int ; str: $str")
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
@@ -36,6 +38,11 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
         getActivityVM(Demo11ViewModel::class.java).mBackOneLiveData.observe(this, Observer {
             toast(it)
         })
+
+
+        FlowBus.with<String>("test-key-01").register(this) {
+            YYLogUtils.w("收到FlowBus消息 - " + it)
+        }
     }
 
     private var firstTime: Long = 0
@@ -95,6 +102,8 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
 //            ) {
 //                applySlideInOut()
 //            }
+
+            FlowBus.withStick<String>("test-key-02").post(lifecycleScope, "Test Stick Message")
 
             //方式二
             navigator.start(

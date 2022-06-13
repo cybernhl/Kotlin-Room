@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 
+import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page2Binding
@@ -9,6 +10,7 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.bus.FlowBus
 import com.guadou.lib_baselib.utils.navigation.applySlideInOut
 import com.guadou.lib_baselib.utils.navigation.navigator
 import com.guadou.lib_baselib.utils.navigation.pop
@@ -22,7 +24,9 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
     }
 
     override fun startObserve() {
-
+        FlowBus.withStick<String>("test-key-02").register(this){
+            YYLogUtils.w("收到粘性消息：$it")
+        }
     }
 
     override fun init() {
@@ -66,6 +70,9 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
 
             //高阶函数回调
             _callback?.invoke(10, "返回给One Page的数据")
+
+            // 主线程-发送消息
+            FlowBus.with<String>("test-key-01").post(this@Demo11OneFragment2.lifecycleScope, "Test Flow Bus Message")
 
             navigator.pop()
         }
