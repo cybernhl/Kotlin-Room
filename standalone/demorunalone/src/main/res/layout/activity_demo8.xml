@@ -59,6 +59,24 @@
             android:text="BRVAH-DIFF刷新"
             binding:clicks="@{click.rvDiff}" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="嵌套滚动8"
+            binding:clicks="@{click.nest8}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="嵌套滚动9"
+            binding:clicks="@{click.nest9}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="嵌套滚动10"
+            binding:clicks="@{click.nest10}" />
+
     </LinearLayout>
 
 </layout>

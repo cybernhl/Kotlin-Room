@@ -44,6 +44,10 @@
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.Demo4Activity" />
 
+        <activity android:name=".demo.demo8_recyclerview.scroll8.Scroll8Activity" />
+        <activity android:name=".demo.demo8_recyclerview.scroll9.Scroll9Activity" />
+        <activity android:name=".demo.demo8_recyclerview.scroll10.Scroll10Activity" />
+
         <activity android:name=".demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity" />
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity" />

@@ -11,6 +11,9 @@ import com.guadou.kt_demo.demo.demo8_recyclerview.rv3.DemoRVHeadFoodVertalActivi
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.DemoRVMobanActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv5.DemoRVMuliteActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv6.DemoRVDiffActivity
+import com.guadou.kt_demo.demo.demo8_recyclerview.scroll10.Scroll10Activity
+import com.guadou.kt_demo.demo.demo8_recyclerview.scroll8.Scroll8Activity
+import com.guadou.kt_demo.demo.demo8_recyclerview.scroll9.Scroll9Activity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -22,7 +25,7 @@ import com.guadou.lib_baselib.ext.commContext
  *
  * 一定要注意 Repository和ViewModel 都要在di中注册
  */
-class Demo8Activity : BaseVDBActivity<EmptyViewModel,ActivityDemo8Binding>() {
+class Demo8Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo8Binding>() {
 
     companion object {
         fun startInstance() {
@@ -58,24 +61,36 @@ class Demo8Activity : BaseVDBActivity<EmptyViewModel,ActivityDemo8Binding>() {
             DemoRVNormalVertalActivity.startInstance()
         }
 
-        fun rvGrid(){
+        fun rvGrid() {
             DemoRVNormalGridActivity.startInstance()
         }
 
-        fun rvHeaderFooter(){
+        fun rvHeaderFooter() {
             DemoRVHeadFoodVertalActivity.startInstance()
         }
 
-        fun rvNetworkLoadMore(){
+        fun rvNetworkLoadMore() {
             DemoRVMobanActivity.startInstance()
         }
 
-        fun rvMuiltType(){
+        fun rvMuiltType() {
             DemoRVMuliteActivity.startInstance()
         }
 
-        fun rvDiff(){
+        fun rvDiff() {
             DemoRVDiffActivity.startInstance()
+        }
+
+        fun nest8() {
+            Scroll8Activity.startInstance()
+        }
+
+        fun nest9() {
+            Scroll9Activity.startInstance()
+        }
+
+        fun nest10() {
+            Scroll10Activity.startInstance()
         }
     }
 

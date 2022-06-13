@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:Easy_title="NestedParent/Child的滚动" />
+
+    <com.guadou.kt_demo.demo.demo8_recyclerview.scroll8.MyNestedScrollParent
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:contentDescription="我是测试的图片"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:background="#ccc"
+            android:text="我是测试的分割线" />
+
+
+        <com.guadou.kt_demo.demo.demo8_recyclerview.scroll8.MyNestedScrollChild
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/scroll_content" />
+
+        </com.guadou.kt_demo.demo.demo8_recyclerview.scroll8.MyNestedScrollChild>
+
+    </com.guadou.kt_demo.demo.demo8_recyclerview.scroll8.MyNestedScrollParent>
+
+</LinearLayout>
