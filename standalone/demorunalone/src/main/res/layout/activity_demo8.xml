@@ -23,59 +23,92 @@
             android:layout_height="wrap_content"
             app:Easy_title="测试RV封装" />
 
-        <Button
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="普通的垂直列表"
-            binding:clicks="@{click.rvVertical}" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Grid效果与分割线"
-            binding:clicks="@{click.rvGrid}" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="添加头布局与脚布局"
-            binding:clicks="@{click.rvHeaderFooter}" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BRVAH标准刷新与加载模板（带网络请求）"
-            binding:clicks="@{click.rvNetworkLoadMore}" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="普通的垂直列表"
+                    binding:clicks="@{click.rvVertical}" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BRVAH多布局"
-            binding:clicks="@{click.rvMuiltType}" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Grid效果与分割线"
+                    binding:clicks="@{click.rvGrid}" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BRVAH-DIFF刷新"
-            binding:clicks="@{click.rvDiff}" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="添加头布局与脚布局"
+                    binding:clicks="@{click.rvHeaderFooter}" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="嵌套滚动8"
-            binding:clicks="@{click.nest8}" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BRVAH标准刷新与加载模板（带网络请求）"
+                    binding:clicks="@{click.rvNetworkLoadMore}" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="嵌套滚动9"
-            binding:clicks="@{click.nest9}" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BRVAH多布局"
+                    binding:clicks="@{click.rvMuiltType}" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="嵌套滚动10"
-            binding:clicks="@{click.nest10}" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BRVAH-DIFF刷新"
+                    binding:clicks="@{click.rvDiff}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="嵌套滚动8"
+                    binding:clicks="@{click.nest8}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="嵌套滚动9"
+                    binding:clicks="@{click.nest9}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="嵌套滚动10"
+                    binding:clicks="@{click.nest10}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="协调滚动11"
+                    binding:clicks="@{click.nest11}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="协调滚动12"
+                    binding:clicks="@{click.nest12}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="协调滚动13"
+                    binding:clicks="@{click.nest13}" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
 
     </LinearLayout>
 

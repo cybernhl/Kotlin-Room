@@ -47,6 +47,9 @@
         <activity android:name=".demo.demo8_recyclerview.scroll8.Scroll8Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll9.Scroll9Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll10.Scroll10Activity" />
+        <activity android:name=".demo.demo8_recyclerview.scroll11.Scroll11Activity" />
+        <activity android:name=".demo.demo8_recyclerview.scroll12.Scroll12Activity" />
+        <activity android:name=".demo.demo8_recyclerview.scroll13.Scroll13Activity" />
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity" />
 
@@ -107,8 +110,7 @@
         <activity android:name=".demo.demo15_aidl.service2.Service2Activity" />
         <activity android:name=".demo.demo15_aidl.service3.Service3Activity" />
 
-        <service
-            android:name=".demo.demo15_aidl.service1.MyService1" />
+        <service android:name=".demo.demo15_aidl.service1.MyService1" />
 
         <service
             android:name=".demo.demo15_aidl.service2.MyService2"
@@ -116,7 +118,7 @@
 
         <service
             android:name=".demo.demo15_aidl.service3.MyService3"
-            android:process=":test"/>
+            android:process=":test" />
 
     </application>
 
