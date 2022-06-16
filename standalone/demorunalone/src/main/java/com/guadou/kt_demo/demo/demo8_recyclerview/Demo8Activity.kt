@@ -15,6 +15,7 @@ import com.guadou.kt_demo.demo.demo8_recyclerview.scroll10.Scroll10Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.scroll11.Scroll11Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.scroll12.Scroll12Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.scroll13.Scroll13Activity
+import com.guadou.kt_demo.demo.demo8_recyclerview.scroll14.Scroll14Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.scroll8.Scroll8Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.scroll9.Scroll9Activity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -106,6 +107,10 @@ class Demo8Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo8Binding>() {
 
         fun nest13() {
             Scroll13Activity.startInstance()
+        }
+
+        fun nest14() {
+            Scroll14Activity.startInstance()
         }
     }
 

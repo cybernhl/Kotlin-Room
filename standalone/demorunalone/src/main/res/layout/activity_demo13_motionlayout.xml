@@ -35,6 +35,20 @@
             android:layout_height="wrap_content"
             android:text="xml文件控制" />
 
+        <Button
+            binding:clicks="@{click.appbar}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="协同AppbarLayout" />
+
+        <Button
+            binding:clicks="@{click.viewPager}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="协同ViewPager" />
+
     </LinearLayout>
 
 </layout>

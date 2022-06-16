@@ -11,7 +11,6 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.interceptor.InterceptChain
-import com.guadou.lib_baselib.utils.interceptor.InterceptChainHandler
 import com.guadou.lib_baselib.view.FangIOSDialog
 
 class Demo13MotionActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo13MotionlayoutBinding>() {
@@ -38,20 +37,20 @@ class Demo13MotionActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo13Motio
 
     override fun init() {
         //测试拦截器模式
-        val intercepts = InterceptChainHandler<DialogPass>()
-
-        intercepts.add(OneIntercept())
-        intercepts.add(TwoIntercept())
-        intercepts.add(ThreeIntercept())
-        intercepts.add(FourIntercept())
-        intercepts.add(FiveIntercept())
-
-        val dialogPass = DialogPass().apply {
-            msg = "测试弹窗流程"
-            passType = 1
-        }
-
-        intercepts.intercept(dialogPass)
+//        val intercepts = InterceptChainHandler<DialogPass>()
+//
+//        intercepts.add(OneIntercept())
+//        intercepts.add(TwoIntercept())
+//        intercepts.add(ThreeIntercept())
+//        intercepts.add(FourIntercept())
+//        intercepts.add(FiveIntercept())
+//
+//        val dialogPass = DialogPass().apply {
+//            msg = "测试弹窗流程"
+//            passType = 1
+//        }
+//
+//        intercepts.intercept(dialogPass)
     }
 
     inner class OneIntercept : InterceptChain<DialogPass>() {
@@ -232,6 +231,14 @@ class Demo13MotionActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo13Motio
 
         fun gotoXmlContrcol() {
             Demo13XmlActivity.startInstance()
+        }
+
+        fun appbar() {
+            Demo13AppbarActivity.startInstance()
+        }
+
+        fun viewPager() {
+            Demo13ViewPagerActivity.startInstance()
         }
 
     }

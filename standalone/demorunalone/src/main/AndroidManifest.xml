@@ -50,6 +50,10 @@
         <activity android:name=".demo.demo8_recyclerview.scroll11.Scroll11Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll12.Scroll12Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll13.Scroll13Activity" />
+        <activity android:name=".demo.demo8_recyclerview.scroll14.Scroll14Activity" />
+
+        <activity android:name=".demo.demo13_motionlayout.Demo13AppbarActivity" />
+        <activity android:name=".demo.demo13_motionlayout.Demo13ViewPagerActivity" />
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity" />
 

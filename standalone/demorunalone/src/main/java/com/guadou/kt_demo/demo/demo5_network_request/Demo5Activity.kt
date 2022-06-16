@@ -2,6 +2,7 @@ package com.guadou.kt_demo.demo.demo5_network_request
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo5Binding
@@ -13,6 +14,10 @@ import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.jeremyliao.liveeventbus.LiveEventBus
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * 网络请求的实例代码
@@ -93,6 +98,45 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
             //没有防抖动-狂点试试看Log
             mViewModel.netDuplicate()
         }
+
+        fun testConcurrency() {
+
+//            for (i in 1..10) {
+//                testFun(i)
+//            }
+
+            testFun(0)
+//            countDown(10, next = { time ->
+//                testFun(time)
+//            }, start = {}, end = {})
+
+        }
+    }
+
+    private fun testFun(index: Int) {
+        lifecycleScope.launch {
+
+            val one = async {
+                withContext(Dispatchers.Default) {
+                    TestUtils.getInstance().value = 1
+                    true
+                }
+            }
+
+            val two = async {
+                withContext(Dispatchers.IO) {
+                    TestUtils.getInstance().value = 2
+                    true
+                }
+
+            }
+
+            if (one.await() && two.await()) {
+                YYLogUtils.w("index:" + index + " values :" + TestUtils.getInstance().value)
+            }
+        }
+
+
     }
 
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:Easy_title="CoordinatorLayout+Behavior" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="我是测试的图片"
+            android:src="@mipmap/ic_launcher"
+            app:layout_behavior="com.google.android.material.appbar.MyImageBehavior" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ccc"
+            android:gravity="center"
+            android:text="我是测试的分割线"
+            android:visibility="visible"
+            app:dependsOn="@id/iv_img"
+            app:dependType="y"
+            app:dependTargetY="-150dp"
+            app:targetY="50dp"
+            app:layout_behavior="com.google.android.material.appbar.EasyBehavior" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.appbar.MyScrollBehavior">
+
+            <TextView
+                android:id="@+id/nestedScrollLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/scroll_content" />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</LinearLayout>

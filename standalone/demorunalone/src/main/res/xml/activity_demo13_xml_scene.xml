@@ -47,12 +47,6 @@
         motion:duration="1000"
         motion:motionInterpolator="linear">
 
-        <!--   滑动     -->
-        <!--        <OnSwipe-->
-        <!--            motion:dragDirection="dragRight"-->
-        <!--            motion:touchAnchorId="@+id/button"-->
-        <!--            motion:touchAnchorSide="right" />-->
-
         <!--   点击     -->
         <OnClick
             motion:clickAction="toggle"

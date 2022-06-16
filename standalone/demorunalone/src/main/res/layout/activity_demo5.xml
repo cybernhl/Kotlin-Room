@@ -61,6 +61,12 @@
                     android:text="加载策略-去重"
                     binding:clicks="@{click.networkDup}" />
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="测试并发"
+                    binding:clicks="@{click.testConcurrency}" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
