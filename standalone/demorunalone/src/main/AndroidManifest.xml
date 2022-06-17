@@ -55,6 +55,8 @@
         <activity android:name=".demo.demo13_motionlayout.Demo13AppbarActivity" />
         <activity android:name=".demo.demo13_motionlayout.Demo13ViewPagerActivity" />
 
+        <activity android:name=".demo.demo13_motionlayout.Demo13Cons01Activity" />
+
         <activity android:name=".demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity" />
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity" />

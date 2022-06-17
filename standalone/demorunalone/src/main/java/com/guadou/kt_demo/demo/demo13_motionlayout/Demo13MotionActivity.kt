@@ -241,6 +241,10 @@ class Demo13MotionActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo13Motio
             Demo13ViewPagerActivity.startInstance()
         }
 
+        fun nav01() {
+            Demo13Cons01Activity.startInstance()
+        }
+
     }
 
 }

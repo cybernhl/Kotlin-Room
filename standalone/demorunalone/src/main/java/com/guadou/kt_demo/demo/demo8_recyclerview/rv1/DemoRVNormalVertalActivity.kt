@@ -9,6 +9,7 @@ import com.guadou.kt_demo.databinding.ActivityDemoRvNormalBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
+import com.guadou.lib_baselib.ext.bindData
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.divider
 import com.guadou.lib_baselib.ext.vertical
@@ -44,18 +45,18 @@ class DemoRVNormalVertalActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoR
         val datas = listOf("关羽", "刘备", "张飞", "吕布", "刘邦", "鲁班", "赵云", "韩信", "孙策")
 
         //使用RecyclerView的扩展方法
-//        recyclerView.vertical()
-//            .bindData(datas, R.layout.item_vertal_text) { holder, t, _ ->
-//                holder.setText(R.id.tv_vertal_text, t)
-//            }
-//            .divider(Color.BLACK)
+        mBinding.recyclerView.vertical()
+            .bindData(datas, R.layout.rl_03_layout) { holder, t, _ ->
+
+            }
+            .divider(Color.BLACK)
 
         //使用DataBinding的方式
-        mBinding.recyclerView.vertical().apply {
-            adapter = mAdapter
-            divider(Color.BLACK)
-        }
-        mAdapter.addData(datas)
+//        mBinding.recyclerView.vertical().apply {
+//            adapter = mAdapter
+//            divider(Color.BLACK)
+//        }
+//        mAdapter.addData(datas)
 
         //测试局部刷新
         mBinding.easyTitle.addRightText("Refresh") {

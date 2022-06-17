@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+
+    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        app:Easy_title="对比1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+<!--            <include layout="@layout/ll_03_layout"/>-->
+<!--                    <include layout="@layout/rl_03_layout"/>-->
+<!--                    <include layout="@layout/cl_03_layout"/>-->
+
+
+            <com.guadou.kt_demo.demo.demo13_motionlayout.view.Rel01
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.guadou.kt_demo.demo.demo13_motionlayout.view.Lin01
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <com.guadou.kt_demo.demo.demo13_motionlayout.view.Cons01
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+<!--    <include layout="@layout/ll_01_layout"/>-->
+<!--    <include layout="@layout/rl_01_layout"/>-->
+<!--    <include layout="@layout/cl_01_layout"/>-->
+
+<!--        <include layout="@layout/ll_02_layout"/>-->
+<!--        <include layout="@layout/rl_02_layout"/>-->
+<!--        <include layout="@layout/cl_02_layout"/>-->
+
+
+
+
+
+</LinearLayout>
