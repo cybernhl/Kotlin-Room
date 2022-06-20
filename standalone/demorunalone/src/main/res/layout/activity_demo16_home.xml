@@ -115,92 +115,93 @@
 
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/d_15dp"-->
-<!--            android:orientation="horizontal">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_15dp"
+            android:orientation="horizontal">
 
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont1TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="&#xe65e;"-->
-<!--                android:textColor="@color/gray"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#xe65e;"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/d_40dp" />
 
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont1TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="&#xe660;"-->
-<!--                android:textColor="#E91E63"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#xe660;"
+                android:textColor="#E91E63"
+                android:textSize="@dimen/d_40dp" />
 
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont1TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="&#xe661;"-->
-<!--                android:textColor="#009688"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#xe661;"
+                android:textColor="#009688"
+                android:textSize="@dimen/d_40dp" />
 
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont1TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="&#xe690;"-->
-<!--                android:textColor="#FF9800"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
-
-
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont1TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="#00BCD4"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
-
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/d_15dp"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont2TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="&#xe611;"-->
-<!--                android:textColor="@color/gray"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
-
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont2TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="&#xe612;"-->
-<!--                android:textColor="#E91E63"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
-
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont2TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="&#xe617;"-->
-<!--                android:textColor="#009688"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
-
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont2TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="&#xe618;"-->
-<!--                android:textColor="#FF9800"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#xe690;"
+                android:textColor="#FF9800"
+                android:textSize="@dimen/d_40dp" />
 
 
-<!--            <com.guadou.lib_baselib.font_text_view.IconFont2TextView-->
-<!--                android:text="&#xe619;"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="#00BCD4"-->
-<!--                android:textSize="@dimen/d_40dp" />-->
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:id="@+id/tv_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00BCD4"
+                android:textSize="@dimen/d_40dp" />
 
-<!--        </LinearLayout>-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_15dp"
+            android:orientation="horizontal">
+
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#xe611;"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/d_40dp" />
+
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#xe612;"
+                android:textColor="#E91E63"
+                android:textSize="@dimen/d_40dp" />
+
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#xe617;"
+                android:textColor="#009688"
+                android:textSize="@dimen/d_40dp" />
+
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#xe618;"
+                android:textColor="#FF9800"
+                android:textSize="@dimen/d_40dp" />
+
+
+            <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                android:text="&#xe619;"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00BCD4"
+                android:textSize="@dimen/d_40dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -10,25 +10,25 @@ import androidx.appcompat.widget.AppCompatTextView;
 /**
  * 字体图片的TextView
  */
-public class IconFont1TextView extends AppCompatTextView {
+public class IconFontTextView extends AppCompatTextView {
 
-    public IconFont1TextView(@NonNull Context context) {
+    public IconFontTextView(@NonNull Context context) {
         super(context);
         init(context);
     }
 
-    public IconFont1TextView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public IconFontTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public IconFont1TextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public IconFontTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
     private void init(Context context) {
-        setTypeface(FontCache.getIconFontTypeFace("001", context));
+        setTypeface(FontCache.getIconFontTypeFace("", context));
     }
 
 }

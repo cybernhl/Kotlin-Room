@@ -40,7 +40,7 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
     }
 
     override fun init() {
-//        mBinding.tvSetImg.text = "\ue6cc"
+        mBinding.tvIcon.text = "\ue6cc"
     }
 
     /**
