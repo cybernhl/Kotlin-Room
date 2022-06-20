@@ -137,6 +137,13 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.navDemo15}" />
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="16.录制视频"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.navDemo16}" />
+
             </LinearLayout>
 
         </ScrollView>

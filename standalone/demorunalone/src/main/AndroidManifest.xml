@@ -59,6 +59,8 @@
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity" />
 
+        <activity android:name=".demo.demo16_record.Demo16RecordActivity" />
+
         <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity" />
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoImagePreviewActivity" />
