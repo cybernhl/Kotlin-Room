@@ -24,222 +24,248 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/d_10dp"
-                    android:layout_marginTop="@dimen/d_10dp"
-                    android:background="@color/gray"
-                    android:includeFontPadding="true"
-                    android:text="No Paddins TextView"
-                    android:textSize="@dimen/d_30sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/d_10dp"
-                    android:layout_marginTop="@dimen/d_10dp"
-                    android:background="@color/gray"
-                    android:includeFontPadding="false"
-                    android:text="No Paddins TextView"
-                    android:textSize="@dimen/d_30sp" />
-
-                <com.guadou.cs_cptservices.widget.NoPaddingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/d_10dp"
-                    android:layout_marginTop="@dimen/d_10dp"
-                    android:background="@color/gray"
-                    android:text="No Paddins TextView"
-                    android:textSize="@dimen/d_30sp"
-                    app:removeDefaultPadding="true" />
-
-                <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/d_10dp"
-                    android:layout_marginTop="@dimen/d_10dp"
-                    android:background="@color/gray"
-                    android:lines="2"
-                    android:text="Auto Size TTex TeTextAext Content Auto Size extAext Content Auto Size extAext Content Auto Size Text Content Auto Size Text Content"
-                    android:textSize="@dimen/d_20sp" />
-
-
-                <com.guadou.cs_cptservices.widget.AutoFitTextView
-                    android:layout_marginTop="@dimen/d_15dp"
-                    android:background="#80808080"
+                <FrameLayout
+                    android:visibility="visible"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:textSize="30sp"
-                    android:gravity="center"
-                    android:text="Auto Size Text Auto Size Text" />
-
-                <com.guadou.cs_cptservices.widget.AutoFitTextView
-                    android:layout_marginTop="15dp"
-                    android:background="#80808080"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:textSize="30sp"
-                    android:text="Auto Size Text Auto Size Text  Auto Size Text Auto Size Text"/>
-
-                <com.guadou.cs_cptservices.widget.AutoFitTextView
-                    android:layout_marginTop="15dp"
-                    android:background="#80808080"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:textSize="30sp"
-                    android:text="Auto Size Text  Auto Size Text  Auto Size Text  Auto Size Text  Auto Size Text  Auto Size Text Auto Size Text"/>
-
-                <com.guadou.cs_cptservices.widget.AutoFitTextView
-                    android:layout_marginTop="15dp"
-                    android:background="#80808080"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:textSize="30sp"
-                    android:gravity="center"
-                    android:text="Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text"/>
-
-                <com.guadou.cs_cptservices.widget.AutoFitTextView
-                    android:layout_marginTop="15dp"
-                    android:background="#80808080"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:gravity="center"
-                    android:textSize="30sp"
-                    android:text="Auto Size Text  Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d_15dp"
-                    android:orientation="horizontal">
+                    android:layout_height="100dp">
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="@dimen/d_40dp"
-                        android:src="@drawable/kafei" />
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="@dimen/d_40dp"
-                        android:src="@drawable/kele" />
-
-                    <ImageView
+                        android:id="@+id/iv_anim"
                         android:layout_width="40dp"
                         android:layout_height="@dimen/d_40dp"
                         android:src="@drawable/shutiao" />
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="@dimen/d_40dp"
-                        android:src="@drawable/xuegao" />
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="@dimen/d_40dp"
-                        android:src="@drawable/zhenzhunaicha" />
+                    <TextView
+                        android:layout_marginRight="@dimen/d_15dp"
+                        android:layout_gravity="right"
+                        android:text="原生的TextView"
+                        android:id="@+id/tv_r_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:srcCompat="@drawable/mianhuatang" />
-
-                </LinearLayout>
+                </FrameLayout>
 
                 <LinearLayout
+                    android:visibility="visible"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d_15dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="&#xe65e;"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/d_40dp" />
+                        android:layout_marginLeft="@dimen/d_10dp"
+                        android:layout_marginTop="@dimen/d_10dp"
+                        android:background="@color/gray"
+                        android:includeFontPadding="true"
+                        android:text="No Paddins TextView"
+                        android:textSize="@dimen/d_30sp" />
 
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="&#xe660;"
-                        android:textColor="#E91E63"
-                        android:textSize="@dimen/d_40dp" />
+                        android:layout_marginLeft="@dimen/d_10dp"
+                        android:layout_marginTop="@dimen/d_10dp"
+                        android:background="@color/gray"
+                        android:includeFontPadding="false"
+                        android:text="No Paddins TextView"
+                        android:textSize="@dimen/d_30sp" />
 
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                    <com.guadou.cs_cptservices.widget.NoPaddingTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="&#xe661;"
-                        android:textColor="#009688"
-                        android:textSize="@dimen/d_40dp" />
+                        android:layout_marginLeft="@dimen/d_10dp"
+                        android:layout_marginTop="@dimen/d_10dp"
+                        android:background="@color/gray"
+                        android:text="No Paddins TextView"
+                        android:textSize="@dimen/d_30sp"
+                        app:removeDefaultPadding="true" />
 
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:text="&#xe690;"
-                        android:textColor="#FF9800"
-                        android:textSize="@dimen/d_40dp" />
+                        android:layout_marginLeft="@dimen/d_10dp"
+                        android:layout_marginTop="@dimen/d_10dp"
+                        android:background="@color/gray"
+                        android:lines="2"
+                        android:text="Auto Size TTex TeTextAext Content Auto Size extAext Content Auto Size extAext Content Auto Size Text Content Auto Size Text Content"
+                        android:textSize="@dimen/d_20sp" />
 
 
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
-                        android:id="@+id/tv_icon"
-                        android:layout_width="wrap_content"
+                    <com.guadou.cs_cptservices.widget.AutoFitTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="@dimen/d_15dp"
+                        android:background="#80808080"
+                        android:gravity="center"
+                        android:text="Auto Size Text Auto Size Text"
+                        android:textSize="30sp" />
+
+                    <com.guadou.cs_cptservices.widget.AutoFitTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="15dp"
+                        android:background="#80808080"
+                        android:gravity="center"
+                        android:text="Auto Size Text Auto Size Text  Auto Size Text Auto Size Text"
+                        android:textSize="30sp" />
+
+                    <com.guadou.cs_cptservices.widget.AutoFitTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="15dp"
+                        android:background="#80808080"
+                        android:gravity="center"
+                        android:text="Auto Size Text  Auto Size Text  Auto Size Text  Auto Size Text  Auto Size Text  Auto Size Text Auto Size Text"
+                        android:textSize="30sp" />
+
+                    <com.guadou.cs_cptservices.widget.AutoFitTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="15dp"
+                        android:background="#80808080"
+                        android:gravity="center"
+                        android:text="Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text"
+                        android:textSize="30sp" />
+
+                    <com.guadou.cs_cptservices.widget.AutoFitTextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#00BCD4"
-                        android:textSize="@dimen/d_40dp" />
+                        android:layout_marginTop="15dp"
+                        android:background="#80808080"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="Auto Size Text  Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text Auto Size Text"
+                        android:textSize="30sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d_15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="@dimen/d_40dp"
+                            android:src="@drawable/kafei" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="@dimen/d_40dp"
+                            android:src="@drawable/kele" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="@dimen/d_40dp"
+                            android:src="@drawable/xuegao" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="@dimen/d_40dp"
+                            android:src="@drawable/zhenzhunaicha" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:srcCompat="@drawable/mianhuatang" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d_15dp"
+                        android:orientation="horizontal">
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe65e;"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/d_40dp" />
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe660;"
+                            android:textColor="#E91E63"
+                            android:textSize="@dimen/d_40dp" />
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe661;"
+                            android:textColor="#009688"
+                            android:textSize="@dimen/d_40dp" />
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe690;"
+                            android:textColor="#FF9800"
+                            android:textSize="@dimen/d_40dp" />
+
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:id="@+id/tv_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#00BCD4"
+                            android:textSize="@dimen/d_40dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d_15dp"
+                        android:orientation="horizontal">
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe611;"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/d_40dp" />
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe612;"
+                            android:textColor="#E91E63"
+                            android:textSize="@dimen/d_40dp" />
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe617;"
+                            android:textColor="#009688"
+                            android:textSize="@dimen/d_40dp" />
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe618;"
+                            android:textColor="#FF9800"
+                            android:textSize="@dimen/d_40dp" />
+
+
+                        <com.guadou.lib_baselib.font_text_view.IconFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="&#xe619;"
+                            android:textColor="#00BCD4"
+                            android:textSize="@dimen/d_40dp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/d_15dp"
-                    android:orientation="horizontal">
-
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="&#xe611;"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/d_40dp" />
-
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="&#xe612;"
-                        android:textColor="#E91E63"
-                        android:textSize="@dimen/d_40dp" />
-
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="&#xe617;"
-                        android:textColor="#009688"
-                        android:textSize="@dimen/d_40dp" />
-
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="&#xe618;"
-                        android:textColor="#FF9800"
-                        android:textSize="@dimen/d_40dp" />
-
-
-                    <com.guadou.lib_baselib.font_text_view.IconFontTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="&#xe619;"
-                        android:textColor="#00BCD4"
-                        android:textSize="@dimen/d_40dp" />
-
-                </LinearLayout>
 
             </LinearLayout>
 

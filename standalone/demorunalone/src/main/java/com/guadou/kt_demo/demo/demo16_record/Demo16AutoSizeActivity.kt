@@ -7,6 +7,7 @@ import com.guadou.kt_demo.databinding.ActivityDemo16AutosizeBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
+import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16AutosizeBinding>() {
-
 
     companion object {
         fun startInstance() {
@@ -35,8 +35,45 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
     override fun startObserve() {
     }
 
+    @SuppressLint("ObjectAnimatorBinding", "Recycle")
     override fun init() {
         mBinding.tvIcon.text = "\ue6cc"
+
+
+//        val mhandler = Handler()
+//        mhandler.post() {
+//            mBinding.ivAnim.animate().scaleX(2f).scaleY(2f).translationX(200f).translationY(200f).setDuration(1000).start()
+//        }
+
+
+//        val animatorscaleX = ObjectAnimator.ofFloat(mBinding.ivAnim, "scaleX", 2f)
+//        val animatorscaleY = ObjectAnimator.ofFloat(mBinding.ivAnim, "scaleY", 2f)
+//        val animatortranslationX = ObjectAnimator.ofFloat(mBinding.ivAnim, "translationX", 200f)
+//        val animatortranslationY = ObjectAnimator.ofFloat(mBinding.ivAnim, "translationY", 200f)
+//
+//        val set = AnimatorSet()
+//        set.setDuration(1000).play(animatorscaleX).with(animatorscaleY).with(animatortranslationX).with(animatortranslationY)
+//        set.start()
+
+       val looperThread = MyLooperThread(this, mBinding.tvRMsg)
+        looperThread.start()
+
+
+        mBinding.ivAnim.click {
+
+//            looperThread.handler.obtainMessage(200, "test set tv'msg").sendToTarget()
+
+            //试试子线程执行动画看看
+            looperThread.handler.post {
+                mBinding.ivAnim.animate().scaleX(2f).scaleY(2f).translationX(200f).translationY(200f).setDuration(1000).start()
+            }
+
+
+        }
+
+        //退出looper
+//        looperThread.looper.quit()
+
     }
 
 }
