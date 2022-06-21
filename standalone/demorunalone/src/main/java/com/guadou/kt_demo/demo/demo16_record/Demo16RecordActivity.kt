@@ -42,13 +42,17 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
     }
 
     override fun init() {
-        mBinding.tvIcon.text = "\ue6cc"
+
     }
 
     /**
      * DataBinding事件处理
      */
     inner class ClickProxy {
+
+        fun autoSize() {
+            Demo16AutoSizeActivity.startInstance()
+        }
 
         fun intent() {
             YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
