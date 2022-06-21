@@ -10,6 +10,8 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
+import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -49,11 +51,13 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
     inner class ClickProxy {
 
         fun intent() {
-            toast("intent")
+            YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
         }
 
         fun mediaRecord() {
-            toast("mediaRecord")
+          CommUtils.getHandler().postDelayed({
+              YYLogUtils.w("ForegroundCheck isForeground: " +  ForegroundCheck.get().isForeground)
+          },3000)
         }
 
         fun mediaCodec() {
