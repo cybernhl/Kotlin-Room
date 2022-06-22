@@ -2,8 +2,6 @@ package com.guadou.kt_demo.demo.demo16_record
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Handler
-import android.os.HandlerThread
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16AutosizeBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -61,11 +59,6 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
 //        looperThread.start()
 
 
-        val handlerThread = HandlerThread("anim_run_in_thread")
-        handlerThread.start()
-        val handler = Handler(handlerThread.looper)
-
-
         mBinding.ivAnim.click {
 
 //            looperThread.handler.obtainMessage(200, "test set tv'msg").sendToTarget()
@@ -76,16 +69,14 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
 //            }
 
             //试试HandlerThread执行动画
-            handler.post {
-                val anim = mBinding.ivAnim.animate()
-                    .scaleX(2f)
-                    .scaleY(2f)
-                    .translationXBy(200f)
-                    .translationYBy(200f)
-                    .setDuration(1000)
-                AsynAnimUtil.instance.startAnim(this, anim)
+            val anim = mBinding.ivAnim.animate()
+                .scaleX(2f)
+                .scaleY(2f)
+                .translationXBy(200f)
+                .translationYBy(200f)
+                .setDuration(2000)
 
-            }
+            AsynAnimUtil.instance.startAnim(this, anim)
 
         }
 

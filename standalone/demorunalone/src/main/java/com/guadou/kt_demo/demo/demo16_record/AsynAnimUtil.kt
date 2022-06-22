@@ -9,10 +9,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
-import com.guadou.lib_baselib.ext.runOnUIThread
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
 
-
+/**
+ * 异步动画工具类
+ */
 class AsynAnimUtil private constructor() : LifecycleObserver {
 
     private var mHandlerThread: HandlerThread? = HandlerThread("anim_run_in_thread")
@@ -76,9 +77,7 @@ class AsynAnimUtil private constructor() : LifecycleObserver {
 
     // 绑定当前页面生命周期
     private fun addLoopLifecycleObserver() {
-        runOnUIThread {
-            mOwner?.lifecycle?.addObserver(this)
-        }
+        mOwner?.lifecycle?.addObserver(this)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
