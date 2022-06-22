@@ -36,6 +36,7 @@ open class BaseApplication : Application() {
         BaseLibCore.init(this, Handler(), android.os.Process.myTid())
 
         //网络监听
+//        BaseLibCore.registerNetworkObserver(this)
         ConnectivityReceiver.registerReceiver(this)
 
     }
@@ -48,6 +49,7 @@ open class BaseApplication : Application() {
 
     override fun onTerminate() {
         super.onTerminate()
+//        BaseLibCore.unregisterNetworkObserver(this)
         ConnectivityReceiver.unregisterReceiver(this)
     }
 

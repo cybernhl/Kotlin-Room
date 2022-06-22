@@ -9,7 +9,12 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.utils.FilesUtils
 import dagger.hilt.android.AndroidEntryPoint
+import okio.appendingSink
+import okio.buffer
+import okio.gzip
+import java.io.File
 
 /**
  * 录制
@@ -77,6 +82,8 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
 
             AsynAnimUtil.instance.startAnim(this, anim)
 
+            val logFile = File(FilesUtils.getInstance().sdpath)
+            val bufferedSink = logFile.appendingSink().gzip().buffer()
         }
 
         //退出looper

@@ -131,6 +131,7 @@ dependencies {
     api deps.support.retrofit2
     api deps.support.retrofit_gson
     api deps.support.cookie_jar
+    api deps.support.okio
 
     //其他依赖
     implementation deps.support.permission
