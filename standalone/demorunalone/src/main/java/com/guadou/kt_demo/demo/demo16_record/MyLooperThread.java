@@ -11,7 +11,7 @@ import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.guadou.lib_baselib.utils.Log.YYLogUtils;
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 public class MyLooperThread extends Thread {
 

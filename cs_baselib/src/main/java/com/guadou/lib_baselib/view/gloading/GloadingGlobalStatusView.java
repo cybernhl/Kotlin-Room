@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.guadou.basiclib.R;
-import com.guadou.lib_baselib.utils.Log.YYLogUtils;
-import com.guadou.lib_baselib.utils.NetWorkUtil;
 import com.guadou.lib_baselib.view.progress.jump.JumpLoadingView;
 
 import static com.guadou.lib_baselib.view.gloading.Gloading.STATUS_LOADING;

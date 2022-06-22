@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.utils.easylog
+package com.guadou.lib_baselib.utils.log
 
 import android.text.TextUtils
 import org.json.JSONArray
@@ -7,67 +7,63 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import java.net.UnknownHostException
 
-object EasyLog {
+object YYLogUtils {
 
     var LINE_SEPARATOR = System.getProperty("line.separator")
 
-    /**
-     * Priority constant for the println method; use Log.v.
-     */
-    private const val VERBOSE = 2
-
-    /**
-     * Priority constant for the println method; use Log.d.
-     */
     private const val DEBUG = 3
 
-    /**
-     * Priority constant for the println method; use Log.i.
-     */
     private const val INFO = 4
 
-    /**
-     * Priority constant for the println method; use Log.w.
-     */
     private const val WARN = 5
 
-    /**
-     * Priority constant for the println method; use Log.e.
-     */
     private const val ERROR = 6
 
-    /**
-     * Priority constant for the println method.
-     */
-    private const val ASSERT = 7
 
     private val logInterceptors = mutableListOf<LogInterceptor>()
     private val interceptorChain = Chain(logInterceptors)
 
+    @JvmStatic
     fun d(message: String, tag: String = "/", vararg args: Any) {
         log(DEBUG, message, tag, *args)
     }
 
+    @JvmStatic
+    fun d(message: String) {
+        d(message, "/")
+    }
+
+    @JvmStatic
     fun e(message: String, tag: String = "/", vararg args: Any, throwable: Throwable? = null) {
         log(ERROR, message, tag, *args, throwable = throwable)
     }
 
+    @JvmStatic
+    fun e(message: String) {
+        e(message, "/")
+    }
+
+    @JvmStatic
     fun w(message: String, tag: String = "/", vararg args: Any) {
         log(WARN, message, tag, *args)
     }
 
+    @JvmStatic
+    fun w(message: String) {
+        w(message, "/")
+    }
+
+    @JvmStatic
     fun i(message: String, tag: String = "/", vararg args: Any) {
         log(INFO, message, tag, *args)
     }
 
-    fun v(message: String, tag: String = "/", vararg args: Any) {
-        log(VERBOSE, message, tag, *args)
+    @JvmStatic
+    fun i(message: String) {
+        i(message, "/")
     }
 
-    fun wtf(message: String, tag: String = "/", vararg args: Any) {
-        log(ASSERT, message, tag, *args)
-    }
-
+    @JvmStatic
     fun json(json: String) {
         if (TextUtils.isEmpty(json)) {
             e("json 数据为空！")

@@ -7,7 +7,7 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
-import com.guadou.lib_baselib.utils.Log.YYLogUtils;
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 
 public class ForegroundCheck implements Application.ActivityLifecycleCallbacks {

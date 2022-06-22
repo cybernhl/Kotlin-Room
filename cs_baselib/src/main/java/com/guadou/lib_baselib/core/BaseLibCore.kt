@@ -4,18 +4,19 @@ import android.app.Application
 import android.graphics.Color
 import android.os.Handler
 import androidx.core.content.ContextCompat
+import com.guadou.basiclib.BuildConfig
 import com.guadou.basiclib.R
 import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.FilesUtils
 import com.guadou.lib_baselib.utils.ThreadPoolUtils
-import com.guadou.lib_baselib.utils.easylog.EasyLog
-import com.guadou.lib_baselib.utils.easylog.interceptor.CallStackLogInterceptor
-import com.guadou.lib_baselib.utils.easylog.interceptor.LogcatInterceptor
-import com.guadou.lib_baselib.utils.easylog.interceptor.OkioLogInterceptor
+import com.guadou.lib_baselib.utils.log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.interceptor.CallStackLogInterceptor
+import com.guadou.lib_baselib.utils.log.interceptor.LogcatInterceptor
+import com.guadou.lib_baselib.utils.log.interceptor.OkioLogInterceptor
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalAdapter
 import com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+import java.io.File
 
 /**
  * 底层的模组依赖库都在这里初始化
@@ -61,9 +62,19 @@ object BaseLibCore {
         //全局的Loading状态默认配置
         Gloading.initDefault(GloadingGlobalAdapter())
 
-        EasyLog.addInterceptor(CallStackLogInterceptor())
-        EasyLog.addInterceptor(LogcatInterceptor())
-        EasyLog.addInterceptor(OkioLogInterceptor.getInstance(FilesUtils.getInstance().sdpath))
+        //配置Log的拦截器，只有Debug下才生效
+        if (BuildConfig.DEBUG) {
+            YYLogUtils.addInterceptor(CallStackLogInterceptor())
+            YYLogUtils.addInterceptor(LogcatInterceptor())
+
+            val logPath = application.applicationContext.filesDir.toString() + "/log/"
+            val dir = File(logPath)
+            if (!dir.exists()) {
+                dir.mkdirs()
+            }
+            YYLogUtils.addInterceptor(OkioLogInterceptor.getInstance(logPath))
+        }
+
     }
 
     /**

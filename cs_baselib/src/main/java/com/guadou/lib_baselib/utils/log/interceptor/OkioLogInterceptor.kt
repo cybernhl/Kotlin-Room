@@ -1,10 +1,10 @@
-package com.guadou.lib_baselib.utils.easylog.interceptor
+package com.guadou.lib_baselib.utils.log.interceptor
 
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.HandlerThread
-import com.guadou.lib_baselib.utils.easylog.Chain
-import com.guadou.lib_baselib.utils.easylog.LogInterceptor
+import com.guadou.lib_baselib.utils.log.Chain
+import com.guadou.lib_baselib.utils.log.LogInterceptor
 import okio.BufferedSink
 import okio.appendingSink
 import okio.buffer

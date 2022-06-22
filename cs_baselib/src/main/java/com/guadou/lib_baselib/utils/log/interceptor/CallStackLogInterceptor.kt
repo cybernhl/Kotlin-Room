@@ -1,9 +1,9 @@
-package com.guadou.lib_baselib.utils.easylog.interceptor
+package com.guadou.lib_baselib.utils.log.interceptor
 
-import com.guadou.lib_baselib.utils.easylog.Chain
-import com.guadou.lib_baselib.utils.easylog.EasyLog
-import com.guadou.lib_baselib.utils.easylog.LogInterceptor
-import com.guadou.lib_baselib.utils.easylog.getCallStack
+import com.guadou.lib_baselib.utils.log.Chain
+import com.guadou.lib_baselib.utils.log.LogInterceptor
+import com.guadou.lib_baselib.utils.log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.getCallStack
 
 class CallStackLogInterceptor : LogInterceptor {
     companion object {
@@ -21,7 +21,7 @@ class CallStackLogInterceptor : LogInterceptor {
 
         private val blackList = listOf(
             CallStackLogInterceptor::class.java.name,
-            EasyLog::class.java.name,
+            YYLogUtils::class.java.name,
             Chain::class.java.name,
         )
     }

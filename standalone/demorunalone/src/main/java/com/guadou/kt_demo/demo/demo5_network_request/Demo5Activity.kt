@@ -11,8 +11,7 @@ import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
-import com.guadou.lib_baselib.utils.easylog.EasyLog
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.track.TrackEventListener
 import com.jeremyliao.liveeventbus.LiveEventBus
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,7 +74,7 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //            mViewModel.testNullNet()
             LiveEventBus.get("newMember").post(true)
 
-            EasyLog.w("Test Log")
+            YYLogUtils.w("Test Log")
         }
 
         /**
@@ -86,7 +85,7 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
             TrackEventListener.networkTrackCallback = object : TrackEventListener.NetworkTrackCallback {
                 override fun onCallEnd(map: Map<String, Any>) {
                     //可以通过IO写入到文件-上传到服务器
-                    EasyLog.i("track map :$map")
+                    YYLogUtils.i("track map :$map")
                 }
             }
 

@@ -10,7 +10,7 @@ import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.*
 
 class Demo11OneFragment3(private val name: String?) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Binding>() {

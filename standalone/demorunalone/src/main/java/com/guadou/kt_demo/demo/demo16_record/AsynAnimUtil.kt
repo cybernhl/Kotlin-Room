@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 /**
  * 异步动画工具类

@@ -15,7 +15,7 @@ import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CheckUtil
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 /**
  * Repository一定要通过默认的构造方法传入进来

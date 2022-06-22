@@ -1,8 +1,8 @@
-package com.guadou.lib_baselib.utils.easylog.interceptor
+package com.guadou.lib_baselib.utils.log.interceptor
 
 import android.util.Log
-import com.guadou.lib_baselib.utils.easylog.Chain
-import com.guadou.lib_baselib.utils.easylog.LogInterceptor
+import com.guadou.lib_baselib.utils.log.Chain
+import com.guadou.lib_baselib.utils.log.LogInterceptor
 
 open class LogcatInterceptor : LogInterceptor {
     override fun log(priority: Int, tag: String, log: String, chain: Chain) {

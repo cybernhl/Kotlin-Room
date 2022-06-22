@@ -6,7 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.guadou.lib_baselib.utils.Log.YYLogUtils;
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.navigation.IOnBackPressed
 import com.guadou.lib_baselib.utils.navigation.loadRootFragment

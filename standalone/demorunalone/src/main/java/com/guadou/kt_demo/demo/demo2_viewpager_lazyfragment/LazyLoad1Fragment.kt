@@ -9,7 +9,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
 

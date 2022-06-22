@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.utils.easylog
+package com.guadou.lib_baselib.utils.log
 
 class Chain(
     private val interceptors: List<LogInterceptor>,

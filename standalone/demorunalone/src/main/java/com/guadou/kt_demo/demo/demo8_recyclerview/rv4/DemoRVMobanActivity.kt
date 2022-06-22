@@ -12,7 +12,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.divider
 import com.guadou.lib_baselib.ext.vertical
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 import dagger.hilt.android.AndroidEntryPoint

@@ -6,7 +6,7 @@ import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 class Demo13Cons01Activity : BaseVMActivity<EmptyViewModel>() {
 

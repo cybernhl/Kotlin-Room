@@ -11,7 +11,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

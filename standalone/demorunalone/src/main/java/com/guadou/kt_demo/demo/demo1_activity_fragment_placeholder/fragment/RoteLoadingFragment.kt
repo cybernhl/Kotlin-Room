@@ -7,7 +7,7 @@ import com.guadou.lib_baselib.base.fragment.BaseVDBLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalStatusView
 import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
