@@ -8,6 +8,9 @@ import com.google.gson.GsonBuilder
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.interceptor.*
+import com.guadou.lib_baselib.utils.track.TrackCallFactory
+import com.guadou.lib_baselib.utils.track.TrackEventListenerFactory
+import com.guadou.lib_baselib.utils.track.TrackInterceptor
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient
@@ -37,13 +40,13 @@ abstract class BaseRetrofitClient {
         get() {
             val builder = OkHttpClient.Builder()
 
-            //可以添加日志拦截和参数拦截
             builder
                 .addInterceptor(LoggingInterceptor())
+                .addInterceptor(TrackInterceptor())
+                .eventListenerFactory(TrackEventListenerFactory)
                 .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
                 .writeTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
-
             if (needHttpCache()) {
                 handleBuilder(builder)
             }
@@ -91,12 +94,15 @@ abstract class BaseRetrofitClient {
             }
     }
 
+    //动态代理构建Retrofit的服务
     fun <S> getService(serviceClass: Class<S>, baseUrl: String): S {
         return Retrofit.Builder()
-            .client(client)
+//            .client(client)
+            .callFactory(TrackCallFactory(client))
             .addConverterFactory(GsonConverterFactory.create(buildGson()))
             .baseUrl(baseUrl)
-            .build().create(serviceClass)
+            .build()
+            .create(serviceClass)
     }
 
     //容错处理

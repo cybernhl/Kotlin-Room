@@ -12,6 +12,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.track.TrackEventListener
 import com.jeremyliao.liveeventbus.LiveEventBus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -78,6 +79,14 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
          * 串联顺序执行
          */
         fun networkChuan() {
+            //打印track追踪的网络请求数据
+            TrackEventListener.networkTrackCallback = object : TrackEventListener.NetworkTrackCallback {
+                override fun onCallEnd(map: Map<String, Any>) {
+                    YYLogUtils.i("track map :$map")
+                    //可以通过IO写入到文件-上传到服务器
+                }
+            }
+
             mViewModel.mContentLiveData.value = ""
             mViewModel.netWorkSeries()
         }

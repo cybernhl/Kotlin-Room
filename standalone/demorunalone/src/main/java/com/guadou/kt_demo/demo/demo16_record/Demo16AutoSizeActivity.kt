@@ -58,7 +58,6 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
 //        val looperThread = MyLooperThread(this, mBinding.tvRMsg)
 //        looperThread.start()
 
-
         mBinding.ivAnim.click {
 
 //            looperThread.handler.obtainMessage(200, "test set tv'msg").sendToTarget()

@@ -3,6 +3,8 @@ package com.guadou.lib_baselib.utils.interceptor;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.guadou.basiclib.BuildConfig;
 import com.guadou.lib_baselib.utils.Log.YYLogUtils;
 
@@ -21,6 +23,7 @@ public class LoggingInterceptor implements Interceptor {
 
     private boolean debug = BuildConfig.DEBUG;
 
+    @NonNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         //这个chain里面包含了request和response，所以你要什么都可以从这里拿
