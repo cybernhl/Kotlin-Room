@@ -2,6 +2,8 @@ package com.guadou.kt_demo.demo.demo16_record
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Handler
+import android.os.HandlerThread
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16AutosizeBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -55,8 +57,13 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
 //        set.setDuration(1000).play(animatorscaleX).with(animatorscaleY).with(animatortranslationX).with(animatortranslationY)
 //        set.start()
 
-       val looperThread = MyLooperThread(this, mBinding.tvRMsg)
-        looperThread.start()
+//        val looperThread = MyLooperThread(this, mBinding.tvRMsg)
+//        looperThread.start()
+
+
+        val handlerThread = HandlerThread("anim_run_in_thread")
+        handlerThread.start()
+        val handler = Handler(handlerThread.looper)
 
 
         mBinding.ivAnim.click {
@@ -64,10 +71,21 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
 //            looperThread.handler.obtainMessage(200, "test set tv'msg").sendToTarget()
 
             //试试子线程执行动画看看
-            looperThread.handler.post {
-                mBinding.ivAnim.animate().scaleX(2f).scaleY(2f).translationX(200f).translationY(200f).setDuration(1000).start()
-            }
+//            looperThread.handler.post {
+//                mBinding.ivAnim.animate().scaleX(2f).scaleY(2f).translationX(200f).translationY(200f).setDuration(1000).start()
+//            }
 
+            //试试HandlerThread执行动画
+            handler.post {
+                val anim = mBinding.ivAnim.animate()
+                    .scaleX(2f)
+                    .scaleY(2f)
+                    .translationXBy(200f)
+                    .translationYBy(200f)
+                    .setDuration(1000)
+                AsynAnimUtil.instance.startAnim(this, anim)
+
+            }
 
         }
 

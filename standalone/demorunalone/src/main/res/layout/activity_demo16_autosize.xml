@@ -31,7 +31,7 @@
                 <FrameLayout
                     android:visibility="visible"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp">
+                    android:layout_height="300dp">
 
                     <ImageView
                         android:id="@+id/iv_anim"
@@ -51,7 +51,7 @@
                 </FrameLayout>
 
                 <LinearLayout
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
