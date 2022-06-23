@@ -4,8 +4,15 @@ import android.text.TextUtils
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.PrintWriter
+import java.io.StringReader
 import java.io.StringWriter
 import java.net.UnknownHostException
+import javax.xml.transform.OutputKeys
+import javax.xml.transform.Source
+import javax.xml.transform.TransformerException
+import javax.xml.transform.TransformerFactory
+import javax.xml.transform.stream.StreamResult
+import javax.xml.transform.stream.StreamSource
 
 object YYLogUtils {
 
@@ -76,6 +83,27 @@ object YYLogUtils {
             e(message)
         } catch (e: Exception) {
             e(e.cause!!.message + LINE_SEPARATOR + json)
+        }
+    }
+
+    @JvmStatic
+    fun xml(xml: String) {
+        if (TextUtils.isEmpty(xml)) {
+            e("xml 数据为空！")
+            return
+        }
+        try {
+            val xmlInput: Source = StreamSource(StringReader(xml))
+            val xmlOutput = StreamResult(StringWriter())
+            val transformer = TransformerFactory.newInstance().newTransformer()
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes")
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4")
+            transformer.transform(xmlInput, xmlOutput)
+            val message =
+                xmlOutput.writer.toString().replaceFirst(">".toRegex(), ">$LINE_SEPARATOR")
+            e(message)
+        } catch (e: TransformerException) {
+            e(e.cause!!.message + LINE_SEPARATOR + xml)
         }
     }
 

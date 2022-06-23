@@ -4,7 +4,10 @@ import android.util.Log
 import com.guadou.lib_baselib.utils.log.Chain
 import com.guadou.lib_baselib.utils.log.LogInterceptor
 
-open class LogcatInterceptor : LogInterceptor {
+/**
+ * 使用Android Log 打印日志
+ */
+open class LogPrintInterceptor : LogInterceptor {
     override fun log(priority: Int, tag: String, log: String, chain: Chain) {
         if (enable()) {
             Log.println(priority, tag, log)

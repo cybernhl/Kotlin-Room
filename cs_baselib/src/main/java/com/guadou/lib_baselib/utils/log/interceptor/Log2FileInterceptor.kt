@@ -13,7 +13,10 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OkioLogInterceptor private constructor(private var dir: String) : LogInterceptor {
+/**
+ * 接收上面拦截器传递的数据-把Log信息保存到本地File
+ */
+class Log2FileInterceptor private constructor(private var dir: String) : LogInterceptor {
     private val handlerThread = HandlerThread("log_to_file_thread")
     private val handler: Handler
     private var startTime = System.currentTimeMillis()
@@ -44,10 +47,10 @@ class OkioLogInterceptor private constructor(private var dir: String) : LogInter
         private const val FLUSH_LOG_DELAY_MILLIS = 3000L
 
         @Volatile
-        private var INSTANCE: OkioLogInterceptor? = null
+        private var INSTANCE: Log2FileInterceptor? = null
 
-        fun getInstance(dir: String): OkioLogInterceptor = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: OkioLogInterceptor(dir).apply { INSTANCE = this }
+        fun getInstance(dir: String): Log2FileInterceptor = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: Log2FileInterceptor(dir).apply { INSTANCE = this }
         }
     }
 

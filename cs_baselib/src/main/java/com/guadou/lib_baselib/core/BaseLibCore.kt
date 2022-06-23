@@ -2,6 +2,7 @@ package com.guadou.lib_baselib.core
 
 import android.app.Application
 import android.graphics.Color
+import android.os.Environment
 import android.os.Handler
 import androidx.core.content.ContextCompat
 import com.guadou.basiclib.BuildConfig
@@ -10,9 +11,9 @@ import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.ThreadPoolUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
-import com.guadou.lib_baselib.utils.log.interceptor.CallStackLogInterceptor
-import com.guadou.lib_baselib.utils.log.interceptor.LogcatInterceptor
-import com.guadou.lib_baselib.utils.log.interceptor.OkioLogInterceptor
+import com.guadou.lib_baselib.utils.log.interceptor.Log2FileInterceptor
+import com.guadou.lib_baselib.utils.log.interceptor.LogDecorateInterceptor
+import com.guadou.lib_baselib.utils.log.interceptor.LogPrintInterceptor
 import com.guadou.lib_baselib.view.gloading.Gloading
 import com.guadou.lib_baselib.view.gloading.GloadingGlobalAdapter
 import com.guadou.lib_baselib.view.titlebar.EasyTitleBar
@@ -64,15 +65,20 @@ object BaseLibCore {
 
         //配置Log的拦截器，只有Debug下才生效
         if (BuildConfig.DEBUG) {
-            YYLogUtils.addInterceptor(CallStackLogInterceptor())
-            YYLogUtils.addInterceptor(LogcatInterceptor())
+            YYLogUtils.addInterceptor(LogDecorateInterceptor())
+            YYLogUtils.addInterceptor(LogPrintInterceptor())
 
-            val logPath = application.applicationContext.filesDir.toString() + "/log/"
+            val logPath = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED)
+                application.applicationContext.getExternalFilesDir("log")?.absolutePath
+                    ?: application.applicationContext.filesDir.absolutePath + "/log/"
+            else
+                application.applicationContext.filesDir.absolutePath + "/log/"
+
             val dir = File(logPath)
             if (!dir.exists()) {
                 dir.mkdirs()
             }
-            YYLogUtils.addInterceptor(OkioLogInterceptor.getInstance(logPath))
+            YYLogUtils.addInterceptor(Log2FileInterceptor.getInstance(logPath))
         }
 
     }
