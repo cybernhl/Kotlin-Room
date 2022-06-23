@@ -6,6 +6,7 @@ class Chain(
 ) {
     fun proceed(priority: Int, tag: String, log: String) {
         val next = Chain(interceptors, index + 1)
+
         val interceptor = interceptors.getOrNull(index)
         interceptor?.log(priority, tag, log, next)
     }

@@ -10,15 +10,10 @@ import java.net.UnknownHostException
 object YYLogUtils {
 
     var LINE_SEPARATOR = System.getProperty("line.separator")
-
     private const val DEBUG = 3
-
     private const val INFO = 4
-
     private const val WARN = 5
-
     private const val ERROR = 6
-
 
     private val logInterceptors = mutableListOf<LogInterceptor>()
     private val interceptorChain = Chain(logInterceptors)

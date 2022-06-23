@@ -132,7 +132,7 @@ class TrackEventListener(private val callId: Long?) : EventListener() {
     }
 
     // 网络数据回调
-    interface NetworkTrackCallback {
+    fun interface NetworkTrackCallback {
         fun onCallEnd(map: Map<String, Any>)
     }
 }

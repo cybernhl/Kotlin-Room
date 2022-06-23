@@ -74,19 +74,60 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //            mViewModel.testNullNet()
             LiveEventBus.get("newMember").post(true)
 
-            YYLogUtils.w("Test Log")
+//            YYLogUtils.w("Test Log")
+
+            val testNet = TestNet()
+
+            testNet.setOnSuccessCallbackDsl {
+                onSuccess { str ->
+                    YYLogUtils.w("str: $str")
+                    str + "再加一点数据"
+                }
+                doSth {
+                    YYLogUtils.w("可以随便写点什么成功之后的逻辑")
+                }
+            }
+
+            YYLogUtils.w("no:" + testNet.no)
+            "".foo()
+
+            testNet.requestNetwork(onCancel = {
+
+                toast("test network onCancel")
+
+            }, onFailed = {
+                //先调用内部的函数处理逻辑
+                it.onFailed("哎呦")  //在这里调用内部定义过的函数，如果不调用，TestNet中 YYLogUtils.w("可以随便写点什么逻辑") 不会执行
+
+                it.onError()
+
+                //在打印日志
+                YYLogUtils.w("test network onFailed")
+
+            },
+//                onSuccess = {
+//                //先打印日志
+//                YYLogUtils.w("test network onSuccess")
+//
+//                //再调用内部的函数处理逻辑
+//                onSuccess("我的成功数据字符串")    //上面是高阶函数的调用 - 这里是高阶扩展函数的调用，同样的效果，上面需要用it调用，这里直接this 调用
+//
+//            },
+                onFinished = {
+                YYLogUtils.w("当前值是10,满足条件：$it")  //这里的it是那边的回调
+                true  //那边是带参数返回的，这里需要返回Booble给那边
+            })
+
         }
 
         /**
          * 串联顺序执行
          */
         fun networkChuan() {
+
             //打印track追踪的网络请求数据
-            TrackEventListener.networkTrackCallback = object : TrackEventListener.NetworkTrackCallback {
-                override fun onCallEnd(map: Map<String, Any>) {
-                    //可以通过IO写入到文件-上传到服务器
-                    YYLogUtils.i("track map :$map")
-                }
+            TrackEventListener.networkTrackCallback = TrackEventListener.NetworkTrackCallback { map -> //可以通过IO写入到文件-上传到服务器
+                YYLogUtils.i("track map :$map")
             }
 
             mViewModel.mContentLiveData.value = ""

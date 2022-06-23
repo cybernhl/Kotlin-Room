@@ -41,7 +41,7 @@ public class LoggingInterceptor implements Interceptor {
         if (debug)
             Log.w("Response,", String.format("接收响应: [%s]  %.1fms%n%s", response.request().url(), (t2 - t1) / 1e6d, response.headers()));
 
-        /*  自己封装的Log打印，长度无限制，可以专门输出json或xml  **/
+        /*  自己封装的Log打印，长度无限制，可以专门输出json  **/
         YYLogUtils.json(responseBody.string());
 
         return response;
