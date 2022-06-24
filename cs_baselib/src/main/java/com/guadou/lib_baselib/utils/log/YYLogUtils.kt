@@ -22,8 +22,8 @@ object YYLogUtils {
     private const val WARN = 5
     private const val ERROR = 6
 
-    private val logInterceptors = mutableListOf<LogInterceptor>()
-    private val interceptorChain = Chain(logInterceptors)
+    private val logInterceptors = mutableListOf<ILogInterceptor>()
+    private val interceptorChain = LogInterceptorChain(logInterceptors)
 
     @JvmStatic
     fun d(message: String, tag: String = "/", vararg args: Any) {
@@ -107,15 +107,15 @@ object YYLogUtils {
         }
     }
 
-    fun addInterceptor(interceptor: LogInterceptor) {
+    fun addInterceptor(interceptor: ILogInterceptor) {
         logInterceptors.add(interceptor)
     }
 
-    fun addFirstInterceptor(interceptor: LogInterceptor) {
+    fun addFirstInterceptor(interceptor: ILogInterceptor) {
         logInterceptors.add(0, interceptor)
     }
 
-    fun removeInterceptor(interceptor: LogInterceptor) {
+    fun removeInterceptor(interceptor: ILogInterceptor) {
         logInterceptors.remove(interceptor)
     }
 
@@ -132,7 +132,7 @@ object YYLogUtils {
             logMessage += getStackTraceString(throwable)
         }
 
-        interceptorChain.proceed(priority, tag, logMessage)
+        interceptorChain.process(priority, tag, logMessage)
 
     }
 
@@ -143,7 +143,6 @@ object YYLogUtils {
         if (tr == null) {
             return ""
         }
-
         var t = tr
         while (t != null) {
             if (t is UnknownHostException) {

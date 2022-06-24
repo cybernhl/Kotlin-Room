@@ -3,8 +3,8 @@ package com.guadou.lib_baselib.utils.log.interceptor
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.HandlerThread
-import com.guadou.lib_baselib.utils.log.Chain
-import com.guadou.lib_baselib.utils.log.LogInterceptor
+import com.guadou.lib_baselib.utils.log.ILogInterceptor
+import com.guadou.lib_baselib.utils.log.LogInterceptorChain
 import okio.BufferedSink
 import okio.appendingSink
 import okio.buffer
@@ -16,7 +16,10 @@ import java.util.*
 /**
  * 接收上面拦截器传递的数据-把Log信息保存到本地File
  */
-class Log2FileInterceptor private constructor(private var dir: String) : LogInterceptor {
+class Log2FileInterceptor private constructor(
+    private val dir: String, private val isEnable: Boolean
+) : ILogInterceptor {
+
     private val handlerThread = HandlerThread("log_to_file_thread")
     private val handler: Handler
     private var startTime = System.currentTimeMillis()
@@ -49,8 +52,8 @@ class Log2FileInterceptor private constructor(private var dir: String) : LogInte
         @Volatile
         private var INSTANCE: Log2FileInterceptor? = null
 
-        fun getInstance(dir: String): Log2FileInterceptor = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: Log2FileInterceptor(dir).apply { INSTANCE = this }
+        fun getInstance(dir: String, isEnable: Boolean): Log2FileInterceptor = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: Log2FileInterceptor(dir, isEnable).apply { INSTANCE = this }
         }
     }
 
@@ -59,18 +62,19 @@ class Log2FileInterceptor private constructor(private var dir: String) : LogInte
         handler = Handler(handlerThread.looper, callback)
     }
 
-    override fun log(priority: Int, tag: String, log: String, chain: Chain) {
-        if (enable()) {
+    override fun log(priority: Int, tag: String, logMsg: String, chain: LogInterceptorChain) {
+
+        if (isEnable) {
             if (!handlerThread.isAlive) handlerThread.start()
             handler.run {
                 removeMessages(TYPE_FLUSH)
-                obtainMessage(TYPE_LOG, "[$tag] $log").sendToTarget()
+                obtainMessage(TYPE_LOG, "[$tag] $logMsg").sendToTarget()
                 val flushMessage = handler.obtainMessage(TYPE_FLUSH)
                 sendMessageDelayed(flushMessage, FLUSH_LOG_DELAY_MILLIS)
             }
         }
 
-        chain.proceed(priority, tag, log)
+        chain.process(priority, tag, logMsg)
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -86,8 +90,5 @@ class Log2FileInterceptor private constructor(private var dir: String) : LogInte
         return bufferedSink!!
     }
 
-    override fun enable(): Boolean {
-        return true
-    }
 
 }

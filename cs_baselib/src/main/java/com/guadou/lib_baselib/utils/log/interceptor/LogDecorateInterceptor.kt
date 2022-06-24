@@ -1,7 +1,7 @@
 package com.guadou.lib_baselib.utils.log.interceptor
 
-import com.guadou.lib_baselib.utils.log.Chain
-import com.guadou.lib_baselib.utils.log.LogInterceptor
+import com.guadou.lib_baselib.utils.log.ILogInterceptor
+import com.guadou.lib_baselib.utils.log.LogInterceptorChain
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 /**
@@ -9,7 +9,8 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils
  * 打印Log之前 封装打印的线程-打印的位置
  * 具体的打印输出由其他拦截器负责
  */
-class LogDecorateInterceptor : LogInterceptor {
+class LogDecorateInterceptor(private val isEnable: Boolean) : ILogInterceptor {
+
     companion object {
 
         private const val TOP_LEFT_CORNER = '┏'
@@ -26,41 +27,35 @@ class LogDecorateInterceptor : LogInterceptor {
         private val blackList = listOf(
             LogDecorateInterceptor::class.java.name,
             YYLogUtils::class.java.name,
-            Chain::class.java.name,
+            LogInterceptorChain::class.java.name,
         )
     }
 
-    override fun log(priority: Int, tag: String, log: String, chain: Chain) {
-        if (enable()) {
-            chain.proceed(priority, tag, TOP_BORDER)
+    override fun log(priority: Int, tag: String, LogMsg: String, chain: LogInterceptorChain) {
 
-            chain.proceed(priority, tag, "$LEFT_BORDER [Thread] → " + Thread.currentThread().name)
+        if (isEnable) {
+            chain.process(priority, tag, TOP_BORDER)
 
-            chain.proceed(priority, tag, MIDDLE_BORDER)
+            chain.process(priority, tag, "$LEFT_BORDER [Thread] → " + Thread.currentThread().name)
 
-//            getCallStack(blackList).take(2).forEach {
-//                val callStack = StringBuilder()
-//                    .append(LEFT_BORDER)
-//                    .append("\t${it}").toString()
-//                chain.proceed(priority, tag, callStack)
-//            }
+            chain.process(priority, tag, MIDDLE_BORDER)
 
             printStackInfo(priority, tag, chain)
 
-            chain.proceed(priority, tag, MIDDLE_BORDER)
+            chain.process(priority, tag, MIDDLE_BORDER)
 
-            chain.proceed(priority, tag, "$LEFT_BORDER $log")
+            chain.process(priority, tag, "$LEFT_BORDER $LogMsg")
 
-            chain.proceed(priority, tag, BOTTOM_BORDER)
+            chain.process(priority, tag, BOTTOM_BORDER)
 
         } else {
-            chain.proceed(priority, tag, log)
+            chain.process(priority, tag, LogMsg)
         }
 
     }
 
     //获取调用栈信息
-    private fun printStackInfo(priority: Int, tag: String, chain: Chain) {
+    private fun printStackInfo(priority: Int, tag: String, chain: LogInterceptorChain) {
         var str = ""
         var line = 0
         val traces = Thread.currentThread().stackTrace.drop(3)
@@ -93,11 +88,8 @@ class LogDecorateInterceptor : LogInterceptor {
             line++
 
             //打印日志
-            chain.proceed(priority, tag, perTrace.toString())
+            chain.process(priority, tag, "$LEFT_BORDER $perTrace")
         }
     }
 
-    override fun enable(): Boolean {
-        return true
-    }
 }
