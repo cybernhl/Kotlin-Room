@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.os.Environment
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
@@ -20,6 +21,8 @@ import com.guadou.lib_baselib.utils.track.TrackEventListener
 import com.jeremyliao.liveeventbus.LiveEventBus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import java.io.File
+import java.io.FileWriter
 
 /**
  * 网络请求的实例代码
@@ -173,28 +176,25 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //                }
 //            }
 
-//            extRequestPermission(
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                block = {
-//                    //申请权限成功
-//                    val sdCard = Environment.getExternalStorageDirectory()
-//                    val directoryPictures = File(sdCard, "Pictures")
-//
-////                    val directoryPictures = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-//
-//                    val fileName = directoryPictures.absolutePath + File.separator + "test.txt"
-//                    YYLogUtils.w("外置SD卡路径：" + directoryPictures.absolutePath)
-//
-//                    GlobalScope.launch(Dispatchers.IO) {
-//                        FileWriter(fileName, true).use {
-//                            it.append("测试写入的文本")
-//                            it.append("\n")
-//                            it.flush()
-//                        }
-//                    }
-//
-//                })
+            extRequestPermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                block = {
+                    //申请权限成功
+                    val directoryPictures = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+
+                    val fileName = directoryPictures.absolutePath + File.separator + "test.txt"
+                    YYLogUtils.w("外置SD卡路径：" + directoryPictures.absolutePath)
+
+                    GlobalScope.launch(Dispatchers.IO) {
+                        FileWriter(fileName, true).use {
+                            it.append("测试写入的文本")
+                            it.append("\n")
+                            it.flush()
+                        }
+                    }
+
+                })
 
 //            extRequestPermission(
 //                Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -210,16 +210,18 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //                }
 //            )
 
-            extRequestPermission(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                block = {
+//            extRequestPermission(
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                block = {
+//
+//                    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+//                    startActivityForResult(intent, 1)
+//
+//                }
+//            )
 
-                    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-                    startActivityForResult(intent, 1)
 
-                }
-            )
         }
 
         fun testConcurrency() {
@@ -279,14 +281,14 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
                                 // 在文件中写入内容
                                 contentResolver.openOutputStream(it.uri)?.write("hello world".toByteArray())
                                 YYLogUtils.w("在文件中写入内容完成")
-                            }catch (e:Exception){
+                            } catch (e: Exception) {
                                 e.printStackTrace()
                             }
                         }
-                            // 删除文件
+                        // 删除文件
 //                            ?.delete()
                     }
-                    // 删除文件夹
+                // 删除文件夹
 //                    ?.delete()
 
             }
