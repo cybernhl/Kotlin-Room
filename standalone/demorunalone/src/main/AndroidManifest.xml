@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+<!--    android:requestLegacyExternalStorage="true"-->
+
     <application
         android:name=".DemoApplication"
         android:allowBackup="true"

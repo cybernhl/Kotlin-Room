@@ -1,7 +1,10 @@
 package com.guadou.kt_demo.demo.demo5_network_request
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -9,16 +12,14 @@ import com.guadou.kt_demo.databinding.ActivityDemo5Binding
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
+import com.guadou.lib_baselib.engine.extRequestPermission
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.track.TrackEventListener
 import com.jeremyliao.liveeventbus.LiveEventBus
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 /**
  * 网络请求的实例代码
@@ -114,9 +115,9 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //
 //            },
                 onFinished = {
-                YYLogUtils.w("当前值是10,满足条件：$it")  //这里的it是那边的回调
-                true  //那边是带参数返回的，这里需要返回Booble给那边
-            })
+                    YYLogUtils.w("当前值是10,满足条件：$it")  //这里的it是那边的回调
+                    true  //那边是带参数返回的，这里需要返回Booble给那边
+                })
 
         }
 
@@ -149,6 +150,76 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
             mViewModel.mContentLiveData.value = ""
             //没有防抖动-狂点试试看Log
             mViewModel.netDuplicate()
+        }
+
+        //保存到本地文件夹
+        @DelicateCoroutinesApi
+        fun save2file() {
+
+
+            //如果不存在就创建一个文件夹
+//            val dir = File(dirPath)
+//            if (!dir.exists()) {
+//                dir.mkdirs()
+//            }
+//            val dirPath = commContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.absolutePath
+//            val fileName = dirPath + File.separator + "test.txt"
+//
+//            GlobalScope.launch(Dispatchers.IO) {
+//                FileWriter(fileName, true).use {
+//                    it.append("测试写入的文本")
+//                    it.append("\n")
+//                    it.flush()
+//                }
+//            }
+
+//            extRequestPermission(
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                block = {
+//                    //申请权限成功
+//                    val sdCard = Environment.getExternalStorageDirectory()
+//                    val directoryPictures = File(sdCard, "Pictures")
+//
+////                    val directoryPictures = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+//
+//                    val fileName = directoryPictures.absolutePath + File.separator + "test.txt"
+//                    YYLogUtils.w("外置SD卡路径：" + directoryPictures.absolutePath)
+//
+//                    GlobalScope.launch(Dispatchers.IO) {
+//                        FileWriter(fileName, true).use {
+//                            it.append("测试写入的文本")
+//                            it.append("\n")
+//                            it.flush()
+//                        }
+//                    }
+//
+//                })
+
+//            extRequestPermission(
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                block = {
+//
+//                    val uri = assets.open("naixiao.jpg").use {
+//                        it.saveToAlbum(commContext(), fileName = "save_naixiao.jpg", null)
+//                    } ?: return@extRequestPermission
+//
+//                    YYLogUtils.w("保存图片成功：$uri")
+//
+//                }
+//            )
+
+            extRequestPermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                block = {
+
+                    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+                    startActivityForResult(intent, 1)
+
+                }
+            )
         }
 
         fun testConcurrency() {
@@ -188,7 +259,40 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
             }
         }
 
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
+            resultData?.data?.let { uri ->
+                YYLogUtils.w("打开文件夹：$uri")
+                DocumentFile.fromTreeUri(this, uri)
+                    // 在文件夹内创建新文件夹
+                    ?.createDirectory("newFolder")
+                    ?.apply {
+                        // 在新文件夹内创建文件
+                        YYLogUtils.w("在新文件夹内创建文件")
+                        createFile("text/plain", "test.txt")
+
+                        // 通过文件名找到文件
+                        findFile("test.txt")?.also {
+                            try {
+                                // 在文件中写入内容
+                                contentResolver.openOutputStream(it.uri)?.write("hello world".toByteArray())
+                                YYLogUtils.w("在文件中写入内容完成")
+                            }catch (e:Exception){
+                                e.printStackTrace()
+                            }
+                        }
+                            // 删除文件
+//                            ?.delete()
+                    }
+                    // 删除文件夹
+//                    ?.delete()
+
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, resultData)
     }
 
 }
