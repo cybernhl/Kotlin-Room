@@ -3,8 +3,7 @@ package com.guadou.lib_baselib.utils.log.interceptor
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.HandlerThread
-import com.guadou.lib_baselib.utils.log.ILogInterceptor
-import com.guadou.lib_baselib.utils.log.LogInterceptorChain
+import com.guadou.lib_baselib.utils.log.LogInterceptChain
 import okio.BufferedSink
 import okio.appendingSink
 import okio.buffer
@@ -18,7 +17,7 @@ import java.util.*
  */
 class Log2FileInterceptor private constructor(
     private val dir: String, private val isEnable: Boolean
-) : ILogInterceptor {
+) : LogInterceptChain() {
 
     private val handlerThread = HandlerThread("log_to_file_thread")
     private val handler: Handler
@@ -62,7 +61,8 @@ class Log2FileInterceptor private constructor(
         handler = Handler(handlerThread.looper, callback)
     }
 
-    override fun log(priority: Int, tag: String, logMsg: String, chain: LogInterceptorChain) {
+
+    override fun intercept(priority: Int, tag: String, logMsg: String?) {
 
         if (isEnable) {
             if (!handlerThread.isAlive) handlerThread.start()
@@ -74,7 +74,8 @@ class Log2FileInterceptor private constructor(
             }
         }
 
-        chain.process(priority, tag, logMsg)
+        super.intercept(priority, tag, logMsg)
+
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -89,6 +90,5 @@ class Log2FileInterceptor private constructor(
         }
         return bufferedSink!!
     }
-
 
 }
