@@ -1,10 +1,8 @@
 package com.guadou.kt_demo.demo.demo5_network_request
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.os.Environment
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
@@ -13,7 +11,6 @@ import com.guadou.kt_demo.databinding.ActivityDemo5Binding
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.engine.extRequestPermission
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.log.YYLogUtils
@@ -21,8 +18,6 @@ import com.guadou.lib_baselib.utils.track.TrackEventListener
 import com.jeremyliao.liveeventbus.LiveEventBus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import java.io.File
-import java.io.FileWriter
 
 /**
  * 网络请求的实例代码
@@ -159,6 +154,18 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
         @DelicateCoroutinesApi
         fun save2file() {
 
+//            FileIOUtils.writeText(commContext(),"haha.txt",getString(R.string.scroll_content))
+
+//            val result = FileIOUtils.read(commContext(), "haha.txt")
+//            YYLogUtils.w("result:$result")
+
+//            val result = FileIOUtils.copyFile2(commContext(), "haha.txt")
+//            YYLogUtils.w("result:$result")
+
+//            val result = FileIOUtilKt.writeText(commContext())
+//            YYLogUtils.w("result:$result")
+
+            FileIOUtilKt.copyFile()
 
             //如果不存在就创建一个文件夹
 //            val dir = File(dirPath)
@@ -176,25 +183,25 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //                }
 //            }
 
-            extRequestPermission(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                block = {
-                    //申请权限成功
-                    val directoryPictures = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-
-                    val fileName = directoryPictures.absolutePath + File.separator + "test.txt"
-                    YYLogUtils.w("外置SD卡路径：" + directoryPictures.absolutePath)
-
-                    GlobalScope.launch(Dispatchers.IO) {
-                        FileWriter(fileName, true).use {
-                            it.append("测试写入的文本")
-                            it.append("\n")
-                            it.flush()
-                        }
-                    }
-
-                })
+//            extRequestPermission(
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                block = {
+//                    //申请权限成功
+//                    val directoryPictures = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+//
+//                    val fileName = directoryPictures.absolutePath + File.separator + "test.txt"
+//                    YYLogUtils.w("外置SD卡路径：" + directoryPictures.absolutePath)
+//
+//                    GlobalScope.launch(Dispatchers.IO) {
+//                        FileWriter(fileName, true).use {
+//                            it.append("测试写入的文本")
+//                            it.append("\n")
+//                            it.flush()
+//                        }
+//                    }
+//
+//                })
 
 //            extRequestPermission(
 //                Manifest.permission.WRITE_EXTERNAL_STORAGE,
