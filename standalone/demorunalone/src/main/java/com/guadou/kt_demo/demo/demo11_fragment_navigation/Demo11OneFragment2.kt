@@ -91,9 +91,7 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
         YYLogUtils.w("Demo2 onSaveInstanceState")
-
+        super.onSaveInstanceState(outState)
     }
 }

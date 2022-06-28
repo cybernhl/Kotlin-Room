@@ -25,7 +25,7 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
     IOnBackPressed {
 
     val callback: (Int, String) -> Unit = { int, str ->
-//        toast("int : $int ; str: $str")
+        toast("int : $int ; str: $str")
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
@@ -128,12 +128,9 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
         return false
     }
 
-
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
         YYLogUtils.w("Demo1 onSaveInstanceState")
-
+        super.onSaveInstanceState(outState)
     }
 
 }

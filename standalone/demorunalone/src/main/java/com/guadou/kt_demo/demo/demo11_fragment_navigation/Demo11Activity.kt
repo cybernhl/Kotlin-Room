@@ -2,14 +2,15 @@ package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.getAllFragments
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.IOnBackPressed
 import com.guadou.lib_baselib.utils.navigation.loadRootFragment
 
@@ -62,6 +63,11 @@ class Demo11Activity : BaseVMActivity<Demo11ViewModel>() {
             }
         }
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        YYLogUtils.w("ACTIVITY onSaveInstanceState")
+        super.onSaveInstanceState(outState)
     }
 
 }

@@ -83,10 +83,8 @@ class Demo11OneFragment3(private val name: String?) : BaseVDBFragment<EmptyViewM
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
         YYLogUtils.w("Demo3 onSaveInstanceState")
-
+        super.onSaveInstanceState(outState)
     }
 
 }
