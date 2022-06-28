@@ -130,7 +130,7 @@ dependencies {
     //网络相关
     api deps.support.retrofit2
     api deps.support.retrofit_gson
-    api deps.support.cookie_jar
+//    api deps.support.cookie_jar
     api deps.support.okio
 
     //其他依赖

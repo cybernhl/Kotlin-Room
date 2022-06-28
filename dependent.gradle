@@ -46,9 +46,9 @@ ext {
                     "hilt_vm"           : 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02',
                     "hilt_vm_kapt"      : 'androidx.hilt:hilt-compiler:1.0.0-alpha02',
 
-                    "retrofit2"         : 'com.squareup.retrofit2:retrofit:2.7.1',
-                    "retrofit_gson"     : 'com.squareup.retrofit2:converter-gson:2.6.2',
-                    'cookie_jar'        : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
+                    "retrofit2"         : 'com.squareup.retrofit2:retrofit:2.9.0',
+                    "retrofit_gson"     : 'com.squareup.retrofit2:converter-gson:2.9.0',
+//                    'cookie_jar'        : 'com.github.franmontiel:PersistentCookieJar:v1.0.1',
                     'okio'              : 'com.squareup.okio:okio:3.0.0',
 
                     "permission"        : 'com.yanzhenjie:permission:2.0.3',

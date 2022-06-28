@@ -123,7 +123,6 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
          * 串联顺序执行
          */
         fun networkChuan() {
-
             //打印track追踪的网络请求数据
             TrackEventListener.networkTrackCallback = TrackEventListener.NetworkTrackCallback { map -> //可以通过IO写入到文件-上传到服务器
                 YYLogUtils.i("track map :$map")
