@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
+import android.os.Bundle
 import com.guadou.cpt_main.ui.LoginFragment
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -79,6 +80,13 @@ class Demo11OneFragment3(private val name: String?) : BaseVDBFragment<EmptyViewM
             //接收Activity返回的数据
             startActivityForResult(Intent(mActivity, Demo10Activity::class.java), 120)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        YYLogUtils.w("Demo3 onSaveInstanceState")
+
     }
 
 }

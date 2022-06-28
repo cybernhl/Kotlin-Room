@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 
+import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -9,8 +10,8 @@ import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.bus.FlowBus
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.applySlideInOut
 import com.guadou.lib_baselib.utils.navigation.navigator
 import com.guadou.lib_baselib.utils.navigation.pop
@@ -87,5 +88,12 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
                 Demo11OneFragment3(arguments?.getString("name"))
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        YYLogUtils.w("Demo2 onSaveInstanceState")
+
     }
 }
