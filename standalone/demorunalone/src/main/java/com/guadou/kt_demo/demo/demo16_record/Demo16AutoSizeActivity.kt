@@ -79,9 +79,11 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
         //手动的设置rightDrawable
         ContextCompat.getDrawable(this, R.mipmap.jobs_tips_date_icon)?.let {
             it.setBounds(0, 0, it.minimumWidth, it.minimumHeight)
+            DrawableCompat.setTintList(it, resources.getColorStateList(R.color.full_tab_color_selector))
             mBinding.tvCenterText.apply {
                 setCompoundDrawables(null, null, it, null)
                 gravity = Gravity.CENTER_VERTICAL or Gravity.RIGHT
+                click { it.isSelected = true }
             }
         }
 
