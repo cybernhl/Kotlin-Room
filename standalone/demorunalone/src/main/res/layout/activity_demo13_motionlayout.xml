@@ -56,6 +56,13 @@
             android:textAllCaps="false"
             android:text="对比01" />
 
+        <Button
+            binding:clicks="@{click.dianjiu}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="点九" />
+
     </LinearLayout>
 
 </layout>

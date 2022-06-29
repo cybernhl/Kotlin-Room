@@ -39,8 +39,7 @@ public class CustomerLableHandler implements Html.TagHandler {
     private Stack<Integer> startIndex;
 
     /**
-     * html的标签的属性值 value，如:<size value='16'></size>
-     * 注：value的值不能带有单位,默认就是sp
+     * html的标签的属性值
      */
     private Stack<String> propertyValue;
 

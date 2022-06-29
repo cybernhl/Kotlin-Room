@@ -245,6 +245,10 @@ class Demo13MotionActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo13Motio
             Demo13Cons01Activity.startInstance()
         }
 
+        fun dianjiu() {
+            Demo13Dianjiu01Activity.startInstance()
+        }
+
     }
 
 }
