@@ -29,9 +29,9 @@
                 android:orientation="vertical">
 
                 <FrameLayout
-                    android:visibility="visible"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp">
+                    android:layout_height="300dp"
+                    android:visibility="visible">
 
                     <ImageView
                         android:id="@+id/iv_anim"
@@ -41,20 +41,55 @@
 
 
                     <TextView
-                        android:layout_marginRight="@dimen/d_15dp"
-                        android:layout_gravity="right"
-                        android:text="原生的TextView"
                         android:id="@+id/tv_r_msg"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="@dimen/d_15dp"
+                        android:text="原生的TextView" />
 
                 </FrameLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/d_28dp"
+                            android:layout_height="@dimen/d_28dp"
+                            android:src="@mipmap/jobs_tips_date_icon"
+                            app:tint="@color/colorAccent" />
+
+                        <ImageView
+                            android:id="@+id/iv_tint"
+                            android:layout_width="@dimen/d_28dp"
+                            android:layout_height="@dimen/d_28dp" />
+
+                        <ImageView
+                            android:id="@+id/iv_tint2"
+                            android:layout_width="@dimen/d_28dp"
+                            android:layout_height="@dimen/d_28dp" />
+
+
+                        <com.guadou.kt_demo.demo.demo16_record.RightDrawableCenterTextView
+                            android:id="@+id/tv_center_text"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/divider_color"
+                            android:drawablePadding="@dimen/d_5dp"
+                            android:gravity="center"
+                            android:text="我是居中文本" />
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:layout_width="wrap_content"

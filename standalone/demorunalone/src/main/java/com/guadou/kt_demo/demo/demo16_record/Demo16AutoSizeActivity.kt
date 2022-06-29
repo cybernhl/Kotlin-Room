@@ -2,6 +2,10 @@ package com.guadou.kt_demo.demo.demo16_record
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.view.Gravity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16AutosizeBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -15,6 +19,7 @@ import okio.appendingSink
 import okio.buffer
 import okio.gzip
 import java.io.File
+
 
 /**
  * 录制
@@ -40,9 +45,45 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
     override fun startObserve() {
     }
 
-    @SuppressLint("ObjectAnimatorBinding", "Recycle")
+    @SuppressLint("ObjectAnimatorBinding", "Recycle", "UseCompatLoadingForDrawables", "UseCompatLoadingForColorStateLists")
     override fun init() {
         mBinding.tvIcon.text = "\ue6cc"
+
+
+//        mBinding.ivTint.setColorFilter(Color.YELLOW)
+
+
+        getDrawable(R.mipmap.jobs_tips_date_icon)?.let {
+            DrawableCompat.setTint(it, Color.GREEN)
+            mBinding.ivTint.setImageDrawable(it)
+        }
+
+        getDrawable(R.mipmap.jobs_tips_date_icon)?.let {
+            DrawableCompat.setTintList(it, resources.getColorStateList(R.color.full_tab_color_selector))
+            mBinding.ivTint2.setImageDrawable(it)
+        }
+
+        mBinding.ivTint2.click {
+            it.isSelected = true
+        }
+
+        //手动的设置leftDrawable
+//        ContextCompat.getDrawable(this, R.mipmap.jobs_tips_date_icon)?.let {
+//            it.setBounds(0, 0, it.minimumWidth, it.minimumHeight)
+//            mBinding.tvCenterText.apply {
+//                setCompoundDrawables(it, null, null, null)
+//                gravity = Gravity.CENTER_VERTICAL
+//            }
+//        }
+
+        //手动的设置rightDrawable
+        ContextCompat.getDrawable(this, R.mipmap.jobs_tips_date_icon)?.let {
+            it.setBounds(0, 0, it.minimumWidth, it.minimumHeight)
+            mBinding.tvCenterText.apply {
+                setCompoundDrawables(null, null, it, null)
+                gravity = Gravity.CENTER_VERTICAL or Gravity.RIGHT
+            }
+        }
 
 
 //        val mhandler = Handler()

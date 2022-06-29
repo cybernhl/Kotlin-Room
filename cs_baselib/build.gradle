@@ -154,7 +154,6 @@ dependencies {
     api(deps.support.picture_selector) {
         exclude group: 'androidx.recyclerview'
         exclude group: 'androidx.appcompat'
-        exclude group: 'com.squareup.okio'
     }
 
     //Banner库
