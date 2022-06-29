@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class FontCache {
 
     private static HashMap<String, Typeface> fontCache = new HashMap<>();
+    public static Typeface iconfont;
 
     public static Typeface getTypeface(String fontname, Context context) {
         Typeface typeface = fontCache.get(fontname);
@@ -27,6 +28,17 @@ public class FontCache {
         }
 
         return typeface;
+    }
+
+
+    //获取IconFont的TypeFace
+    public static Typeface getIconFontTypeFace(String iconfontNum, Context context) {
+        if (iconfont != null) {
+            return iconfont;
+        } else {
+            iconfont = Typeface.createFromAsset(context.getAssets(), "iconfont" + iconfontNum + ".ttf");
+        }
+        return iconfont;
     }
 
 }

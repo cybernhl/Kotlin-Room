@@ -1,5 +1,6 @@
 package com.guadou.kt_demo
 
+import com.guadou.kt_demo.demo.demo16_record.ForegroundCheck
 import com.guadou.lib_baselib.base.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
@@ -9,5 +10,6 @@ class DemoApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
+        ForegroundCheck.init(this)
     }
 }

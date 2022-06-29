@@ -3,13 +3,10 @@ package com.guadou.lib_baselib.ext
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
-import android.media.MediaScannerConnection
-import android.net.Uri
 import android.os.*
 import android.view.View
 import android.view.WindowManager
@@ -27,9 +24,6 @@ import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.interceptor.LoginInterceptorTask
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import java.io.Serializable
 
 
@@ -327,52 +321,6 @@ fun Array<out Pair<String, Any?>>.toBundle(): Bundle? {
  */
 fun Any.runOnUIThread(block: () -> Unit) {
     Handler(Looper.getMainLooper()).post { block() }
-}
-
-
-/**
- * 将Bitmap保存到相册
- */
-fun Bitmap.saveToAlbum(
-    format: Bitmap.CompressFormat = Bitmap.CompressFormat.PNG,
-    quality: Int = 100,
-    filename: String = "",
-    callback: ((path: String?, uri: Uri?) -> Unit)? = null
-) {
-    GlobalScope.launch {
-        try {
-            //1. create path
-            val dirPath =
-                Environment.getExternalStorageDirectory().absolutePath + "/" + Environment.DIRECTORY_PICTURES
-            val dirFile = File(dirPath)
-            if (!dirFile.exists()) dirFile.mkdirs()
-            val ext = when (format) {
-                Bitmap.CompressFormat.PNG -> ".png"
-                Bitmap.CompressFormat.JPEG -> ".jpg"
-                Bitmap.CompressFormat.WEBP -> ".webp"
-            }
-            val target = File(
-                dirPath,
-                (if (filename.isEmpty()) System.currentTimeMillis().toString() else filename) + ext
-            )
-            if (target.exists()) target.delete()
-            target.createNewFile()
-            //2. save
-            compress(format, quality, FileOutputStream(target))
-            //3. notify
-            MediaScannerConnection.scanFile(
-                CommUtils.getContext(), arrayOf(target.absolutePath),
-                arrayOf("image/$ext")
-            ) { path, uri ->
-                runOnUIThread {
-                    callback?.invoke(path, uri)
-                }
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-            runOnUIThread { callback?.invoke(null, null) }
-        }
-    }
 }
 
 

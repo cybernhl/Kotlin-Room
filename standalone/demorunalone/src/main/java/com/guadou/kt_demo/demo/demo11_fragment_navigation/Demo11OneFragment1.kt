@@ -1,31 +1,36 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page1Binding
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.IOneActivityCallback
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.IOneFragmentCallback
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.ext.getActivityVM
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
 import com.guadou.lib_baselib.utils.bus.FlowBus
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.*
-
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Binding>(),
-    IOnBackPressed {
+    IOnBackPressed, IOneActivityCallback {
+
+    private val activityViewModel: Demo11ViewModel by activityViewModels()
 
     val callback: (Int, String) -> Unit = { int, str ->
-//        toast("int : $int ; str: $str")
+        toast("int : $int ; str: $str")
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
@@ -33,15 +38,28 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
             .addBindingParams(BR.click, ClickProxy())
     }
 
+    private lateinit var mCallback: IOneFragmentCallback
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mCallback = context as IOneFragmentCallback
+    }
+
     override fun startObserve() {
         //通过Activity中的LiveData来接收返回的数据
-        getActivityVM(Demo11ViewModel::class.java).mBackOneLiveData.observe(this, Observer {
-            toast(it)
-        })
+        activityViewModel.mBackOneLD.observe(this) {
+            YYLogUtils.w("收到LD消息 - $it")
+        }
+
+        lifecycleScope.launch {
+            activityViewModel.mMsgFlow.collect {
+                YYLogUtils.w("收到Flow消息 - $it")
+            }
+        }
+
 
 
         FlowBus.with<String>("test-key-01").register(this) {
-            YYLogUtils.w("收到FlowBus消息 - " + it)
+            YYLogUtils.w("收到FlowBus消息 - $it")
         }
     }
 
@@ -120,6 +138,10 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
             }
 
         }
+
+        fun callback() {
+            mCallback.callActOne("message come from one page")
+        }
     }
 
     //返回事件- 不穿透交给自己处理
@@ -128,5 +150,15 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
         return false
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        YYLogUtils.w("Demo1 onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+    }
+
+    // =======================  callback =========================
+
+    override fun callOneFragment(string: String) {
+        YYLogUtils.w("啊，我在Fragment1中被调用了！msg:$string")
+    }
 
 }

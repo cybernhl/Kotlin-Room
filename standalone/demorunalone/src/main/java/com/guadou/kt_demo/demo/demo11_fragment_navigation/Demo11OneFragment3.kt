@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
+import android.os.Bundle
 import com.guadou.cpt_main.ui.LoginFragment
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -10,7 +11,7 @@ import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.*
 
 class Demo11OneFragment3(private val name: String?) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page3Binding>() {
@@ -79,6 +80,11 @@ class Demo11OneFragment3(private val name: String?) : BaseVDBFragment<EmptyViewM
             //接收Activity返回的数据
             startActivityForResult(Intent(mActivity, Demo10Activity::class.java), 120)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        YYLogUtils.w("Demo3 onSaveInstanceState")
+        super.onSaveInstanceState(outState)
     }
 
 }

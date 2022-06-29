@@ -6,7 +6,7 @@ import com.guadou.cpt_main.mvvm.AuthViewModel
 import com.guadou.cpt_main.others.MemberServer
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject

@@ -2,21 +2,34 @@ package com.guadou.kt_demo.demo.demo11_fragment_navigation
 
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.getAllFragments
+import androidx.navigation.getAllNavFragments
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.IOneActivityCallback
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.IOneFragmentCallback
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.ITwoActivityCallback
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.ITwoFragmentCallback
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.NetWorkUtil
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.IOnBackPressed
 import com.guadou.lib_baselib.utils.navigation.loadRootFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Fragment导航
  */
-class Demo11Activity : BaseVMActivity<Demo11ViewModel>() {
+@AndroidEntryPoint
+class Demo11Activity : BaseVMActivity<Demo11ViewModel>(), IOneFragmentCallback, ITwoFragmentCallback {
+
+    @Inject
+    lateinit var mMsg: String
 
     companion object {
         fun startInstance() {
@@ -40,6 +53,8 @@ class Demo11Activity : BaseVMActivity<Demo11ViewModel>() {
         }
 
         YYLogUtils.w("当前设备Android系统：" + Build.VERSION.SDK_INT)
+
+        toast(mMsg)
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
@@ -62,6 +77,33 @@ class Demo11Activity : BaseVMActivity<Demo11ViewModel>() {
             }
         }
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        YYLogUtils.w("ACTIVITY onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+    }
+
+    // =======================  callback  =========================
+
+    override fun callActOne(str: String) {
+        YYLogUtils.w("str:$str")
+
+        getAllNavFragments(R.id.nav_host).firstOrNull {
+            it is ITwoActivityCallback
+        }?.let {
+            (it as ITwoActivityCallback).callTwoFragment("yeye")
+        }
+    }
+
+    override fun callActTwo(str: String) {
+        YYLogUtils.w("str:$str")
+
+        getAllNavFragments(R.id.nav_host).firstOrNull {
+            it is IOneActivityCallback
+        }?.let {
+            (it as IOneActivityCallback).callOneFragment("hehe")
+        }
     }
 
 }

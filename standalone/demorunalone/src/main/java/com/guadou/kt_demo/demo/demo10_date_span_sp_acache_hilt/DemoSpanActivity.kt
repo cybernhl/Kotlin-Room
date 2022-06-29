@@ -10,7 +10,7 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.font_text_view.TypefaceUtil
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.span.dsl.buildSpannableString
 
 import dagger.hilt.android.AndroidEntryPoint

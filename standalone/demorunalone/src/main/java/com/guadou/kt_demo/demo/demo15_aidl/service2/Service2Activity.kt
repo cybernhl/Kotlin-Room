@@ -14,7 +14,7 @@ import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 /**
  *  通过Binder-AIDL的方式 跨进程通信

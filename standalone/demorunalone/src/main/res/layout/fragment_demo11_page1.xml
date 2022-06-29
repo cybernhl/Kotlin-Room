@@ -41,6 +41,14 @@
             android:text="去第二个页面"
             binding:clicks="@{click.nav2Page2}" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_20dp"
+            android:text="Call Back"
+            android:textAllCaps="false"
+            binding:clicks="@{click.callback}" />
+
     </LinearLayout>
 
 </layout>

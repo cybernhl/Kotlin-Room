@@ -1,7 +1,7 @@
 package com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt
 
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import javax.inject.Inject
 import javax.inject.Singleton
 

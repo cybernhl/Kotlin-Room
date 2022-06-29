@@ -1,10 +1,11 @@
 package androidx.navigation
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.NavContainerFragment
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 internal fun NavDestination.removeFromParent() {
     this.parent = null
@@ -53,4 +54,10 @@ fun NavHostFragment.getAllFragments(): List<Fragment> {
         }
     }
     return list
+}
+
+//根据Activity获取到Fragments
+fun FragmentActivity.getAllNavFragments(navHostRes: Int): List<Fragment> {
+    val navHostFragment = supportFragmentManager.findFragmentById(navHostRes) as NavHostFragment
+    return navHostFragment.getAllFragments()
 }

@@ -7,6 +7,7 @@ import com.guadou.kt_demo.demo.demo12_databinding_texing.Demo12Activity
 import com.guadou.kt_demo.demo.demo13_motionlayout.Demo13MotionActivity
 import com.guadou.kt_demo.demo.demo14_mvi.mvi.Demo14Activity
 import com.guadou.kt_demo.demo.demo15_aidl.Demo15OptionActivity
+import com.guadou.kt_demo.demo.demo16_record.Demo16RecordActivity
 import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.activity.Demo1Activity
 import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.Demo2Activity
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.Demo3Activity
@@ -107,6 +108,10 @@ class DemoMainActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoMainBinding
 
         fun navDemo15() {
             Demo15OptionActivity.startInstance()
+        }
+
+        fun navDemo16() {
+            Demo16RecordActivity.startInstance()
         }
 
 

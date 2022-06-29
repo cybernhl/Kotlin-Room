@@ -3,7 +3,7 @@ package com.guadou.kt_demo.demo.demo15_aidl.service1
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 class MyService1 : Service() {
 

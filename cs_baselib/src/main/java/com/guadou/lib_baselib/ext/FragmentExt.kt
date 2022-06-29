@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -99,9 +99,10 @@ fun Fragment.removeFragment(f: Fragment) {
 }
 
 //view model
-fun <T : ViewModel> Fragment.getVM(clazz: Class<T>) = ViewModelProviders.of(this).get(clazz)
+fun <T : ViewModel> Fragment.getVM(clazz: Class<T>) = ViewModelProvider(this).get(clazz)
 
-fun <T : ViewModel> Fragment.getActivityVM(clazz: Class<T>) = ViewModelProviders.of(activity!!).get(clazz)
+fun <T : ViewModel> Fragment.getActivityVM(clazz: Class<T>) = ViewModelProvider(requireActivity()).get(clazz)
+
 
 //获取泛型的实例
 fun <VM> getVMCls(cls: Any): VM {

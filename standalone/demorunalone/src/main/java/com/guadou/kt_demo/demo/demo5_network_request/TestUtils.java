@@ -1,7 +1,7 @@
 package com.guadou.kt_demo.demo.demo5_network_request;
 
 
-import com.guadou.lib_baselib.utils.Log.YYLogUtils;
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 import com.guadou.lib_baselib.utils.ThreadPoolUtils;
 
 import java.util.Random;

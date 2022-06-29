@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 import com.guadou.kt_demo.R;
-import com.guadou.lib_baselib.utils.Log.YYLogUtils;
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 public class Rel01 extends RelativeLayout {
 

@@ -101,7 +101,7 @@ class GlobalWebActivity : BaseVMActivity<BaseViewModel>() {
         })
 
         if (!TextUtils.isEmpty(mWeburl))
-            mWebView!!.loadUrl(mWeburl)
+            mWebView!!.loadUrl(mWeburl!!)
 
         fl_content.addView(mWebView)
 

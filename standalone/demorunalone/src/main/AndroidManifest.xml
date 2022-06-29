@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+<!--    android:requestLegacyExternalStorage="true"-->
 
     <application
         android:name=".DemoApplication"
@@ -54,11 +57,14 @@
 
         <activity android:name=".demo.demo13_motionlayout.Demo13AppbarActivity" />
         <activity android:name=".demo.demo13_motionlayout.Demo13ViewPagerActivity" />
+        <activity android:name=".demo.demo16_record.Demo16AutoSizeActivity" />
 
         <activity android:name=".demo.demo13_motionlayout.Demo13Cons01Activity" />
         <activity android:name=".demo.demo13_motionlayout.Demo13Dianjiu01Activity" />
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity" />
+
+        <activity android:name=".demo.demo16_record.Demo16RecordActivity" />
 
         <activity android:name=".demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity" />
 

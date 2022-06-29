@@ -5,7 +5,7 @@ import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.utils.CheckUtil
-import com.guadou.lib_baselib.utils.Log.YYLogUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import javax.inject.Inject
 
 /**
