@@ -49,6 +49,15 @@
             binding:clicks="@{click.nav2Page3}"
             android:text="去第三个页面" />
 
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_20dp"
+            binding:clicks="@{click.callback}"
+            android:textAllCaps="false"
+            android:text="Test Callback" />
+
     </LinearLayout>
 
 </layout>

@@ -63,18 +63,16 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
             mBinding.ivTint2.setImageDrawable(it)
         }
 
-        mBinding.ivTint2.click {
-            it.isSelected = true
-        }
+        mBinding.ivTint2.click { it.isSelected = true }
 
         //手动的设置leftDrawable
-//        ContextCompat.getDrawable(this, R.mipmap.jobs_tips_date_icon)?.let {
-//            it.setBounds(0, 0, it.minimumWidth, it.minimumHeight)
-//            mBinding.tvCenterText.apply {
-//                setCompoundDrawables(it, null, null, null)
-//                gravity = Gravity.CENTER_VERTICAL
-//            }
-//        }
+        ContextCompat.getDrawable(this, R.mipmap.jobs_tips_date_icon)?.let {
+            it.setBounds(0, 0, it.minimumWidth, it.minimumHeight)
+            mBinding.tvCenterText.apply {
+                setCompoundDrawables(it, null, null, null)
+                gravity = Gravity.CENTER_VERTICAL
+            }
+        }
 
         //手动的设置rightDrawable
         ContextCompat.getDrawable(this, R.mipmap.jobs_tips_date_icon)?.let {
