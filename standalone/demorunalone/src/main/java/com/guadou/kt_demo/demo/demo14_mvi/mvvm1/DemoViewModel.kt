@@ -1,7 +1,5 @@
 package com.guadou.kt_demo.demo.demo14_mvi.mvvm1
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -9,11 +7,14 @@ import com.guadou.kt_demo.demo.demo5_network_request.bean.Industry
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5Repository
 import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.toast
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DemoViewModel @ViewModelInject constructor(
+@HiltViewModel
+class DemoViewModel @Inject constructor(
     private val mRepository: Demo5Repository,
-    @Assisted val savedState: SavedStateHandle
+    val savedState: SavedStateHandle
 ) : BaseViewModel() {
 
     val liveData = MutableLiveData<List<Industry>?>()

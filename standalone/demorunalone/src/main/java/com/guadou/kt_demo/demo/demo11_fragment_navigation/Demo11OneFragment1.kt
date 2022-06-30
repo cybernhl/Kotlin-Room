@@ -24,8 +24,15 @@ import com.guadou.lib_baselib.utils.navigation.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+//@AndroidEntryPoint
 class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page1Binding>(),
     IOnBackPressed, IOneActivityCallback {
+
+//    @Inject
+//    lateinit var mMsg: String
+
+//    @Inject
+//    lateinit var mMsgLD: MutableLiveData<String>
 
     private val activityViewModel: Demo11ViewModel by activityViewModels()
 
@@ -76,6 +83,7 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
 
     override fun init() {
         toast(test)
+//        YYLogUtils.w("mMsgLD:$mMsgLD")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -1,10 +1,12 @@
 package com.guadou.kt_demo.demo.demo7_imageload_glide
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.guadou.lib_baselib.base.vm.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class Demo7ViewModel @ViewModelInject constructor() : BaseViewModel() {
+@HiltViewModel
+class Demo7ViewModel @Inject constructor() : BaseViewModel() {
 
     val img1LiveData = MutableLiveData<String>()
     val img2LiveData = MutableLiveData<String>()

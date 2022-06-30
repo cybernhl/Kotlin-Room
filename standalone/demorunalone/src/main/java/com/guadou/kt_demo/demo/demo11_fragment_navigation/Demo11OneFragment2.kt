@@ -4,12 +4,14 @@ package com.guadou.kt_demo.demo.demo11_fragment_navigation
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page2Binding
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.ITwoActivityCallback
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.ITwoFragmentCallback
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.di.Book
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
@@ -25,11 +27,18 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Binding>(),
+class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) :
+    BaseVDBFragment<EmptyViewModel, FragmentDemo11Page2Binding>(),
     ITwoActivityCallback {
 
     @Inject
     lateinit var mMsg: String
+
+    @Inject
+    lateinit var mMsgLD: MutableLiveData<String>
+
+    @Inject
+    lateinit var mBook: Book
 
     private val activityViewModel: Demo11ViewModel by activityViewModels()
 
@@ -53,6 +62,8 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
     override fun init() {
         val bundleText = arguments?.getString("age")
         toast("age:$bundleText")
+
+        YYLogUtils.w("mMsgLD:$mMsgLD mBook:$mBook")
     }
 
     override fun onResume() {
@@ -115,7 +126,7 @@ class Demo11OneFragment2(private val _callback: ((Int, String) -> Unit)?) : Base
 //            activityViewModel.setCallbackValue()
 
 
-            toast(mMsg)
+            mMsgLD.value = "hilt注入对象发出的消息"
         }
 
     }

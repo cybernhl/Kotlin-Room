@@ -1,8 +1,8 @@
 package com.guadou.lib_baselib.base.vm
 
-import androidx.hilt.lifecycle.ViewModelInject
-import com.guadou.lib_baselib.base.vm.BaseViewModel
-import javax.inject.Singleton
 
-@Singleton
-class EmptyViewModel @ViewModelInject constructor() : BaseViewModel()
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class EmptyViewModel @Inject constructor() : BaseViewModel()

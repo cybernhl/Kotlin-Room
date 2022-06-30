@@ -1,7 +1,5 @@
 package com.guadou.kt_demo.demo.demo5_network_request.mvvm
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -16,15 +14,18 @@ import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 /**
  * Repository一定要通过默认的构造方法传入进来
  * 在DI中注册之后会自动加载
  */
-class Demo5ViewModel @ViewModelInject constructor(
+@HiltViewModel
+class Demo5ViewModel @Inject constructor(
     private val mRepository: Demo5Repository,
-    @Assisted val savedState: SavedStateHandle
+    val savedState: SavedStateHandle
 ) : BaseViewModel() {
 
     private val _industryLD = MutableLiveData<List<Industry>>()

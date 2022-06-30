@@ -1,14 +1,15 @@
 package com.guadou.cpt_main.mvvm
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.toast
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AuthViewModel @ViewModelInject constructor(
+@HiltViewModel
+class AuthViewModel @Inject constructor(
     private val mAuthRepository: AuthRepository,
-    @Assisted val savedState: SavedStateHandle
+     val savedState: SavedStateHandle
 ) : BaseViewModel() {
 
     fun getServiceTime() {

@@ -3,6 +3,7 @@ package com.guadou.kt_demo.demo.demo11_fragment_navigation
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.getAllFragments
 import androidx.navigation.getAllNavFragments
@@ -11,10 +12,10 @@ import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.IOneActivityC
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.IOneFragmentCallback
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.ITwoActivityCallback
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.ITwoFragmentCallback
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.di.Book
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.navigation.IOnBackPressed
@@ -29,7 +30,10 @@ import javax.inject.Inject
 class Demo11Activity : BaseVMActivity<Demo11ViewModel>(), IOneFragmentCallback, ITwoFragmentCallback {
 
     @Inject
-    lateinit var mMsg: String
+    lateinit var mMsgLD: MutableLiveData<String>
+
+    @Inject
+    lateinit var mBook: Book
 
     companion object {
         fun startInstance() {
@@ -54,7 +58,7 @@ class Demo11Activity : BaseVMActivity<Demo11ViewModel>(), IOneFragmentCallback, 
 
         YYLogUtils.w("当前设备Android系统：" + Build.VERSION.SDK_INT)
 
-        toast(mMsg)
+        YYLogUtils.w("mMsgLD:$mMsgLD mBook:$mBook")
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
@@ -62,6 +66,9 @@ class Demo11Activity : BaseVMActivity<Demo11ViewModel>(), IOneFragmentCallback, 
 
     override fun startObserve() {
 
+        mMsgLD.observe(this) {
+            YYLogUtils.w("收到消息：" + it)
+        }
     }
 
     override fun onBackPressed() {

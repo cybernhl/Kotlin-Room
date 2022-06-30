@@ -83,8 +83,8 @@ dependencies {
     //依赖注入
     implementation deps.support.hilt
     kapt deps.support.hilt_kapt
-    implementation deps.support.hilt_vm
-    kapt deps.support.hilt_vm_kapt
+//    implementation deps.support.hilt_vm
+//    kapt deps.support.hilt_vm_kapt
 //    kapt deps.android.fragivity_processor
 
     api project(':cs_cptServices')

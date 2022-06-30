@@ -1,7 +1,5 @@
 package com.guadou.kt_demo.demo.demo14_mvi.mvi
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -13,12 +11,15 @@ import com.guadou.lib_baselib.base.mvi.BaseViewState
 import com.guadou.lib_baselib.base.mvi.setState
 import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.OkResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class Damo14ViewModel @ViewModelInject constructor(
+@HiltViewModel
+class Damo14ViewModel @Inject constructor(
     private val mRepository: Demo5Repository,
-    @Assisted val savedState: SavedStateHandle
+     val savedState: SavedStateHandle
 ) : BaseViewModel() {
 
     private val _viewStates: MutableLiveData<Demo14ViewState> = MutableLiveData(Demo14ViewState())
