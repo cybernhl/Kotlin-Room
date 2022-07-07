@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.scopes.ActivityScoped
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ActivityComponent::class)
 class Demo11Module {
 
     @Provides
@@ -16,13 +16,13 @@ class Demo11Module {
         return "di提供的消息"
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideBook(): Book {
         return Book("1", "2")
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideLD(): MutableLiveData<String> {
         return MutableLiveData()
