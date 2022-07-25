@@ -17,6 +17,8 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.jeremyliao.liveeventbus.LiveEventBus
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.Semaphore
 
 
 /**
@@ -43,7 +45,7 @@ class Demo4Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo4Binding>() {
 
 
     override fun startObserve() {
-        LiveEventBus.get("newMember",Boolean::class.java).observe(this){
+        LiveEventBus.get("newMember", Boolean::class.java).observe(this) {
             newMemberIntercept.resetNewMember()
         }
     }
@@ -106,6 +108,13 @@ class Demo4Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo4Binding>() {
             chain.process()
 
         }
+
+
+        fun testAsync() {
+            Mutex()
+
+        }
+
 
     }
 

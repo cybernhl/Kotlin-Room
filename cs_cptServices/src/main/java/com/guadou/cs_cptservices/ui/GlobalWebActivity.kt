@@ -66,7 +66,6 @@ class GlobalWebActivity : BaseVMActivity<BaseViewModel>() {
         )
         mWebView = MyWebView(applicationContext)
         mWebView!!.layoutParams = params
-
         mWebView!!.setOnWebChangeListener(object : MyWebView.OnWebChangeListener {
             override fun titleChange(title: String) {
                 if (CheckUtil.isEmpty(mWebtitle)) {
