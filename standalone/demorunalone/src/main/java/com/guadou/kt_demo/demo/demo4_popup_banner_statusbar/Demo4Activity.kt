@@ -1,6 +1,8 @@
 package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar
 
 import android.content.Intent
+import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo4Binding
@@ -15,10 +17,11 @@ import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toastSuccess
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.StatusBarUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import com.jeremyliao.liveeventbus.LiveEventBus
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 
 /**
@@ -111,9 +114,55 @@ class Demo4Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo4Binding>() {
 
 
         fun testAsync() {
-            Mutex()
+            testflow()
 
         }
+
+
+    }
+
+    private fun testflow() {
+
+//        val bannerFlow = MutableStateFlow<String?>(null)
+//        val listFlow = MutableStateFlow<String?>(null)
+//
+//        lifecycleScope.launch {
+//
+//            listOf(bannerFlow, listFlow).merge().collect {
+//
+//                YYLogUtils.w("value:$it")
+//            }
+//
+//        }
+//
+//        lifecycleScope.launch {
+//
+//            withContext(Dispatchers.Default) {
+//                delay(1000)
+//                bannerFlow.emit("Banner")
+//            }
+//
+//            withContext(Dispatchers.Default) {
+//                delay(3000)
+//                listFlow.emit("list")
+//            }
+//
+//        }
+
+
+            flow {
+                YYLogUtils.w( "start: ${Thread.currentThread().name}")
+                repeat(3) {
+                    delay(1000)
+                    this.emit(it)
+                }
+                YYLogUtils.w( "end: ${Thread.currentThread().name}")
+            }
+                .flowOn(Dispatchers.Main)
+                .onEach {
+                    YYLogUtils.w( "collect: $it, ${Thread.currentThread().name}")
+                }
+                .launchIn(lifecycleScope)
 
 
     }

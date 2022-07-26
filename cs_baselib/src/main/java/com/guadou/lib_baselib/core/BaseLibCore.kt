@@ -65,7 +65,7 @@ object BaseLibCore {
 
         //配置Log的拦截器，只有Debug下才生效
         if (BuildConfig.DEBUG) {
-            YYLogUtils.addInterceptor(LogDecorateInterceptor(true))
+            YYLogUtils.addInterceptor(LogDecorateInterceptor(false))
             YYLogUtils.addInterceptor(LogPrintInterceptor(true))
 
             val logPath = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED)
