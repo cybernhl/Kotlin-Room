@@ -93,9 +93,6 @@ abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.Connect
             getDataFromIntent(intent)
         }
 
-        //设置竖屏展示
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
         /** 管理Activity的栈  */
         ActivityManage.addActivity(this)
 

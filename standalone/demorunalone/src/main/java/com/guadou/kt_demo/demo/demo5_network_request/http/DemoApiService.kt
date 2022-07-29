@@ -3,11 +3,9 @@ package com.guadou.kt_demo.demo.demo5_network_request.http
 
 import com.guadou.kt_demo.demo.demo5_network_request.bean.Industry
 import com.guadou.kt_demo.demo.demo5_network_request.bean.SchoolBean
-import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.FullJobsPage
+import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.NewsBean
 import com.guadou.testxiecheng.base.BaseBean
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface DemoApiService {
 
@@ -32,7 +30,7 @@ interface DemoApiService {
         @Query("page_size") page_size: String,
         @Header("Content-Type") contentType: String,
         @Header("Accept") accept: String
-    ): BaseBean<FullJobsPage>
+    ): BaseBean<NewsBean>
 
     /**
      * 银行卡提现已预约信息
@@ -43,5 +41,17 @@ interface DemoApiService {
         @Header("Accept") accept: String?,
         @Header("Authorization") token: String?
     ): BaseBean<Long>
+
+
+    @POST("/wanandroid")
+    suspend fun fetchNews(
+        @FieldMap map: Map<String, String>
+    ): BaseBean<NewsBean>
+
+
+    @POST("/wanandroid")
+    suspend fun changeState(
+        @FieldMap map: Map<String, String>
+    ): BaseBean<String>
 
 }

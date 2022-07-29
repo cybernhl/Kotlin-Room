@@ -105,10 +105,11 @@ dependencies {
     api deps.android.kt_ktx
     api deps.android.ktx_coroutines_core
     api deps.android.ktx_coroutines_android
+
     api deps.android.lifecycle
-    api deps.android.lifecycle_vm
-    api deps.android.lifecycle_live
-    api deps.android.lifecycle_scope
+    api deps.android.lifecycle_ktx
+    api deps.android.lifecycle_process
+
 
     //测试
     testImplementation deps.android.junit

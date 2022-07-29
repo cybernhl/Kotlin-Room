@@ -55,7 +55,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="测试协程"
-            binding:clicks="@{click.testAsync}" />
+            binding:clicks="@{click.testAsync}"
+
+          />
 
     </LinearLayout>
 

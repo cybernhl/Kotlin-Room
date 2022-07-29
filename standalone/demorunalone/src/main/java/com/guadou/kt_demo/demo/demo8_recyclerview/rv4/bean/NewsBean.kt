@@ -1,6 +1,6 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean
 
-data class FullJobsPage(
+data class NewsBean(
     val count: Int,
     val countPage: Int,
     val curPage: Int,

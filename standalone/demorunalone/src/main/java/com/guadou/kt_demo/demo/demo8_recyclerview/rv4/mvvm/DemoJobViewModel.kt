@@ -7,7 +7,7 @@ import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5Repository
-import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.FullJobsPage
+import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.NewsBean
 import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.checkNet
 import com.guadou.lib_baselib.ext.toastError
@@ -29,7 +29,7 @@ class DemoJobViewModel @Inject constructor(
     var mCurPage = 1
     private var isNeedPlaceHolder = true
     var isNeedCleanAllData = true
-    var mDatas = mutableListOf<FullJobsPage.FullJobs>()
+    var mDatas = mutableListOf<NewsBean.FullJobs>()
     val mAdapter by lazy {
         BaseDataBindingAdapter(R.layout.item_demo_jobs, BR.item, mDatas)
     }
@@ -70,7 +70,7 @@ class DemoJobViewModel @Inject constructor(
     }
 
     //处理数据-添加或刷新
-    private fun handleData(list: List<FullJobsPage.FullJobs>?) {
+    private fun handleData(list: List<NewsBean.FullJobs>?) {
         if (!CheckUtil.isEmpty(list)) {
             //有数据，判断是刷新还是加载更多的数据
             if (isNeedCleanAllData) {
