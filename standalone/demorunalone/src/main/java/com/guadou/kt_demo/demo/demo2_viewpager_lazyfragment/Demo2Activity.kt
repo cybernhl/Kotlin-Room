@@ -38,6 +38,10 @@ class Demo2Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo2Binding>() {
 
     override fun init() {
 
+        mBinding.easyTitle.addRightText("测试懒加载2") {
+
+        }
+
         mBinding.viewPager.bindFragment(
             supportFragmentManager,
             listOf(LazyLoad1Fragment.obtainFragment(), LazyLoad2Fragment.obtainFragment(), LazyLoad3Fragment.obtainFragment()),

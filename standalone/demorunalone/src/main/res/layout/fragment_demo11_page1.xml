@@ -49,6 +49,15 @@
             android:textAllCaps="false"
             binding:clicks="@{click.callback}" />
 
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_20dp"
+            android:text="去新的Nav2页面"
+            android:textAllCaps="false"
+            binding:clicks="@{click.gotoNaV2}" />
+
     </LinearLayout>
 
 </layout>

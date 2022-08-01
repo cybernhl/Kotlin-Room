@@ -13,6 +13,7 @@ import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo11Page1Binding
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.IOneActivityCallback
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.callback.IOneFragmentCallback
+import com.guadou.kt_demo.demo.demo11_fragment_navigation.nav2.DemoNav2Activity
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.vm.Demo11ViewModel
 import com.guadou.lib_baselib.base.fragment.BaseVDBFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
@@ -150,6 +151,11 @@ class Demo11OneFragment1(private val test: String) : BaseVDBFragment<EmptyViewMo
         fun callback() {
             mCallback.callActOne("message come from one page")
         }
+
+        fun gotoNaV2() {
+            DemoNav2Activity.startInstance()
+        }
+
     }
 
     //返回事件- 不穿透交给自己处理
