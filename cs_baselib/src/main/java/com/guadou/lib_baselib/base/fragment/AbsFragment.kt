@@ -17,9 +17,6 @@ import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 
 abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiverListener {
 
-    private var isRootViewInit = false
-    private var rootView: View? = null
-
     /**
      * 获取Context对象
      */
@@ -42,23 +39,12 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
-        if (rootView == null) {
-            rootView = transformRootView(setContentView(container))
-        }
-
-        return rootView
+        return transformRootView(setContentView(container))
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (!isRootViewInit) {//初始化过视图则不再进行view和data初始化
-            super.onViewCreated(view, savedInstanceState)
-            initViews(view)
-            isRootViewInit = true
-        }
 
         initViews(view)
     }
@@ -81,9 +67,6 @@ abstract class AbsFragment : Fragment(), ConnectivityReceiver.ConnectivityReceiv
             ConnectivityReceiver.unregisterObserver(this)
             ConnectivityReceiver.unregisterAnnotationObserver(this)
         }
-
-        isRootViewInit = false
-        rootView = null
     }
 
     /**
