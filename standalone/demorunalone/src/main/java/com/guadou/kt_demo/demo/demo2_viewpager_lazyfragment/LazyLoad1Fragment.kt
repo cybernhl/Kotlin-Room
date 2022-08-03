@@ -3,6 +3,7 @@ package com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment
 import android.view.View
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.FragmentDemo2Binding
+import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.lazy2.DemoLazy2Activity
 import com.guadou.lib_baselib.base.fragment.BaseVDBLazyLoadingFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -39,7 +40,9 @@ class LazyLoad1Fragment : BaseVDBLazyLoadingFragment<EmptyViewModel, FragmentDem
         YYLogUtils.w("LazyLoad1Fragment - init")
 
         mBinding.tvPage2.click {
-            Demo2Pager2Activity.startInstance()
+//            Demo2Pager2Activity.startInstance()
+
+            DemoLazy2Activity.startInstance()
         }
     }
 

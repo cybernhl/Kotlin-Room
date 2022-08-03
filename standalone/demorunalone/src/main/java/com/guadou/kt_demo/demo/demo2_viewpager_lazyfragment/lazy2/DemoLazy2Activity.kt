@@ -38,11 +38,11 @@ class DemoLazy2Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo2Page2Bind
 
     override fun init() {
 
-//        mBinding.viewPager2.bindFragment(
-//            supportFragmentManager,
-//            this.lifecycle,
-//
-//        )
+        mBinding.viewPager2.bindFragment(
+            supportFragmentManager,
+            this.lifecycle,
+            listOf(Lazy2Fragment1(), Lazy2Fragment2(), Lazy2Fragment3())
+        )
 
         val title = listOf("Demo1", "Demo2", "Demo3")
         TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager2) { tab, position ->

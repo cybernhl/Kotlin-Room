@@ -137,4 +137,9 @@
         <attr name="delay" format="integer|reference" />
     </declare-styleable>
 
+    <!--  异步加载布局  -->
+    <declare-styleable name="AsyncViewStub">
+        <attr name="layout" format="reference" />
+    </declare-styleable>
+
 </resources>
