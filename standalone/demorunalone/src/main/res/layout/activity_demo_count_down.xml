@@ -29,6 +29,30 @@
             android:text="点击发送验证码"
             binding:clicks="@{click.startCountDown}" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CountDownTimer实现"
+            binding:clicks="@{click.countDownTimer}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Handler实现"
+            binding:clicks="@{click.countDownHander}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Timer实现"
+            binding:clicks="@{click.countDownTimer2}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thread实现"
+            binding:clicks="@{click.countDownThread}" />
+
         <TextView
             android:id="@+id/tv_show_time"
             android:layout_width="wrap_content"

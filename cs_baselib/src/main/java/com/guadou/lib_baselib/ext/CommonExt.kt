@@ -12,6 +12,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.interceptor.LoginInterceptorTask
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.io.Serializable
@@ -388,7 +390,7 @@ fun BaseViewModel.countDown(
  * 倒计时的实现
  */
 @ExperimentalCoroutinesApi
-fun AppCompatActivity.countDown(
+fun FragmentActivity.countDown(
     time: Int = 5,
     start: (scop: CoroutineScope) -> Unit,
     end: () -> Unit,
@@ -397,35 +399,30 @@ fun AppCompatActivity.countDown(
 
     lifecycleScope.launch {
         // 在这个范围内启动的协程会在Lifecycle被销毁的时候自动取消
-        //开启一个子协程，可以取消这个子线程，无需取消整个VewModelScop
 
-        launch {
-
-            flow {
-                (time downTo 0).forEach {
-                    delay(1000)
-                    emit(it)
-                }
-            }.onStart {
-                // 倒计时开始 ，在这里可以让Button 禁止点击状态
-                start(this@launch)
-
-            }.onCompletion {
-                // 倒计时结束 ，在这里可以让Button 恢复点击状态
-                end()
-
-            }.catch {
-                //错误
-                toast(it.message)
-
-            }.collect {
-                // 在这里 更新值来显示到UI
-                next(it)
+        flow {
+            (time downTo 0).forEach {
+                delay(1000)
+                emit(it)
             }
+        }.onStart {
+            // 倒计时开始 ，在这里可以让Button 禁止点击状态
+            start(this@launch)
 
+        }.onCompletion {
+            // 倒计时结束 ，在这里可以让Button 恢复点击状态
+            end()
+
+        }.catch {
+            //错误
+            YYLogUtils.e(it.message ?: "Unkown Error")
+
+        }.collect {
+            // 在这里 更新值来显示到UI
+            next(it)
         }
-    }
 
+    }
 }
 
 @ExperimentalCoroutinesApi

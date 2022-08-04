@@ -3,6 +3,7 @@ package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.guadou.kt_demo.BR
@@ -246,7 +247,11 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //        }
 
 //
-        mViewModel.changeSearch("1234")
+
+        CommUtils.getHandler().postDelayed({
+            mViewModel.changeSearch("1234")
+        }, 2000)
+
 //
 //
 //        mViewModel.changeState()
@@ -260,7 +265,35 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         //更新一些UI
     }
 
+    override fun onStart() {
+        super.onStart()
+        YYLogUtils.w("页面开始onStart了")
+    }
+
     override fun startObserve() {
+        lifecycleScope.launch {
+            mViewModel.searchFlow.collect {
+                YYLogUtils.w("search-state-value $it")
+            }
+        }
+
+        mViewModel.searchLD.observeForever {
+            YYLogUtils.w("search-livedata-value $it")
+        }
+
+
+//        lifecycleScope.launch {
+//            mViewModel.sharedFlow.collect {
+//                YYLogUtils.w("shared-value1 $it")
+//            }
+//
+//        }
+//
+//        lifecycleScope.launch {
+//            mViewModel.channel.consumeAsFlow().collect {
+//                YYLogUtils.w("shared-value2 $it")
+//            }
+//        }
 
         lifecycleScope.launchWhenCreated {
             mViewModel.stateFlow.collect {
@@ -268,30 +301,6 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
             }
         }
 
-        mViewModel.searchLD.observe(this) {
-            YYLogUtils.w("value $it")
-        }
-
-        lifecycleScope.launch {
-            mViewModel.sharedFlow.collect {
-                YYLogUtils.w("shared-value1 $it")
-            }
-
-        }
-
-        lifecycleScope.launch {
-            mViewModel.channel.consumeAsFlow().collect {
-                YYLogUtils.w("shared-value2 $it")
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            mViewModel.searchFlow.value
-            mViewModel.searchFlow.collect {
-                YYLogUtils.w("state-value $it")
-            }
-
-        }
 
     }
 
