@@ -134,6 +134,10 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         }
 
 
+        fun resumeScope() {
+            mViewModel.resumeCoroutine()
+        }
+
     }
 
     private fun testflow() {
@@ -245,12 +249,14 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //            YYLogUtils.w("count: $result")
 //            YYLogUtils.w("count:执行耗时：${System.currentTimeMillis() - start}")
 //        }
-
 //
 
-        CommUtils.getHandler().postDelayed({
-            mViewModel.changeSearch("1234")
-        }, 2000)
+
+        mViewModel.suspendSth()
+
+//        CommUtils.getHandler().postDelayed({
+//            mViewModel.changeSearch("1234")
+//        }, 2000)
 
 //
 //
@@ -260,6 +266,7 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //            updateUI()
 //        }
     }
+
 
     private fun updateUI() {
         //更新一些UI
