@@ -24,8 +24,6 @@ import javax.inject.Inject
 @AndroidEntryPoint  //这里用到了自定义的注入 需要加注解
 class Demo10Activity : BaseVDBLoadingActivity<EmptyViewModel, ActivityDemo10Binding>() {
 
-    @Inject
-    lateinit var userServer: UserServer
 
     companion object {
         fun startInstance() {
@@ -129,8 +127,8 @@ class Demo10Activity : BaseVDBLoadingActivity<EmptyViewModel, ActivityDemo10Bind
         }
 
         val printHilt: () -> Unit = {
-            YYLogUtils.w("server:" + userServer.toString() + "Dao:"+userServer.getDaoContent())
-            userServer.testUser()
+//            YYLogUtils.w("server:" + userServer.toString() + "Dao:" + userServer.getDaoContent())
+//            userServer.testUser()
         }
 
         fun printGson() {
@@ -165,6 +163,10 @@ class Demo10Activity : BaseVDBLoadingActivity<EmptyViewModel, ActivityDemo10Bind
         //EditText的文字监听
         val onEditTextChangeListener: (String) -> Unit = {
             toast(it)
+        }
+
+        fun jumpDI() {
+            gotoActivity<Demo10DIActivity>()
         }
 
     }

@@ -41,6 +41,7 @@
         <activity android:name=".demo.demo8_recyclerview.scroll9.Scroll9Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll10.Scroll10Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll11.Scroll11Activity" />
+        <activity android:name=".demo.demo10_date_span_sp_acache_hilt.Demo10DIActivity"/>
         <activity android:name=".demo.demo8_recyclerview.scroll12.Scroll12Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll13.Scroll13Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll14.Scroll14Activity" />

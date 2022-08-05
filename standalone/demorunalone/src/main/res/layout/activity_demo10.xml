@@ -108,6 +108,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <Button
+            android:id="@+id/btn_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="进入单独的DI页面"
+            android:textAllCaps="false"
+            binding:clicks="@{click.jumpDI}"
+            binding:isVisibleGone="@{true}" />
+
     </LinearLayout>
 
 </layout>

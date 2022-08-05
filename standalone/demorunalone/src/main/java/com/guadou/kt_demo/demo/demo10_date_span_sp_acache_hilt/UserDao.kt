@@ -4,9 +4,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserDao @Inject constructor() {
+class UserDao @Inject constructor(private val user: UserBean) {
 
     fun printUser(): String {
-        return this.toString()
+        return user.toString()
     }
+
 }
