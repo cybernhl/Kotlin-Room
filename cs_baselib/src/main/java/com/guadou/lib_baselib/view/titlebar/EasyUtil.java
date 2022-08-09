@@ -15,25 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class EasyUtil {
 
     /**
-     * 获取屏幕宽度
-     */
-    public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int width = wm.getDefaultDisplay().getWidth();
-        return width;
-    }
-
-
-    /**
-     * 获取屏幕高度
-     */
-    public static int getScreenHeith(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int height = wm.getDefaultDisplay().getHeight();
-        return height;
-    }
-
-    /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static int dip2px(Context context, float dpValue) {

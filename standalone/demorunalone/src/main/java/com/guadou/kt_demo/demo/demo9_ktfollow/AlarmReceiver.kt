@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.SystemClock
 import com.guadou.kt_demo.DemoMainActivity
+import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.utils.ActivityManage
 import com.guadou.lib_baselib.utils.CommUtils
@@ -39,7 +40,7 @@ class AlarmReceiver : BroadcastReceiver() {
         //检测Activity栈里面是否有MainActivity
         if (ActivityManage.getActivityStack() == null || ActivityManage.getActivityStack().size == 0) {
             //重启首页
-            context.gotoActivity<DemoMainActivity>()
+           //commContext().gotoActivity<DemoMainActivity>()
         } else {
             YYLogUtils.w("不需要重启，已经有栈在运行了 Size：" + ActivityManage.getActivityStack().size)
         }

@@ -1,9 +1,12 @@
 package com.guadou.kt_demo.demo.demo9_ktfollow
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.*
+import android.view.Window
+import android.view.WindowManager
 import androidx.lifecycle.MutableLiveData
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -15,6 +18,7 @@ import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.countDown
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.utils.ScreenUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import kotlinx.coroutines.*
 import java.util.*
@@ -26,6 +30,8 @@ import java.util.*
 class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountDownBinding>(), Runnable {
 
     private val click by lazy { ClickProxy() }
+
+    private lateinit var wakeLock: PowerManager.WakeLock
 
     companion object {
         fun startInstance() {
@@ -42,8 +48,29 @@ class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountD
             .addBindingParams(BR.click, click)
     }
 
+    @SuppressLint("InvalidWakeLockTag")
     override fun init() {
 
+//        val powerManager = commContext().getSystemService(Service.POWER_SERVICE) as PowerManager
+//        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock")
+//
+//        //是否需计算锁的数量
+//        wakeLock.setReferenceCounted(false)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        wakeLock.acquire()
+
+        ScreenUtils.keepScreenLongLight(this, true, true)
+    }
+
+    override fun onStop() {
+        super.onStop()
+//        wakeLock.release();
+
+        ScreenUtils.keepScreenLongLight(this, false, false)
     }
 
     override fun startObserve() {
