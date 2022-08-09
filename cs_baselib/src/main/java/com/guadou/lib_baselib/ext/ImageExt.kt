@@ -21,7 +21,9 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.util.*
 
-
+/**
+ * 保存File到图库 保存Input流到图库 保存Bitmap到图库
+ */
 private val ALBUM_DIR = Environment.DIRECTORY_PICTURES
 
 private class OutputFileTaker(var file: File? = null)
@@ -102,6 +104,7 @@ fun Bitmap.saveToAlbum(
     return imageUri
 }
 
+//根据Uri打开一个输出流 - 准备写入文件
 private fun Uri.outputStream(resolver: ContentResolver): OutputStream? {
     return try {
         resolver.openOutputStream(this)
@@ -111,6 +114,7 @@ private fun Uri.outputStream(resolver: ContentResolver): OutputStream? {
     }
 }
 
+// 文件 / 流 /Bitmap 写入完成之后，通知媒体库更新
 private fun Uri.finishPending(
     context: Context,
     resolver: ContentResolver,
@@ -154,7 +158,7 @@ private fun String.getMimeType(): String? {
 }
 
 /**
- * 插入图片到媒体库
+ * 重要方法插入图片到媒体库
  */
 private fun ContentResolver.insertMediaImage(
     fileName: String,

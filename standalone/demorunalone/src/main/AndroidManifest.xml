@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.guadou.kt_demo">
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -95,6 +96,7 @@
         <service
             android:name=".demo.demo15_aidl.service3.MyService3"
             android:process=":test" />
+        <receiver android:name=".demo.demo9_ktfollow.AlarmReceiver"/>
     </application>
 
 </manifest>

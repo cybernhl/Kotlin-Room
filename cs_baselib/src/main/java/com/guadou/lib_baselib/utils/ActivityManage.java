@@ -24,6 +24,11 @@ public class ActivityManage {
         activityStack.push(activity);
     }
 
+    //获取activity栈
+    public static  Stack<Activity> getActivityStack(){
+        return activityStack;
+    }
+
     /**
      * 只是移除栈，不用结束Activity
      */

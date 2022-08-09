@@ -65,12 +65,10 @@ object BaseLibCore {
 
         //配置Log的拦截器，只有Debug下才生效
         if (BuildConfig.DEBUG) {
-            YYLogUtils.addInterceptor(LogDecorateInterceptor(false))
-            YYLogUtils.addInterceptor(LogPrintInterceptor(true))
 
             val logPath = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED)
                 application.applicationContext.getExternalFilesDir("log")?.absolutePath
-                    ?: application.applicationContext.filesDir.absolutePath + "/log/"
+                    ?: (application.applicationContext.filesDir.absolutePath + "/log/")
             else
                 application.applicationContext.filesDir.absolutePath + "/log/"
 
@@ -78,6 +76,9 @@ object BaseLibCore {
             if (!dir.exists()) {
                 dir.mkdirs()
             }
+
+            YYLogUtils.addInterceptor(LogDecorateInterceptor(false))
+            YYLogUtils.addInterceptor(LogPrintInterceptor(true))
             YYLogUtils.addInterceptor(Log2FileInterceptor.getInstance(logPath, true))
         }
 

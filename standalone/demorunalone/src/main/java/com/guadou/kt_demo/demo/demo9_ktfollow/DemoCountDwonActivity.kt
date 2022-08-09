@@ -1,10 +1,9 @@
 package com.guadou.kt_demo.demo.demo9_ktfollow
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Intent
-import android.os.CountDownTimer
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
+import android.os.*
 import androidx.lifecycle.MutableLiveData
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -15,10 +14,10 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.countDown
 import com.guadou.lib_baselib.ext.toast
+import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import kotlinx.coroutines.*
 import java.util.*
-import java.lang.Runnable
 
 
 /**
@@ -197,6 +196,31 @@ class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountD
                 mflag = false
 
             }
+
+        }
+
+        //定时任务
+        fun backgroundTask() {
+
+            //开启3分钟的闹钟广播服务,检测是否运行了首页，如果退出了应用，那么重启应用
+            val alarmManager = applicationContext.getSystemService(ALARM_SERVICE) as AlarmManager
+
+            val intent1 = Intent(CommUtils.getContext(), AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(CommUtils.getContext(), 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT)
+
+            //先取消一次
+            alarmManager.cancel(pendingIntent)
+
+            //再次启动,这里不延时，直接发送
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), pendingIntent)
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), pendingIntent)
+            } else {
+                alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 18000, pendingIntent)
+            }
+
+            YYLogUtils.w("点击按钮-开启 alarmManager 定时任务啦")
 
         }
 
