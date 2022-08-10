@@ -15,7 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ff00ff"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
@@ -62,6 +62,17 @@
             android:layout_height="wrap_content"
             android:text="恢复协程"
             binding:clicks="@{click.resumeScope}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打印文本"
+            binding:clicks="@{click.printText}" />
+
+        <TextView
+            android:id="@+id/tv_print"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

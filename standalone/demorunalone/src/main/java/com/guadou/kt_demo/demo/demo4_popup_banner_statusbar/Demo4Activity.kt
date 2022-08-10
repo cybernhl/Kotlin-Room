@@ -1,11 +1,11 @@
 package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar
 
 import android.content.Intent
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.view.View
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo4Binding
@@ -14,9 +14,7 @@ import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.InterceptC
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.lai.*
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.viewmodel.Demo4ViewModel
-import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.NewsBean
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
-import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toastSuccess
@@ -24,16 +22,9 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
-import com.jeremyliao.liveeventbus.LiveEventBus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.flow.SharingStarted.Companion.Eagerly
-import kotlinx.coroutines.flow.SharingStarted.Companion.Lazily
-import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
-import kotlinx.coroutines.sync.Mutex
-import java.util.concurrent.Executors
 
 
 /**
@@ -69,6 +60,65 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 
     }
 
+    private val text = "Hello World."
+    private var curIndex = 0
+    private val handler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+
+            if (msg.what == 101) {
+                val text: String = msg.obj as String
+
+                YYLogUtils.w("当前展示的字符串：" + text)
+
+                mBinding.tvPrint.text = text
+
+                printForwardMessage(17L)
+
+            } else if (msg.what == 102) {
+
+                val text: String = msg.obj as String
+
+                YYLogUtils.w("当前展示的字符串：" + text)
+
+                mBinding.tvPrint.text = text
+
+                printBackMessage(17L)
+            }
+        }
+    }
+
+    private fun printForwardMessage(delay: Long) {
+        val message = handler.obtainMessage()
+        message.what = 101
+        curIndex += 1
+        if (curIndex <= text.length) {
+            val text = text.substring(0, curIndex)
+            message.obj = text
+            handler.sendMessageDelayed(message, delay)
+        } else {
+            YYLogUtils.w("写完了")
+            curIndex = text.length
+
+            printBackMessage(delay)
+        }
+    }
+
+    private fun printBackMessage(delay: Long) {
+        val message = handler.obtainMessage()
+        message.what = 102
+        curIndex -= 1
+        if (curIndex >= 0) {
+            val text = text.substring(0, curIndex)
+            message.obj = text
+            handler.sendMessageDelayed(message, delay)
+        } else {
+            YYLogUtils.w("写完了")
+            curIndex = 0
+
+            printForwardMessage(delay)
+        }
+    }
 
     /**
      * DataBinding事件处理
@@ -89,6 +139,11 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 
         fun navBannerPage() {
             DemoBannerActivity.startInstance()
+        }
+
+        //打印文本
+        fun printText() {
+            printForwardMessage(0)
         }
 
         fun navIntercept() {
@@ -265,6 +320,8 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //        mViewModel.getNewsDetail().observe(this) {
 //            updateUI()
 //        }
+
+
     }
 
 

@@ -38,6 +38,7 @@ class Demo4ViewModel @Inject constructor(
     val searchLD: LiveData<String> = _searchLD
 
     private val _searchFlow = MutableStateFlow("")
+
     val searchFlow: StateFlow<String> = _searchFlow
 
     val sharedFlow = MutableSharedFlow<String>()

@@ -210,7 +210,6 @@ class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountD
             if (!mThread.isAlive) {
 
                 mflag = true
-
                 if (mThread.state == Thread.State.TERMINATED) {
                     mThread = Thread(this@DemoCountDwonActivity)
                     if (mThreadNum == -1) mThreadNum = 60
