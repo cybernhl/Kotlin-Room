@@ -92,11 +92,11 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         //测试下载
         fun testDownLoad() {
 
-//            extRequestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) {
+            extRequestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) {
 
                 startDownLoad()
 
-//            }
+            }
         }
     }
 
