@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.fragment.app.Fragment
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
+import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.view.FangIOSDialog
 import com.yanzhenjie.permission.AndPermission
 import java.io.File
@@ -93,5 +94,7 @@ fun Fragment.extRequestPermission(
  * AndPermission提供的File转换Uri
  */
 fun Any.getUri(file: File): Uri {
+    AndPermission.with(CommUtils.getContext()).install()
+
     return AndPermission.getFileUri(commContext(), file)
 }

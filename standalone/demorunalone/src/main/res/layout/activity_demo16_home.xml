@@ -33,23 +33,36 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="跳转相机"
+            android:text="前台后台的监控"
             android:textAllCaps="false"
             binding:clicks="@{click.intent}" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MediaRecord"
+            android:text="AutoSize测试"
             android:textAllCaps="false"
             binding:clicks="@{click.mediaRecord}" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MediaCodec"
+            android:text="测试经纬度"
             android:textAllCaps="false"
-            binding:clicks="@{click.mediaCodec}" />
+            binding:clicks="@{click.testLocation}" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试下载Apk"
+            android:textAllCaps="false"
+            binding:clicks="@{click.testDownLoad}" />
 
     </LinearLayout>
 

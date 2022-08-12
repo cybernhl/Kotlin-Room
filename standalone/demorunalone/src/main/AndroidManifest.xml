@@ -11,6 +11,12 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+
     <application
         android:name=".DemoApplication"
         android:allowBackup="true"
@@ -98,6 +104,8 @@
             android:name=".demo.demo15_aidl.service3.MyService3"
             android:process=":test" />
         <receiver android:name=".demo.demo9_ktfollow.AlarmReceiver"/>
+        <service android:name=".demo.demo16_record.LocationService"/>
+
     </application>
 
 </manifest>

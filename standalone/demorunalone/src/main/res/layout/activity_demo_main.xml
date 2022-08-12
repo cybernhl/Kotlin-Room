@@ -140,7 +140,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="16.录制视频"
+                    android:text="16.其他功能"
                     android:textAllCaps="false"
                     binding:clicks="@{click.navDemo16}" />
 

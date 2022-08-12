@@ -21,9 +21,6 @@ import okio.gzip
 import java.io.File
 
 
-/**
- * 录制
- */
 @AndroidEntryPoint
 class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16AutosizeBinding>() {
 
