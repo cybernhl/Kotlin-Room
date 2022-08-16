@@ -11,6 +11,7 @@ import android.database.ContentObserver
 import android.database.Cursor
 import android.net.Uri
 import android.os.Environment
+import android.widget.Toast
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
@@ -136,7 +137,9 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,fileName)
 
         //开始构建 DownloadManager 对象
-        val downloadManager = commContext().getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+
+        Toast.makeText(mActivity,"hello world",Toast.LENGTH_SHORT).show()
 
         //加入Request到系统下载队列，在条件满足时会自动开始下载。返回的为下载任务的唯一ID
         val requestID = downloadManager.enqueue(request)

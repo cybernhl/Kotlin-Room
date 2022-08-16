@@ -95,6 +95,8 @@
         <activity android:name=".demo.demo15_aidl.service1.Service1Activity" />
         <activity android:name=".demo.demo15_aidl.service2.Service2Activity" />
         <activity android:name=".demo.demo15_aidl.service3.Service3Activity" />
+        <activity android:name=".demo.demo3_bottomtabbar_fragment.LoginDemoActivity" />
+        <activity android:name=".demo.demo3_bottomtabbar_fragment.ProfileDemoActivity" />
 
         <service android:name=".demo.demo15_aidl.service1.MyService1" />
         <service

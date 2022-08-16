@@ -70,12 +70,6 @@ abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.Connect
         }
     }
 
-    /**
-     * 跳转页面
-     */
-    protected fun gotoActivity(clazz: Class<*>) {
-        startActivity(Intent(mActivity, clazz))
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
