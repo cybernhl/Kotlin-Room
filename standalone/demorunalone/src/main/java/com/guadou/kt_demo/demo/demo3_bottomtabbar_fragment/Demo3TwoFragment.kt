@@ -27,9 +27,9 @@ class Demo3TwoFragment : BaseVMFragment<EmptyViewModel>() {
 
 
     override fun startObserve() {
-        FunctionManager.get().addLoginCallback(this) {
-            gotoProfilePage()
-        }
+//        FunctionManager.get().addLoginCallback(this) {
+//            gotoProfilePage()
+//        }
     }
 
     override fun init() {
