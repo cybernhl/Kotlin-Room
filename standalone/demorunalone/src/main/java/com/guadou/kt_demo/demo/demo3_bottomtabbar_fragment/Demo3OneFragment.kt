@@ -40,10 +40,10 @@ class Demo3OneFragment : BaseVMFragment<EmptyViewModel>() {
         mBtnProfile.click {
 
             //带回调继续执行的登录方式
-//            gotoProfilePage()
+            gotoProfilePage()
 
             //不带回调的登录方式
-            gotoProfilePage2()
+//            gotoProfilePage2()
         }
 
     }
