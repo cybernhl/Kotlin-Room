@@ -23,8 +23,9 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.Runnable
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
@@ -87,6 +88,7 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
                 mBinding.tvPrint.text = text
 
                 printBackMessage(17L)
+
             }
         }
     }
