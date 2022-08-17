@@ -5,6 +5,7 @@ import android.widget.TextView
 import com.guadou.cs_cptservices.Constants
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.function.FunctionManager
+import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.function.IFunction
 import com.guadou.lib_baselib.base.fragment.BaseVMFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.*
@@ -26,7 +27,9 @@ class Demo3TwoFragment : BaseVMFragment<EmptyViewModel>() {
 
 
     override fun startObserve() {
-
+        FunctionManager.get().addLoginCallback(this) {
+            gotoProfilePage()
+        }
     }
 
     override fun init() {
@@ -47,15 +50,11 @@ class Demo3TwoFragment : BaseVMFragment<EmptyViewModel>() {
     private fun checkLogin() {
         if (SP().getString(Constants.KEY_TOKEN, "").checkEmpty()) {
 
-//            FunctionManager.get().addFunction(object : Function("gotoProfilePage") {
-//                override fun function() {
-//                    gotoProfilePage()
-//                }
-//            })
-
-            FunctionManager.get().addLoginCallback(this) {
-                gotoProfilePage()
-            }
+            FunctionManager.get().addFunction(object : IFunction("gotoProfilePage") {
+                override fun function() {
+                    gotoProfilePage()
+                }
+            })
 
             gotoLoginPage()
 

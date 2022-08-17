@@ -3,7 +3,6 @@ package com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.function;
 import android.text.TextUtils;
 
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
@@ -13,7 +12,7 @@ public class FunctionManager {
 
     private static FunctionManager functionManager;
 
-    private static HashMap<String, Function> mFunctionMap;
+    private static HashMap<String, IFunction> mFunctionMap;
 
     public FunctionManager() {
         mFunctionMap = new HashMap<>();
@@ -29,9 +28,9 @@ public class FunctionManager {
 
 
     /**
-     * 添加无参数无返回值
+     * 添加方法
      */
-    public FunctionManager addFunction(Function function) {
+    public FunctionManager addFunction(IFunction function) {
         if (mFunctionMap != null) {
             mFunctionMap.put(function.functionName, function);
         }
@@ -40,14 +39,14 @@ public class FunctionManager {
 
 
     /**
-     * 执行没参数没返回值的
+     * 执行方法
      */
     public void invokeFunction(String key) {
         if (TextUtils.isEmpty(key)) {
             return;
         }
         if (mFunctionMap != null) {
-            Function function = mFunctionMap.get(key);
+            IFunction function = mFunctionMap.get(key);
 
             if (function != null) {
                 function.function();
@@ -77,8 +76,8 @@ public class FunctionManager {
     // =======  LiveData的方式 ===================
 
     public void addLoginCallback(LifecycleOwner owner, ILoginCallback callback) {
-        LiveEventBus.get("login", Boolean.class).observe(owner, o -> {
-            if (o != null && o) {
+        LiveEventBus.get("login", Boolean.class).observe(owner, aBoolean -> {
+            if (aBoolean != null && aBoolean) {
                 callback.callback();
             }
         });

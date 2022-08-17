@@ -1,10 +1,10 @@
 package com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.function;
 
-public abstract class Function {
+public abstract class IFunction {
 
     public String functionName;
 
-    public Function(String functionName) {
+    public IFunction(String functionName) {
 
         this.functionName = functionName;
     }
