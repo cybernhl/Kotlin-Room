@@ -77,7 +77,7 @@ object BaseLibCore {
                 dir.mkdirs()
             }
 
-            YYLogUtils.addInterceptor(LogDecorateInterceptor(false))
+            YYLogUtils.addInterceptor(LogDecorateInterceptor(true))
             YYLogUtils.addInterceptor(LogPrintInterceptor(true))
             YYLogUtils.addInterceptor(Log2FileInterceptor.getInstance(logPath, true))
         }

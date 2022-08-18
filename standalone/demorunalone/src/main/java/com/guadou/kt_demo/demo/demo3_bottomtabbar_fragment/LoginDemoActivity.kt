@@ -6,6 +6,7 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo3LoginBinding
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.function.FunctionManager
+import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.thread.LoginInterceptThreadManager
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -57,6 +58,8 @@ class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBind
 
                 //发送通知的方式
                 FunctionManager.get().finishLogin()
+
+                LoginInterceptThreadManager.get().loginFinished()
 
                 finish()
 
