@@ -6,6 +6,7 @@ import com.guadou.cs_cptservices.Constants
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.aop.Login
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.aop.LoginCallback
+import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.dynamic.DynamicProxyUtils
 import com.guadou.lib_baselib.base.fragment.BaseVMFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.*
@@ -40,10 +41,13 @@ class Demo3OneFragment : BaseVMFragment<EmptyViewModel>() {
         mBtnProfile.click {
 
             //带回调继续执行的登录方式
-            gotoProfilePage()
+//            gotoProfilePage()
 
             //不带回调的登录方式
 //            gotoProfilePage2()
+
+//            DynamicProxyUtils.hookAms()
+            gotoProfilePage()
         }
 
     }

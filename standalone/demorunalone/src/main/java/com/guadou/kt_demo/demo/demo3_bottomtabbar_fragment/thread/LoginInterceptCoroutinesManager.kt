@@ -88,10 +88,12 @@ class LoginInterceptCoroutinesManager private constructor() : DefaultLifecycleOb
     }
 
     fun loginFinished() {
+        if (!this@LoginInterceptCoroutinesManager::mCancellableContinuation.isInitialized) return
 
         if (mCancellableContinuation.isCancelled) return
 
         mCancellableContinuation.resume(LoginManager.isLogin(), null)
+
 
 //        launch {
 
