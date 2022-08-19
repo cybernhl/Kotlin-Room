@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.guadou.kt_demo">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -11,8 +11,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
@@ -41,15 +41,32 @@
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.EmptyFragmentActivity" />
         <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Activity" />
         <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Pager2Activity" />
-        <activity android:name=".demo.demo3_bottomtabbar_fragment.Demo3Activity" />
+        <activity
+            android:name=".demo.demo3_bottomtabbar_fragment.Demo3Activity"
+            android:launchMode="singleTask">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="showDialog" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="ktdemo"
+                    android:path="/demo3"
+                    android:scheme="android" />
+
+            </intent-filter>
+        </activity>
         <activity android:name=".demo.demo4_popup_banner_statusbar.Demo4Activity" />
         <activity android:name=".demo.demo2_viewpager_lazyfragment.lazy2.DemoLazy2Activity" />
-        <activity android:name=".demo.demo11_fragment_navigation.nav2.DemoNav2Activity"/>
+        <activity android:name=".demo.demo11_fragment_navigation.nav2.DemoNav2Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll8.Scroll8Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll9.Scroll9Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll10.Scroll10Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll11.Scroll11Activity" />
-        <activity android:name=".demo.demo10_date_span_sp_acache_hilt.Demo10DIActivity"/>
+        <activity android:name=".demo.demo10_date_span_sp_acache_hilt.Demo10DIActivity" />
         <activity android:name=".demo.demo8_recyclerview.scroll12.Scroll12Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll13.Scroll13Activity" />
         <activity android:name=".demo.demo8_recyclerview.scroll14.Scroll14Activity" />
@@ -105,8 +122,9 @@
         <service
             android:name=".demo.demo15_aidl.service3.MyService3"
             android:process=":test" />
-        <receiver android:name=".demo.demo9_ktfollow.AlarmReceiver"/>
-        <service android:name=".demo.demo16_record.LocationService"/>
+
+        <receiver android:name=".demo.demo9_ktfollow.AlarmReceiver" />
+        <service android:name=".demo.demo16_record.LocationService" />
 
     </application>
 

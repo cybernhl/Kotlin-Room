@@ -10,6 +10,7 @@ import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 /**
  * 一般App的首页参考这个类
@@ -22,6 +23,11 @@ class Demo3Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo3Binding>() {
     private lateinit var mDemo3TwoFragment: Demo3TwoFragment
     private lateinit var mDemo3ThreeFragment: Demo3ThreeFragment
     private lateinit var mDemo3FourFragment: Demo3FourFragment
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        YYLogUtils.w("收到newintent:" + intent.toString())
+    }
 
     companion object {
 

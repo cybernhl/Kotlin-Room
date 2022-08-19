@@ -22,6 +22,8 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils
  */
 class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBinding>() {
 
+    private var mTargetIntent: Intent? = null
+
     companion object {
         fun startInstance() {
             commContext().let {
@@ -30,6 +32,11 @@ class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBind
                 })
             }
         }
+    }
+
+    override fun getDataFromIntent(intent: Intent) {
+        mTargetIntent = intent.getParcelableExtra("targetIntent")
+        YYLogUtils.w("mTargetIntent:" + mTargetIntent)
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
@@ -61,16 +68,21 @@ class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBind
                 //发送通知的方式
                 FunctionManager.get().finishLogin()
 
+                //线程
                 LoginInterceptThreadManager.get().loginFinished()
 
+                //协程
                 LoginInterceptCoroutinesManager.get().loginFinished()
-
-                finish()
 
                 //方法池的方式
                 FunctionManager.get().invokeFunction("gotoProfilePage")
 
+                setResult(-1, Intent())   //设置Result
 
+                YYLogUtils.w("2 mTargetIntent:" + mTargetIntent)
+                startActivity(mTargetIntent)
+
+                finish()
 
             }, 500)
 
