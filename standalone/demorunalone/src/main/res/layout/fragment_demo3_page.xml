@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/d_20dp"
-        android:text="跳转个人中心 - AOP" />
+        android:text="跳转个人中心 - 动态代理" />
 
 
     <Button

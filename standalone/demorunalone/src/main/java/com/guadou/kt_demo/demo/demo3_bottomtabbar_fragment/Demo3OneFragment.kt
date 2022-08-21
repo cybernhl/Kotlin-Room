@@ -9,6 +9,7 @@ import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.aop.Login
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.aop.LoginCallback
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.aop.LoginManager
+import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.dynamic.DynamicProxyUtils
 import com.guadou.lib_baselib.base.fragment.BaseVMFragment
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.*
@@ -53,7 +54,9 @@ class Demo3OneFragment : BaseVMFragment<EmptyViewModel>() {
             //不带回调的登录方式
 //            gotoProfilePage2()
 
-//            DynamicProxyUtils.hookAms()
+            //启动动态代理
+            DynamicProxyUtils.hookAms()
+
             gotoProfilePage()
         }
 
