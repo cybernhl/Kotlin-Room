@@ -23,6 +23,7 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils
 class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBinding>() {
 
     private var mTargetIntent: Intent? = null
+    private var mTargetType = 0
 
     companion object {
         fun startInstance() {
@@ -36,6 +37,7 @@ class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBind
 
     override fun getDataFromIntent(intent: Intent) {
         mTargetIntent = intent.getParcelableExtra("targetIntent")
+        mTargetType = intent.getIntExtra("type", 0)
         YYLogUtils.w("mTargetIntent:" + mTargetIntent)
     }
 
@@ -77,10 +79,12 @@ class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBind
                 //方法池的方式
                 FunctionManager.get().invokeFunction("gotoProfilePage")
 
-                setResult(-1, Intent())   //设置Result
+                setResult(-1, Intent().apply { putExtra("type", mTargetType) })   //设置Result
 
                 YYLogUtils.w("2 mTargetIntent:" + mTargetIntent)
-                startActivity(mTargetIntent)
+                if (mTargetIntent != null) {
+                    startActivity(mTargetIntent)
+                }
 
                 finish()
 

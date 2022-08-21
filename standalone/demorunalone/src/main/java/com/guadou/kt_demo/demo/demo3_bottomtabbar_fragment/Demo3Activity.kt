@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo3Binding
+import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.aop.LoginManager
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -24,12 +25,29 @@ class Demo3Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo3Binding>() {
     private lateinit var mDemo3ThreeFragment: Demo3ThreeFragment
     private lateinit var mDemo3FourFragment: Demo3FourFragment
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         YYLogUtils.w("收到newintent:" + intent.toString())
+        val categories = intent.categories
+
+        when (categories.take(1)[0]) {
+            switch_tab1 -> {
+                switchFragment(1)
+            }
+            switch_tab2 -> {
+                switchFragment(2)
+            }
+            switch_tab3 -> {
+                switchFragment(3)
+            }
+        }
+
     }
 
     companion object {
+        val switch_tab1 = "10"
+        val switch_tab2 = "11"
+        val switch_tab3 = "12"
 
         const val EXTRA_SAVE_INDEX = "extra_save_index"
         const val EXTRA_IS_HOME_ACT_DESTROY = "extra_is_home_act_destroy"
@@ -225,16 +243,51 @@ class Demo3Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo3Binding>() {
         }
 
         fun switchPage1() {
-            switchFragment(1)
+
+            if (!LoginManager.isLogin()) {
+                val intent = Intent(mActivity, Demo3Activity::class.java)
+                intent.addCategory(switch_tab1)
+
+                gotoLoginPage(intent)
+
+
+            } else {
+                switchFragment(1)
+            }
+
         }
 
         fun switchPage2() {
-            switchFragment(2)
+            if (!LoginManager.isLogin()) {
+                val intent = Intent(mActivity, Demo3Activity::class.java)
+                intent.addCategory(switch_tab2)
+
+                gotoLoginPage(intent)
+
+
+            } else {
+                switchFragment(2)
+            }
         }
 
         fun switchPage3() {
-            switchFragment(3)
+            if (!LoginManager.isLogin()) {
+                val intent = Intent(mActivity, Demo3Activity::class.java)
+                intent.addCategory(switch_tab3)
+
+                gotoLoginPage(intent)
+
+
+            } else {
+                switchFragment(3)
+            }
         }
+    }
+
+    fun gotoLoginPage(targetIntent: Intent) {
+        val intent = Intent(mActivity, LoginDemoActivity::class.java)
+        intent.putExtra("targetIntent", targetIntent)
+        startActivity(intent)
     }
 
 }
