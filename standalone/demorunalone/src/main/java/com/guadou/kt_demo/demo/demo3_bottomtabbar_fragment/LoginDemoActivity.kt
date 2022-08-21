@@ -6,6 +6,7 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo3LoginBinding
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.function.FunctionManager
+import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.loginIntercepter.LoginInterceptChain
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.thread.LoginInterceptCoroutinesManager
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.thread.LoginInterceptThreadManager
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -81,10 +82,12 @@ class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBind
 
                 setResult(-1, Intent().apply { putExtra("type", mTargetType) })   //设置Result
 
-                YYLogUtils.w("2 mTargetIntent:" + mTargetIntent)
                 if (mTargetIntent != null) {
                     startActivity(mTargetIntent)
                 }
+
+                //拦截器放行
+                LoginInterceptChain.loginFinished()
 
                 finish()
 
