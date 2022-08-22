@@ -5,16 +5,13 @@ import android.animation.AnimatorListenerAdapter
 import android.os.Handler
 import android.os.HandlerThread
 import android.view.ViewPropertyAnimator
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.*
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 /**
  * 异步动画工具类
  */
-class AsynAnimUtil private constructor() : LifecycleObserver {
+class AsyncAnimUtil private constructor() : DefaultLifecycleObserver {
 
     private var mHandlerThread: HandlerThread? = HandlerThread("anim_run_in_thread")
 
@@ -27,8 +24,8 @@ class AsynAnimUtil private constructor() : LifecycleObserver {
     private var mAnim: ViewPropertyAnimator? = null
 
     companion object {
-        val instance: AsynAnimUtil by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-            AsynAnimUtil()
+        val instance: AsyncAnimUtil by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            AsyncAnimUtil()
         }
     }
 
@@ -80,8 +77,7 @@ class AsynAnimUtil private constructor() : LifecycleObserver {
         mOwner?.lifecycle?.addObserver(this)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestroy() {
+    override fun onDestroy(owner: LifecycleOwner) {
         YYLogUtils.i("AsynAnimUtil Lifecycle -> onDestroy")
         mAnim?.cancel()
         destory()

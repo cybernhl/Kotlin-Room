@@ -5,7 +5,10 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.view.View
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo4Binding
@@ -55,6 +58,8 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 
 
     override fun init() {
+
+        lifecycle.addObserver(AutoDismiss())
 
         //默认的状态栏是白背景-黑文字
         //这里改为随EasyTitle的背景-白色文字
@@ -369,12 +374,25 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //            }
 //        }
 
-        lifecycleScope.launchWhenCreated {
-            mViewModel.stateFlow.collect {
-                updateUI()
-            }
-        }
+        lifecycleScope.launch {
+            mViewModel.stateFlow.flowWithLifecycle(lifecycle).collect{
 
+            }
+
+
+//            repeatOnLifecycle(Lifecycle.State.STARTED){
+//                mViewModel.stateFlow.collect{
+//
+//                }
+//            }
+
+
+            mViewModel.stateFlow.onEach {  }.launchIn(lifecycleScope)
+
+//            mViewModel.stateFlow.collect {
+//                updateUI()
+//            }
+        }
 
     }
 

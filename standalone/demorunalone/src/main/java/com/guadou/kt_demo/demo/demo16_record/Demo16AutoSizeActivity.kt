@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.view.Gravity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16AutosizeBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -83,6 +84,7 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
         }
 
 
+
 //        val mhandler = Handler()
 //        mhandler.post() {
 //            mBinding.ivAnim.animate().scaleX(2f).scaleY(2f).translationX(200f).translationY(200f).setDuration(1000).start()
@@ -118,7 +120,7 @@ class Demo16AutoSizeActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16Aut
                 .translationYBy(200f)
                 .setDuration(2000)
 
-            AsynAnimUtil.instance.startAnim(this, anim)
+            AsyncAnimUtil.instance.startAnim(this, anim)
 
             val logFile = File(FilesUtils.getInstance().sdpath)
             val bufferedSink = logFile.appendingSink().gzip().buffer()
