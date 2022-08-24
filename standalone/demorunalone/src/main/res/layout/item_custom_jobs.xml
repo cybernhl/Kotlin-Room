@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fefefe"
+    android:gravity="center_vertical"
+    android:padding="@dimen/d_10dp"
+    tools:viewBindingIgnore="true"
+    tools:ignore="MissingDefaultResource">
+
+
+    <ImageView
+        android:id="@+id/iv_job_img"
+        android:layout_width="@dimen/d_80dp"
+        android:layout_height="@dimen/d_80dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_job_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/d_15dp"
+        tools:text="Title" />
+
+</LinearLayout>
+
+

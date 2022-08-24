@@ -92,6 +92,7 @@
         <activity android:name=".demo.demo9_ktfollow.DemoCountDwonActivity" />
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.Demo10Activity" />
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.DemoSpanActivity" />
+        <activity android:name=".demo.demo8_recyclerview.rv8.CustomRV1Activity"/>
         <activity
             android:name=".demo.demo11_fragment_navigation.Demo11Activity"
             android:launchMode="singleTask">

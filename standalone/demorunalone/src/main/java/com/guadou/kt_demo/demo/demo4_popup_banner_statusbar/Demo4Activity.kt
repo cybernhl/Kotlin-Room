@@ -381,15 +381,11 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 
             }
 
-
 //            repeatOnLifecycle(Lifecycle.State.STARTED){
 //                mViewModel.stateFlow.collect{
 //
 //                }
 //            }
-
-
-            mViewModel.stateFlow.onEach {  }.launchIn(lifecycleScope)
 
 //            mViewModel.stateFlow.collect {
 //                updateUI()
