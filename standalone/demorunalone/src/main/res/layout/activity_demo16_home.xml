@@ -64,6 +64,14 @@
             android:textAllCaps="false"
             binding:clicks="@{click.testDownLoad}" />
 
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试装饰者"
+            android:textAllCaps="false"
+            binding:clicks="@{click.decoratorTest}" />
+
     </LinearLayout>
 
 </layout>

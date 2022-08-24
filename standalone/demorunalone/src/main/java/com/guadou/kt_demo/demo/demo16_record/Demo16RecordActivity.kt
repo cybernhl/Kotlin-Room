@@ -15,6 +15,8 @@ import android.widget.Toast
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
+import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
+import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -99,6 +101,16 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 
             }
         }
+
+        //装饰者模式
+        fun decoratorTest() {
+            val mMiProtableBattery = MiProtableBattery()
+            mMiProtableBattery.charge()
+
+            val mMi2ProtableBattery = Mi2ProtableBattery(mMiProtableBattery)
+            mMi2ProtableBattery.charge()
+
+        }
     }
 
     private fun startDownLoad() {
@@ -139,7 +151,7 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         //开始构建 DownloadManager 对象
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
 
-        Toast.makeText(mActivity,"hello world",Toast.LENGTH_SHORT).show()
+        Toast.makeText(mActivity, "hello world", Toast.LENGTH_SHORT).show()
 
         //加入Request到系统下载队列，在条件满足时会自动开始下载。返回的为下载任务的唯一ID
         val requestID = downloadManager.enqueue(request)
