@@ -6,6 +6,7 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo3LoginBinding
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.function.FunctionManager
+import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.loginIntercepter.LoginInterceptChain
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.thread.LoginInterceptCoroutinesManager
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.thread.LoginInterceptThreadManager
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -23,6 +24,7 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils
 class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBinding>() {
 
     private var mTargetIntent: Intent? = null
+    private var mTargetType = 0
 
     companion object {
         fun startInstance() {
@@ -36,6 +38,7 @@ class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBind
 
     override fun getDataFromIntent(intent: Intent) {
         mTargetIntent = intent.getParcelableExtra("targetIntent")
+        mTargetType = intent.getIntExtra("type", 0)
         YYLogUtils.w("mTargetIntent:" + mTargetIntent)
     }
 
@@ -77,10 +80,14 @@ class LoginDemoActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo3LoginBind
                 //方法池的方式
                 FunctionManager.get().invokeFunction("gotoProfilePage")
 
-                setResult(-1, Intent())   //设置Result
+                setResult(-1, Intent().apply { putExtra("type", mTargetType) })   //设置Result
 
-                YYLogUtils.w("2 mTargetIntent:" + mTargetIntent)
-                startActivity(mTargetIntent)
+                if (mTargetIntent != null) {
+                    startActivity(mTargetIntent)
+                }
+
+                //拦截器放行
+                LoginInterceptChain.loginFinished()
 
                 finish()
 

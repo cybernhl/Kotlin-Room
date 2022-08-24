@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.LoginDemoActivity;
+import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.aop.LoginManager;
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.lang.reflect.Field;
@@ -15,7 +16,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- *
+ * 动态代理+Hook的方式
  */
 public class DynamicProxyUtils {
 
@@ -84,6 +85,13 @@ public class DynamicProxyUtils {
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
             if ("startActivity".equals(method.getName())) {
+
+                //如果已经登录-直接放行
+                if (LoginManager.isLogin()){
+                    return method.invoke(obj, args);
+                }
+
+                //如果未登录-获取到原始意图，再替换Intent携带数据到LoginActivity中
                 Intent raw;
                 int index = 0;
                 for (int i = 0; i < args.length; i++) {
@@ -92,18 +100,25 @@ public class DynamicProxyUtils {
                         break;
                     }
                 }
+
+                //原始意图
                 raw = (Intent) args[index];
+                YYLogUtils.w("原始意图：" + raw);
+
+
+                //设置新的Intent-直接制定LoginActivity
                 Intent newIntent = new Intent();
                 String targetPackage = "com.guadou.kt_demo";
                 ComponentName componentName = new ComponentName(targetPackage, LoginDemoActivity.class.getName());
                 newIntent.setComponent(componentName);
-                newIntent.putExtra("_tartget_intent", raw);
+                newIntent.putExtra("targetIntent", raw);
 
-                YYLogUtils.w("拦截activity的启动成功" + " --->" );
+
+                YYLogUtils.w("改变了Activity启动");
 
                 args[index] = newIntent;
 
-                YYLogUtils.w("改变了Activity启动");
+                YYLogUtils.w("拦截activity的启动成功" + " --->");
 
                 return method.invoke(obj, args);
 

@@ -26,11 +26,13 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.actor
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 /**
@@ -270,52 +272,52 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //        }.asCoroutineDispatcher()
 
 
-//        lifecycleScope.launch {
-//
-//            val start = System.currentTimeMillis()
-//            var count = 0
-//
-//            suspend fun addActor() = actor<Int> {
-//
-//                for (msg in channel) {
-//                    when (msg) {
-//                        0 -> count++
-//                        1 -> count--
-//                    }
-//                }
-//            }
-//
-//            val actor = addActor()
-//
-//            val job1 = CoroutineScope(Dispatchers.IO).launch {
-//                repeat(99999) {
-//                    actor.send(0)//加
-//                }
-//            }
-//
-//            val job2 = CoroutineScope(Dispatchers.IO).launch {
-//                repeat(99999) {
-//                    actor.send(1)//减
-//                }
-//            }
-//
-//            job1.join()
-//            job2.join()
-//
-//            val deferred = CompletableDeferred<Int>()
-//            deferred.complete(count)
-//            val result = deferred.await()
-//
-//            actor.close()
-//
-//            //等待Job1 Job2执行完毕打印结果
-//            YYLogUtils.w("count: $result")
-//            YYLogUtils.w("count:执行耗时：${System.currentTimeMillis() - start}")
-//        }
-//
+        lifecycleScope.launch {
+
+            val start = System.currentTimeMillis()
+            var count = 0
+
+            suspend fun addActor() = actor<Int>(capacity = Channel.UNLIMITED) {
+
+                for (msg in channel) {
+                    when (msg) {
+                        0 -> count++
+                        1 -> count--
+                    }
+                }
+            }
+
+            val actor = addActor()
+
+            val job1 = CoroutineScope(Dispatchers.IO).launch {
+                repeat(99999) {
+                    actor.send(0)//加
+                }
+            }
+
+            val job2 = CoroutineScope(Dispatchers.IO).launch {
+                repeat(99999) {
+                    actor.send(1)//减
+                }
+            }
+
+            job1.join()
+            job2.join()
+
+            val deferred = CompletableDeferred<Int>()
+            deferred.complete(count)
+            val result = deferred.await()
+
+            actor.close()
+
+            //等待Job1 Job2执行完毕打印结果
+            YYLogUtils.w("count: $result")
+            YYLogUtils.w("count:执行耗时：${System.currentTimeMillis() - start}")
+        }
 
 
-        mViewModel.suspendSth()
+
+//        mViewModel.suspendSth()
 
 //        CommUtils.getHandler().postDelayed({
 //            mViewModel.changeSearch("1234")
@@ -330,13 +332,13 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //        }
 
 
-        val executorService: ScheduledExecutorService = Executors.newScheduledThreadPool(3)
-        val command = Runnable {
-            //dosth
-        }
-        executorService.scheduleAtFixedRate(command, 0, 3, TimeUnit.SECONDS)
-
-        executorService.shutdown()
+//        val executorService: ScheduledExecutorService = Executors.newScheduledThreadPool(3)
+//        val command = Runnable {
+//            //dosth
+//        }
+//        executorService.scheduleAtFixedRate(command, 0, 3, TimeUnit.SECONDS)
+//
+//        executorService.shutdown()
     }
 
 
