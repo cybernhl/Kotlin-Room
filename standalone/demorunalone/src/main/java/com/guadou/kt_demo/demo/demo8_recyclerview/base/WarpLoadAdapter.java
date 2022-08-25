@@ -94,17 +94,6 @@ public class WarpLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         mAdapter.onBindViewHolder(holder, noHeadPosition);
 
-//        if (holder.getItemViewType() == BASE_LOAD_MORE_KEY) {
-//
-//            //如果是加载更多
-//            if (holder instanceof BaseViewHolder) {
-//                mLoadMoreView.showState((BaseViewHolder) holder);
-//            }
-//        } else {
-//            //最后才走到Item的绑定数据
-//            mAdapter.onBindViewHolder(holder, position);
-//        }
-
     }
 
     private void requestData(int position) {
@@ -137,7 +126,6 @@ public class WarpLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (mLoadMoreListener != null) {
                 mLoadMoreListener.onLoadMoreRequest();
             }
-
         }
     }
 

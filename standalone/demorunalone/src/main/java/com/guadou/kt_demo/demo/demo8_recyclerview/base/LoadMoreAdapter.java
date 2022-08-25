@@ -50,6 +50,22 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position == getItemCount() - 1 && mLoadMoreEnable) {
+            //加载LoadMore底部布局
+            return BASE_LOAD_MORE_KEY;
+        } else {
+            //加载默认的数据
+            return mAdapter.getItemViewType(position);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return mLoadMoreEnable ? mAdapter.getItemCount() + 1 : mAdapter.getItemCount();
+    }
+
     private void requestData(int position) {
 
         if (!mLoadMoreEnable) return;
@@ -79,22 +95,6 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
 
         }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position == getItemCount() - 1 && mLoadMoreEnable) {
-            //加载LoadMore底部布局
-            return BASE_LOAD_MORE_KEY;
-        } else {
-            //加载默认的数据
-            return mAdapter.getItemViewType(position);
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mLoadMoreEnable ? mAdapter.getItemCount() + 1 : mAdapter.getItemCount();
     }
 
     // =======================   Load More ↓ =========================

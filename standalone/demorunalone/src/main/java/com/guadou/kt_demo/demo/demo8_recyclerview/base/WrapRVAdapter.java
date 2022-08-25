@@ -34,40 +34,36 @@ public class WrapRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        /**    区分头部和底部，根据ViewType来
-         ViewType可能有三部分  头部 底部 Adapter  **/
-        /**  判断是否为头部  **/
+        //    区分头部和底部，根据ViewType来
+        // 判断是否为头部
         if (isHeaderViewType(viewType)) {
             View headerView = mHeaderViews.get(viewType);
             //header
             return createHeaderOrFooterViewHolder(headerView);
         }
-        /**  判断是否为脚部  **/
+        // 判断是否为脚部
         if (isFooterViewType(viewType)) {
             View footerView = mFooterViews.get(viewType);
             //footer
             return createHeaderOrFooterViewHolder(footerView);
         }
-        /**  原生的ViewHolders  **/
+        // 原生的ViewHolders
         return mAdapter.onCreateViewHolder(parent, viewType);
     }
 
     @Override
     public int getItemViewType(int position) {
-        //position -> viewtype  头部 底部 adapter  必须要用map集合进行标识
-        //if(头部）return 头部 key
-        //if(中间位置）return mAdapter.getItemViewType(position);
-        //if(底部) return 底部 key
-        /**  返回头布局的viewtype  **/
+
+        //  返回头布局的viewtype
         if (isHeaderPosition(position)) {
             return mHeaderViews.keyAt(position);
         }
-        /**  返回脚布局的viewtype  **/
+        // 返回脚布局的viewtype
         if (isFooterPosition(position)) {
             position = position - mHeaderViews.size() - mAdapter.getItemCount();
             return mFooterViews.keyAt(position);
         }
-        /**  返回原生的viewtype  **/
+        // 返回原生的viewtype
         position = position - mHeaderViews.size();
         return mAdapter.getItemViewType(position);
     }
@@ -78,7 +74,7 @@ public class WrapRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (isHeaderPosition(position) || isFooterPosition(position)) {
             return;
         }
-        /**  调用原生的绑定数据  **/
+        // 调用原生的绑定数据
         position = position - mHeaderViews.size();
         mAdapter.onBindViewHolder(holder, position);
     }
@@ -92,7 +88,8 @@ public class WrapRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
      * 创建头部和底部ViewHolder
      */
     private RecyclerView.ViewHolder createHeaderOrFooterViewHolder(View view) {
-        return new RecyclerView.ViewHolder(view) {};
+        return new RecyclerView.ViewHolder(view) {
+        };
     }
 
     /**
