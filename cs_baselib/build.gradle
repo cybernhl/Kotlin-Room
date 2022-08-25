@@ -105,7 +105,7 @@ dependencies {
     api deps.android.kt_ktx
     api deps.android.ktx_coroutines_core
     api deps.android.ktx_coroutines_android
-
+    api 'org.jetbrains.kotlin:kotlin-reflect:1.5.31'
     api deps.android.lifecycle
     api deps.android.lifecycle_ktx
     api deps.android.lifecycle_process

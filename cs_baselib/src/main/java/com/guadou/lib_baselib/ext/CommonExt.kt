@@ -10,11 +10,11 @@ import android.graphics.drawable.RippleDrawable
 import android.os.*
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -27,6 +27,9 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.io.Serializable
+import kotlin.reflect.KClass
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.full.primaryConstructor
 
 
 /**
@@ -317,6 +320,36 @@ fun Array<out Pair<String, Any?>>.toBundle(): Bundle? {
 
 }
 
+//data class 对象的深拷贝
+fun <T : Any> T.deepCopy(): T {
+    //如果不是数据类，直接返回
+    if (!this::class.isData) {
+        return this
+    }
+
+    //拿到构造函数
+    return this::class.primaryConstructor!!.let { primaryConstructor ->
+        primaryConstructor.parameters.map { parameter ->
+            //转换类型
+
+            //最终value=第一个参数类型的对象
+            val value = (this::class as KClass<T>).memberProperties.first {
+                it.name == parameter.name
+            }.get(this)
+
+            //如果当前类(这里的当前类指的是参数对应的类型，比如说这里如果非基本类型时)是数据类
+            if ((parameter.type.classifier as? KClass<*>)?.isData == true) {
+                parameter to value?.deepCopy()
+            } else {
+                parameter to value
+            }
+
+            //最终返回一个新的映射map,即返回一个属性值重新组合的map，并调用callBy返回指定的对象
+        }.toMap().let(primaryConstructor::callBy)
+    }
+}
+
+
 
 /**
  * 主线程运行
@@ -353,33 +386,30 @@ fun BaseViewModel.countDown(
     next: (time: Int) -> Unit
 ) {
 
-    launchOnUI {
+    viewModelScope.launch {
 
-        //开启一个子协程，可以取消这个子线程，无需取消整个VewModelScop
-        launch {
+        // 在这个范围内启动的协程会在Lifecycle被销毁的时候自动取消
 
-            flow {
-                (time downTo 0).forEach {
-                    delay(1000)
-                    emit(it)
-                }
-            }.onStart {
-                // 倒计时开始 ，在这里可以让Button 禁止点击状态
-                start(this@launch)
-
-            }.onCompletion {
-                // 倒计时结束 ，在这里可以让Button 恢复点击状态
-                end()
-
-            }.catch {
-                //错误
-                toast(it.message)
-
-            }.collect {
-                // 在这里 更新值来显示到UI
-                next(it)
+        flow {
+            (time downTo 0).forEach {
+                delay(1000)
+                emit(it)
             }
+        }.onStart {
+            // 倒计时开始 ，在这里可以让Button 禁止点击状态
+            start(this@launch)
 
+        }.onCompletion {
+            // 倒计时结束 ，在这里可以让Button 恢复点击状态
+            end()
+
+        }.catch {
+            //错误
+            YYLogUtils.e(it.message ?: "Unkown Error")
+
+        }.collect {
+            // 在这里 更新值来显示到UI
+            next(it)
         }
 
     }
@@ -398,6 +428,7 @@ fun FragmentActivity.countDown(
 ) {
 
     lifecycleScope.launch {
+
         // 在这个范围内启动的协程会在Lifecycle被销毁的时候自动取消
 
         flow {
@@ -433,34 +464,32 @@ fun Fragment.countDown(
     next: (time: Int) -> Unit
 ) {
 
-    viewLifecycleOwner.lifecycleScope.launch {
+    lifecycleScope.launch {
+
         // 在这个范围内启动的协程会在Lifecycle被销毁的时候自动取消
-        //开启一个子协程，可以取消这个子线程，无需取消整个VewModelScop
 
-        launch {
-            flow {
-                (time downTo 0).forEach {
-                    delay(1000)
-                    emit(it)
-                }
-            }.onStart {
-                // 倒计时开始 ，在这里可以让Button 禁止点击状态
-                start(this@launch)
-
-            }.onCompletion {
-                // 倒计时结束 ，在这里可以让Button 恢复点击状态
-                end()
-
-            }.catch {
-                //错误
-                toast(it.message)
-
-            }.collect {
-                // 在这里 更新值来显示到UI
-                next(it)
+        flow {
+            (time downTo 0).forEach {
+                delay(1000)
+                emit(it)
             }
+        }.onStart {
+            // 倒计时开始 ，在这里可以让Button 禁止点击状态
+            start(this@launch)
 
+        }.onCompletion {
+            // 倒计时结束 ，在这里可以让Button 恢复点击状态
+            end()
+
+        }.catch {
+            //错误
+            YYLogUtils.e(it.message ?: "Unkown Error")
+
+        }.collect {
+            // 在这里 更新值来显示到UI
+            next(it)
         }
+
     }
 
 }

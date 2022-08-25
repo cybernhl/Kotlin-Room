@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.database.ContentObserver
 import android.database.Cursor
 import android.net.Uri
 import android.os.Environment
@@ -17,12 +16,14 @@ import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
 import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
+import com.guadou.kt_demo.demo.demo16_record.prototype.Address
+import com.guadou.kt_demo.demo.demo16_record.prototype.Company
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.engine.extRequestPermission
-import com.guadou.lib_baselib.engine.getUri
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.deepCopy
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -111,6 +112,52 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
             mMi2ProtableBattery.charge()
 
         }
+
+        //原型模式
+        fun prototypeTest() {
+//            val userProfile = UserProfile("1", "张三", "30")
+//            val skills = arrayListOf("篮球", "游泳", "长跑", "Java")
+//            userProfile.address = UserAddress("武汉", "楚河汉街")
+//            userProfile.skills = skills
+//            YYLogUtils.w(
+//                "userProfile:$userProfile  name:" + userProfile.name + " age:" + userProfile.age +
+//                        " skill:" + userProfile.skills + "address:" + userProfile.address + " address-city:" + userProfile.address.city
+//            )
+//
+//            try {
+//
+//                val newUser = userProfile.clone()
+//                newUser.name = "李四"
+//                newUser.skills.add("H5")
+//                newUser.address.city = "长沙"
+//                YYLogUtils.w(
+//                    "userProfile:$newUser  name:" + newUser.name + " age:" + newUser.age +
+//                            " skill:" + newUser.skills + "address:" + newUser.address + " address-city:" + newUser.address.city
+//                )
+//
+//                YYLogUtils.w(
+//                    "userProfile:$userProfile  name:" + userProfile.name + " age:" + userProfile.age +
+//                            " skill:" + userProfile.skills + "address:" + userProfile.address + " address-city:" + userProfile.address.city
+//                )
+//
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+
+
+            val company = Company("百度", "2001年", listOf(Address("北京", "海淀区"), Address("武汉", "江夏区")))
+
+            YYLogUtils.w("company:$company address:${company.addesses}")
+
+            val newCompany = company.copy()
+
+            newCompany.name = "网易"
+            newCompany.addesses.get(0).city = "杭州"
+            newCompany.addesses.get(0).address = "西湖区"
+            YYLogUtils.w("newCompany:$newCompany  address:${newCompany.addesses}")
+            YYLogUtils.w("company:$company  address:${company.addesses}")
+        }
+
     }
 
     private fun startDownLoad() {
