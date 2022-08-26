@@ -188,6 +188,7 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
             Invoker(upCommand).action()
             Invoker(downCommand).action()
 
+
         }
     }
 

@@ -8,9 +8,7 @@ import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Build
 import android.os.SystemClock
-import com.guadou.kt_demo.DemoMainActivity
-import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.gotoActivity
+
 import com.guadou.lib_baselib.utils.ActivityManage
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
