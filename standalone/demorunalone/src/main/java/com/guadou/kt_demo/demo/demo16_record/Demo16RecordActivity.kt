@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
+import com.guadou.kt_demo.demo.demo16_record.command.*
 import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.prototype.Address
@@ -158,6 +159,36 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
             YYLogUtils.w("company:$company  address:${company.addesses}")
         }
 
+        //命令模式
+        fun commandTest() {
+//            val receiver = Receiver()
+//            val command = ConcreteCommand(receiver)
+//            val invoker = Invoker(command)
+//            invoker.action()
+
+//            val chineseTeacher = ChineseTeacher()
+//            val englishTeacher = EnglishTeacher()
+//
+//            val chineseCommand = TeachChineseCommand(chineseTeacher)
+//            val englishCommand = TeachEnglishCommand(englishTeacher)
+//
+//            Invoker(chineseCommand).action()
+//            Invoker(englishCommand).action()
+
+
+            val television = Television()
+            val leftCommand = LeftCommand(television)
+            val rightCommand = RightCommand(television)
+            val upCommand = UpCommand(television)
+            val downCommand = DwonCommand(television)
+
+            //传入不同的命令就可以实现不同的逻辑
+            Invoker(leftCommand).action()
+            Invoker(rightCommand).action()
+            Invoker(upCommand).action()
+            Invoker(downCommand).action()
+
+        }
     }
 
     private fun startDownLoad() {
