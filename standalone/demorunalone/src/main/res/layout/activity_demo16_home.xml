@@ -86,6 +86,15 @@
             android:textAllCaps="false"
             binding:clicks="@{click.commandTest}" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Result"
+            android:textAllCaps="false"
+            binding:clicks="@{click.resultTest}" />
+
+
+
     </LinearLayout>
 
 </layout>

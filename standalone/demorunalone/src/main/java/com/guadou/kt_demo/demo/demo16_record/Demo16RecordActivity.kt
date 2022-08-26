@@ -11,9 +11,11 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Environment
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
+import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity
 import com.guadou.kt_demo.demo.demo16_record.command.*
 import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
@@ -23,10 +25,12 @@ import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.engine.extRequestPermission
-import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.deepCopy
+import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
+import com.guadou.lib_baselib.utils.result.GetSAFLauncher
+import com.guadou.lib_baselib.utils.result.ISAFLauncher
+import com.guadou.lib_baselib.utils.result.SAFLauncher
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.concurrent.Executors
@@ -37,10 +41,19 @@ import java.util.concurrent.TimeUnit
  * 录制
  */
 @AndroidEntryPoint
-class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeBinding>() {
+class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeBinding>(), ISAFLauncher by SAFLauncher() {
 
     private val clickProxy: ClickProxy by lazy { ClickProxy() }
     private val scheduledExecutorService: ScheduledExecutorService = Executors.newScheduledThreadPool(3)
+
+//    //SAF
+//    private val requestDataLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//        if (result.resultCode == RESULT_OK) {
+//            val data = result.data?.getStringExtra("text")
+//            toast("拿到返回数据：$data")
+//        }
+//    }
+
 
     companion object {
         fun startInstance() {
@@ -62,7 +75,7 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
     }
 
     override fun init() {
-
+        initLauncher()
     }
 
     /**
@@ -190,6 +203,28 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 
 
         }
+
+        //AFR
+        fun resultTest() {
+
+//            gotoActivityForResult<Demo10Activity>(bundle = arrayOf("id" to "123", "name" to "zhangsan")) {
+//                val text = it?.getStringExtra("text")
+//                toast("拿到返回数据：$text")
+//            }
+
+
+            getLauncher()?.launch(Intent(mActivity, Demo10Activity::class.java)) { result ->
+                val data = result.data?.getStringExtra("text")
+                toast("拿到返回数据：$data")
+            }
+
+//            safLauncher?.launch<Demo10Activity>() { result ->
+//                val data = result.data?.getStringExtra("text")
+//                toast("拿到返回数据：$data")
+//            }
+
+        }
+
     }
 
     private fun startDownLoad() {

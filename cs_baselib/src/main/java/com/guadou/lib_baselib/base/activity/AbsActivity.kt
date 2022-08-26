@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.ActivityManage
 import com.guadou.lib_baselib.utils.StatusBarUtils
+import com.guadou.lib_baselib.utils.result.GetSAFLauncher
 
 /**
  * 最底层的Activity,不带MVP和MVVM,一般不用这个
@@ -71,11 +72,9 @@ abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.Connect
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView()
-
         mActivity = this
         mContext = this.applicationContext
 
@@ -97,6 +96,7 @@ abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.Connect
 
         init()
     }
+
 
     /**
      * 是否需要注册监听网络变换
