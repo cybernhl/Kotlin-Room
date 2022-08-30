@@ -11,7 +11,6 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Environment
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
@@ -21,16 +20,18 @@ import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.prototype.Address
 import com.guadou.kt_demo.demo.demo16_record.prototype.Company
+import com.guadou.kt_demo.demo.demo16_record.strategy.*
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.engine.extRequestPermission
-import com.guadou.lib_baselib.ext.*
+import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
-import com.guadou.lib_baselib.utils.result.GetSAFLauncher
 import com.guadou.lib_baselib.utils.result.ISAFLauncher
 import com.guadou.lib_baselib.utils.result.SAFLauncher
+import com.guadou.lib_baselib.view.FangIOSDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.concurrent.Executors
@@ -41,7 +42,8 @@ import java.util.concurrent.TimeUnit
  * 录制
  */
 @AndroidEntryPoint
-class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeBinding>(), ISAFLauncher by SAFLauncher() {
+class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeBinding>(),
+    ISAFLauncher by SAFLauncher() {
 
     private val clickProxy: ClickProxy by lazy { ClickProxy() }
     private val scheduledExecutorService: ScheduledExecutorService = Executors.newScheduledThreadPool(3)
@@ -225,6 +227,51 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 
         }
 
+
+        //策略模式实战 and or
+        fun strategyTest() {
+            val jobCheck = JobCheck(
+                "S9876543A", "Singapore", "Singapore", 20F,
+                3.5F, false, false,
+                "Chinese", 1, "25", true,
+                false
+            )
+
+            jobCheck.hasCovidTest = true
+            val covidRule = COVIDRule {
+                //如果不满足新冠，首先就被排除了
+                //如果没有新冠 - 弹窗提示他
+                FangIOSDialog(mActivity).apply {
+                    setTitle("你没有新冠表单")
+                    setMessage("老哥你快去做核酸吧,老哥你快去做核酸吧,老哥你快去做核酸吧")
+                    setPositiveButton("好的") {
+                        dismiss()
+                    }
+                    setNegativeButton("就不去") {
+                        dismiss()
+                    }
+                    show()
+                }
+
+            }  //false
+            val ageRule = AgeRule()  //true
+            val fillProfileRule = FillProfileRule()  //true
+            val genderRule = GenderRule(0)  //true
+            val languageRule = LanguageRule(listOf("Chinese", "English"))   //true
+            val nationalityRule = NationalityRule(listOf("China", "Malaysia"))   //true
+            val visaRule = VisaRule()   //true
+
+            //构建规则执行器
+            val result = RuleExecute.create(jobCheck)
+                .and(listOf(covidRule))
+                .or(listOf(nationalityRule, visaRule))
+                .and(listOf(ageRule, fillProfileRule, genderRule, languageRule))
+                .build()
+                .execute()
+
+            YYLogUtils.w("执行规则器的结果：$result")
+            toast("执行规则器的结果：$result")
+        }
     }
 
     private fun startDownLoad() {
@@ -328,7 +375,8 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //                //描述
 //                val description = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_DESCRIPTION))
 
-                val downloaded = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR))
+                val downloaded =
+                    cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR))
                 val total = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_TOTAL_SIZE_BYTES))
                 val progress = downloaded * 100 / total
 

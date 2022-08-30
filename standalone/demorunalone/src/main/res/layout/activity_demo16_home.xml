@@ -89,6 +89,13 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="策略模式 And Or"
+            android:textAllCaps="false"
+            binding:clicks="@{click.strategyTest}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Result"
             android:textAllCaps="false"
             binding:clicks="@{click.resultTest}" />
