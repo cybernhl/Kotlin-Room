@@ -5,10 +5,8 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.view.View
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo4Binding
@@ -16,6 +14,8 @@ import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner.DemoBannerAct
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.InterceptChain
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.lai.*
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity
+import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostImmersiveStatusActivity
+import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.viewmodel.Demo4ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -67,6 +67,7 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         //这里改为随EasyTitle的背景-白色文字
         StatusBarUtils.setStatusBarWhiteText(this)
         StatusBarUtils.immersive(this)
+        //沉浸式之后使用EasyTitleBar的状态栏功能
 
     }
 
@@ -154,6 +155,16 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         //打印文本
         fun printText() {
             printForwardMessage(0)
+        }
+
+        //状态栏沉浸式处理 -1
+        fun hostNormal() {
+            HostNormalStatusActivity.startInstance()
+        }
+
+        //状态栏沉浸式处理 -2
+        fun hostInvasion() {
+            HostImmersiveStatusActivity.startInstance()
         }
 
         fun navIntercept() {
@@ -316,7 +327,6 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         }
 
 
-
 //        mViewModel.suspendSth()
 
 //        CommUtils.getHandler().postDelayed({
@@ -377,7 +387,7 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //        }
 
         lifecycleScope.launch {
-            mViewModel.stateFlow.flowWithLifecycle(lifecycle).collect{
+            mViewModel.stateFlow.flowWithLifecycle(lifecycle).collect {
 
             }
 

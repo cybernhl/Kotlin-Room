@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:viewBindingIgnore="true">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/chengxiao" />
+
+        <TextView
+            android:id="@+id/title_view"
+            android:background="#86ff8778"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_48dp"
+            android:gravity="center"
+            android:text="我是标题栏"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d_10dp"
+        android:text="君不见，黄河之水天上来，奔流到海不复回。"
+        android:textColor="@color/black"
+        android:textSize="@dimen/d_15sp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d_10dp"
+        android:text="君不见，高堂明镜悲白发，朝如青丝暮成雪。"
+        android:textColor="@color/black"
+        android:textSize="@dimen/d_15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d_10dp"
+        android:text="人生得意须尽欢，莫使金樽空对月。"
+        android:textColor="@color/black"
+        android:textSize="@dimen/d_15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d_10dp"
+        android:text="天生我材必有用，千金散尽还复来。"
+        android:textColor="@color/black"
+        android:textSize="@dimen/d_15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d_10dp"
+        android:text="烹羊宰牛且为乐，会须一饮三百杯。"
+        android:textColor="@color/black"
+        android:textSize="@dimen/d_15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d_10dp"
+        android:text="岑夫子，丹丘生，将进酒，杯莫停。"
+        android:textColor="@color/black"
+        android:textSize="@dimen/d_15sp" />
+
+    <Button
+        android:id="@+id/btn_001"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d_20dp"
+        android:text="开启沉浸式" />
+
+    <Button
+        android:id="@+id/btn_002"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="取消沉浸式" />
+
+    <Button
+        android:id="@+id/btn_003"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自适应状态栏高度" />
+
+
+</LinearLayout>
