@@ -16,6 +16,7 @@ import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.lai.*
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostImmersiveStatusActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity
+import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.viewmodel.Demo4ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -165,6 +166,10 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         //状态栏沉浸式处理 -2
         fun hostInvasion() {
             HostImmersiveStatusActivity.startInstance()
+        }
+        //状态栏沉浸式处理 -3
+        fun hostscroll(){
+            HostScrollStatusActivity.startInstance()
         }
 
         fun navIntercept() {

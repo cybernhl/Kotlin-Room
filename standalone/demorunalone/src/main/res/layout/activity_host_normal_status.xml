@@ -73,13 +73,18 @@
         <Button
             android:id="@+id/btn_bg_color"
             android:layout_marginTop="@dimen/d_20dp"
-            android:text="切换状态栏背景颜色"
+            android:text="切换状态栏背景颜色-红色"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_bg_color2"
+            android:text="切换状态栏背景颜色-白色"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btn_bg_img"
-            android:layout_marginTop="@dimen/d_20dp"
             android:text="切换状态栏背景图片"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

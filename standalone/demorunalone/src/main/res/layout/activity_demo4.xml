@@ -97,6 +97,12 @@
                     android:text="状态栏Host方案-沉浸式"
                     binding:clicks="@{click.hostInvasion}" />
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:text="状态栏Host方案-滚动"
+                    binding:clicks="@{click.hostscroll}" />
 
             </LinearLayout>
 

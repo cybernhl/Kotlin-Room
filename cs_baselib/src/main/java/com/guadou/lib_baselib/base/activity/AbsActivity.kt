@@ -5,10 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.guadou.lib_baselib.receiver.ConnectivityReceiver
 import com.guadou.lib_baselib.utils.ActivityManage
+import com.guadou.lib_baselib.utils.StatusBarUtils
 
 /**
  * 最底层的Activity,不带MVP和MVVM,一般不用这个
@@ -30,43 +32,50 @@ abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.Connect
      */
     open protected fun getDataFromIntent(intent: Intent) {}
 
-//    /**
-//     * 设置顶部状态栏的颜色（默认为白色背景-黑色文字）
-//     */
-//    protected fun setStatusBarColor(): Int {
-//        //如果状态栏文字能变黑那么背景设置为白色，否则返回背景灰色文本默认为白色
-//        return if (StatusBarUtils.setStatusBarBlackText(this)) {
-//            Color.WHITE
-//        } else {
-//            Color.parseColor("#B0B0B0")
-//        }
-//    }
+    /**
+     * 设置顶部状态栏的颜色（默认为白色背景-黑色文字）
+     */
+    protected fun setStatusBarColor(): Int {
+        //如果状态栏文字能变黑那么背景设置为白色，否则返回背景灰色文本默认为白色
+        return if (StatusBarUtils.setStatusBarBlackText(this)) {
+            Color.WHITE
+        } else {
+            Color.parseColor("#B0B0B0")
+        }
+    }
 
-//    /**
-//     * 动态的设置状态栏颜色
-//     * 当颜色为白色的时候显示白底黑字
-//     * 其他颜色为其他颜色底白色字
-//     * 一般由子类重写
-//     */
-//    fun setStatusBarColor(color: Int) {
-//
-//        if (color == Color.WHITE) {
-//            //变黑色文字成功
-//            if (StatusBarUtils.setStatusBarBlackText(this)) {
-//                StatusBarUtils.setColor(this, Color.WHITE)
-//            } else {
-//                StatusBarUtils.setColor(this, Color.parseColor("#B0B0B0"))
-//            }
-//
-//        } else {
-//
-//            //变为白色文字成功
-//            StatusBarUtils.setStatusBarWhiteText(this)
-//            StatusBarUtils.setColor(this, color)
-//
-//        }
-//    }
+    /**
+     * 动态的设置状态栏颜色
+     * 当颜色为白色的时候显示白底黑字
+     * 其他颜色为其他颜色底白色字
+     * 一般由子类重写
+     */
+    fun setStatusBarColor(color: Int) {
 
+        if (color == Color.WHITE) {
+            //变黑色文字成功
+            if (StatusBarUtils.setStatusBarBlackText(this)) {
+                StatusBarUtils.setColor(this, Color.WHITE)
+            } else {
+                StatusBarUtils.setColor(this, Color.parseColor("#B0B0B0"))
+            }
+
+        } else {
+
+            //变为白色文字成功
+            StatusBarUtils.setStatusBarWhiteText(this)
+            StatusBarUtils.setColor(this, color)
+
+        }
+    }
+
+    fun setStatusBarBlackText(){
+        StatusBarUtils.setStatusBarBlackText(this)
+    }
+
+    fun setStatusBarWhiteText(){
+        StatusBarUtils.setStatusBarWhiteText(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +84,7 @@ abstract class AbsActivity() : AppCompatActivity(), ConnectivityReceiver.Connect
         mContext = this.applicationContext
 
         //设置当前页面的顶部状态栏背景.
-//        StatusBarUtils.setColor(this, setStatusBarColor())
+        StatusBarUtils.setColor(this, setStatusBarColor())
 
         //获取intent传递的数据
         if (intent != null) {

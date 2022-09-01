@@ -90,7 +90,18 @@ public class StatusBarHostLayout extends LinearLayout {
      * 设置自定义状态栏布局的背景颜色
      */
     public StatusBarHostLayout setStatusBarBackground(int color) {
-        mStatusView.setBackgroundColor(color);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mStatusView.setBackgroundColor(color);
+        } else {
+            //6.0以下不能白色状态栏
+            YYLogUtils.w("当前的状态颜色1：" + color);
+            if (color == Color.WHITE) {
+                color = Color.parseColor("#B0B0B0");
+            }
+
+            mStatusView.setBackgroundColor(color);
+        }
+
         return this;
     }
 
@@ -98,6 +109,7 @@ public class StatusBarHostLayout extends LinearLayout {
      * 设置自定义状态栏布局的背景图片
      */
     public StatusBarHostLayout setStatusBarBackground(Drawable drawable) {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             mStatusView.setBackground(drawable);
         } else {

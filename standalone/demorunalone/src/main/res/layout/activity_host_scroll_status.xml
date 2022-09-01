@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:viewBindingIgnore="true">
+
+
+    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        android:id="@+id/easy_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:Easy_title="Host方案滚动效果" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/my_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/iv_top_img"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/chengxiao" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="君不见，黄河之水天上来，奔流到海不复回。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="君不见，高堂明镜悲白发，朝如青丝暮成雪。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="人生得意须尽欢，莫使金樽空对月。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="天生我材必有用，千金散尽还复来。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="烹羊宰牛且为乐，会须一饮三百杯。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="岑夫子，丹丘生，将进酒，杯莫停。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="与君歌一曲，请君为我倾耳听。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="钟鼓馔玉不足贵，但愿长醉不复醒。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="古来圣贤皆寂寞，惟有饮者留其名。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="陈王昔时宴平乐，斗酒十千恣欢谑。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="主人何为言少钱，径须沽取对君酌。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="君不见，黄河之水天上来，奔流到海不复回。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="君不见，高堂明镜悲白发，朝如青丝暮成雪。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="人生得意须尽欢，莫使金樽空对月。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="天生我材必有用，千金散尽还复来。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="烹羊宰牛且为乐，会须一饮三百杯。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="岑夫子，丹丘生，将进酒，杯莫停。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="与君歌一曲，请君为我倾耳听。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="钟鼓馔玉不足贵，但愿长醉不复醒。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="古来圣贤皆寂寞，惟有饮者留其名。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="陈王昔时宴平乐，斗酒十千恣欢谑。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="主人何为言少钱，径须沽取对君酌。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

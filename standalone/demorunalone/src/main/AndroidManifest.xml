@@ -95,6 +95,7 @@
         <activity android:name=".demo.demo8_recyclerview.rv8.CustomRV1Activity"/>
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity"/>
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostImmersiveStatusActivity"/>
+        <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity"/>
         <activity
             android:name=".demo.demo11_fragment_navigation.Demo11Activity"
             android:launchMode="singleTask">

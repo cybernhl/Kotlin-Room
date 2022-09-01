@@ -6,6 +6,7 @@ import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
+import com.guadou.lib_baselib.ext.color
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHost
@@ -30,12 +31,17 @@ class HostNormalStatusActivity : BaseVMActivity<EmptyViewModel>() {
 
     override fun init() {
         val hostLayout = StatusBarHost.inject(this)
-            .setStatusBarBackground(Color.WHITE)
+            .setStatusBarBackground(color(R.color.white))
             .setStatusBarBlackText()
 
         findViewById<View>(R.id.btn_bg_color).click {
 
             hostLayout.setStatusBarBackground(Color.RED)
+        }
+
+        findViewById<View>(R.id.btn_bg_color2).click {
+
+            hostLayout.setStatusBarBackground(Color.WHITE)
         }
 
         findViewById<View>(R.id.btn_bg_img).click {
