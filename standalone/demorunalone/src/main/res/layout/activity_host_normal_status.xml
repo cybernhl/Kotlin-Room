@@ -1,100 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:viewBindingIgnore="true">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:Easy_title="Host方案默认效果" />
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity.ClickProxy" />
 
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
-
-        <TextView
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/d_10dp"
-            android:text="君不见，黄河之水天上来，奔流到海不复回。"
-            android:textColor="@color/black"
-            android:textSize="@dimen/d_15sp" />
+            app:Easy_title="Host方案默认效果" />
 
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/d_10dp"
-            android:text="君不见，高堂明镜悲白发，朝如青丝暮成雪。"
-            android:textColor="@color/black"
-            android:textSize="@dimen/d_15sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/d_10dp"
-            android:text="人生得意须尽欢，莫使金樽空对月。"
-            android:textColor="@color/black"
-            android:textSize="@dimen/d_15sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/d_10dp"
-            android:text="天生我材必有用，千金散尽还复来。"
-            android:textColor="@color/black"
-            android:textSize="@dimen/d_15sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="君不见，黄河之水天上来，奔流到海不复回。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/d_10dp"
-            android:text="烹羊宰牛且为乐，会须一饮三百杯。"
-            android:textColor="@color/black"
-            android:textSize="@dimen/d_15sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/d_10dp"
-            android:text="岑夫子，丹丘生，将进酒，杯莫停。"
-            android:textColor="@color/black"
-            android:textSize="@dimen/d_15sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="君不见，高堂明镜悲白发，朝如青丝暮成雪。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
 
-        <Button
-            android:id="@+id/btn_bg_color"
-            android:layout_marginTop="@dimen/d_20dp"
-            android:text="切换状态栏背景颜色-红色"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="人生得意须尽欢，莫使金樽空对月。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
 
-        <Button
-            android:id="@+id/btn_bg_color2"
-            android:text="切换状态栏背景颜色-白色"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="天生我材必有用，千金散尽还复来。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
 
-        <Button
-            android:id="@+id/btn_bg_img"
-            android:text="切换状态栏背景图片"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="烹羊宰牛且为乐，会须一饮三百杯。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
 
-        <Button
-            android:id="@+id/btn_text_color"
-            android:text="切换状态栏文本颜色"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/d_10dp"
+                android:text="岑夫子，丹丘生，将进酒，杯莫停。"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_15sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d_20dp"
+                android:text="切换状态栏背景颜色-红色"
+                binding:clicks="@{click.changeBGRed}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="切换状态栏背景颜色-白色"
+                binding:clicks="@{click.changeBGWhite}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="切换状态栏背景图片"
+                binding:clicks="@{click.changeBGImage}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="切换状态栏文本颜色"
+                binding:clicks="@{click.changeTextColor}" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</layout>

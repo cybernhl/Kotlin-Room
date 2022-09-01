@@ -1,20 +1,24 @@
 package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars
 
 import android.graphics.Color
-import android.view.View
+import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
-import com.guadou.lib_baselib.base.activity.BaseVMActivity
+import com.guadou.kt_demo.databinding.ActivityHostNormalStatusBinding
+import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
-import com.guadou.lib_baselib.ext.click
+import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.color
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHost
+import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostLayout
 
 /**
  * 使用宿主的方式管理状态栏
  */
-class HostNormalStatusActivity : BaseVMActivity<EmptyViewModel>() {
+class HostNormalStatusActivity : BaseVDBActivity<EmptyViewModel, ActivityHostNormalStatusBinding>() {
+
+    lateinit var hostLayout: StatusBarHostLayout
 
     companion object {
         fun startInstance() {
@@ -22,38 +26,44 @@ class HostNormalStatusActivity : BaseVMActivity<EmptyViewModel>() {
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_host_normal_status
-
+    override fun getDataBindingConfig(): DataBindingConfig {
+        return DataBindingConfig(R.layout.activity_host_normal_status)
+            .addBindingParams(BR.click, ClickProxy())
+    }
 
     override fun startObserve() {
 
     }
 
     override fun init() {
-        val hostLayout = StatusBarHost.inject(this)
+        hostLayout = StatusBarHost.inject(this)
             .setStatusBarBackground(color(R.color.white))
             .setStatusBarBlackText()
+    }
 
-        findViewById<View>(R.id.btn_bg_color).click {
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
 
+
+        fun changeBGRed() {
             hostLayout.setStatusBarBackground(Color.RED)
         }
 
-        findViewById<View>(R.id.btn_bg_color2).click {
-
+        fun changeBGWhite() {
             hostLayout.setStatusBarBackground(Color.WHITE)
         }
 
-        findViewById<View>(R.id.btn_bg_img).click {
-
+        fun changeBGImage() {
             hostLayout.setStatusBarBackground(getDrawable(R.drawable.statusbar_image_1))
         }
 
-        findViewById<View>(R.id.btn_text_color).click {
-
+        fun changeTextColor(){
             hostLayout.setStatusBarWhiteText()
         }
 
     }
+
 
 }
