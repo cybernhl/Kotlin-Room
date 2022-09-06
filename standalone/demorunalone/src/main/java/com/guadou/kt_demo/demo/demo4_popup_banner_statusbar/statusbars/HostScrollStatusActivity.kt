@@ -1,6 +1,8 @@
 package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars
 
+import android.net.Uri
 import android.widget.ImageView
+import androidx.core.content.FileProvider
 import androidx.core.widget.NestedScrollView
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
@@ -46,7 +48,8 @@ class HostScrollStatusActivity : BaseVMActivity<EmptyViewModel>() {
         //默认的状态处理
         hostLayout = StatusBarHost.inject(this)
             .setStatusBarBackground(startColor)
-            .setStatusBarWhiteText()
+            .setStatusBarBlackText()
+
 
 
         //监听滚动

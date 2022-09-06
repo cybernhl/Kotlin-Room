@@ -9,4 +9,5 @@ include ':app',
 
         ':cpt_main',
 
-        ':standalone:demorunalone'
+        ':standalone:demorunalone',
+        ':standalone:receiverrunalone'

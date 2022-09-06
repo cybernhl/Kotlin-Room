@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ReceiveImageActivity">
+
+    <TextView
+        android:id="@+id/btn_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d_20dp"
+        android:text="我想主动获取图片"
+        android:background="@color/gray"
+        android:textColor="@color/black"
+        android:textSize="@dimen/d_16sp" />
+
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_marginTop="@dimen/d_15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

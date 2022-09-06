@@ -92,10 +92,10 @@
         <activity android:name=".demo.demo9_ktfollow.DemoCountDwonActivity" />
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.Demo10Activity" />
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.DemoSpanActivity" />
-        <activity android:name=".demo.demo8_recyclerview.rv8.CustomRV1Activity"/>
-        <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity"/>
-        <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostImmersiveStatusActivity"/>
-        <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity"/>
+        <activity android:name=".demo.demo8_recyclerview.rv8.CustomRV1Activity" />
+        <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity" />
+        <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostImmersiveStatusActivity" />
+        <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity" />
         <activity
             android:name=".demo.demo11_fragment_navigation.Demo11Activity"
             android:launchMode="singleTask">
@@ -129,6 +129,24 @@
 
         <receiver android:name=".demo.demo9_ktfollow.AlarmReceiver" />
         <service android:name=".demo.demo16_record.LocationService" />
+
+        <provider
+            android:name=".demo.demo15_aidl.provider.MyFileProvider"
+            android:authorities="com.guadou.kt_demo.fileprovider"
+            android:exported="true"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path">
+
+            </meta-data>
+        </provider>
+
+        <provider
+            android:name=".demo.demo15_aidl.provider.SharedFileProvider"
+            android:authorities="com.guadou.kt_demo.shared.fileprovider"
+            android:enabled="true"
+            android:exported="true" />
 
     </application>
 

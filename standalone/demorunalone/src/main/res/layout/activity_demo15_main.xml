@@ -45,6 +45,13 @@
             android:textAllCaps="false"
             binding:clicks="@{click.service3}" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试 FileProvider01"
+            android:textAllCaps="false"
+            binding:clicks="@{click.fileProvider1}" />
+
     </LinearLayout>
 
 </layout>
