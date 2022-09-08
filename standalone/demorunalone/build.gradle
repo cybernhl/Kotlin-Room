@@ -88,5 +88,6 @@ dependencies {
 
     api project(':cs_cptServices')
     api project(':cpt_main')
+    api 'com.github.minminaya:GenaralRoundLayout:1.0.0'
 
 }

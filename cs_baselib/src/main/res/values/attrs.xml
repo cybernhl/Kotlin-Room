@@ -110,13 +110,13 @@
 
     <!--  Shimmer闪光  -->
     <declare-styleable name="ShimmerLayout">
-        <attr name="shimmer_color" format="color|reference"/>
-        <attr name="shimmer_animation_duration" format="integer|reference"/>
-        <attr name="shimmer_auto_start" format="boolean|reference"/>
-        <attr name="shimmer_angle" format="integer|reference"/>
-        <attr name="shimmer_mask_width" format="float|reference"/>
-        <attr name="shimmer_gradient_center_color_width" format="float|reference"/>
-        <attr name="shimmer_reverse_animation" format="boolean|reference"/>
+        <attr name="shimmer_color" format="color|reference" />
+        <attr name="shimmer_animation_duration" format="integer|reference" />
+        <attr name="shimmer_auto_start" format="boolean|reference" />
+        <attr name="shimmer_angle" format="integer|reference" />
+        <attr name="shimmer_mask_width" format="float|reference" />
+        <attr name="shimmer_gradient_center_color_width" format="float|reference" />
+        <attr name="shimmer_reverse_animation" format="boolean|reference" />
     </declare-styleable>
 
     <!--  原形的Loading-Anim  -->
@@ -132,7 +132,7 @@
         </attr>
     </declare-styleable>
 
-
+    <!--  跳动动画的自定义View  -->
     <declare-styleable name="JumpLoadingView">
         <attr name="delay" format="integer|reference" />
     </declare-styleable>
@@ -140,6 +140,26 @@
     <!--  异步加载布局  -->
     <declare-styleable name="AsyncViewStub">
         <attr name="layout" format="reference" />
+    </declare-styleable>
+
+    <!-- 自定义圆角布局，可以自由设置四个角的圆角   -->
+    <declare-styleable name="CustomRadiusImageView">
+        <attr name="radius" format="dimension" />
+        <attr name="left_top_radius" format="dimension" />
+        <attr name="right_top_radius" format="dimension" />
+        <attr name="right_bottom_radius" format="dimension" />
+        <attr name="left_bottom_radius" format="dimension" />
+    </declare-styleable>
+
+    <!-- 自定义圆角布局 ,可以设置圆角，圆形  -->
+    <declare-styleable name="RoundCircleImageView">
+        <attr name="isCircle" format="boolean" />
+        <attr name="round_background_color" format="color" />
+        <attr name="round_radius" format="dimension" />
+        <attr name="topLeft" format="dimension" />
+        <attr name="topRight" format="dimension" />
+        <attr name="bottomRight" format="dimension" />
+        <attr name="bottomLeft" format="dimension" />
     </declare-styleable>
 
 </resources>

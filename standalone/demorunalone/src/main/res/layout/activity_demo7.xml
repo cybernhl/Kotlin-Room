@@ -10,6 +10,10 @@
             name="viewModel"
             type="com.guadou.kt_demo.demo.demo7_imageload_glide.Demo7ViewModel" />
 
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo7_imageload_glide.Demo7Activity.ClickProxy" />
+
     </data>
 
     <LinearLayout
@@ -126,6 +130,13 @@
                 <include
                     layout="@layout/include_demo7_img"
                     binding:viewModel="@{viewModel}" />
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设置圆角图片"
+                    binding:clicks="@{click.setRoundImage}" />
 
             </LinearLayout>
 

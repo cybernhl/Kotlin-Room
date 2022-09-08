@@ -26,6 +26,7 @@ class Demo7Activity : BaseVDBActivity<Demo7ViewModel, ActivityDemo7Binding>() {
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.activity_demo7, BR.viewModel, mViewModel)
+            .addBindingParams(BR.click, ClickProxy())
     }
 
     override fun startObserve() {
@@ -38,4 +39,13 @@ class Demo7Activity : BaseVDBActivity<Demo7ViewModel, ActivityDemo7Binding>() {
 
     }
 
+    /**
+     * DataBinding事件处理
+     */
+    inner class ClickProxy {
+
+        fun setRoundImage() {
+            RoundImageActivity.startInstance()
+        }
+    }
 }

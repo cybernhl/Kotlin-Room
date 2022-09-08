@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -39,6 +40,10 @@ fun ImageView.extLoad(
     isCircle: Boolean = false,
     isCenterCrop: Boolean = false,
     roundRadius: Int = 0,
+    topLeftRadius: Float = 0f,
+    topRightRadius: Float = 0f,
+    bottomLeftRadius: Float = 0f,
+    bottomRightRadius: Float = 0f,
     placeholder: Drawable? = null,
     isCrossFade: Boolean = false,
     isForceOriginalSize: Boolean = false
@@ -56,12 +61,22 @@ fun ImageView.extLoad(
     options.error(error).apply {
         if (isCenterCrop && scaleType != ImageView.ScaleType.CENTER_CROP)
             scaleType = ImageView.ScaleType.CENTER_CROP
+
         if (isCircle) {
             if (scaleType == ImageView.ScaleType.CENTER_CROP) {
                 transforms(CenterCrop(), CircleCrop())
             } else {
                 transform(CircleCrop())
             }
+
+        } else if (topLeftRadius > 0 || topRightRadius > 0 || bottomLeftRadius > 0 || bottomRightRadius > 0) {
+
+            if (scaleType == ImageView.ScaleType.CENTER_CROP) {
+                transforms(CenterCrop(), GranularRoundedCorners(topLeftRadius, topRightRadius, bottomRightRadius, bottomLeftRadius))
+            } else {
+                transform(GranularRoundedCorners(topLeftRadius, topRightRadius, bottomRightRadius, bottomLeftRadius))
+            }
+
         } else if (roundRadius != 0) {
             if (scaleType == ImageView.ScaleType.CENTER_CROP) {
                 transforms(CenterCrop(), RoundedCorners(roundRadius))
@@ -69,6 +84,7 @@ fun ImageView.extLoad(
                 transform(RoundedCorners(roundRadius))
             }
         }
+
         if (isForceOriginalSize) {
             override(Target.SIZE_ORIGINAL)
         }
