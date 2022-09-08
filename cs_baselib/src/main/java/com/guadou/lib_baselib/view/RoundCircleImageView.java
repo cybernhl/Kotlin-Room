@@ -22,6 +22,7 @@ import android.util.AttributeSet;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.guadou.basiclib.R;
@@ -46,12 +47,16 @@ public class RoundCircleImageView extends AppCompatImageView {
 
     private final Paint mBitmapPaint = new Paint();
     private final Paint mRoundBackgroundPaint = new Paint();
-    private int mRoundBackgroundColor = Color.TRANSPARENT;
+
+    private Drawable mRoundBackgroundDrawable;
 
     private Bitmap mBitmap;
     private BitmapShader mBitmapShader;
     private int mBitmapWidth;
     private int mBitmapHeight;
+
+    private Bitmap mBackgroundBitmap;
+    private BitmapShader mBackgroundBitmapShader;
 
     private ColorFilter mColorFilter;
     private float mDrawableRadius;
@@ -84,7 +89,14 @@ public class RoundCircleImageView extends AppCompatImageView {
         mBottomRight = array.getDimensionPixelOffset(R.styleable.RoundCircleImageView_bottomRight, 0);
 
         if (array.hasValue(R.styleable.RoundCircleImageView_round_background_color)) {
-            mRoundBackgroundColor = array.getColor(R.styleable.RoundCircleImageView_round_background_color, Color.TRANSPARENT);
+            int roundBackgroundColor = array.getColor(R.styleable.RoundCircleImageView_round_background_color, Color.TRANSPARENT);
+            mRoundBackgroundDrawable = new ColorDrawable(roundBackgroundColor);
+            mBackgroundBitmap = getBitmapFromDrawable(mRoundBackgroundDrawable);
+        }
+
+        if (array.hasValue(R.styleable.RoundCircleImageView_round_background_drawable)) {
+            mRoundBackgroundDrawable = array.getDrawable(R.styleable.RoundCircleImageView_round_background_drawable);
+            mBackgroundBitmap = getBitmapFromDrawable(mRoundBackgroundDrawable);
         }
 
         isCircleType = array.getBoolean(R.styleable.RoundCircleImageView_isCircle, false);
@@ -127,23 +139,25 @@ public class RoundCircleImageView extends AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        if (mBitmap == null) {
+        if (mBitmap == null && mBackgroundBitmap == null) {
             return;
         }
 
         if (isCircleType) {
 
-            if (mRoundBackgroundColor != Color.TRANSPARENT) {
+            if (mRoundBackgroundDrawable != null && mBackgroundBitmap != null) {
                 canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mRoundBackgroundPaint);
             }
-            canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mBitmapPaint);
+
+            if (mBitmap != null) {
+                canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mBitmapPaint);
+            }
 
         } else {
 
-
             if (mTopLeft > 0 || mTopRight > 0 || mBottomLeft > 0 || mBottomRight > 0) {
                 //使用单独的圆角
-                if (mRoundBackgroundColor != Color.TRANSPARENT) {
+                if (mRoundBackgroundDrawable != null && mBackgroundBitmap != null) {
                     Path path = new Path();
                     path.addRoundRect(
                             mDrawableRect,
@@ -152,26 +166,28 @@ public class RoundCircleImageView extends AppCompatImageView {
                     canvas.drawPath(path, mRoundBackgroundPaint);
                 }
 
-                Path path = new Path();
-                path.addRoundRect(
-                        mDrawableRect,
-                        new float[]{mTopLeft, mTopLeft, mTopRight, mTopRight, mBottomRight, mBottomRight, mBottomLeft, mBottomLeft},
-                        Path.Direction.CW);
-                canvas.drawPath(path, mBitmapPaint);
+                if (mBitmap != null) {
+                    Path path = new Path();
+                    path.addRoundRect(
+                            mDrawableRect,
+                            new float[]{mTopLeft, mTopLeft, mTopRight, mTopRight, mBottomRight, mBottomRight, mBottomLeft, mBottomLeft},
+                            Path.Direction.CW);
+                    canvas.drawPath(path, mBitmapPaint);
+                }
+
 
             } else {
                 //使用统一的圆角
-                if (mRoundBackgroundColor != Color.TRANSPARENT) {
+                if (mRoundBackgroundDrawable != null && mBackgroundBitmap != null) {
                     canvas.drawRoundRect(mDrawableRect, mRoundRadius, mRoundRadius, mRoundBackgroundPaint);
                 }
 
-                canvas.drawRoundRect(mDrawableRect, mRoundRadius, mRoundRadius, mBitmapPaint);
-
+                if (mBitmap != null) {
+                    canvas.drawRoundRect(mDrawableRect, mRoundRadius, mRoundRadius, mBitmapPaint);
+                }
             }
 
-
         }
-
 
     }
 
@@ -198,22 +214,44 @@ public class RoundCircleImageView extends AppCompatImageView {
         setRoundBackgroundColor(color);
     }
 
-    public int getRoundBackgroundColor() {
-        return mRoundBackgroundColor;
+    @Override
+    public void setBackground(Drawable background) {
+        setRoundBackgroundDrawable(background);
+    }
+
+    @Override
+    public void setBackgroundDrawable(@Nullable Drawable background) {
+        setRoundBackgroundDrawable(background);
+    }
+
+    @Override
+    public void setBackgroundResource(int resId) {
+        @SuppressLint("UseCompatLoadingForDrawables")
+        Drawable drawable = getContext().getResources().getDrawable(resId);
+        setRoundBackgroundDrawable(drawable);
+    }
+
+    @Override
+    public Drawable getBackground() {
+        return getRoundBackgroundDrawable();
     }
 
     public void setRoundBackgroundColor(@ColorInt int roundBackgroundColor) {
-        if (roundBackgroundColor == mRoundBackgroundColor) {
-            return;
-        }
-
-        mRoundBackgroundColor = roundBackgroundColor;
-        mRoundBackgroundPaint.setColor(roundBackgroundColor);
-        invalidate();
+        ColorDrawable drawable = new ColorDrawable(roundBackgroundColor);
+        setRoundBackgroundDrawable(drawable);
     }
 
     public void setRoundBackgroundColorResource(@ColorRes int circleBackgroundRes) {
         setRoundBackgroundColor(getContext().getResources().getColor(circleBackgroundRes));
+    }
+
+    public Drawable getRoundBackgroundDrawable() {
+        return mRoundBackgroundDrawable;
+    }
+
+    public void setRoundBackgroundDrawable(Drawable drawable) {
+        mRoundBackgroundDrawable = drawable;
+        initializeBitmap();
     }
 
     @Override
@@ -294,6 +332,10 @@ public class RoundCircleImageView extends AppCompatImageView {
 
         mBitmap = getBitmapFromDrawable(getDrawable());
 
+        if (mRoundBackgroundDrawable != null) {
+            mBackgroundBitmap = getBitmapFromDrawable(mRoundBackgroundDrawable);
+        }
+
         setup();
     }
 
@@ -307,28 +349,33 @@ public class RoundCircleImageView extends AppCompatImageView {
             return;
         }
 
-        if (mBitmap == null) {
+        if (mBitmap == null && mBackgroundBitmap == null) {
             invalidate();
             return;
         }
 
-        mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        if (mBitmap != null) {
+            mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            mBitmapPaint.setAntiAlias(true);
+            mBitmapPaint.setShader(mBitmapShader);
+        }
 
-        mBitmapPaint.setAntiAlias(true);
-        mBitmapPaint.setShader(mBitmapShader);
+        if (mRoundBackgroundDrawable != null && mBackgroundBitmap != null) {
+            mBackgroundBitmapShader = new BitmapShader(mBackgroundBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            mRoundBackgroundPaint.setAntiAlias(true);
+            mRoundBackgroundPaint.setShader(mBackgroundBitmapShader);
+        }
 
-        mRoundBackgroundPaint.setStyle(Paint.Style.FILL);
-        mRoundBackgroundPaint.setAntiAlias(true);
-        mRoundBackgroundPaint.setColor(mRoundBackgroundColor);
-
-        mBitmapHeight = mBitmap.getHeight();
-        mBitmapWidth = mBitmap.getWidth();
+        Bitmap bitmap = mBitmap != null ? mBitmap : mBackgroundBitmap;
+        mBitmapHeight = bitmap.getHeight();
+        mBitmapWidth = bitmap.getWidth();
 
         mDrawableRect.set(calculateBounds());
         mDrawableRadius = Math.min(mDrawableRect.height() / 2.0f, mDrawableRect.width() / 2.0f);
 
         applyColorFilter();
         updateShaderMatrix();
+        //重绘
         invalidate();
     }
 
@@ -362,7 +409,12 @@ public class RoundCircleImageView extends AppCompatImageView {
         mShaderMatrix.setScale(scale, scale);
         mShaderMatrix.postTranslate((int) (dx + 0.5f) + mDrawableRect.left, (int) (dy + 0.5f) + mDrawableRect.top);
 
-        mBitmapShader.setLocalMatrix(mShaderMatrix);
+        if (mBitmapShader != null) {
+            mBitmapShader.setLocalMatrix(mShaderMatrix);
+        }
+        if (mBackgroundBitmapShader != null) {
+            mBackgroundBitmapShader.setLocalMatrix(mShaderMatrix);
+        }
     }
 
 }

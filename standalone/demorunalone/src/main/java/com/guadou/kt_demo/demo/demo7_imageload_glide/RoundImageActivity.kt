@@ -6,10 +6,7 @@ import com.guadou.lib_baselib.view.RoundCircleImageView
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.engine.extLoad
-import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.dp2px
-import com.guadou.lib_baselib.ext.drawable
-import com.guadou.lib_baselib.ext.gotoActivity
+import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.view.CircleImageView
 
 
@@ -45,12 +42,11 @@ class RoundImageActivity : BaseVMActivity<EmptyViewModel>() {
         findViewById<ImageView>(R.id.iv_round_shared).background = drawable(R.drawable.shape_blue)  //丑，需要优化
         findViewById<ImageView>(R.id.iv_round_shared).extLoad(imgUrl, R.drawable.test_img_placeholder)
 
-        findViewById<RoundCircleImageView>(R.id.iv_custom_round).setRoundBackgroundColorResource(R.color.picture_color_blue)
-        findViewById<RoundCircleImageView>(R.id.iv_custom_round).extLoad(imgUrl, R.drawable.test_img_placeholder)
+//        findViewById<RoundCircleImageView>(R.id.iv_custom_round).background = drawable(R.drawable.shape_blue)
+//        findViewById<RoundCircleImageView>(R.id.iv_custom_round).extLoad(imgUrl, R.drawable.test_img_placeholder)
 
-        findViewById<RoundCircleImageView>(R.id.iv_custom_round2).setRoundBackgroundColorResource(R.color.picture_color_blue)
-        findViewById<RoundCircleImageView>(R.id.iv_custom_round2).extLoad("123", R.drawable.test_img_placeholder)
-
+//        findViewById<RoundCircleImageView>(R.id.iv_custom_round2).background = drawable(R.drawable.chengxiao)
+//        findViewById<RoundCircleImageView>(R.id.iv_custom_round2).extLoad(imgUrl, R.drawable.test_img_placeholder)
 
         findViewById<ImageView>(R.id.iv_radius).background = drawable(R.drawable.shape_blue)
         findViewById<ImageView>(R.id.iv_radius).extLoad(imgUrl, R.drawable.test_img_placeholder)

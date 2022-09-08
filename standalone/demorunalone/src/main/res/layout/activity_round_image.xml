@@ -60,23 +60,33 @@
                 android:layout_height="@dimen/d_150dp"
                 android:layout_marginTop="@dimen/d_10dp"
                 app:isCircle="false"
+                app:round_background_drawable="@drawable/shape_blue"
                 app:round_background_color="@color/gray"
-                app:topRight="@dimen/d_20dp"
-                app:bottomLeft="@dimen/d_20dp"
-                app:bottomRight="@dimen/d_40dp"
-                app:topLeft="@dimen/d_40dp" />
+                app:round_radius="@dimen/d_20dp" />
 
             <com.guadou.lib_baselib.view.RoundCircleImageView
                 android:id="@+id/iv_custom_round2"
                 android:layout_width="@dimen/d_150dp"
                 android:layout_height="@dimen/d_150dp"
                 android:layout_marginTop="@dimen/d_10dp"
-                app:isCircle="false"
-                app:round_background_color="@color/gray"
-                app:topRight="@dimen/d_20dp"
                 app:bottomLeft="@dimen/d_20dp"
                 app:bottomRight="@dimen/d_40dp"
-                app:topLeft="@dimen/d_40dp" />
+                app:isCircle="false"
+                app:round_background_drawable="@drawable/chengxiao"
+                app:topLeft="@dimen/d_40dp"
+                app:topRight="@dimen/d_20dp" />
+
+            <com.guadou.lib_baselib.view.RoundCircleImageView
+                android:id="@+id/iv_custom_round3"
+                android:layout_width="@dimen/d_150dp"
+                android:layout_height="@dimen/d_150dp"
+                android:layout_marginTop="@dimen/d_10dp"
+                app:bottomLeft="@dimen/d_20dp"
+                app:bottomRight="@dimen/d_40dp"
+                app:isCircle="false"
+                app:round_background_color="@color/gray"
+                app:topLeft="@dimen/d_40dp"
+                app:topRight="@dimen/d_20dp" />
 
             <com.guadou.lib_baselib.view.CustomRadiusImageView
                 android:id="@+id/iv_radius"

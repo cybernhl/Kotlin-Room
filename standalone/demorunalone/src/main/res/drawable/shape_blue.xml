@@ -3,4 +3,5 @@
 
     <solid android:color="@color/picture_color_blue"/>
 
+    <size android:width="@dimen/d_100dp" android:height="100dp"/>
 </shape>
