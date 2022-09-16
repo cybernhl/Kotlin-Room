@@ -5,6 +5,7 @@ import android.graphics.Color
 import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.databinding.ActivityDemoRvNormal3Binding
 import com.guadou.kt_demo.databinding.ActivityDemoRvNormalBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
@@ -18,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * 普通的垂直的或者水平的直接用扩展的方法
  */
 @AndroidEntryPoint
-class DemoRVHeadFoodVertalActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoRvNormalBinding>() {
+class DemoRVHeadFoodVertalActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoRvNormal3Binding>() {
 
     private val mAdapter by lazy { BaseDataBindingAdapter<String>(R.layout.item_vertal_text, BR.text) }
 
@@ -33,7 +34,7 @@ class DemoRVHeadFoodVertalActivity : BaseVDBActivity<EmptyViewModel, ActivityDem
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
-        return DataBindingConfig(R.layout.activity_demo_rv_normal)
+        return DataBindingConfig(R.layout.activity_demo_rv_normal_3)
 
     }
 
@@ -43,7 +44,7 @@ class DemoRVHeadFoodVertalActivity : BaseVDBActivity<EmptyViewModel, ActivityDem
 
     override fun init() {
 
-        val datas = listOf("关羽", "刘备", "张飞", "吕布", "刘邦", "鲁班", "赵云", "韩信", "孙策")
+        val datas = listOf("关羽", "刘备", "张飞", "吕布", "刘邦", "鲁班", "赵云", "韩信", "孙策","关羽", "刘备", "张飞", "吕布", "刘邦", "鲁班", "赵云", "韩信", "孙策")
 
         //使用RecyclerView的扩展方法
 //        recyclerView.vertical()

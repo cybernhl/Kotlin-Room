@@ -22,19 +22,20 @@
             app:Easy_title="列表展示" />
 
 
-        <!--        <com.guadou.kt_demo.demo.demo7_imageload_glide.layout.RoundCircleFrameLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            app:topLeft="@dimen/d_20dp"-->
-        <!--            app:topRight="@dimen/d_20dp">-->
+<!--        <com.guadou.kt_demo.demo.demo7_imageload_glide.layout.RoundCircleFrameLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:round_radius="@dimen/d_20dp">-->
 
-        <com.guadou.kt_demo.demo.demo7_imageload_glide.layout.RoundCircleRecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:round_radius="@dimen/d_20dp" />
+            <com.guadou.kt_demo.demo.demo7_imageload_glide.layout.RoundCircleRecyclerView
+                android:id="@+id/recyclerView"
+                app:topRight="@dimen/d_20dp"
+                app:topLeft="@dimen/d_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <!--        </com.guadou.kt_demo.demo.demo7_imageload_glide.layout.RoundCircleFrameLayout>-->
+<!--        </com.guadou.kt_demo.demo.demo7_imageload_glide.layout.RoundCircleFrameLayout>-->
+
 
     </LinearLayout>
 

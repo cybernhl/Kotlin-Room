@@ -5,6 +5,8 @@ import android.content.Intent
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo8Binding
+import com.guadou.kt_demo.demo.demo7_imageload_glide.layout.policy.AbsRoundCirclePolicy
+import com.guadou.kt_demo.demo.demo7_imageload_glide.layout.policy.RoundCircleLayoutOutlinePolicy
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv1.DemoRVNormalVertalActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv2.DemoRVNormalGridActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv3.DemoRVHeadFoodVertalActivity
@@ -49,7 +51,6 @@ class Demo8Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo8Binding>() {
 
     @SuppressLint("SetTextI18n")
     override fun startObserve() {
-
     }
 
     override fun init() {

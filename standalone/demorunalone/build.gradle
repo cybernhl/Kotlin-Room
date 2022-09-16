@@ -88,6 +88,6 @@ dependencies {
 
     api project(':cs_cptServices')
     api project(':cpt_main')
-    api 'com.github.minminaya:GenaralRoundLayout:1.0.0'
-
+//    api 'com.github.minminaya:GenaralRoundLayout:1.0.0'
+//    implementation "io.github.liukai2530533:round_circle_imageview:1.0.1"
 }

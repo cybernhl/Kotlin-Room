@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.Demo1Activity" />
+        <activity android:name=".demo.demo7_imageload_glide.RoundLayoutActivity"/>
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.NormalLoadingActivity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.JumpLoadingActivity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.PlaceHolderLoadingActivity" />

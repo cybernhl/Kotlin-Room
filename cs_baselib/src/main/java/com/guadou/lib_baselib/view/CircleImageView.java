@@ -10,6 +10,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Outline;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;

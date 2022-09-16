@@ -47,5 +47,10 @@ class Demo7Activity : BaseVDBActivity<Demo7ViewModel, ActivityDemo7Binding>() {
         fun setRoundImage() {
             RoundImageActivity.startInstance()
         }
+
+        fun setRoundLayout() {
+            RoundLayoutActivity.startInstance()
+        }
+
     }
 }

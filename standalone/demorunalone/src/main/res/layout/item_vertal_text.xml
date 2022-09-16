@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:background="#fefefe"
         android:gravity="center_vertical"
-        android:padding="@dimen/d_10dp"
         tools:ignore="MissingDefaultResource">
 
 
