@@ -13,6 +13,8 @@ import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.OkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,8 +24,20 @@ class Damo14ViewModel @Inject constructor(
      val savedState: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _viewStates: MutableLiveData<Demo14ViewState> = MutableLiveData(Demo14ViewState())
+    //使用StateFlow一样可以做MVI的分发，更适合于Compose项目
+//    private val _industrys = MutableStateFlow(0)
+//    private val _schools = MutableStateFlow("")
+//    val state = combine(
+//        _industrys,
+//        _schools
+//    ) { count, input ->
+//        Demo14ViewState(
+//            industrys = _industrys,
+//            schools = _schools,
+//        )
+//    }
 
+    private val _viewStates: MutableLiveData<Demo14ViewState> = MutableLiveData(Demo14ViewState())
     //只需要暴露一个LiveData，包括页面所有状态
     val viewStates: LiveData<Demo14ViewState> = _viewStates
 

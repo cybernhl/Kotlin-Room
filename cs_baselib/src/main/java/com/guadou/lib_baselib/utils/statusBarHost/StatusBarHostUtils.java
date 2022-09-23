@@ -7,13 +7,23 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
 import android.view.WindowManager;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
+
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 /**
  * 状态栏工具类,只用于内部使用
  */
-class StatusBarHostUtils {
+public class StatusBarHostUtils {
 
     /**
      * 设置当前页面的状态栏颜色，使用宿主方案一般不用这个修改颜色，只是用于沉浸式之后修改状态栏颜色为透明
@@ -40,48 +50,42 @@ class StatusBarHostUtils {
     }
 
     /**
-     * 设置沉浸式状态
-     *
-     * @param activity
+     * 5.0以上设置沉浸式状态
      */
     public static void immersiveStatusBar(Activity activity) {
-        Window window = activity.getWindow();
+        //默认需要沉浸式
+        immersiveStatusBar(activity, true);
+    }
 
+    /**
+     * 5.0以上设置沉浸式状态
+     */
+    public static void immersiveStatusBar(Activity activity, boolean needImmersive) {
+        //false 表示沉浸，true表示不沉浸 ，这里取反
+        WindowCompat.setDecorFitsSystemWindows(activity.getWindow(), !needImmersive);
+    }
+
+    /**
+     * 5.0以上-设置NavigationBar底部导航栏的沉浸式
+     */
+    public static void immersiveNavigationBar(Activity activity, boolean isDarkFont) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
+            Window window = activity.getWindow();
+            View decorView = window.getDecorView();
+            decorView.setSystemUiVisibility(decorView.getSystemUiVisibility()
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
 
-            int systemUiVisibility = window.getDecorView().getSystemUiVisibility();
-            systemUiVisibility |= View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-            systemUiVisibility |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            window.getDecorView().setSystemUiVisibility(systemUiVisibility);
+            WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(decorView);
+            assert controller != null;
 
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-            int mixtureColor = Color.TRANSPARENT;
-            ViewGroup container = (ViewGroup) window.getDecorView();
-            View translucentView = container.findViewById(android.R.id.custom);
-            if (translucentView == null) {
-                translucentView = new View(container.getContext());
-                translucentView.setId(android.R.id.custom);
-                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        getStatusBarHeight(container.getContext()));
-                container.addView(translucentView, lp);
+            if (!isDarkFont) {
+                window.setNavigationBarColor(Color.TRANSPARENT);
+                controller.setAppearanceLightNavigationBars(false);
+            } else {
+                controller.setAppearanceLightNavigationBars(true);
             }
-            if (translucentView != null) {
-                translucentView.setBackgroundColor(mixtureColor);
-            }
-
-        } else {
-            int systemUiVisibility = window.getDecorView().getSystemUiVisibility();
-            systemUiVisibility |= View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-            systemUiVisibility |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            window.getDecorView().setSystemUiVisibility(systemUiVisibility);
         }
-
     }
 
 
@@ -106,21 +110,223 @@ class StatusBarHostUtils {
         return false;
     }
 
+    // =======================  StatusBar begin ↓ =========================
 
     /**
-     * 获取状态栏高度
-     *
-     * @param context
-     * @return 高度
+     * 老的方法获取状态栏高度
      */
-    public static int getStatusBarHeight(Context context) {
+    private static int getStatusBarHeight(Context context) {
         int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height",
-                "dimen", "android");
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    /**
+     * 新方法获取状态栏高度
+     */
+    public static void getStatusBarHeight(Activity activity, HeightValueCallback callback) {
+        getStatusBarHeight(activity.getWindow().getDecorView(), callback);
+    }
+
+    /**
+     * 新方法获取状态栏高度
+     */
+    public static void getStatusBarHeight(View view, HeightValueCallback callback) {
+
+        //方案一：监听回调的方案
+//        ViewCompat.setOnApplyWindowInsetsListener(view, new OnApplyWindowInsetsListener() {
+//            @Override
+//            public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
+//
+//                Insets statusInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars());
+//
+//                int top = statusInsets.top;
+//                int bottom = statusInsets.bottom;
+//                int height = Math.abs(bottom - top);
+//
+//                if (height > 0) {
+//                    callback.onHeight(height);
+//                } else {
+//                    callback.onHeight(getStatusBarHeight(view.getContext()));
+//                }
+//                return insets;
+//            }
+//        });
+
+
+        //方案二：getRootWindowInsets的方案
+        boolean attachedToWindow = view.isAttachedToWindow();
+
+        if (attachedToWindow) {
+
+            WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(view);
+            assert windowInsets != null;
+            int top = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
+            int bottom = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars()).bottom;
+            int height = Math.abs(bottom - top);
+            if (height > 0) {
+                callback.onHeight(height);
+            } else {
+                callback.onHeight(getStatusBarHeight(view.getContext()));
+            }
+
+        } else {
+
+            view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+                @Override
+                public void onViewAttachedToWindow(View v) {
+
+                    WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(v);
+                    assert windowInsets != null;
+                    int top = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
+                    int bottom = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars()).bottom;
+                    int height = Math.abs(bottom - top);
+                    if (height > 0) {
+                        callback.onHeight(height);
+                    } else {
+                        callback.onHeight(getStatusBarHeight(view.getContext()));
+                    }
+                }
+
+                @Override
+                public void onViewDetachedFromWindow(View v) {
+                }
+            });
+
+        }
+    }
+
+    // =======================  NavigationBar begin ↓ =========================
+
+    /**
+     * 老的方法获取导航栏的高度
+     */
+    private static int getNavigationBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    /**
+     * 获取底部导航栏的高度
+     */
+    public static void getNavigationBarHeight(Activity activity, HeightValueCallback callback) {
+        getNavigationBarHeight(activity.getWindow().getDecorView(), callback);
+    }
+
+    /**
+     * 获取底部导航栏的高度
+     */
+    public static void getNavigationBarHeight(View view, HeightValueCallback callback) {
+
+        ViewCompat.setOnApplyWindowInsetsListener(view, new OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
+
+                Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+
+                int top = navInsets.top;
+                int bottom = navInsets.bottom;
+                int height = Math.abs(bottom - top);
+
+                if (height > 0) {
+                    callback.onHeight(height);
+                } else {
+                    callback.onHeight(getNavigationBarHeight(view.getContext()));
+                }
+
+                return insets;
+            }
+        });
+    }
+
+    // =======================  NavigationBar StatusBar Hide Show begin ↓ =========================
+
+    /**
+     * 显示隐藏底部导航栏（注意不是沉浸式效果）
+     */
+    public static void showHideNavigationBar(Activity activity, boolean isShow) {
+
+        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(activity.getWindow().getDecorView());
+
+        if (controller != null) {
+            if (isShow) {
+                controller.show(WindowInsetsCompat.Type.navigationBars());
+                controller.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_TOUCH);
+            } else {
+                controller.hide(WindowInsetsCompat.Type.navigationBars());
+                controller.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+            }
+        }
+    }
+
+    /**
+     * 显示隐藏顶部的状态栏（注意不是沉浸式效果）
+     */
+    public static void showHideStatusBar(Activity activity, boolean isShow) {
+
+        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(activity.getWindow().getDecorView());
+
+        if (controller != null) {
+            if (isShow) {
+                controller.show(WindowInsetsCompat.Type.statusBars());
+            } else {
+                controller.hide(WindowInsetsCompat.Type.statusBars());
+            }
+        }
+    }
+
+    /**
+     * 当前是否显示了底部导航栏
+     */
+    public static void hasNavigationBars(Activity activity, BooleanValueCallback callback) {
+
+        View decorView = activity.getWindow().getDecorView();
+        boolean attachedToWindow = decorView.isAttachedToWindow();
+
+        if (attachedToWindow) {
+
+            WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(decorView);
+
+            YYLogUtils.w("windowInsets1:" + windowInsets);
+
+            if (windowInsets != null) {
+
+                boolean hasNavigationBar = windowInsets.isVisible(WindowInsetsCompat.Type.navigationBars()) &&
+                        windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom > 0;
+
+                callback.onBoolean(hasNavigationBar);
+            }
+
+        } else {
+
+            decorView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+                @Override
+                public void onViewAttachedToWindow(View v) {
+
+                    WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(v);
+
+                    if (windowInsets != null) {
+
+                        boolean hasNavigationBar = windowInsets.isVisible(WindowInsetsCompat.Type.navigationBars()) &&
+                                windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom > 0;
+
+                        callback.onBoolean(hasNavigationBar);
+                    }
+                }
+
+                @Override
+                public void onViewDetachedFromWindow(View v) {
+                }
+            });
+        }
+
     }
 
 }

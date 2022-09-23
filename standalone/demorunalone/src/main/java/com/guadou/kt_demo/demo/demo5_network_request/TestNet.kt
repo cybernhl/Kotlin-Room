@@ -10,7 +10,7 @@ fun String.foo() {
 
 val TestNet.no: Int get() = 1  //扩展成员变量
 
-fun TestNet.setOnSuccessCallbackDsl(init: SuccessCallbackImpl.() -> Unit){
+fun TestNet.setOnSuccessCallbackDsl(init: SuccessCallbackImpl.() -> Unit) {
     val listener = SuccessCallbackImpl()
     init(listener)
     this.setOnSuccessCallback(listener)
@@ -20,6 +20,27 @@ class TestNet {
 
     fun String.foo() {
         YYLogUtils.w("扩展函数 foo2")
+    }
+
+
+    fun requestDSLCallback() {
+
+        MainScope().launch {
+
+            val result = withContext(Dispatchers.IO) {
+                delay(500)
+
+                return@withContext Random().nextInt(10)
+            }
+
+            val res = mCallback?.onSuccess("DSL测试-->成功")
+
+            YYLogUtils.w("result:$res")
+
+            mCallback?.doSth()
+
+
+        }
     }
 
     fun requestNetwork(
@@ -67,11 +88,11 @@ class TestNet {
 //                    YYLogUtils.w("res:$res")
 
 
-                   val res =  callback?.onSuccess("success")
+                    val res = mCallback?.onSuccess("success")
 
                     YYLogUtils.w("res:$res")
 
-                    callback?.doSth()
+                    mCallback?.doSth()
 
                 }
                 else -> {
@@ -102,9 +123,9 @@ class TestNet {
         fun onError()
     }
 
-    var callback: SuccessCallback? = null
+    var mCallback: SuccessCallback? = null
 
     fun setOnSuccessCallback(callback: SuccessCallback) {
-        this.callback = callback
+        this.mCallback = callback
     }
 }

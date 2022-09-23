@@ -15,28 +15,34 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
 import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity
+import com.guadou.kt_demo.demo.demo16_record.KotlinDemo.Companion.industry
 import com.guadou.kt_demo.demo.demo16_record.command.*
 import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.prototype.Address
 import com.guadou.kt_demo.demo.demo16_record.prototype.Company
 import com.guadou.kt_demo.demo.demo16_record.strategy.*
+import com.guadou.kt_demo.demo.demo5_network_request.TestNet
+import com.guadou.kt_demo.demo.demo5_network_request.TestNet.SuccessCallback
+import com.guadou.kt_demo.demo.demo5_network_request.setOnSuccessCallbackDsl
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.engine.extRequestPermission
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.ext.toast
-import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.result.ISAFLauncher
 import com.guadou.lib_baselib.utils.result.SAFLauncher
+import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostUtils
 import com.guadou.lib_baselib.view.FangIOSDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
+
 
 /**
  * 录制
@@ -56,6 +62,10 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //        }
 //    }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+
+    }
 
     companion object {
         fun startInstance() {
@@ -78,6 +88,62 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 
     override fun init() {
         initLauncher()
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            window.setDecorFitsSystemWindows(false)
+//
+//            val callback = object : WindowInsetsAnimation.Callback(DISPATCH_MODE_CONTINUE_ON_SUBTREE) {
+//
+//                override fun onProgress(insets: WindowInsets, animations: MutableList<WindowInsetsAnimation>): WindowInsets {
+//
+//                    val statusBars = insets.getInsets(WindowInsets.Type.statusBars())
+//
+//                    val navigationBars = insets.getInsets(WindowInsets.Type.navigationBars())
+//
+//                    val ime = insets.getInsets(WindowInsets.Type.ime())
+//
+////                    val parmas = (content.layoutParams as ViewGroup.MarginLayoutParams)
+////                    parmas.bottomMargin = ime.bottom - navigationBars.bottom
+////                    content.layoutParams = parmas
+//
+//                    return insets
+//
+//                }
+//            }
+//
+////            content.setWindowInsetsAnimationCallback(callback)
+//        }
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            mBinding.statusView.setOnApplyWindowInsetsListener { view: View, windowInsets: WindowInsets ->
+//
+//                //状态栏
+//                val statusBars = windowInsets.getInsets(WindowInsets.Type.statusBars())
+//                //导航栏
+//                val navigationBars = windowInsets.getInsets(WindowInsets.Type.navigationBars())
+//                //键盘
+//                val ime = windowInsets.getInsets(WindowInsets.Type.ime())
+//
+//                windowInsets
+//            }
+//        }
+
+
+        StatusBarHostUtils.getStatusBarHeight(mActivity) {
+            YYLogUtils.w("获取顶部状态栏的高度statusBarsHeight: $it")
+
+        }
+
+        StatusBarHostUtils.getNavigationBarHeight(mActivity) {
+            YYLogUtils.w("获取底部导航栏的高度：" + it)
+        }
+
+
+        StatusBarHostUtils.hasNavigationBars(mActivity) {
+            YYLogUtils.w("当前页面是否有导航栏：" + it)
+        }
     }
 
     /**
@@ -86,17 +152,70 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
     inner class ClickProxy {
 
         fun autoSize() {
-            Demo16AutoSizeActivity.startInstance()
+//            Demo16AutoSizeActivity.startInstance()
+
+            StatusBarHostUtils.hasNavigationBars(mActivity) {
+                YYLogUtils.w("当前页面是否有导航栏：" + it)
+            }
+
+            StatusBarHostUtils.immersiveNavigationBar(mActivity, false)
+
+//            StatusBarHostUtils.showHideNavigationBar(mActivity, true)
+//            StatusBarHostUtils.setStatusBarDarkFont(mActivity, true)
+//            StatusBarHostUtils.showHideStatusBar(mActivity, true)
         }
 
         fun intent() {
-            YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
+//            YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
+
+            StatusBarHostUtils.immersiveNavigationBar(mActivity, true)
+
+//            StatusBarHostUtils.showHideNavigationBar(mActivity, false)
+//            StatusBarHostUtils.setStatusBarDarkFont(mActivity, false)
+//            StatusBarHostUtils.showHideStatusBar(mActivity, false)
         }
 
         fun mediaRecord() {
-            CommUtils.getHandler().postDelayed({
-                YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
-            }, 3000)
+//            val testNet = TestNet()
+//
+//            testNet.setOnSuccessCallbackDsl {
+//                onSuccess { str ->
+//                    YYLogUtils.w("str: $str")
+//                    str + "再加一点数据"
+//                }
+//                doSth {
+//                    YYLogUtils.w("可以随便写点什么成功之后的逻辑")
+//                }
+//            }
+//
+//            testNet.requestDSLCallback()
+
+            "test".setValueCallback1 { int ->
+                YYLogUtils.w("收到回调：str:" + this + " int:" + int)
+            }
+
+            "test".setValueCallback11 { int ->
+                YYLogUtils.w("收到回调：industry:" + this.toString() + " int:" + int)
+            }
+
+            "test".setValueCallback12 { industry, int ->
+                YYLogUtils.w("收到回调：industry:" + industry.toString() + " int:" + int)
+            }
+
+            "test".setValueCallback13 { str ->
+                YYLogUtils.w("收到回调：callback:" + this + " str:" + str)
+                this.onCallback()
+            }
+
+            KotlinDemo().setValueCallback3 {
+
+                YYLogUtils.w("直接运行在协程里面")
+
+            }
+
+//            CommUtils.getHandler().postDelayed({
+//                YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
+//            }, 3000)
         }
 
         fun testLocation() {
@@ -227,6 +346,10 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 
         }
 
+        //Java调用Kotlin
+        fun javaCallKotlin() {
+            gotoActivity<JavaCallKTActivity>()
+        }
 
         //策略模式实战 and or
         fun strategyTest() {

@@ -7,7 +7,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.guadou.lib_baselib.utils.result.Ghost
-import com.guadou.lib_baselib.utils.result.Ghost.requestCode
 
 /**
  * Activity相关
@@ -81,3 +80,9 @@ inline fun <reified T> FragmentActivity.gotoActivityForResult(
     }
     Ghost.launchActivityForResult(this, intent, callback)
 }
+
+/** dp和px转换 **/
+fun Context.dp2px22(dpValue: Float): Int {
+    return (dpValue * resources.displayMetrics.density + 0.5f).toInt()
+}
+

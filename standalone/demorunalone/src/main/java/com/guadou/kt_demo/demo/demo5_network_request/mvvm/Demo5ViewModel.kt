@@ -16,6 +16,8 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
 /**
@@ -35,6 +37,7 @@ class Demo5ViewModel @Inject constructor(
     val mSchoolLD: LiveData<List<Industry>> = _industryLD
 
     var mContentLiveData: MutableLiveData<String> = MutableLiveData()
+
 
     /**
      * 网络请求串联-一个加载完成再请求下一个

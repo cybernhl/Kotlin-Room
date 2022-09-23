@@ -120,6 +120,18 @@
 
             </com.guadou.kt_demo.demo.demo7_imageload_glide.layout.RoundCircleFrameLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="系统的圆角控件" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/shapeable_img"
+                android:layout_width="@dimen/d_150dp"
+                android:layout_height="@dimen/d_150dp"
+                android:scaleType="centerCrop" />
+
         </LinearLayout>
 
     </ScrollView>

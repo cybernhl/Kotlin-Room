@@ -77,7 +77,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="7.图片加载Glide封装"
+                    android:text="7.图片加载，圆角图片，圆角布局"
                     android:textAllCaps="false"
                     binding:clicks="@{click.navDemo7}" />
 

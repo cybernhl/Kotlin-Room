@@ -14,7 +14,9 @@ open class BaseViewModel : ViewModel() {
     var mLoadActionLiveData: MutableLiveData<LoadAction> = MutableLiveData()
 
     fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
-        viewModelScope.launch { block() }
+        viewModelScope.launch {
+            block
+        }
     }
 
     suspend fun <T> launchOnIO(block: suspend CoroutineScope.() -> T) {

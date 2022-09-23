@@ -15,7 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/gray"
         android:orientation="vertical">
 
         <com.guadou.lib_baselib.view.titlebar.StatusbarGrayView
@@ -23,83 +23,103 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试AutoSize CustomView"
-            android:textAllCaps="false"
-            binding:clicks="@{click.autoSize}" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="前台后台的监控"
-            android:textAllCaps="false"
-            binding:clicks="@{click.intent}" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AutoSize测试"
-            android:textAllCaps="false"
-            binding:clicks="@{click.mediaRecord}" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试经纬度"
-            android:textAllCaps="false"
-            binding:clicks="@{click.testLocation}" />
-
-        <TextView
-            android:id="@+id/tv_location"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试下载Apk"
-            android:textAllCaps="false"
-            binding:clicks="@{click.testDownLoad}" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="测试AutoSize CustomView"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.autoSize}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="前台后台的监控"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.intent}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AutoSize测试"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.mediaRecord}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="测试经纬度"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.testLocation}" />
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试装饰者"
-            android:textAllCaps="false"
-            binding:clicks="@{click.decoratorTest}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="测试下载Apk"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.testDownLoad}" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试原型模式"
-            android:textAllCaps="false"
-            binding:clicks="@{click.prototypeTest}" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试命令模式"
-            android:textAllCaps="false"
-            binding:clicks="@{click.commandTest}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="测试装饰者"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.decoratorTest}" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="策略模式 And Or"
-            android:textAllCaps="false"
-            binding:clicks="@{click.strategyTest}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="测试原型模式"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.prototypeTest}" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Result"
-            android:textAllCaps="false"
-            binding:clicks="@{click.resultTest}" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="测试命令模式"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.commandTest}" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="策略模式 And Or"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.strategyTest}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Result"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.resultTest}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Java调用Kotlin"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.javaCallKotlin}" />
+
+            </LinearLayout>
+
+        </ScrollView>
 
 
     </LinearLayout>

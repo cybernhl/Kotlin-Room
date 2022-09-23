@@ -9,11 +9,11 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
-    compileSdkVersion BuildConfig.compileSdkVersion
-    buildToolsVersion BuildConfig.buildToolsVersion
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildToolsVersion
     defaultConfig {
-        minSdkVersion versions.minSdk   //使用dependent.gradle的依赖无法跳转
-        targetSdkVersion versions.targetSdk  //修改gradle文件中的值，需要build
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
 
         versionCode BuildConfig.versionCode   //使用version方式管理的依赖，可以跳转
         versionName BuildConfig.versionName   //修改其中的值，无需build
