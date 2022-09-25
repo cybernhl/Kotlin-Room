@@ -48,8 +48,8 @@
         <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Pager2Activity" />
         <activity
             android:name=".demo.demo3_bottomtabbar_fragment.Demo3Activity"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -104,8 +104,8 @@
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity" />
         <activity
             android:name=".demo.demo11_fragment_navigation.Demo11Activity"
-            android:launchMode="singleTask"
-            android:exported="false">
+            android:exported="false"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -129,12 +129,12 @@
         <service android:name=".demo.demo15_aidl.service1.MyService1" />
         <service
             android:name=".demo.demo15_aidl.service2.MyService2"
-            android:process=":test"
-            android:exported="false"/>
+            android:exported="false"
+            android:process=":test" />
         <service
             android:name=".demo.demo15_aidl.service3.MyService3"
-            android:process=":test"
-            android:exported="false"/>
+            android:exported="false"
+            android:process=":test" />
 
         <receiver android:name=".demo.demo9_ktfollow.AlarmReceiver" />
         <service android:name=".demo.demo16_record.LocationService" />
