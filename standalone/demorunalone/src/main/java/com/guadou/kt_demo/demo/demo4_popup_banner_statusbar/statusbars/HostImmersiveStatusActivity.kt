@@ -6,6 +6,7 @@ import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.click
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.drawable
 import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHost
 
@@ -30,6 +31,7 @@ class HostImmersiveStatusActivity : BaseVMActivity<EmptyViewModel>() {
     override fun init() {
         val hostLayout = StatusBarHost.inject(this)
             .setStatusBarImmersive(true)
+            .setNavigationBarBackground(drawable(R.drawable.statusbar_image_1))
 
 
         findViewById<View>(R.id.btn_001).click {

@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -25,6 +27,7 @@ public class StatusBarHostLayout extends LinearLayout {
 
     private Activity mActivity;
     private StatusView mStatusView;
+    private NavigationView mNavigationView;
     private FrameLayout mContentLayout;
 
     StatusBarHostLayout(Activity activity) {
@@ -43,6 +46,10 @@ public class StatusBarHostLayout extends LinearLayout {
             mContentLayout = new FrameLayout(mActivity);
             mContentLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1.0f));
             addView(mContentLayout);
+
+            mNavigationView = new NavigationView(mActivity);
+            mNavigationView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            addView(mNavigationView);
         }
 
         //替换宿主的contentView为外界设置的View
@@ -51,6 +58,24 @@ public class StatusBarHostLayout extends LinearLayout {
         //设置原生的状态栏沉浸式，使用自定义的状态栏布局
         StatusBarHostUtils.immersiveStatusBar(mActivity);
         StatusBarHostUtils.setStatusBarColor(mActivity, Color.TRANSPARENT);
+        //设置原生导航栏为沉浸式，使用自定义导航栏
+        StatusBarHostUtils.immersiveNavigationBar(mActivity);
+        StatusBarHostUtils.setNavigationBarColor(mActivity, Color.TRANSPARENT);
+    }
+
+    @Override
+    public final WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        //这里只判断底部导航栏是否需要隐藏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            StatusBarHostUtils.hasNavigationBars(mActivity, new BooleanValueCallback() {
+                @Override
+                public void onBoolean(boolean success) {
+                    mNavigationView.setVisibility(success ? VISIBLE : GONE);
+                }
+            });
+        }
+
+        return insets;
     }
 
     private void replaceContentView() {
@@ -83,6 +108,22 @@ public class StatusBarHostLayout extends LinearLayout {
      */
     public StatusBarHostLayout setStatusBarWhiteText() {
         StatusBarHostUtils.setStatusBarDarkFont(mActivity, false);
+        return this;
+    }
+
+    /**
+     * 设置导航栏图片颜色为黑色
+     */
+    public StatusBarHostLayout setNavigatiopnBarIconBlack() {
+        StatusBarHostUtils.setNavigationBarDrak(mActivity, true);
+        return this;
+    }
+
+    /**
+     * 设置导航栏图片颜色为白色
+     */
+    public StatusBarHostLayout setNavigatiopnBarIconWhite() {
+        StatusBarHostUtils.setNavigationBarDrak(mActivity, false);
         return this;
     }
 
@@ -123,6 +164,33 @@ public class StatusBarHostLayout extends LinearLayout {
      */
     public StatusBarHostLayout setStatusBarBackgroundAlpha(int alpha) {
         Drawable background = mStatusView.getBackground();
+        if (background != null) {
+            background.mutate().setAlpha(alpha);
+        }
+        return this;
+    }
+
+    /**
+     * 设置自定义状态栏布局的背景颜色
+     */
+    public StatusBarHostLayout setNavigationBarBackground(int color) {
+        mNavigationView.setBackgroundColor(color);
+        return this;
+    }
+
+    /**
+     * 设置自定义状态栏布局的背景图片
+     */
+    public StatusBarHostLayout setNavigationBarBackground(Drawable drawable) {
+        mNavigationView.setBackground(drawable);
+        return this;
+    }
+
+    /**
+     * 设置自定义状态栏布局的透明度
+     */
+    public StatusBarHostLayout setNavigationBarBackgroundAlpha(int alpha) {
+        Drawable background = mNavigationView.getBackground();
         if (background != null) {
             background.mutate().setAlpha(alpha);
         }

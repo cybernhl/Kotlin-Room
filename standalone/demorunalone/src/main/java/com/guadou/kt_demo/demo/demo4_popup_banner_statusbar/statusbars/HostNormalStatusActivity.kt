@@ -39,6 +39,8 @@ class HostNormalStatusActivity : BaseVDBActivity<EmptyViewModel, ActivityHostNor
         hostLayout = StatusBarHost.inject(this)
             .setStatusBarBackground(color(R.color.white))
             .setStatusBarBlackText()
+            .setNavigationBarBackground(color(R.color.colorAccent))
+            .setNavigatiopnBarIconWhite()
     }
 
     /**
@@ -53,13 +55,15 @@ class HostNormalStatusActivity : BaseVDBActivity<EmptyViewModel, ActivityHostNor
 
         fun changeBGWhite() {
             hostLayout.setStatusBarBackground(Color.WHITE)
+            hostLayout.setStatusBarBlackText()
         }
 
         fun changeBGImage() {
             hostLayout.setStatusBarBackground(getDrawable(R.drawable.statusbar_image_1))
+            hostLayout.setStatusBarWhiteText()
         }
 
-        fun changeTextColor(){
+        fun changeTextColor() {
             hostLayout.setStatusBarWhiteText()
         }
 

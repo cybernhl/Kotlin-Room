@@ -15,16 +15,12 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
 import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity
-import com.guadou.kt_demo.demo.demo16_record.KotlinDemo.Companion.industry
 import com.guadou.kt_demo.demo.demo16_record.command.*
 import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.prototype.Address
 import com.guadou.kt_demo.demo.demo16_record.prototype.Company
 import com.guadou.kt_demo.demo.demo16_record.strategy.*
-import com.guadou.kt_demo.demo.demo5_network_request.TestNet
-import com.guadou.kt_demo.demo.demo5_network_request.TestNet.SuccessCallback
-import com.guadou.kt_demo.demo.demo5_network_request.setOnSuccessCallbackDsl
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -131,19 +127,21 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //        }
 
 
-        StatusBarHostUtils.getStatusBarHeight(mActivity) {
-            YYLogUtils.w("获取顶部状态栏的高度statusBarsHeight: $it")
+//        StatusBarHostUtils.getStatusBarHeight(mActivity) {
+//            YYLogUtils.w("获取顶部状态栏的高度statusBarsHeight: $it")
+//
+//        }
+//
+//        StatusBarHostUtils.getNavigationBarHeight(mActivity) {
+//            YYLogUtils.w("获取底部导航栏的高度：" + it)
+//        }
+//
+//        StatusBarHostUtils.hasNavigationBars(mActivity) {
+//            YYLogUtils.w("当前页面是否有导航栏：" + it)
+//        }
 
-        }
-
-        StatusBarHostUtils.getNavigationBarHeight(mActivity) {
-            YYLogUtils.w("获取底部导航栏的高度：" + it)
-        }
-
-
-        StatusBarHostUtils.hasNavigationBars(mActivity) {
-            YYLogUtils.w("当前页面是否有导航栏：" + it)
-        }
+        //导航栏沉浸式
+        StatusBarHostUtils.immersiveNavigationBar(mActivity)
     }
 
     /**
@@ -154,11 +152,9 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         fun autoSize() {
 //            Demo16AutoSizeActivity.startInstance()
 
-            StatusBarHostUtils.hasNavigationBars(mActivity) {
-                YYLogUtils.w("当前页面是否有导航栏：" + it)
-            }
+//            StatusBarHostUtils.immersiveNavigationBar(mActivity, false)
 
-            StatusBarHostUtils.immersiveNavigationBar(mActivity, false)
+            StatusBarHostUtils.setNavigationBarDrak(mActivity, true)
 
 //            StatusBarHostUtils.showHideNavigationBar(mActivity, true)
 //            StatusBarHostUtils.setStatusBarDarkFont(mActivity, true)
@@ -168,8 +164,9 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         fun intent() {
 //            YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
 
-            StatusBarHostUtils.immersiveNavigationBar(mActivity, true)
+//            StatusBarHostUtils.immersiveNavigationBar(mActivity, true)
 
+            StatusBarHostUtils.setNavigationBarDrak(mActivity, false)
 //            StatusBarHostUtils.showHideNavigationBar(mActivity, false)
 //            StatusBarHostUtils.setStatusBarDarkFont(mActivity, false)
 //            StatusBarHostUtils.showHideStatusBar(mActivity, false)
