@@ -63,20 +63,20 @@ public class StatusBarHostLayout extends LinearLayout {
         StatusBarHostUtils.setNavigationBarColor(mActivity, Color.TRANSPARENT);
     }
 
-    @Override
-    public final WindowInsets onApplyWindowInsets(WindowInsets insets) {
-        //这里只判断底部导航栏是否需要隐藏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            StatusBarHostUtils.hasNavigationBars(mActivity, new BooleanValueCallback() {
-                @Override
-                public void onBoolean(boolean success) {
-                    mNavigationView.setVisibility(success ? VISIBLE : GONE);
-                }
-            });
-        }
-
-        return insets;
-    }
+//    @Override
+//    public final WindowInsets onApplyWindowInsets(WindowInsets insets) {
+//        //这里只判断底部导航栏是否需要隐藏
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            StatusBarHostUtils.hasNavigationBars(mActivity, new BooleanValueCallback() {
+//                @Override
+//                public void onBoolean(boolean success) {
+//                    mNavigationView.setVisibility(success ? VISIBLE : GONE);
+//                }
+//            });
+//        }
+//
+//        return insets;
+//    }
 
     private void replaceContentView() {
         Window window = mActivity.getWindow();

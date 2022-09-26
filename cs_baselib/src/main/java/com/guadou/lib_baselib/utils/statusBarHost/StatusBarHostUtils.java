@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -66,7 +67,8 @@ public class StatusBarHostUtils {
      * @param darkFont 是否需要黑色文本
      * @return 是否修改成功
      */
-    public static boolean setStatusBarDarkFont(Activity activity, boolean darkFont) {
+    public static void setStatusBarDarkFont(Activity activity, boolean darkFont) {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Window window = activity.getWindow();
             View decorView = window.getDecorView();
@@ -75,10 +77,40 @@ public class StatusBarHostUtils {
             } else {
                 decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
-            return true;
         }
-        return false;
+
+//        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(activity.findViewById(android.R.id.content));
+//        if (controller != null)
+//            controller.setAppearanceLightStatusBars(!darkFont);
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            Window window = activity.getWindow();
+//            View decorView = window.getDecorView();
+//            int systemUi = !darkFont ? View.SYSTEM_UI_FLAG_LAYOUT_STABLE : View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+//            systemUi = changeStatusBarModeRetainFlag(window, systemUi);
+//            decorView.setSystemUiVisibility(systemUi);
+//        }
+
     }
+
+//    private static int changeStatusBarModeRetainFlag(Window window, int out) {
+//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_FULLSCREEN);
+//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+//        return out;
+//    }
+//
+//    private static int retainSystemUiFlag(Window window, int out, int type) {
+//        int now = window.getDecorView().getSystemUiVisibility();
+//        if ((now & type) == type) {
+//            out |= type;
+//        }
+//        return out;
+//    }
 
     /**
      * 老的方法获取状态栏高度
@@ -178,7 +210,12 @@ public class StatusBarHostUtils {
             decorView.setSystemUiVisibility(decorView.getSystemUiVisibility()
                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+
             window.setNavigationBarColor(Color.TRANSPARENT);
+            WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(activity.findViewById(android.R.id.content));
+            if (controller != null) {
+                controller.setAppearanceLightNavigationBars(false);
+            }
         }
     }
 

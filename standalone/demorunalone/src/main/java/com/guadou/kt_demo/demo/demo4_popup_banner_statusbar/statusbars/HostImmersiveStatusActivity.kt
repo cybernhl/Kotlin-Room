@@ -31,6 +31,7 @@ class HostImmersiveStatusActivity : BaseVMActivity<EmptyViewModel>() {
     override fun init() {
         val hostLayout = StatusBarHost.inject(this)
             .setStatusBarImmersive(true)
+            .setStatusBarWhiteText()
             .setNavigationBarBackground(drawable(R.drawable.statusbar_image_1))
 
 

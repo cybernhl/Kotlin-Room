@@ -152,10 +152,6 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         fun autoSize() {
 //            Demo16AutoSizeActivity.startInstance()
 
-//            StatusBarHostUtils.immersiveNavigationBar(mActivity, false)
-
-            StatusBarHostUtils.setNavigationBarDrak(mActivity, true)
-
 //            StatusBarHostUtils.showHideNavigationBar(mActivity, true)
 //            StatusBarHostUtils.setStatusBarDarkFont(mActivity, true)
 //            StatusBarHostUtils.showHideStatusBar(mActivity, true)
@@ -164,9 +160,6 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         fun intent() {
 //            YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
 
-//            StatusBarHostUtils.immersiveNavigationBar(mActivity, true)
-
-            StatusBarHostUtils.setNavigationBarDrak(mActivity, false)
 //            StatusBarHostUtils.showHideNavigationBar(mActivity, false)
 //            StatusBarHostUtils.setStatusBarDarkFont(mActivity, false)
 //            StatusBarHostUtils.showHideStatusBar(mActivity, false)
