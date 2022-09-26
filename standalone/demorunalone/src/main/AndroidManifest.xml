@@ -27,16 +27,19 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".DemoMainActivity">
+        <activity
+            android:name=".DemoMainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.Demo1Activity" />
         <activity android:name=".demo.demo16_record.JavaCallKTActivity" />
-        <activity android:name=".demo.demo7_imageload_glide.RoundLayoutActivity"/>
+        <activity android:name=".demo.demo7_imageload_glide.RoundLayoutActivity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.NormalLoadingActivity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.JumpLoadingActivity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.PlaceHolderLoadingActivity" />
@@ -45,6 +48,7 @@
         <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Pager2Activity" />
         <activity
             android:name=".demo.demo3_bottomtabbar_fragment.Demo3Activity"
+            android:exported="true"
             android:launchMode="singleTask">
 
             <intent-filter>
@@ -100,13 +104,13 @@
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity" />
         <activity
             android:name=".demo.demo11_fragment_navigation.Demo11Activity"
+            android:exported="false"
             android:launchMode="singleTask">
+
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:scheme="demo11" />
+
             </intent-filter>
         </activity>
         <activity android:name=".demo.demo12_databinding_texing.Demo12Activity" />
@@ -125,9 +129,11 @@
         <service android:name=".demo.demo15_aidl.service1.MyService1" />
         <service
             android:name=".demo.demo15_aidl.service2.MyService2"
+            android:exported="false"
             android:process=":test" />
         <service
             android:name=".demo.demo15_aidl.service3.MyService3"
+            android:exported="false"
             android:process=":test" />
 
         <receiver android:name=".demo.demo9_ktfollow.AlarmReceiver" />
