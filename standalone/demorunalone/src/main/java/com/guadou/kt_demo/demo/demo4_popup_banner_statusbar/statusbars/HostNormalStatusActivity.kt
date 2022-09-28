@@ -10,6 +10,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.color
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.gotoActivity
+import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHost
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostLayout
 
@@ -39,8 +40,8 @@ class HostNormalStatusActivity : BaseVDBActivity<EmptyViewModel, ActivityHostNor
         hostLayout = StatusBarHost.inject(this)
             .setStatusBarBackground(color(R.color.white))
             .setStatusBarBlackText()
-            .setNavigationBarBackground(color(R.color.colorAccent))
-            .setNavigatiopnBarIconWhite()
+            .setNavigationBarBackground(color(R.color.normal_navigation_color))
+//            .setNavigatiopnBarIconWhite()
     }
 
     /**
@@ -48,19 +49,20 @@ class HostNormalStatusActivity : BaseVDBActivity<EmptyViewModel, ActivityHostNor
      */
     inner class ClickProxy {
 
-
         fun changeBGRed() {
             hostLayout.setStatusBarBackground(Color.RED)
         }
 
         fun changeBGWhite() {
-            hostLayout.setStatusBarBackground(Color.WHITE)
+//            hostLayout.setStatusBarBackground(Color.WHITE)
             hostLayout.setStatusBarBlackText()
+
         }
 
         fun changeBGImage() {
-            hostLayout.setStatusBarBackground(getDrawable(R.drawable.statusbar_image_1))
+//            hostLayout.setStatusBarBackground(getDrawable(R.drawable.statusbar_image_1))
             hostLayout.setStatusBarWhiteText()
+
         }
 
         fun changeTextColor() {

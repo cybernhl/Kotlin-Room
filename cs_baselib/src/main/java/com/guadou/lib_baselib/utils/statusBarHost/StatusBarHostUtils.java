@@ -4,17 +4,23 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
+import com.luck.picture.lib.immersive.RomUtils;
 
 /**
  * 状态栏工具类,只用于内部使用
@@ -27,36 +33,29 @@ public class StatusBarHostUtils {
      * 5.0以上设置沉浸式状态
      */
     public static void immersiveStatusBar(Activity activity) {
-        //默认需要沉浸式
-        immersiveStatusBar(activity, true);
-    }
+        //方式一
+        //false 表示沉浸，true表示不沉浸
+        WindowCompat.setDecorFitsSystemWindows(activity.getWindow(), false);
 
-    /**
-     * 5.0以上设置沉浸式状态
-     */
-    public static void immersiveStatusBar(Activity activity, boolean needImmersive) {
-        //false 表示沉浸，true表示不沉浸 ，这里取反
-        WindowCompat.setDecorFitsSystemWindows(activity.getWindow(), !needImmersive);
+        //方式二：添加Flag，两种方式都可以，都是5.0以上使用
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Window window = activity.getWindow();
+//            View decorView = window.getDecorView();
+//            decorView.setSystemUiVisibility(decorView.getSystemUiVisibility()
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+//            window.setStatusBarColor(Color.TRANSPARENT);
+//        }
     }
 
     /**
      * 设置当前页面的状态栏颜色，使用宿主方案一般不用这个修改颜色，只是用于沉浸式之后修改状态栏颜色为透明
      */
     public static void setStatusBarColor(Activity activity, int statusBarColor) {
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            activity.getWindow().setStatusBarColor(statusBarColor);
-
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            ViewGroup systemContent = activity.findViewById(android.R.id.content);
-            View statusBarView = new View(activity);
-            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
-            statusBarView.setBackgroundColor(statusBarColor);
-            systemContent.getChildAt(0).setFitsSystemWindows(true);
-            systemContent.addView(statusBarView, 0, lp);
+            Window window = activity.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(statusBarColor);
         }
     }
 
@@ -64,53 +63,21 @@ public class StatusBarHostUtils {
      * 6.0版本及以上可以设置黑色的状态栏文本
      *
      * @param activity
-     * @param darkFont 是否需要黑色文本
-     * @return 是否修改成功
+     * @param dark     是否需要黑色文本
      */
-    public static void setStatusBarDarkFont(Activity activity, boolean darkFont) {
+    public static void setStatusBarDarkFont(Activity activity, boolean dark) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Window window = activity.getWindow();
             View decorView = window.getDecorView();
-            if (darkFont) {
+            if (dark) {
                 decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             } else {
                 decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
         }
 
-//        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(activity.findViewById(android.R.id.content));
-//        if (controller != null)
-//            controller.setAppearanceLightStatusBars(!darkFont);
-
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            Window window = activity.getWindow();
-//            View decorView = window.getDecorView();
-//            int systemUi = !darkFont ? View.SYSTEM_UI_FLAG_LAYOUT_STABLE : View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-//            systemUi = changeStatusBarModeRetainFlag(window, systemUi);
-//            decorView.setSystemUiVisibility(systemUi);
-//        }
-
     }
-
-//    private static int changeStatusBarModeRetainFlag(Window window, int out) {
-//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_FULLSCREEN);
-//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-//        out = retainSystemUiFlag(window, out, View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-//        return out;
-//    }
-//
-//    private static int retainSystemUiFlag(Window window, int out, int type) {
-//        int now = window.getDecorView().getSystemUiVisibility();
-//        if ((now & type) == type) {
-//            out |= type;
-//        }
-//        return out;
-//    }
 
     /**
      * 老的方法获取状态栏高度
@@ -212,10 +179,6 @@ public class StatusBarHostUtils {
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
 
             window.setNavigationBarColor(Color.TRANSPARENT);
-            WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(activity.findViewById(android.R.id.content));
-            if (controller != null) {
-                controller.setAppearanceLightNavigationBars(false);
-            }
         }
     }
 
@@ -235,7 +198,6 @@ public class StatusBarHostUtils {
      */
     public static void setNavigationBarDrak(Activity activity, boolean isDarkFont) {
         WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(activity.findViewById(android.R.id.content));
-        YYLogUtils.w("controller:" + controller);
         if (controller != null) {
             if (!isDarkFont) {
                 controller.setAppearanceLightNavigationBars(false);

@@ -139,6 +139,8 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 
         val testToast: () -> Unit = {
             toastSuccess("Test Tosast")
+
+            StatusBarUtils.setStatusBarWhiteText(mActivity)
         }
 
         fun testParams(view: View) {
@@ -146,7 +148,9 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         }
 
         fun navPopupPage() {
-            DemoXPopupActivity.startInstance()
+//            DemoXPopupActivity.startInstance()
+
+            StatusBarUtils.setStatusBarBlackText(mActivity)
         }
 
         fun navBannerPage() {
@@ -167,8 +171,9 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         fun hostInvasion() {
             HostImmersiveStatusActivity.startInstance()
         }
+
         //状态栏沉浸式处理 -3
-        fun hostscroll(){
+        fun hostscroll() {
             HostScrollStatusActivity.startInstance()
         }
 

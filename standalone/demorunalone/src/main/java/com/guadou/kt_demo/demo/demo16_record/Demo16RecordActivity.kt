@@ -8,9 +8,22 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.database.Cursor
+import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
+import android.util.Log
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsAnimation
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewCompat.getRootWindowInsets
+import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
+import androidx.core.view.WindowInsetsAnimationCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.adapters.ViewBindingAdapter.setOnAttachStateChangeListener
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
@@ -25,14 +38,18 @@ import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.engine.extRequestPermission
+import com.guadou.lib_baselib.ext.color
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.result.ISAFLauncher
 import com.guadou.lib_baselib.utils.result.SAFLauncher
+import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHost
+import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostLayout
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostUtils
 import com.guadou.lib_baselib.view.FangIOSDialog
+import com.lxj.xpopup.util.XPopupUtils.isNavBarVisible
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.concurrent.Executors
@@ -47,6 +64,7 @@ import java.util.concurrent.TimeUnit
 class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeBinding>(),
     ISAFLauncher by SAFLauncher() {
 
+    lateinit var hostLayout: StatusBarHostLayout
     private val clickProxy: ClickProxy by lazy { ClickProxy() }
     private val scheduledExecutorService: ScheduledExecutorService = Executors.newScheduledThreadPool(3)
 
@@ -86,44 +104,104 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         initLauncher()
 
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//            window.setDecorFitsSystemWindows(false)
-//
-//            val callback = object : WindowInsetsAnimation.Callback(DISPATCH_MODE_CONTINUE_ON_SUBTREE) {
-//
-//                override fun onProgress(insets: WindowInsets, animations: MutableList<WindowInsetsAnimation>): WindowInsets {
-//
-//                    val statusBars = insets.getInsets(WindowInsets.Type.statusBars())
-//
-//                    val navigationBars = insets.getInsets(WindowInsets.Type.navigationBars())
-//
-//                    val ime = insets.getInsets(WindowInsets.Type.ime())
-//
-////                    val parmas = (content.layoutParams as ViewGroup.MarginLayoutParams)
-////                    parmas.bottomMargin = ime.bottom - navigationBars.bottom
-////                    content.layoutParams = parmas
-//
-//                    return insets
-//
-//                }
-//            }
-//
-////            content.setWindowInsetsAnimationCallback(callback)
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.decorView.setOnApplyWindowInsetsListener { view: View, windowInsets: WindowInsets ->
 
+                //导航栏
+                val statusBars = windowInsets.getInsets(WindowInsets.Type.statusBars())
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//            mBinding.statusView.setOnApplyWindowInsetsListener { view: View, windowInsets: WindowInsets ->
-//
-//                //状态栏
-//                val statusBars = windowInsets.getInsets(WindowInsets.Type.statusBars())
+                //导航栏高度
+                val navigationHeight = Math.abs(statusBars.bottom - statusBars.top)
+
+                YYLogUtils.w("navigationHeight:$navigationHeight")
+
 //                //导航栏
 //                val navigationBars = windowInsets.getInsets(WindowInsets.Type.navigationBars())
 //                //键盘
 //                val ime = windowInsets.getInsets(WindowInsets.Type.ime())
+
+                windowInsets
+            }
+
+
+//            val windowInsets = window.decorView.rootWindowInsets
+//            //状态栏
+//            val statusBars = windowInsets.getInsets(WindowInsets.Type.statusBars())
+//            //状态栏高度
+//            val statusBarHeight = statusBars.bottom
 //
-//                windowInsets
+//            YYLogUtils.w("statusBarHeight2:$statusBarHeight")
+
+            window.decorView.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+                override fun onViewAttachedToWindow(view: View?) {
+                    val windowInsets = window.decorView.rootWindowInsets
+                    //状态栏
+                    val navigationBars = windowInsets.getInsets(WindowInsets.Type.navigationBars())
+                    //状态栏高度
+                    val navigationHeight = Math.abs(navigationBars.bottom - navigationBars.top)
+
+                    YYLogUtils.w("navigationHeight:$navigationHeight")
+                }
+
+                override fun onViewDetachedFromWindow(view: View?) {
+                }
+            })
+        }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+            //打开键盘
+            window?.insetsController?.apply {
+
+                show(WindowInsetsCompat.Type.ime())
+//
+//                show(WindowInsetsCompat.Type.statusBars())
+//
+//                show(WindowInsetsCompat.Type.navigationBars())
+//
+//                show(WindowInsetsCompat.Type.systemBars())
+
+            }
+//            window.decorView.windowInsetsController?.show(WindowInsets.Type.ime())
+
+
+            window.decorView.setWindowInsetsAnimationCallback(object : WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
+                override fun onProgress(insets: WindowInsets, runningAnimations: MutableList<WindowInsetsAnimation>): WindowInsets {
+
+                    val isVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+                    val keyboardHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
+
+                    //当前是否展示
+                    YYLogUtils.w("isVisible = $isVisible")
+                    //当前的高度进度回调
+                    YYLogUtils.w("keyboardHeight = $keyboardHeight")
+
+                    return insets
+                }
+            })
+
+        }
+
+
+//        ViewCompat.setWindowInsetsAnimationCallback(window.decorView, object : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_STOP) {
+//            override fun onProgress(insets: WindowInsetsCompat, runningAnimations: MutableList<WindowInsetsAnimationCompat>): WindowInsetsCompat {
+//
+//                val isVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+//                val keyboardHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
+//
+//                //当前是否展示
+//                YYLogUtils.w("isVisible = $isVisible")
+//                //当前的高度进度回调
+//                YYLogUtils.w("keyboardHeight = $keyboardHeight")
+//
+//                return insets
 //            }
+//        })
+//        ViewCompat.getWindowInsetsController(findViewById(android.R.id.content))?.apply {
+//
+//            show(WindowInsetsCompat.Type.ime())
+//
 //        }
 
 
@@ -140,8 +218,10 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //            YYLogUtils.w("当前页面是否有导航栏：" + it)
 //        }
 
-        //导航栏沉浸式
-        StatusBarHostUtils.immersiveNavigationBar(mActivity)
+        hostLayout = StatusBarHost.inject(this)
+            .setStatusBarBackground(color(R.color.white))
+            .setStatusBarBlackText()
+            .setNavigationBarBackground(color(R.color.normal_navigation_color))
     }
 
     /**
@@ -150,8 +230,9 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
     inner class ClickProxy {
 
         fun autoSize() {
-//            Demo16AutoSizeActivity.startInstance()
 
+//            Demo16AutoSizeActivity.startInstance()
+            hostLayout.setNavigatiopnBarIconBlack()
 //            StatusBarHostUtils.showHideNavigationBar(mActivity, true)
 //            StatusBarHostUtils.setStatusBarDarkFont(mActivity, true)
 //            StatusBarHostUtils.showHideStatusBar(mActivity, true)
@@ -159,7 +240,7 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 
         fun intent() {
 //            YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
-
+            hostLayout.setNavigatiopnBarIconWhite()
 //            StatusBarHostUtils.showHideNavigationBar(mActivity, false)
 //            StatusBarHostUtils.setStatusBarDarkFont(mActivity, false)
 //            StatusBarHostUtils.showHideStatusBar(mActivity, false)

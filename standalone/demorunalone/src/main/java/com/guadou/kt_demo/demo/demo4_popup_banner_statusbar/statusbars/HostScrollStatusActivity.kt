@@ -51,7 +51,8 @@ class HostScrollStatusActivity : BaseVMActivity<EmptyViewModel>() {
         hostLayout = StatusBarHost.inject(this)
             .setStatusBarBackground(startColor)
             .setStatusBarBlackText()
-            .setNavigationBarBackground(ContextCompat.getDrawable(this, R.color.normal_navigation_color))
+            .setNavigationBarBackground(ContextCompat.getDrawable(this, R.color.white))
+//            .setNavigatiopnBarIconBlack()
 
 
         //监听滚动

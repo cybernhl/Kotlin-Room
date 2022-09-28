@@ -13,15 +13,16 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/ll_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
         android:orientation="vertical">
 
-        <com.guadou.lib_baselib.view.titlebar.StatusbarGrayView
-            android:id="@+id/status_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+<!--        <com.guadou.lib_baselib.view.titlebar.StatusbarGrayView-->
+<!--            android:id="@+id/status_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content" />-->
 
         <ScrollView
             android:layout_width="match_parent"
