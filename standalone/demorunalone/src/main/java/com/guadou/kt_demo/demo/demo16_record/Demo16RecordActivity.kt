@@ -8,22 +8,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.database.Cursor
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowInsetsAnimation
 import android.widget.Toast
-import androidx.core.view.ViewCompat
-import androidx.core.view.ViewCompat.getRootWindowInsets
-import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
-import androidx.core.view.WindowInsetsAnimationCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.databinding.adapters.ViewBindingAdapter.setOnAttachStateChangeListener
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
@@ -49,7 +39,6 @@ import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHost
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostLayout
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostUtils
 import com.guadou.lib_baselib.view.FangIOSDialog
-import com.lxj.xpopup.util.XPopupUtils.isNavBarVisible
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.util.concurrent.Executors
@@ -152,9 +141,9 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
             //打开键盘
-            window?.insetsController?.apply {
+//            window?.insetsController?.apply {
 
-                show(WindowInsetsCompat.Type.ime())
+//                show(WindowInsetsCompat.Type.ime())
 //
 //                show(WindowInsetsCompat.Type.statusBars())
 //
@@ -162,26 +151,26 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //
 //                show(WindowInsetsCompat.Type.systemBars())
 
-            }
+//            }
 //            window.decorView.windowInsetsController?.show(WindowInsets.Type.ime())
 
 
-            window.decorView.setWindowInsetsAnimationCallback(object : WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
-                override fun onProgress(insets: WindowInsets, runningAnimations: MutableList<WindowInsetsAnimation>): WindowInsets {
-
-                    val isVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
-                    val keyboardHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
-
-                    //当前是否展示
-                    YYLogUtils.w("isVisible = $isVisible")
-                    //当前的高度进度回调
-                    YYLogUtils.w("keyboardHeight = $keyboardHeight")
-
-                    return insets
-                }
-            })
-
-        }
+//            window.decorView.setWindowInsetsAnimationCallback(object : WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
+//                override fun onProgress(insets: WindowInsets, runningAnimations: MutableList<WindowInsetsAnimation>): WindowInsets {
+//
+//                    val isVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+//                    val keyboardHeight = insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
+//
+//                    //当前是否展示
+//                    YYLogUtils.w("isVisible = $isVisible")
+//                    //当前的高度进度回调
+//                    YYLogUtils.w("keyboardHeight = $keyboardHeight")
+//
+//                    return insets
+//                }
+//            })
+//
+//        }
 
 
 //        ViewCompat.setWindowInsetsAnimationCallback(window.decorView, object : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_STOP) {
@@ -217,12 +206,46 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //        StatusBarHostUtils.hasNavigationBars(mActivity) {
 //            YYLogUtils.w("当前页面是否有导航栏：" + it)
 //        }
+        }
 
         hostLayout = StatusBarHost.inject(this)
             .setStatusBarBackground(color(R.color.white))
             .setStatusBarBlackText()
             .setNavigationBarBackground(color(R.color.normal_navigation_color))
+
+        val num = 123
+
+        val num1 = kotlin.run {
+            YYLogUtils.w("num :$num")
+            return@run num + 1
+        }
+        YYLogUtils.w("num1 :$num1")
+
+
+
+
+
+        num.apply {
+            toString().trim()
+        }
+
+        num.also { value ->
+            value.toString().trim()
+        }
+
+        val num4 = num.let {
+            it.toString().trim()
+            return@let "222"
+        }
+        YYLogUtils.w("num4 :$num4")
+
+        val num5 = with(num) {
+            toString().trim()
+            return@with 111
+        }
+        YYLogUtils.w("num5 :$num5")
     }
+
 
     /**
      * DataBinding事件处理
@@ -415,6 +438,11 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //                toast("拿到返回数据：$data")
 //            }
 
+        }
+
+        //軟鍵盤高度
+        fun heightSoftInput() {
+            gotoActivity<SoftInputActivity>()
         }
 
         //Java调用Kotlin

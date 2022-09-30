@@ -13,6 +13,7 @@ import android.view.WindowInsets;
 import android.view.WindowManager;
 
 import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -232,65 +233,67 @@ public class StatusBarHostUtils {
     public static void getNavigationBarHeight(View view, HeightValueCallback callback) {
 
         //方案一：监听回调的方案
-//        ViewCompat.setOnApplyWindowInsetsListener(view, new OnApplyWindowInsetsListener() {
-//            @Override
-//            public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
-//
-//                Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
-//
-//                int top = navInsets.top;
-//                int bottom = navInsets.bottom;
-//                int height = Math.abs(bottom - top);
-//
-//                if (height > 0) {
-//                    callback.onHeight(height);
-//                } else {
-//                    callback.onHeight(getNavigationBarHeight(view.getContext()));
-//                }
-//
-//                return insets;
-//            }
-//        });
+        ViewCompat.setOnApplyWindowInsetsListener(view, new OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
+
+                Insets navInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+
+                int top = navInsets.top;
+                int bottom = navInsets.bottom;
+                YYLogUtils.w("bottom:"+bottom);
+                int height = Math.abs(bottom - top);
+
+                if (height > 0) {
+                    callback.onHeight(height);
+                } else {
+                    callback.onHeight(getNavigationBarHeight(view.getContext()));
+                }
+
+                return insets;
+            }
+        });
+
 
         //方案二：getRootWindowInsets的方案
-        boolean attachedToWindow = view.isAttachedToWindow();
-
-        if (attachedToWindow) {
-
-            WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(view);
-            assert windowInsets != null;
-            int top = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).top;
-            int bottom = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
-            int height = Math.abs(bottom - top);
-            if (height > 0) {
-                callback.onHeight(height);
-            } else {
-                callback.onHeight(getNavigationBarHeight(view.getContext()));
-            }
-
-        } else {
-
-            view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-                @Override
-                public void onViewAttachedToWindow(View v) {
-
-                    WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(v);
-                    assert windowInsets != null;
-                    int top = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).top;
-                    int bottom = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
-                    int height = Math.abs(bottom - top);
-                    if (height > 0) {
-                        callback.onHeight(height);
-                    } else {
-                        callback.onHeight(getNavigationBarHeight(view.getContext()));
-                    }
-                }
-
-                @Override
-                public void onViewDetachedFromWindow(View v) {
-                }
-            });
-        }
+//        boolean attachedToWindow = view.isAttachedToWindow();
+//
+//        if (attachedToWindow) {
+//
+//            WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(view);
+//            assert windowInsets != null;
+//            int top = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).top;
+//            int bottom = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+//            int height = Math.abs(bottom - top);
+//            if (height > 0) {
+//                callback.onHeight(height);
+//            } else {
+//                callback.onHeight(getNavigationBarHeight(view.getContext()));
+//            }
+//
+//        } else {
+//
+//            view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+//                @Override
+//                public void onViewAttachedToWindow(View v) {
+//
+//                    WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(v);
+//                    assert windowInsets != null;
+//                    int top = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).top;
+//                    int bottom = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+//                    int height = Math.abs(bottom - top);
+//                    if (height > 0) {
+//                        callback.onHeight(height);
+//                    } else {
+//                        callback.onHeight(getNavigationBarHeight(view.getContext()));
+//                    }
+//                }
+//
+//                @Override
+//                public void onViewDetachedFromWindow(View v) {
+//                }
+//            });
+//        }
     }
 
     // =======================  NavigationBar StatusBar Hide Show begin ↓ =========================

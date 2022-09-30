@@ -11,7 +11,7 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils;
 /**
  * 自定义底部导航栏的View，用于StatusBarHostLayout中使用
  */
-public class NavigationView extends View {
+class NavigationView extends View {
 
     private int mBarSize;
 

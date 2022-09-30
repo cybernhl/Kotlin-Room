@@ -121,7 +121,8 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="测试滚动效果"
+                    android:text="软键盘高度获取"
+                    binding:clicks="@{click.heightSoftInput}"
                     android:textAllCaps="false" />
 
                 <Button
