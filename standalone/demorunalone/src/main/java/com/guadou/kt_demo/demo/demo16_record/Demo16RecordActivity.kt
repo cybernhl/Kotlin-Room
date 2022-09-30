@@ -24,6 +24,7 @@ import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.prototype.Address
 import com.guadou.kt_demo.demo.demo16_record.prototype.Company
 import com.guadou.kt_demo.demo.demo16_record.strategy.*
+import com.guadou.kt_demo.demo.demo16_record.viewpager.ViewPagerNestActivity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -448,6 +449,11 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         //Java调用Kotlin
         fun javaCallKotlin() {
             gotoActivity<JavaCallKTActivity>()
+        }
+
+        //测试ViewPager
+        fun testViewPager() {
+            gotoActivity<ViewPagerNestActivity>()
         }
 
         //策略模式实战 and or

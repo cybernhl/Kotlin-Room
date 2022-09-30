@@ -40,6 +40,7 @@
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.Demo1Activity" />
         <activity android:name=".demo.demo16_record.JavaCallKTActivity" />
         <activity android:name=".demo.demo16_record.SoftInputActivity" />
+        <activity android:name=".demo.demo16_record.viewpager.ViewPagerNestActivity" />
         <activity android:name=".demo.demo7_imageload_glide.RoundLayoutActivity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.NormalLoadingActivity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.JumpLoadingActivity" />
