@@ -13,11 +13,12 @@
         app:Easy_title="ViewPager测试" />
 
 
-    <LinearLayout
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
 
-    </LinearLayout>
+
 
 </LinearLayout>
