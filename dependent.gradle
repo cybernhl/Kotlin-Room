@@ -1,9 +1,9 @@
 ext {
     versions = [
             'minSdk'           : 21,
-            'targetSdk'        : 31,
-            'compileSdk'       : 31,
-            'buildToolsVersion': '31.0.0'
+            'targetSdk'        : 30,
+            'compileSdk'       : 30,
+            'buildToolsVersion': '30.0.2'
     ]
     deps = [
             //android和kt依赖资源
