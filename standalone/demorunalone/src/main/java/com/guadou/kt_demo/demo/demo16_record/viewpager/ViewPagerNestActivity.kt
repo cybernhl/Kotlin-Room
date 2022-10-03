@@ -20,16 +20,16 @@ class ViewPagerNestActivity : BaseVMActivity<EmptyViewModel>() {
 
     override fun init() {
 
-        findViewById<ViewPager>(R.id.viewpager).apply {
+        findViewById<ViewPager2>(R.id.viewpager2).apply {
 
             bindFragment(
                 supportFragmentManager,
-//                lifecycle,
+                lifecycle,
                 listOf(VPItemFragment(Color.RED), VPItemFragment(Color.GREEN), VPItemFragment(Color.BLUE)),
-                                behavior = 1
+//                                behavior = 1
             )
 
-//            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
         }
 
     }

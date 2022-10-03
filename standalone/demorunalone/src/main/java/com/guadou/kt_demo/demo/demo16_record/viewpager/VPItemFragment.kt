@@ -26,29 +26,28 @@ internal class VPItemFragment(private var bgColor: Int) : BaseVMFragment<EmptyVi
         val llRoot = view.findViewById<View>(R.id.ll_root)
         llRoot.setBackgroundColor(bgColor)
 
-        view.findViewById<ViewPager2>(R.id.viewPager2).apply {
+        view.findViewById<ViewPager>(R.id.viewPager).apply {
 
             val fragmentList = listOf(VPItemChildFragment(0), VPItemChildFragment(1), VPItemChildFragment(2))
             bindFragment(
                 childFragmentManager,
-                lifecycle,
-                fragmentList
-//                behavior = 1
+//                lifecycle,
+                fragmentList,
+                behavior = 1
             )
 
-            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//            orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    //这个view是的fragment。
-                    val view = fragmentList[position].view
-                    view?.let {
-                        updatePagerHeightForChild(view, this@apply)
-                    }
-                }
-            })
+//            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//                override fun onPageSelected(position: Int) {
+//                    super.onPageSelected(position)
+//                    //这个view是的fragment。
+//                    val view = fragmentList[position].view
+//                    view?.let {
+//                        updatePagerHeightForChild(view, this@apply)
+//                    }
+//                }
+//            })
 
         }
 
