@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="click"
+            type="com.guadou.kt_demo.demo.demo17_softinput.Demo17SoftInputActivity.ClickProxy" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_title="软键盘选择" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="普通LinearLayout"
+            android:textAllCaps="false"
+            binding:clicks="@{click.testLayout}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ScrollView"
+            android:textAllCaps="false"
+            binding:clicks="@{click.testScrollView}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="列表"
+            android:textAllCaps="false"
+            binding:clicks="@{click.testRV}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="朋友圈"
+            android:textAllCaps="false"
+            binding:clicks="@{click.testMoment}" />
+
+    </LinearLayout>
+
+</layout>

@@ -48,7 +48,7 @@ import java.util.concurrent.TimeUnit
 
 
 /**
- * 录制
+ * 其他
  */
 @AndroidEntryPoint
 class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeBinding>(),

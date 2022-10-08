@@ -144,6 +144,16 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.navDemo16}" />
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="17.软键盘相关"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.navDemo17}" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="15dp" />
             </LinearLayout>
 
         </ScrollView>
