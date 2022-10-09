@@ -56,7 +56,7 @@ class SoftInputMomentActivity : BaseVMActivity<EmptyViewModel>() {
             //等待弹窗弹起自后再获取到Y的高度，就是加上了软键盘之后的高度了
             val etReviewY = getY(dialog.findViewById<LinearLayout>(R.id.dialog_layout_comment))
 
-            val offsetY = rvReviewY - (etReviewY - rvReviewHeight)
+            val offsetY = rvReviewY - etReviewY + rvReviewHeight
 
             rvList.smoothScrollBy(0, offsetY)
 
