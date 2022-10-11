@@ -79,6 +79,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity android:name=".demo.demo17_softinput.SoftInputMomentActivity" />
+        <activity android:name=".demo.demo16_record.lazy.PropertyLazyActivity" />
         <activity android:name=".demo.demo4_popup_banner_statusbar.Demo4Activity" />
         <activity android:name=".demo.demo2_viewpager_lazyfragment.lazy2.DemoLazy2Activity" />
         <activity android:name=".demo.demo11_fragment_navigation.nav2.DemoNav2Activity" />

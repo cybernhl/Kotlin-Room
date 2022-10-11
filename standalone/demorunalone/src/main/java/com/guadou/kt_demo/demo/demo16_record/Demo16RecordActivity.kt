@@ -21,6 +21,7 @@ import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity
 import com.guadou.kt_demo.demo.demo16_record.command.*
 import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
+import com.guadou.kt_demo.demo.demo16_record.lazy.PropertyLazyActivity
 import com.guadou.kt_demo.demo.demo16_record.prototype.Address
 import com.guadou.kt_demo.demo.demo16_record.prototype.Company
 import com.guadou.kt_demo.demo.demo16_record.strategy.*
@@ -454,6 +455,11 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         //测试ViewPager
         fun testViewPager() {
             gotoActivity<ViewPagerNestActivity>()
+        }
+
+        //属性的延时加载
+        fun textLazy(){
+            gotoActivity<PropertyLazyActivity>()
         }
 
         //策略模式实战 and or

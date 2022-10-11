@@ -128,7 +128,8 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="测试滚动效果"
+                    android:text="延时加载属性"
+                    binding:clicks="@{click.textLazy}"
                     android:textAllCaps="false" />
 
                 <Button
