@@ -15,7 +15,11 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.guadou.kt_demo.demo.demo17_softinput.utils.NavigationBarCallback;
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.util.List;
 
@@ -23,6 +27,7 @@ public final class Keyboard4Utils {
 
     public static int sDecorViewInvisibleHeightPre;
     private static ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener;
+    private static int mNavHeight;
 
     private Keyboard4Utils() {
     }
@@ -36,7 +41,7 @@ public final class Keyboard4Utils {
         decorView.getWindowVisibleDisplayFrame(outRect);
 
         int delta = Math.abs(decorView.getBottom() - outRect.bottom);
-        if (delta <= getNavBarHeight()) {
+        if (delta <= mNavHeight) {
             sDecorViewDelta = delta;
             return 0;
         }
@@ -62,9 +67,12 @@ public final class Keyboard4Utils {
             @Override
             public WindowInsets onProgress(@NonNull WindowInsets windowInsets, @NonNull List<WindowInsetsAnimation> list) {
 
-                int height = windowInsets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
+                int imeHeight = windowInsets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
+                int navHeight = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+                boolean hasNavigationBar = windowInsets.isVisible(WindowInsetsCompat.Type.navigationBars()) &&
+                        windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom > 0;
 
-                listener.onKeyboardHeightChanged(height);
+                listener.onKeyboardHeightChanged(hasNavigationBar ? Math.max(imeHeight - navHeight, 0) : imeHeight);
 
                 return windowInsets;
             }
@@ -95,7 +103,16 @@ public final class Keyboard4Utils {
             }
         };
 
-        contentView.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
+        //获取到导航栏高度之后再添加布局监听
+        getNavigationBarHeight(activity, new NavigationBarCallback() {
+            @Override
+            public void onHeight(int height, boolean hasNav) {
+                mNavHeight = height;
+                YYLogUtils.w("获取到导航栏高度：" + mNavHeight);
+                contentView.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
+            }
+        });
+
     }
 
     public static void unregisterKeyboardHeightListener(Activity activity) {
@@ -112,6 +129,55 @@ public final class Keyboard4Utils {
             return res.getDimensionPixelSize(resourceId);
         } else {
             return 0;
+        }
+    }
+
+    public static void getNavigationBarHeight(Activity activity, NavigationBarCallback callback) {
+
+        View view = activity.getWindow().getDecorView();
+        boolean attachedToWindow = view.isAttachedToWindow();
+
+        if (attachedToWindow) {
+
+            WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(view);
+            assert windowInsets != null;
+
+            int height = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+
+            boolean hasNavigationBar = windowInsets.isVisible(WindowInsetsCompat.Type.navigationBars()) &&
+                    windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom > 0;
+
+            if (height > 0) {
+                callback.onHeight(height, hasNavigationBar);
+            } else {
+                callback.onHeight(getNavBarHeight(), hasNavigationBar);
+            }
+
+        } else {
+
+            view.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+                @Override
+                public void onViewAttachedToWindow(View v) {
+
+                    WindowInsetsCompat windowInsets = ViewCompat.getRootWindowInsets(v);
+                    assert windowInsets != null;
+                    int height = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+
+                    boolean hasNavigationBar = windowInsets.isVisible(WindowInsetsCompat.Type.navigationBars()) &&
+                            windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom > 0;
+
+                    if (height > 0) {
+                        callback.onHeight(height, hasNavigationBar);
+                    } else {
+                        callback.onHeight(getNavBarHeight(), hasNavigationBar);
+                    }
+
+                }
+
+                @Override
+                public void onViewDetachedFromWindow(View v) {
+                }
+            });
         }
     }
 
