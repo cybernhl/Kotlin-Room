@@ -10,10 +10,16 @@ import android.content.IntentFilter
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.Environment
+import android.util.AttributeSet
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.WindowInsets
 import android.widget.Toast
+import androidx.core.view.LayoutInflaterCompat
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo16HomeBinding
@@ -39,7 +45,6 @@ import com.guadou.lib_baselib.utils.result.ISAFLauncher
 import com.guadou.lib_baselib.utils.result.SAFLauncher
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHost
 import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostLayout
-import com.guadou.lib_baselib.utils.statusBarHost.StatusBarHostUtils
 import com.guadou.lib_baselib.view.FangIOSDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -91,8 +96,49 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
     override fun startObserve() {
     }
 
+    override fun onResume() {
+        super.onResume()
+        YYLogUtils.w("onResume执行了")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        LayoutInflaterCompat.setFactory2(layoutInflater, object : LayoutInflater.Factory2 {
+            override fun onCreateView(
+                parent: View?, name: String, context: Context, attrs: AttributeSet
+            ): View? {
+                YYLogUtils.w("->onCreateView1-->")
+                return null
+            }
+
+            override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+                YYLogUtils.w("->onCreateView2-->")
+                return null
+            }
+
+        })
+
+
+        super.onCreate(savedInstanceState)
+    }
+
+
     override fun init() {
         initLauncher()
+
+        window.decorView.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(p0: View?) {
+
+                YYLogUtils.w("->onViewAttachedToWindow-->")
+            }
+
+            override fun onViewDetachedFromWindow(p0: View?) {
+
+            }
+        })
+
+        window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
+            YYLogUtils.w("->addOnGlobalLayoutListener-->") }
+
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -458,7 +504,7 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         }
 
         //属性的延时加载
-        fun textLazy(){
+        fun textLazy() {
             gotoActivity<PropertyLazyActivity>()
         }
 
