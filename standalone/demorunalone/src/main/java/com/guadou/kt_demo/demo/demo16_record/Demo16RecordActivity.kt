@@ -28,6 +28,7 @@ import com.guadou.kt_demo.demo.demo16_record.command.*
 import com.guadou.kt_demo.demo.demo16_record.decorator.Mi2ProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.decorator.MiProtableBattery
 import com.guadou.kt_demo.demo.demo16_record.lazy.PropertyLazyActivity
+import com.guadou.kt_demo.demo.demo16_record.list.SequencesActivity
 import com.guadou.kt_demo.demo.demo16_record.prototype.Address
 import com.guadou.kt_demo.demo.demo16_record.prototype.Company
 import com.guadou.kt_demo.demo.demo16_record.strategy.*
@@ -60,7 +61,7 @@ import java.util.concurrent.TimeUnit
 class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeBinding>(),
     ISAFLauncher by SAFLauncher() {
 
-    lateinit var hostLayout: StatusBarHostLayout
+//    lateinit var hostLayout: StatusBarHostLayout
     private val clickProxy: ClickProxy by lazy { ClickProxy() }
     private val scheduledExecutorService: ScheduledExecutorService = Executors.newScheduledThreadPool(3)
 
@@ -256,10 +257,10 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 //        }
         }
 
-        hostLayout = StatusBarHost.inject(this)
-            .setStatusBarBackground(color(R.color.white))
-            .setStatusBarBlackText()
-            .setNavigationBarBackground(color(R.color.normal_navigation_color))
+//        hostLayout = StatusBarHost.inject(this)
+//            .setStatusBarBackground(color(R.color.white))
+//            .setStatusBarBlackText()
+//            .setNavigationBarBackground(color(R.color.normal_navigation_color))
 
         val num = 123
 
@@ -268,9 +269,6 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
             return@run num + 1
         }
         YYLogUtils.w("num1 :$num1")
-
-
-
 
 
         num.apply {
@@ -303,7 +301,7 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         fun autoSize() {
 
 //            Demo16AutoSizeActivity.startInstance()
-            hostLayout.setNavigatiopnBarIconBlack()
+//            hostLayout.setNavigatiopnBarIconBlack()
 //            StatusBarHostUtils.showHideNavigationBar(mActivity, true)
 //            StatusBarHostUtils.setStatusBarDarkFont(mActivity, true)
 //            StatusBarHostUtils.showHideStatusBar(mActivity, true)
@@ -311,7 +309,7 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
 
         fun intent() {
 //            YYLogUtils.w("ForegroundCheck isForeground: " + ForegroundCheck.get().isForeground)
-            hostLayout.setNavigatiopnBarIconWhite()
+//            hostLayout.setNavigatiopnBarIconWhite()
 //            StatusBarHostUtils.showHideNavigationBar(mActivity, false)
 //            StatusBarHostUtils.setStatusBarDarkFont(mActivity, false)
 //            StatusBarHostUtils.showHideStatusBar(mActivity, false)
@@ -491,6 +489,10 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         //軟鍵盤高度
         fun heightSoftInput() {
             gotoActivity<SoftInputActivity>()
+        }
+
+        fun testSequences(){
+            gotoActivity<SequencesActivity>()
         }
 
         //Java调用Kotlin

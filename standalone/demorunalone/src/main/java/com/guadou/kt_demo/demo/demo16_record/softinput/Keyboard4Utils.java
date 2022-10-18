@@ -67,10 +67,10 @@ public final class Keyboard4Utils {
             @Override
             public WindowInsets onProgress(@NonNull WindowInsets windowInsets, @NonNull List<WindowInsetsAnimation> list) {
 
-                int imeHeight = windowInsets.getInsets(WindowInsetsCompat.Type.ime()).bottom;
-                int navHeight = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
-                boolean hasNavigationBar = windowInsets.isVisible(WindowInsetsCompat.Type.navigationBars()) &&
-                        windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom > 0;
+                int imeHeight = windowInsets.getInsets(WindowInsets.Type.ime()).bottom;
+                int navHeight = windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom;
+                boolean hasNavigationBar = windowInsets.isVisible(WindowInsets.Type.navigationBars()) &&
+                        windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom > 0;
 
                 listener.onKeyboardHeightChanged(hasNavigationBar ? Math.max(imeHeight - navHeight, 0) : imeHeight);
 
@@ -108,7 +108,6 @@ public final class Keyboard4Utils {
             @Override
             public void onHeight(int height, boolean hasNav) {
                 mNavHeight = height;
-                YYLogUtils.w("获取到导航栏高度：" + mNavHeight);
                 contentView.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
             }
         });

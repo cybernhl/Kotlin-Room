@@ -6,10 +6,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import com.guadou.kt_demo.R
-import com.guadou.kt_demo.demo.demo16_record.softinput.Keyboard1Utils
-import com.guadou.kt_demo.demo.demo16_record.softinput.Keyboard3Utils
-import com.guadou.kt_demo.demo.demo16_record.softinput.Keyboard4Utils
-import com.guadou.kt_demo.demo.demo16_record.softinput.KeyboardHeightUtils
+import com.guadou.kt_demo.demo.demo16_record.softinput.*
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.utils.log.YYLogUtils
@@ -48,11 +45,22 @@ class SoftInputActivity : BaseVMActivity<EmptyViewModel>() {
 //        }
 //        keyboardHeightUtils.start()
 
+//        Keyboard2Utils.addKeyBordHeightChangeCallBack(mActivity) { height ->
+//
+//            YYLogUtils.w("第二种方式：当前的软键盘高度：$height")
+//
+//            updateVoiceIcon(height)
+//        }
 
         Keyboard4Utils.registerKeyboardHeightListener(this) {
             YYLogUtils.w("第三种方式：当前的软键盘高度：$it")
             updateVoiceIcon(it)
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
 
     }
 
