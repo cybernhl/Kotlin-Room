@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:Easy_title="我的Diff刷新" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/diff_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Diff刷新1" />
+
+        <Button
+            android:id="@+id/diff_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Diff刷新2" />
+
+        <Button
+            android:id="@+id/diff_3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Diff刷新3" />
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+

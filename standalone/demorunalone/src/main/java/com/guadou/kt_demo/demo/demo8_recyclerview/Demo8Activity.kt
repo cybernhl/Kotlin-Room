@@ -13,6 +13,7 @@ import com.guadou.kt_demo.demo.demo8_recyclerview.rv3.DemoRVHeadFoodVertalActivi
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.DemoRVMobanActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv5.DemoRVMuliteActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv6.DemoRVDiffActivity
+import com.guadou.kt_demo.demo.demo8_recyclerview.rv7.DemoMyDiffActivity
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv8.CustomRV1Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.scroll10.Scroll10Activity
 import com.guadou.kt_demo.demo.demo8_recyclerview.scroll11.Scroll11Activity
@@ -25,6 +26,7 @@ import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.gotoActivity
 
 
 /**
@@ -85,6 +87,10 @@ class Demo8Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo8Binding>() {
 
         fun rvDiff() {
             DemoRVDiffActivity.startInstance()
+        }
+
+        fun myDiff() {
+            gotoActivity<DemoMyDiffActivity>()
         }
 
         fun customType() {

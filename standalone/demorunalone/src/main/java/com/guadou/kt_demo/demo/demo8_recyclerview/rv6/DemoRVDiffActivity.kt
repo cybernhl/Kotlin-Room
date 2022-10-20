@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.demo.demo8_recyclerview.rv6
 
 import android.content.Intent
+import com.chad.library.adapter.base.diff.BrvahAsyncDifferConfig
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemoRvDiffBinding
@@ -10,6 +11,7 @@ import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.vertical
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.Executors.newCachedThreadPool
 import javax.inject.Inject
 
 
@@ -60,7 +62,19 @@ class DemoRVDiffActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoRvDiffBin
 
     private fun initRV() {
         //设置BRVAH
-        mAdapter.setDiffCallback(DiffDemoCallback())
+//        mAdapter.setDiffCallback(DiffDemoCallback())  //快速实现，内部默认实现默认主线程和默认子线程
+
+//        mAdapter.setDiffConfig(BrvahAsyncDifferConfig(mainExecutor, newCachedThreadPool(), DiffDemoCallback()))  //带线程池的快速实现
+
+        mAdapter.setDiffConfig(
+            BrvahAsyncDifferConfig.Builder(DiffDemoCallback())   //自定义实现
+                .setMainThreadExecutor(mainExecutor)
+                .setBackgroundThreadExecutor(newCachedThreadPool())
+                .build()
+        )
+
+
+
         mBinding.recyclerView.vertical().adapter = mAdapter
 
 

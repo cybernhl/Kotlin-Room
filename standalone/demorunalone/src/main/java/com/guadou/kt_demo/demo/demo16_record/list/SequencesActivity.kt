@@ -1,9 +1,13 @@
 package com.guadou.kt_demo.demo.demo16_record.list
 
+import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.R
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.utils.log.YYLogUtils
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
 
 
@@ -49,6 +53,41 @@ class SequencesActivity : BaseVMActivity<EmptyViewModel>() {
         }
 
         YYLogUtils.w("耗费的时间2$time2")
+
+        lifecycleScope.safeLaunch<String> {
+            onRequest = {
+               "1234"   //这里一定要return指定的数据，放最后一行即可
+            }
+
+            onSuccess = {
+
+            }
+
+            onError = {
+
+            }
+        }
     }
 
+}
+
+fun <T> CoroutineScope.safeLaunch(init: CoroutineBuilder<T>.() -> Unit) {
+    val result = CoroutineBuilder<T>().apply { init() }
+
+    val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        result.onError?.invoke(throwable)
+    }
+
+    this.launch(exceptionHandler) {
+        val res: T? = result.onRequest?.invoke()
+        res?.let {
+            result.onSuccess?.invoke(it)
+        }
+    }
+}
+
+class CoroutineBuilder<T> {
+    var onRequest: (suspend () -> T)? = null
+    var onSuccess: ((T) -> Unit)? = null
+    var onError: ((Throwable) -> Unit)? = null
 }
