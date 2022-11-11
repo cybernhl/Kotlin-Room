@@ -9,6 +9,7 @@ import com.guadou.kt_demo.demo.demo14_mvi.mvi.Demo14Activity
 import com.guadou.kt_demo.demo.demo15_aidl.Demo15OptionActivity
 import com.guadou.kt_demo.demo.demo16_record.Demo16RecordActivity
 import com.guadou.kt_demo.demo.demo17_softinput.Demo17SoftInputActivity
+import com.guadou.kt_demo.demo.demo18_customview.Demo18CustomViewActivity
 import com.guadou.kt_demo.demo.demo1_activity_fragment_placeholder.activity.Demo1Activity
 import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.Demo2Activity
 import com.guadou.kt_demo.demo.demo3_bottomtabbar_fragment.Demo3Activity
@@ -119,6 +120,9 @@ class DemoMainActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoMainBinding
             Demo17SoftInputActivity.startInstance()
         }
 
+        fun navDemo18() {
+            Demo18CustomViewActivity.startInstance()
+        }
 
     }
 

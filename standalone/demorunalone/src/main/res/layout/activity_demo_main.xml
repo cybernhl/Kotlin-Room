@@ -151,6 +151,13 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.navDemo17}" />
 
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="18.自定义View相关"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.navDemo18}" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="15dp" />

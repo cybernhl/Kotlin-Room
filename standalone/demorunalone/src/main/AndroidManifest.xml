@@ -116,6 +116,8 @@
         <activity android:name=".demo.demo8_recyclerview.rv7.DemoMyDiffActivity"/>
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.DemoSpanActivity" />
         <activity android:name=".demo.demo8_recyclerview.rv8.CustomRV1Activity" />
+        <activity android:name=".demo.demo18_customview.Demo18CustomViewActivity" />
+        <activity android:name=".demo.demo18_customview.circleView.DemoCircleViewActivity" />
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity" />
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostImmersiveStatusActivity" />
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity" />
