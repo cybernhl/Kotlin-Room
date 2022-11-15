@@ -40,6 +40,12 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.circleView}" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="温度计-自定义View"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.temperatureView}" />
 
             </LinearLayout>
 

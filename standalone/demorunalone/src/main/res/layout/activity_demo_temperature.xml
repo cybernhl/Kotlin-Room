@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:Easy_title="圆环View" />
+
+
+    <Button
+        android:id="@+id/set_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置进度" />
+
+
+    <com.guadou.kt_demo.demo.demo18_customview.temperature.TemperatureView
+        android:id="@+id/temperature_view"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/d_40dp" />
+
+</LinearLayout>

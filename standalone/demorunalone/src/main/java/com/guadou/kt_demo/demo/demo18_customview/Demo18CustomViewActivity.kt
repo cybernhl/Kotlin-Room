@@ -4,6 +4,7 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo18HomeBinding
 import com.guadou.kt_demo.demo.demo18_customview.circleView.DemoCircleViewActivity
+import com.guadou.kt_demo.demo.demo18_customview.temperature.TemperatureViewActivity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -60,6 +61,11 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
                 toast("收到返回的数据：$result")
             }
 
+        }
+
+
+        fun temperatureView(){
+            TemperatureViewActivity.startInstance()
         }
 
     }
