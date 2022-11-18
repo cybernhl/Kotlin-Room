@@ -173,4 +173,22 @@
         <attr name="isanim" format="boolean" />
     </declare-styleable>
 
+    <!--  评分星星控件  -->
+    <declare-styleable name="StarScoreView">
+        <!--星星间距-->
+        <attr name="starDistance" format="dimension" />
+        <!--星星大小-->
+        <attr name="starSize" format="dimension" />
+        <!--星星个数-->
+        <attr name="starCount" format="integer" />
+        <!--星星已评分图片-->
+        <attr name="starScoredDrawable" format="reference" />
+        <!--星星未评分图片-->
+        <attr name="starUnscoredDrawable" format="reference" />
+        <!--是否可以点击-->
+        <attr name="starIsTouchEnable" format="boolean" />
+        <!--是否显示整数-->
+        <attr name="starIsOnlyIntegerScore" format="boolean" />
+    </declare-styleable>
+
 </resources>

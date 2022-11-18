@@ -119,6 +119,7 @@
         <activity android:name=".demo.demo18_customview.Demo18CustomViewActivity" />
         <activity android:name=".demo.demo18_customview.circleView.DemoCircleViewActivity" />
         <activity android:name=".demo.demo18_customview.temperature.TemperatureViewActivity" />
+        <activity android:name=".demo.demo18_customview.star.StarScoreViewActivity" />
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity" />
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostImmersiveStatusActivity" />
         <activity android:name=".demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity" />

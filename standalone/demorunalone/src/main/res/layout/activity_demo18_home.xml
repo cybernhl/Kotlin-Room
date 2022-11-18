@@ -47,6 +47,13 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.temperatureView}" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="星星评分-自定义View"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.starView}" />
+
             </LinearLayout>
 
         </ScrollView>
