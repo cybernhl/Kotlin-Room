@@ -54,6 +54,13 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.starView}" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="区间选择-自定义View"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.rangeView}" />
+
             </LinearLayout>
 
         </ScrollView>

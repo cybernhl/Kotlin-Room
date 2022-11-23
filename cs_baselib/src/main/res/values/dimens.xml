@@ -27,6 +27,7 @@
     <dimen name="d_0.5dp">0.5dp</dimen>
     <dimen name="d_0.7dp">0.7dp</dimen>
     <dimen name="d_1dp">1dp</dimen>
+    <dimen name="d_1d5dp">1.5dp</dimen>
     <dimen name="d_2dp">2dp</dimen>
     <dimen name="d_3dp">3dp</dimen>
     <dimen name="d_4dp">4dp</dimen>

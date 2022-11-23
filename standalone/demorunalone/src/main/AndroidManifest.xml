@@ -146,6 +146,7 @@
         <activity android:name=".demo.demo3_bottomtabbar_fragment.LoginDemoActivity" />
         <activity android:name=".demo.demo3_bottomtabbar_fragment.ProfileDemoActivity" />
         <activity android:name=".demo.demo7_imageload_glide.RoundImageActivity" />
+        <activity android:name=".demo.demo18_customview.range.RangeViewActivity" />
 
         <service android:name=".demo.demo15_aidl.service1.MyService1" />
         <service
