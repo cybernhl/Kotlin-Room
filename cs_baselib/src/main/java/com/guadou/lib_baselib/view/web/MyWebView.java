@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.view;
+package com.guadou.lib_baselib.view.web;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,7 +20,6 @@ import android.webkit.WebViewClient;
 
 public class MyWebView extends WebView {
 
-
     private WebSettings mWebSettings;
 
     public MyWebView(Context context) {
@@ -40,7 +39,6 @@ public class MyWebView extends WebView {
 
     @SuppressLint({"ObsoleteSdkInt", "SetJavaScriptEnabled"})
     private void initView() {
-
 
         mWebSettings = getSettings();
         mWebSettings.setSupportZoom(false);

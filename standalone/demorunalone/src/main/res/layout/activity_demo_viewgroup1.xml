@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup1
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_200dp"
+            android:background="#00ff00" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_200dp"
+            android:background="#2196F3" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_200dp"
+            android:background="#9C27B0" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_200dp"
+            android:background="#F44336" />
+
+    </com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup1>
+
+</LinearLayout>

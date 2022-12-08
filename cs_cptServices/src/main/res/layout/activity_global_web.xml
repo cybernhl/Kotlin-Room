@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         app:Easy_title="Title" />
 
-    <com.guadou.lib_baselib.view.WebViewProgressBar
+    <com.guadou.lib_baselib.view.web.WebViewProgressBar
         android:id="@+id/pb_web_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d_1dp"

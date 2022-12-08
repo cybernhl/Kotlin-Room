@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -23,6 +24,7 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils
 class Nav2Fragment3 : BaseVDBFragment<EmptyViewModel, Nav2Fragment3Binding>() {
 
     private val activityViewModel by activityViewModels<Nav2ViewModel>()
+    private val viewModel by viewModels<EmptyViewModel>()
 
     override fun getDataBindingConfig(): DataBindingConfig {
 

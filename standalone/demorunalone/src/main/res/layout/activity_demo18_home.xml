@@ -61,6 +61,20 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.rangeView}" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ViewGroup1"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.viewGroup1}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ViewGroup2"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.viewGroup2}" />
+
             </LinearLayout>
 
         </ScrollView>

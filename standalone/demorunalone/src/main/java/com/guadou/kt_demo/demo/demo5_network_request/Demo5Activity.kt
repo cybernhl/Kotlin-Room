@@ -3,6 +3,7 @@ package com.guadou.kt_demo.demo.demo5_network_request
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import androidx.activity.viewModels
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
@@ -26,6 +27,8 @@ import kotlinx.coroutines.*
  */
 @AndroidEntryPoint
 class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
+
+    private val viewModel : Demo5ViewModel by viewModels()
 
     companion object {
         fun startInstance() {

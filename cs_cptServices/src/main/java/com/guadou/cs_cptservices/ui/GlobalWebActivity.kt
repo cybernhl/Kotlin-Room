@@ -13,7 +13,7 @@ import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.CheckUtil
 import com.guadou.lib_baselib.utils.CommUtils
-import com.guadou.lib_baselib.view.MyWebView
+import com.guadou.lib_baselib.view.web.MyWebView
 import kotlinx.android.synthetic.main.activity_global_web.*
 
 class GlobalWebActivity : BaseVMActivity<BaseViewModel>() {

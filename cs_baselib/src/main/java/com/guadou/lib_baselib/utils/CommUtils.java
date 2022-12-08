@@ -28,9 +28,7 @@ public class CommUtils {
         mMainTheadId = mainTheadId;
     }
 
-
     //---------------------初始化Application定义的方法-----------------------------------
-
 
     public static Context getContext() {
         return mApplication.getApplicationContext();

@@ -1,14 +1,17 @@
 package com.guadou.lib_baselib.base.activity
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.annotation.MainThread
+import androidx.lifecycle.*
 import com.guadou.lib_baselib.base.vm.BaseViewModel
+import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.LoadAction
 import com.guadou.lib_baselib.ext.getVMCls
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.view.LoadingDialogManager
+import kotlin.reflect.KClass
 
 /**
  * 加入ViewModel与LoadState
@@ -48,7 +51,7 @@ abstract class BaseVMActivity<VM : BaseViewModel> : AbsActivity() {
     override fun onNetworkConnectionChanged(isConnected: Boolean, networkType: NetWorkUtil.NetworkType?) {
     }
 
-    // ================== 网络状态的监听 ======================
+// ================== 网络状态的监听 ======================
 
     private var stateObserver: Observer<LoadAction> = Observer { loadAction ->
         if (loadAction != null) {

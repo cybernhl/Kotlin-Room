@@ -1,4 +1,4 @@
-package com.guadou.lib_baselib.view;
+package com.guadou.lib_baselib.view.web;
 
 import android.content.Context;
 import android.graphics.Canvas;
