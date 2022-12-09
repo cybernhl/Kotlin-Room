@@ -3,6 +3,7 @@ package com.guadou.kt_demo.demo.demo18_customview.viewgroup;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 

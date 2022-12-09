@@ -75,6 +75,13 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click.viewGroup2}" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ViewGroup3"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.viewGroup3}" />
+
             </LinearLayout>
 
         </ScrollView>
