@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <!--    <com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup4Scroll-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#FF5722" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#F44336" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#E91E63" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#9C27B0" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#3F51B5" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#2196F3" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#03A9F4" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#00BCD4" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:background="#009688" />-->
+
+    <!--    </com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup4Scroll>-->
+
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical">-->
+
+    <!--        <com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup4Child1-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content" />-->
+
+    <!--    </LinearLayout>-->
+
+
+    <com.guadou.kt_demo.demo.demo18_customview.viewgroup.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#33666666"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Name"
+                android:textColor="#99000000"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="#aa000000"
+                android:gravity="center"
+                android:text="Call"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="#eeff0000"
+                android:gravity="center"
+                android:text="Delete"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </com.guadou.kt_demo.demo.demo18_customview.viewgroup.SwipeLayout>
+
+</LinearLayout>

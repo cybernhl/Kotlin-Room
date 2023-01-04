@@ -10,6 +10,7 @@ import com.guadou.kt_demo.demo.demo18_customview.temperature.TemperatureViewActi
 import com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup1Activity
 import com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup2Activity
 import com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup3Activity
+import com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup4Activity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -92,6 +93,9 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
             ViewGroup3Activity.startInstance()
         }
 
+        fun viewGroup4() {
+            ViewGroup4Activity.startInstance()
+        }
     }
 
 }

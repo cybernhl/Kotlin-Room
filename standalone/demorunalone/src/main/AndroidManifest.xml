@@ -36,10 +36,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup1Activity"/>
-        <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup2Activity"/>
-        <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup3Activity"/>
+        <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup4Activity" />
+        <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup1Activity" />
+        <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup2Activity" />
+        <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup3Activity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.Demo1Activity" />
         <activity android:name=".demo.demo16_record.JavaCallKTActivity" />
         <activity android:name=".demo.demo16_record.SoftInputActivity" />
@@ -116,7 +116,7 @@
         <activity android:name=".demo.demo8_recyclerview.rv6.DemoRVDiffActivity" />
         <activity android:name=".demo.demo9_ktfollow.DemoCountDwonActivity" />
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.Demo10Activity" />
-        <activity android:name=".demo.demo8_recyclerview.rv7.DemoMyDiffActivity"/>
+        <activity android:name=".demo.demo8_recyclerview.rv7.DemoMyDiffActivity" />
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.DemoSpanActivity" />
         <activity android:name=".demo.demo8_recyclerview.rv8.CustomRV1Activity" />
         <activity android:name=".demo.demo18_customview.Demo18CustomViewActivity" />
