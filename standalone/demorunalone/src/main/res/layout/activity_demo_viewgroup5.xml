@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.guadou.kt_demo.demo.demo18_customview.viewgroup.Xianyu5 xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/xianyu5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clipChildren="false">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup5
+            android:id="@+id/viewgroup5"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.guadou.kt_demo.demo.demo18_customview.viewgroup.ShowMoreTextView
+                android:id="@+id/tv_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/back_black"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="20dp"
+                android:textSize="13sp" />
+
+        </com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup5>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="我是内容布局" />
+
+    </LinearLayout>
+
+    <com.guadou.kt_demo.demo.demo18_customview.viewgroup.ShowMoreTextView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:drawableLeft="@mipmap/back_black"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="20dp"
+        android:text="多"
+        android:textSize="13sp" />
+
+</com.guadou.kt_demo.demo.demo18_customview.viewgroup.Xianyu5>
+
+
+<!--<com.guadou.kt_demo.demo.demo18_customview.viewgroup.DouyinView5 xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/white">-->
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:text="抖音的内容页面" />-->
+
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#f1f1f1"-->
+<!--        android:gravity="center"-->
+<!--        android:text="抖音的详情页面" />-->
+
+<!--</com.guadou.kt_demo.demo.demo18_customview.viewgroup.DouyinView5>-->

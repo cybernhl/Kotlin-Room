@@ -71,7 +71,11 @@ public class ViewGroup4Scroll extends ViewGroup4 implements View.OnTouchListener
 
         if (mScroller.computeScrollOffset()) {
             scrollTo(0, mScroller.getCurrY());
-            postInvalidate();
+
+            if (mScroller.getCurrX() == getScrollX() && mScroller.getCurrY() == getScrollY() ) {
+                postInvalidate();
+            }
+
         }
     }
 
