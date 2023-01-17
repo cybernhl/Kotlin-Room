@@ -36,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup6Activity"/>
         <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup5Activity"/>
         <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup4Activity" />
         <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup1Activity" />

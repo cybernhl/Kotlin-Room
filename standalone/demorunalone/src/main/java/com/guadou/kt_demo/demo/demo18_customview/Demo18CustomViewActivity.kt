@@ -97,6 +97,10 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
         fun viewGroup5() {
             ViewGroup5Activity.startInstance()
         }
+
+        fun viewGroup6() {
+            ViewGroup6Activity.startInstance()
+        }
     }
 
 }

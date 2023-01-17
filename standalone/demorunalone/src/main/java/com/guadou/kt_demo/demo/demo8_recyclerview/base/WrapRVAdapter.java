@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 包裹布局的Adapter的基类。用于添加头布局，脚布局
- * 本质还是一个RecyclerView.Adapter。可以和RV-Adapter配合使用
+ * 本质还是一个RecyclerView.CurtainAdapter。可以和RV-Adapter配合使用
  */
 @SuppressLint("NotifyDataSetChanged")
 public class WrapRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
