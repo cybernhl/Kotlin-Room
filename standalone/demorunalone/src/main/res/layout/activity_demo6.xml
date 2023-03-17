@@ -52,6 +52,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/d_10dp"
+            android:layout_height="wrap_content"
+            android:text="写入文件"
+            binding:clicks="@{click.writeFile}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/d_10dp"
+            android:layout_height="wrap_content"
+            android:text="读取文件"
+            binding:clicks="@{click.readFile}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_10dp"
+            android:text="选择文件"
+            binding:clicks="@{click.chooseFile}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择的文件：" />
+
     </LinearLayout>
 
 </layout>

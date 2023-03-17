@@ -1,5 +1,6 @@
 package com.guadou.kt_demo.demo.demo5_network_request
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -12,6 +13,7 @@ import com.guadou.kt_demo.databinding.ActivityDemo5Binding
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5ViewModel
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.bean.DataBindingConfig
+import com.guadou.lib_baselib.engine.extRequestPermission
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.toast
 import com.guadou.lib_baselib.utils.log.YYLogUtils
@@ -167,7 +169,7 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //            val result = FileIOUtilKt.writeText(commContext())
 //            YYLogUtils.w("result:$result")
 
-            FileIOUtilKt.copyFile()
+//            FileIOUtilKt.copyFile()
 
             //如果不存在就创建一个文件夹
 //            val dir = File(dirPath)
@@ -219,16 +221,25 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //                }
 //            )
 
-//            extRequestPermission(
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                block = {
-//
-//                    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-//                    startActivityForResult(intent, 1)
-//
-//                }
-//            )
+            extRequestPermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                block = {
+
+
+                    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+
+                    //指定选择类型为全部类型
+//                    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+//                    intent.addCategory(Intent.CATEGORY_OPENABLE)
+//                    intent.type = "*/*"
+
+
+
+                    startActivityForResult(intent, 1)
+
+                }
+            )
 
 
         }
@@ -275,6 +286,11 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == 1) {
             resultData?.data?.let { uri ->
+
+                contentResolver.takePersistableUriPermission(uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                )
+
                 YYLogUtils.w("打开文件夹：$uri")
                 DocumentFile.fromTreeUri(this, uri)
                     // 在文件夹内创建新文件夹

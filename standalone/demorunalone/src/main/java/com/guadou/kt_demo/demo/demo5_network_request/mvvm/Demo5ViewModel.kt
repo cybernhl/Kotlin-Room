@@ -16,9 +16,9 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 /**
  * Repository一定要通过默认的构造方法传入进来
@@ -81,10 +81,95 @@ class Demo5ViewModel @Inject constructor(
 
                 //完成Loading
                 loadHideProgress()
+
+
+                val salary = calculateSalary()
+
+                val salary2 = calculateSalary2()
+
+                YYLogUtils.w("salary:$salary  salary2:$salary2")
+
             }
 
+//            viewModelScope.launch {
+//
+//                YYLogUtils.w("协程执行开始：" + Thread.currentThread().name)
+//
+//                val login = withContext(Dispatchers.Default) {
+//                    //requestLogin()
+//
+//                    YYLogUtils.w("线程1：" + Thread.currentThread().name)
+//                    delay(1000)
+//
+//                    "success"
+//                }
+//
+//                withContext(Dispatchers.Default) {
+//                    //requestUserInfo()
+//
+//                    YYLogUtils.w("线程2：" + Thread.currentThread().name)
+//                    delay(1000)
+//
+//                    withContext(Dispatchers.IO) {
+//                        // saveUserInfo2DB()
+//
+//                        YYLogUtils.w("线程3：" + Thread.currentThread().name)
+//                        delay(1000)
+//
+//                    }
+//
+//                }
+//
+//                YYLogUtils.w("协程执行结束" + Thread.currentThread().name)
+//            }
+//
         })
 
+    }
+
+    fun runMethodTask(callback: OnSingleMethodCallback) {
+        Thread {
+            Thread.sleep(1000)
+            callback.onValueCallback("abc")
+        }.start()
+    }
+
+    fun runMethodTask() {
+        runMethodTask(object : OnSingleMethodCallback {
+            override fun onValueCallback(value: String) {
+                YYLogUtils.w("value:$value")
+            }
+        })
+    }
+
+
+    suspend fun runMethodTaskWithSuspend(): String {
+
+        return suspendCoroutine { continuation ->
+
+            runMethodTask(object : OnSingleMethodCallback {
+                override fun onValueCallback(value: String) {
+                    continuation.resume(value)
+                }
+            })
+
+        }
+
+    }
+
+    private fun calculateSalary(): String {
+        // 省略100行代码
+        return "1000"
+    }
+
+    private suspend fun calculateSalary2() = withContext(Dispatchers.Default) {
+        // 省略100行代码
+        "2000"
+    }
+
+    private suspend fun calculateSalary3() = coroutineScope {
+        // 省略100行代码
+        "3000"
     }
 
     /**
@@ -93,7 +178,6 @@ class Demo5ViewModel @Inject constructor(
     fun netSupervene() {
         //检查网络的状态，可选用
         checkNet({
-
 
             viewModelScope.launch {
 

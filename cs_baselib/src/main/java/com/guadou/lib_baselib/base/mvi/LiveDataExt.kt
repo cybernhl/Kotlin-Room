@@ -60,5 +60,6 @@ internal data class StateTuple3<A, B, C>(val a: A, val b: B, val c: C)
 
 //更新State
 fun <T> MutableLiveData<T>.setState(reducer: T.() -> T) {
+    //拿到T去处理，处理完成之后的T，再次赋值给LiveData
     this.value = this.value?.reducer()
 }
