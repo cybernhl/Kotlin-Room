@@ -5,8 +5,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.*
-import android.view.Window
-import android.view.WindowManager
 import androidx.lifecycle.MutableLiveData
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -21,15 +19,71 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.ScreenUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import kotlinx.coroutines.*
+import org.w3c.dom.Text
 import java.util.*
+import kotlin.properties.Delegates
+import kotlin.properties.ReadOnlyProperty
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 
 /**
  * 倒计时的实现 Kotlin-Flow流
  */
-class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountDownBinding>(), Runnable {
+class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountDownBinding>(), Runnable, IUserAction by UserActionImpl() {
 
     private val click by lazy { ClickProxy() }
+
+    private var textStr by TextDelegate2()
+    private var textStr2 by this::textStr
+
+    val name: String by lazy {
+        YYLogUtils.w("第一次调用初始化")
+        "abc123"
+    }
+
+    private val industryName: String
+        get() {
+            return "abc123"
+        }
+
+    var values: String by Delegates.observable("默认值") { property, oldValue, newValue ->
+
+        YYLogUtils.w("打印值: $oldValue -> $newValue ")
+    }
+
+    var age: Int by Delegates.vetoable(18) { property, oldValue, newValue ->
+        newValue > oldValue
+    }
+
+
+//    class TextDelegate {
+//
+//        operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+//            return "我是赋值给与的文本"
+//        }
+//
+//        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+//            YYLogUtils.w("设置的值为：$value")
+//        }
+//
+//    }
+
+    class TextDelegate : ReadOnlyProperty<Any, String> {
+        override fun getValue(thisRef: Any, property: KProperty<*>): String {
+            return "我是赋值给与的文本"
+        }
+    }
+
+    class TextDelegate2 : ReadWriteProperty<Any, String> {
+        override fun getValue(thisRef: Any, property: KProperty<*>): String {
+            return "我是赋值给与的文本"
+        }
+
+        override fun setValue(thisRef: Any, property: KProperty<*>, value: String) {
+            YYLogUtils.w("设置的值为：$value")
+        }
+    }
 
     private lateinit var wakeLock: PowerManager.WakeLock
 
@@ -50,6 +104,46 @@ class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountD
 
     @SuppressLint("InvalidWakeLockTag")
     override fun init() {
+        val actionImpl = UserActionImpl()
+
+        UserDelegate1(actionImpl).run {
+            attack()
+            defense()
+        }
+
+        UserDelegate2(actionImpl).run {
+            attack()
+            defense()
+        }
+
+        UserDelegate3(actionImpl).run {
+            attack()
+            defense()
+        }
+
+//        YYLogUtils.w("textStr:$textStr")
+//        textStr = "abc123"
+
+//        YYLogUtils.w(name)
+//        YYLogUtils.w(name)
+//        YYLogUtils.w(name)
+
+//        values = "第一次修改"
+//        values = "第二次修改"
+//        values = "第三次修改"
+
+//        YYLogUtils.w("age:$age")
+//        age = 14
+//        YYLogUtils.w("age:$age")
+//        age = 20
+//        YYLogUtils.w("age:$age")
+//        age = 22
+//        YYLogUtils.w("age:$age")
+//        age = 20
+//        YYLogUtils.w("age:$age")
+
+        val member = Member(mapOf("name" to "guanyu", "age" to "36", Pair("dob", 1234567890L)))
+        YYLogUtils.w("member:$member")
 
 //        val powerManager = commContext().getSystemService(Service.POWER_SERVICE) as PowerManager
 //        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock")
