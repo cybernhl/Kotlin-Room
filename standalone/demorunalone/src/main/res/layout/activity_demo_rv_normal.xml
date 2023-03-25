@@ -21,6 +21,25 @@
             app:Easy_menuTextColor="@color/black"
             app:Easy_title="列表展示" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_scoll_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="滚动" />
+
+            <Button
+                android:id="@+id/btn_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="再减速" />
+
+        </LinearLayout>
+
 
         <!--        <com.guadou.kt_demo.demo.demo7_imageload_glide.layout.RoundCircleFrameLayout-->
         <!--            android:layout_width="match_parent"-->

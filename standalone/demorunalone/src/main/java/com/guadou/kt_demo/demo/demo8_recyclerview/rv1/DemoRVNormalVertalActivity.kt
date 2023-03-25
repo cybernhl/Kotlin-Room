@@ -2,6 +2,11 @@ package com.guadou.kt_demo.demo.demo8_recyclerview.rv1
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.guadou.cs_cptservices.binding.BaseDataBindingAdapter
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -9,10 +14,8 @@ import com.guadou.kt_demo.databinding.ActivityDemoRvNormalBinding
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.ext.bindData
-import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.divider
-import com.guadou.lib_baselib.ext.vertical
+import com.guadou.lib_baselib.ext.*
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 
 
 /**
@@ -21,6 +24,27 @@ import com.guadou.lib_baselib.ext.vertical
 class DemoRVNormalVertalActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoRvNormalBinding>() {
 
     private val mAdapter by lazy { BaseDataBindingAdapter<String>(R.layout.item_vertal_text, BR.text) }
+
+    var smoothScrolling = false
+    var smoothScrollPosition = -1
+
+    private val bgColors = arrayOf(
+        Color.parseColor("#F44336"),
+        Color.parseColor("#E91E63"),
+        Color.parseColor("#9C27B0"),
+        Color.parseColor("#3F51B5"),
+        Color.parseColor("#2196F3"),
+        Color.parseColor("#03A9F4"),
+        Color.parseColor("#00BCD4"),
+        Color.parseColor("#009688"),
+        Color.parseColor("#4CAF50"),
+        Color.parseColor("#CDDC39"),
+        Color.parseColor("#FFEB3B"),
+        Color.parseColor("#FFC107"),
+        Color.parseColor("#FF9800"),
+        Color.parseColor("#FF5722"),
+        Color.parseColor("#FF00FF")
+    )
 
     companion object {
         fun startInstance() {
@@ -41,28 +65,79 @@ class DemoRVNormalVertalActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoR
     }
 
     override fun init() {
-
-        val datas = listOf("关羽", "刘备", "张飞", "吕布", "刘邦", "鲁班", "赵云", "韩信", "孙策")
-
-        //使用RecyclerView的扩展方法
-        mBinding.recyclerView.vertical()
-            .bindData(datas, R.layout.rl_03_layout) { holder, t, _ ->
-
-            }
-            .divider(Color.BLACK)
-
-        //使用DataBinding的方式
-//        mBinding.recyclerView.vertical().apply {
-//            adapter = mAdapter
-//            divider(Color.BLACK)
-//        }
-//        mAdapter.addData(datas)
-
-        //测试局部刷新
-        mBinding.easyTitle.addRightText("Refresh") {
-            mAdapter.data[0] = "关平"
-            mAdapter.notifyItemChanged(0)
+        val datas = arrayListOf<String>()
+        for (i in 0..99) {
+            datas.add("Item 内容 $i")
         }
 
+        //使用RecyclerView的扩展方法
+        val layoutManager = SmoothLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//        val random = Random()
+        mBinding.recyclerView.apply {
+            setLayoutManager(layoutManager)
+            bindData(datas, R.layout.item_custom_jobs) { holder, t, _ ->
+                holder.setText(R.id.tv_job_text, t)
+//                holder.getView<View>(R.id.ll_root).setBackgroundColor(bgColors[random.nextInt(bgColors.size)])
+            }
+            divider(Color.BLACK)
+            scrollToPosition(0)
+        }
+
+        //测试滚动到底部
+        mBinding.easyTitle.addRightText("To-Bottom") {
+            mBinding.recyclerView.scrollToPosition(datas.size - 1)
+        }
+
+
+        mBinding.btnScollTo.click {
+
+//            layoutManager.scrollToPositionWithOffset(75, 0)
+
+//            rvScrollToPosition(mBinding.recyclerView, layoutManager, 75)
+
+//            mBinding.recyclerView.scrollToPosition(75)
+
+//            mBinding.recyclerView.smoothScrollToPosition(75)
+
+//            smoothScrolling = true
+//            smoothScrollPosition = 75
+
+            RVScrollUtils.rvSmoothScrollToPosition(mBinding.recyclerView, layoutManager, 75)
+
+        }
+
+        mBinding.btnSpeed.click {
+//            layoutManager.setSpeedSlow(100F)
+        }
+
+//        mBinding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//
+//                if (smoothScrolling || newState == SCROLL_STATE_IDLE) {
+//
+//                    val lastPos: Int = layoutManager.findLastVisibleItemPosition()
+//
+//                    if (smoothScrollPosition >= 0 && lastPos == smoothScrollPosition) {
+//
+//                        val childAt: View? = layoutManager.findViewByPosition(lastPos)
+//                        var top = childAt?.top ?: 0
+//                        recyclerView.scrollBy(0, top)
+//
+//                        mBinding.recyclerView.removeOnScrollListener(this)
+//                        smoothScrollPosition = -1
+//
+//                    }
+//                    smoothScrolling = false
+//                }
+//            }
+//
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//
+//            }
+//        })
+//
     }
+
+
 }
