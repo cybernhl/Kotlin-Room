@@ -1,16 +1,19 @@
 package com.guadou.kt_demo.demo.demo18_customview
 
+import android.Manifest
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo18HomeBinding
 import com.guadou.kt_demo.demo.demo18_customview.circleView.DemoCircleViewActivity
 import com.guadou.kt_demo.demo.demo18_customview.range.RangeViewActivity
 import com.guadou.kt_demo.demo.demo18_customview.star.StarScoreViewActivity
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.RecoderVideo1Activity
 import com.guadou.kt_demo.demo.demo18_customview.temperature.TemperatureViewActivity
 import com.guadou.kt_demo.demo.demo18_customview.viewgroup.*
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
+import com.guadou.lib_baselib.engine.extRequestPermission
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.ext.toast
@@ -101,6 +104,13 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
         fun viewGroup6() {
             ViewGroup6Activity.startInstance()
         }
+
+        fun videoRecoder1() {
+            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
+                RecoderVideo1Activity.startInstance()
+            }
+        }
+
     }
 
 }

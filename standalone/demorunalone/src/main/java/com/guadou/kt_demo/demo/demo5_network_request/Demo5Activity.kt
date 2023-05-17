@@ -30,7 +30,7 @@ import kotlinx.coroutines.*
 @AndroidEntryPoint
 class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 
-    private val viewModel : Demo5ViewModel by viewModels()
+    private val viewModel: Demo5ViewModel by viewModels()
 
     companion object {
         fun startInstance() {
@@ -235,7 +235,6 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //                    intent.type = "*/*"
 
 
-
                     startActivityForResult(intent, 1)
 
                 }
@@ -255,6 +254,10 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
 //                testFun(time)
 //            }, start = {}, end = {})
 
+        }
+
+        fun testRunblocking() {
+            mViewModel.testRunBlocking()
         }
     }
 
@@ -287,7 +290,8 @@ class Demo5Activity : BaseVDBActivity<Demo5ViewModel, ActivityDemo5Binding>() {
         if (resultCode == Activity.RESULT_OK && requestCode == 1) {
             resultData?.data?.let { uri ->
 
-                contentResolver.takePersistableUriPermission(uri,
+                contentResolver.takePersistableUriPermission(
+                    uri,
                     Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                 )
 

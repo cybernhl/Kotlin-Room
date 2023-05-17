@@ -136,10 +136,17 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="视频录制1"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.videoRecoder1}" />
+
             </LinearLayout>
 
         </ScrollView>
-
 
     </LinearLayout>
 

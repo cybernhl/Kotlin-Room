@@ -272,4 +272,38 @@ class Demo5ViewModel @Inject constructor(
         }
     }
 
+
+    fun testRunBlocking(){
+
+        runBlocking {
+            YYLogUtils.w("开始执行延时")
+
+            delay(2000)
+
+            YYLogUtils.w("延时2秒执行")
+        }
+
+        YYLogUtils.w("runBlocking执行完毕")
+
+        launchOnUI {
+
+            YYLogUtils.w("launchOnUI开始执行")
+
+            runBlocking {
+                YYLogUtils.w("开始执行延时-2")
+
+                delay(2000)
+
+                YYLogUtils.w("延时2秒执行-2")
+            }
+
+            async {
+                YYLogUtils.w("开始执行延时-3")
+
+                delay(2000)
+
+                YYLogUtils.w("延时2秒执行-3")
+            }
+        }
+    }
 }

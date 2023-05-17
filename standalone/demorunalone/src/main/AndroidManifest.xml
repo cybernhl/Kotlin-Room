@@ -42,6 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup6Activity"/>
+        <activity android:name=".demo.demo18_customview.takevideo1.RecoderVideo1Activity"/>
         <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup5Activity"/>
         <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup4Activity" />
         <activity android:name=".demo.demo18_customview.viewgroup.ViewGroup1Activity" />
@@ -58,7 +59,7 @@
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.PlaceHolderLoadingActivity" />
         <activity android:name=".demo.demo1_activity_fragment_placeholder.activity.EmptyFragmentActivity" />
         <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Activity" />
-        <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2Pager2Activity" />
+        <activity android:name=".demo.demo2_viewpager_lazyfragment.Demo2PagerCustomActivity" />
         <activity
             android:name=".demo.demo3_bottomtabbar_fragment.Demo3Activity"
             android:exported="true"

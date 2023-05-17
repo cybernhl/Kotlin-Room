@@ -70,6 +70,12 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="测试阻塞"
+                    binding:clicks="@{click.testRunblocking}" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="测试写文件"
                     binding:clicks="@{click.save2file}" />
 

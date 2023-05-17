@@ -15,6 +15,7 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.AsyncViewStub
 import com.guadou.lib_baselib.view.gloading.Gloading
+import com.guadou.lib_baselib.view.gloading.GloadingGlobalAdapter
 import com.guadou.lib_baselib.view.gloading.GloadingRoatingAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -34,7 +35,7 @@ class Lazy2Fragment1 : BaseVMLoadingFragment<EmptyViewModel>() {
 
     //重新生成GLoading对象
     override fun generateGLoading(view: View): Gloading.Holder {
-        return Gloading.from(GloadingRoatingAdapter()).wrap(view).withRetry {
+        return Gloading.from(GloadingGlobalAdapter()).wrap(view).withRetry {
             onGoadingRetry()
         }
     }
