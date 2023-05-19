@@ -13,10 +13,8 @@ import com.guadou.kt_demo.R;
 
 
 /**
- * Created by zhaoshuang on 17/2/8.
- * 录按钮的绘制和动画效果.没有依赖xml布局文件
+ * 录按钮的绘制和动画效果
  */
-
 public class RecordedButton extends View {
 
     private int measuredWidth = -1;
@@ -24,10 +22,11 @@ public class RecordedButton extends View {
     private int colorGray;
     private float radius1;
     private float radius2;
-    private float zoom = 0.8f;//初始化缩放比例
+    private float zoom = 0.8f; //初始化缩放比例
     private int dp5;
     private Paint paintProgress;
     private int colorBlue;
+
     /**
      * 当前进度 以角度为单位
      */
@@ -47,21 +46,17 @@ public class RecordedButton extends View {
         init();
     }
 
-
     public RecordedButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
-
 
     public RecordedButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-
     private void init() {
-
 
         dp5 = (int) getResources().getDimension(R.dimen.d_5dp);
         colorGray = getResources().getColor(R.color.gray);
@@ -90,7 +85,6 @@ public class RecordedButton extends View {
         paintDelete.setColor(Color.RED);
         paintDelete.setStrokeWidth(dp5);
         paintDelete.setStyle(Paint.Style.STROKE);
-
 
         //设置绘制大小
         oval = new RectF();
@@ -135,21 +129,16 @@ public class RecordedButton extends View {
         this.max = max;
     }
 
-
     /**
      * 设置进度
      */
     public void setProgress(float progress) {
-
-
         this.progress = progress;
         float ratio = progress / max;
         girthPro = 365 * ratio;
+
         postInvalidate();
-
-
     }
-
 
     /**
      * 清除残留的进度
@@ -157,7 +146,6 @@ public class RecordedButton extends View {
     public void clearProgress() {
         setProgress(0);
     }
-
 
     /**
      * 获取到当前按钮的动画
@@ -170,14 +158,11 @@ public class RecordedButton extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-
         if (measuredWidth == -1) {
             measuredWidth = getMeasuredWidth();
 
-
             radius1 = measuredWidth * zoom / 2;
             radius2 = measuredWidth * zoom / 2 - dp5;
-
 
             oval.left = dp5 / 2;
             oval.top = dp5 / 2;
@@ -185,7 +170,6 @@ public class RecordedButton extends View {
             oval.bottom = measuredWidth - dp5 / 2;
         }
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {

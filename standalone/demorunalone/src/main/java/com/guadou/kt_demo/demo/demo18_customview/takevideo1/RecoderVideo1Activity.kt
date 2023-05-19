@@ -41,6 +41,11 @@ class RecoderVideo1Activity : BaseVMActivity<EmptyViewModel>() {
         mRecorderVideoView.clearWindow()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mRecorderVideoView.destoryAll()
+    }
+
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         mRecorderVideoView.stop();

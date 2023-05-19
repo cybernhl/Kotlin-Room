@@ -351,8 +351,6 @@ public class MyVideoView extends TextureView implements TextureView.SurfaceTextu
         //End 状态：通过release()方法可以进入End状态，只要MediaPlayer对象不再被使用，就应当尽快将其通过release()方法释放掉
         //Initialized 状态：这个状态比较简单，MediaPlayer调用setDataSource()方法就进入Initialized状态，表示此时要播放的文件已经设置好了。
         //Prepared 状态：初始化完成之后还需要通过调用prepare()或prepareAsync()方法，这两个方法一个是同步的一个是异步的，只有进入Prepared状态，才表明MediaPlayer到目前为止都没有错误，可以进行文件播放。
-
-
         Exception exception = null;
         try {
             if (mMediaPlayer == null) {
@@ -494,9 +492,7 @@ public class MyVideoView extends TextureView implements TextureView.SurfaceTextu
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
 
-
     }
-
 
     /**
      * 是否可用
@@ -505,7 +501,6 @@ public class MyVideoView extends TextureView implements TextureView.SurfaceTextu
         //|| mCurrentState == STATE_PAUSED || mCurrentState == STATE_PLAYING
         return mMediaPlayer != null && (mCurrentState == STATE_PREPARED);
     }
-
 
     //	/** 是否能即可播放 */
     //	public boolean canStart() {
