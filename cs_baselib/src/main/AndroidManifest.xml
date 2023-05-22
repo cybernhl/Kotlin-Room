@@ -34,6 +34,18 @@
             android:name="android.webkit.WebView.EnableSafeBrowing"
             android:value="true" />
 
+        <!--   7.1系统Uri适配     -->
+        <provider
+            android:name="com.guadou.lib_baselib.engine.PermissionFileProvider"
+            android:authorities="${applicationId}.file.path.share"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/permission_file_paths" />
+        </provider>
+
     </application>
+
 
 </manifest>

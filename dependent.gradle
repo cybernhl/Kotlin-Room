@@ -1,9 +1,9 @@
 ext {
     versions = [
             'minSdk'           : 21,
-            'targetSdk'        : 30,
-            'compileSdk'       : 30,
-            'buildToolsVersion': '30.0.2'
+            'targetSdk'        : 31,
+            'compileSdk'       : 31,
+            'buildToolsVersion': '31.0.0'
     ]
     deps = [
             //android和kt依赖资源
@@ -55,7 +55,9 @@ ext {
                     "brvah"             : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6',
                     "smart_refresh_core": 'com.scwang.smart:refresh-layout-kernel:2.0.1',
                     "smart_refresh_head": 'com.scwang.smart:refresh-header-classics:2.0.1',
-                    "picture_selector"  : 'com.github.LuckSiege.PictureSelector:picture_library:v2.6.0',  //图片选择
+                    "picture_selector"         : 'io.github.lucksiege:pictureselector:v3.11.1',    //图片选择
+                    "picture_selector_compress": 'io.github.lucksiege:compress:v3.11.1',    //图片选择-压缩
+                    "picture_selector_ucrop"   : 'io.github.lucksiege:ucrop:v3.11.1',    //图片选择-裁剪
                     "easy_adapter"      : 'com.lxj:easyadapter:1.2.3',  //xpopup的内置依赖库
                     "xpopup"            : 'com.lxj:xpopup:2.2.10',
 

@@ -88,4 +88,11 @@ dependencies {
     api project(':cpt_main')
 //    api 'com.github.minminaya:GenaralRoundLayout:1.0.0'
 //    implementation "io.github.liukai2530533:round_circle_imageview:1.0.1"
+
+    //CameraX依赖
+    implementation 'androidx.camera:camera-camera2:1.0.1'
+    implementation 'androidx.camera:camera-core:1.0.1'
+    implementation 'androidx.camera:camera-lifecycle:1.0.1'
+    implementation 'androidx.camera:camera-view:1.0.0-alpha27'
+
 }

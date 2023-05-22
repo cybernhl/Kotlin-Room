@@ -60,7 +60,7 @@ public class RecordedButton extends View {
 
         dp5 = (int) getResources().getDimension(R.dimen.d_5dp);
         colorGray = getResources().getColor(R.color.gray);
-        colorBlue = getResources().getColor(R.color.picture_color_blue);
+        colorBlue = getResources().getColor(R.color.ps_color_blue);
 
         paint = new Paint();
         paint.setAntiAlias(true);

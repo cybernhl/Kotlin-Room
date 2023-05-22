@@ -13,8 +13,6 @@ import java.io.File;
  */
 interface ICameraAction {
 
-    void setupCustomParams(int width ,int height  ,int recordMaxTime);
-
     void setOutFile(File file);
 
     File getOutFile();
@@ -25,7 +23,7 @@ interface ICameraAction {
 
     void startCameraRecord();
 
-    void stopCameraRecord();
+    void stopCameraRecord(ICameraCallback cameraCallback);
 
     void releaseCameraRecord();
 

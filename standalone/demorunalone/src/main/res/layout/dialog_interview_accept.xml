@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/d_5dp"
             android:layout_marginRight="@dimen/d_5dp"
             android:padding="@dimen/d_5dp"
-            android:src="@drawable/picture_icon_delete" />
+            android:src="@drawable/ps_ic_delete" />
 
     </RelativeLayout>
 

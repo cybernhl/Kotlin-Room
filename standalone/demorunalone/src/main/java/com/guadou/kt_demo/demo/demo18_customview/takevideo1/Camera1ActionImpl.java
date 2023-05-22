@@ -4,6 +4,7 @@ package com.guadou.kt_demo.demo.demo18_customview.takevideo1;
 import android.content.Context;
 import android.hardware.Camera;
 import android.media.MediaRecorder;
+import android.util.DisplayMetrics;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -13,13 +14,12 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Camera1ActionImpl implements ICameraAction {
 
-    private int mWidth; // 视频分辨率宽度
-    private int mHeight; // 视频分辨率高度
-    private int mRecordMaxTime;  // 一次拍摄最长时间
     private File mVecordFile = null;  // 输出的文件
 
     private int previewWidth = 0;
@@ -28,15 +28,9 @@ public class Camera1ActionImpl implements ICameraAction {
     private SurfaceView mSurfaceView;
     private SurfaceHolder mSurfaceHolder;
     private Camera mCamera;
+    private Camera.Size mBestPreviewSize;
     private MediaRecorder mMediaRecorder;
-
-    @Override
-    public void setupCustomParams(int width, int height, int recordMaxTime) {
-
-        this.mWidth = width;
-        this.mHeight = height;
-        this.mRecordMaxTime = recordMaxTime;
-    }
+    private Context mContext;
 
     @Override
     public void setOutFile(File file) {
@@ -51,6 +45,7 @@ public class Camera1ActionImpl implements ICameraAction {
     @Override
     public View initCamera(Context context) {
         mSurfaceView = new SurfaceView(context);
+        mContext = context;
         mSurfaceView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         mSurfaceHolder = mSurfaceView.getHolder();
@@ -68,13 +63,6 @@ public class Camera1ActionImpl implements ICameraAction {
 
     @Override
     public void startCameraRecord() {
-
-//        if(mCamera == null) return;
-//        Camera.Parameters params = mCamera.getParameters();
-//        Camera.Size previewSize = params.getPreviewSize();
-//        int preWidth = previewSize.width;
-//        int preHeight = previewSize.height;
-//        YYLogUtils.w("preWidth:"+preWidth +" preHeight:"+preHeight);
 
         mMediaRecorder = new MediaRecorder();
         mMediaRecorder.reset();
@@ -94,9 +82,12 @@ public class Camera1ActionImpl implements ICameraAction {
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);  // 音频源
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);  // 视频输出格式
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);  // 音频格式
-        mMediaRecorder.setVideoSize(mWidth, mHeight);  // 设置分辨率
+        if (mBestPreviewSize != null) {
+//            mMediaRecorder.setVideoSize(mBestPreviewSize.width, mBestPreviewSize.height);  // 设置分辨率
+            mMediaRecorder.setVideoSize(640, 480);  // 设置分辨率
+        }
 //        mMediaRecorder.setVideoFrameRate(16); // 比特率
-        mMediaRecorder.setVideoEncodingBitRate(1 * 1024 * 512);// 设置帧频率，
+        mMediaRecorder.setVideoEncodingBitRate(1024 * 512);// 设置帧频率，
         mMediaRecorder.setOrientationHint(90);// 输出旋转90度，保持竖屏录制
         mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);// 视频录制格式
         mMediaRecorder.setOutputFile(mVecordFile.getAbsolutePath());
@@ -111,12 +102,13 @@ public class Camera1ActionImpl implements ICameraAction {
     }
 
     @Override
-    public void stopCameraRecord() {
+    public void stopCameraRecord(ICameraCallback cameraCallback) {
         if (mMediaRecorder != null) {
             mMediaRecorder.setOnErrorListener(null);
             mMediaRecorder.setPreviewDisplay(null);
             try {
                 mMediaRecorder.stop();
+                cameraCallback.takeSuccess();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -168,13 +160,6 @@ public class Camera1ActionImpl implements ICameraAction {
         try {
             mCamera = Camera.open();
 
-            Camera.Parameters parameters = mCamera.getParameters();
-            List<Camera.Size> sizes = parameters.getSupportedPreviewSizes();
-            for (int i = 0; i < sizes.size(); i++) {
-                Camera.Size size = sizes.get(i);
-                YYLogUtils.w("支持的Size-width:" + size.width + " height:" + size.height);
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
             releaseCamera();
@@ -184,6 +169,7 @@ public class Camera1ActionImpl implements ICameraAction {
 
         //设置摄像头参数
         setCameraParams();
+
 
         try {
             mCamera.setDisplayOrientation(90);   //设置拍摄方向为90度（竖屏）
@@ -207,10 +193,67 @@ public class Camera1ActionImpl implements ICameraAction {
     //设置垂直方向
     private void setCameraParams() {
         if (mCamera != null) {
-            Camera.Parameters params = mCamera.getParameters();
-            params.set("orientation", "portrait");
-            mCamera.setParameters(params);
+
+            DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
+            int screenWidth = displayMetrics.widthPixels;
+            int screenHeight = displayMetrics.heightPixels;
+
+            //找到最接近屏幕宽高比的比例
+            Camera.Parameters parameters = mCamera.getParameters();
+
+            // 初始化最佳预览尺寸
+            mBestPreviewSize = getBestPreviewSize(parameters, screenWidth, screenHeight);
+
+            if (mBestPreviewSize != null) {
+                YYLogUtils.w("bestSize- width" + mBestPreviewSize.width + " height:" + mBestPreviewSize.height);
+                parameters.setPreviewSize(mBestPreviewSize.width, mBestPreviewSize.height);
+            }
+
+            parameters.set("orientation", "portrait");
+            mCamera.setParameters(parameters);
+
         }
+    }
+
+    private Camera.Size getBestPreviewSize(Camera.Parameters parameters, int screenWidth, int screenHeight) {
+        List<Camera.Size> supportedSizes = parameters.getSupportedPreviewSizes();
+        // 假设 screenWidth 和 screenHeight 分别表示屏幕的宽度和高度
+        double screenRatio = (double) screenWidth / screenHeight;
+        YYLogUtils.w("屏幕的尺寸-screenWidth: " + screenWidth + " screenHeight:" + screenHeight + " screenRatio:" + screenRatio);
+
+        // 初始化最小差值为一个足够大的数
+        double minDiff = Double.MAX_VALUE;
+        Camera.Size bestSize = null;
+
+        // 遍历 supportedSizes 数组
+        for (Camera.Size size : supportedSizes) {
+
+            double ratio = (double) size.width / size.height;
+            double diff = Math.abs(ratio - screenRatio);
+
+            YYLogUtils.w("支持的预览宽高，width:" + size.width + " height:" + size.height + " ratio:" + ratio + " 差值：" + diff);
+
+            // 如果差值比当前最小差值还要小，则更新最小差值和 bestSize
+            if (diff < minDiff) {
+                minDiff = diff;
+                bestSize = size;
+            }
+
+            double ratio2 = (double) size.height / size.width;
+            double diff2 = Math.abs(ratio2 - screenRatio);
+
+            YYLogUtils.w("支持的预览宽高，width:" + size.height + " height:" + size.width + " ratio:" + ratio2 + " 差值：" + diff2);
+
+            // 如果差值比当前最小差值还要小，则更新最小差值和 bestSize
+            if (diff2 < minDiff) {
+                minDiff = diff2;
+                bestSize = size;
+            }
+
+        }
+
+        return bestSize;
+
     }
 
     /* =========================== SurfaceView的Callback ===================================**/
@@ -228,6 +271,7 @@ public class Camera1ActionImpl implements ICameraAction {
 
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            YYLogUtils.w("surfaceChanged-width: " + width + " height:" + height);
         }
 
         @Override

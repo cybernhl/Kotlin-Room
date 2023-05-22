@@ -8,11 +8,15 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.hardware.Camera;
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.OrientationEventListener;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,12 +24,29 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.camera.core.AspectRatio;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.ImageCapture;
+import androidx.camera.core.Preview;
+import androidx.camera.core.VideoCapture;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.common.util.concurrent.ListenableFuture;
 import com.guadou.kt_demo.R;
+import com.guadou.lib_baselib.utils.CommUtils;
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -35,7 +56,8 @@ import java.util.TimerTask;
 public class RecorderVideoView extends LinearLayout {
 
     //使用Camera1录制
-    private ICameraAction mCameraAction = new Camera1ActionImpl();
+//    private ICameraAction mCameraAction = new Camera1ActionImpl();
+    private ICameraAction mCameraAction = new CameraXActionImpl();
 
     private ImageView mIvclose;
     private ImageView mIvfinish;
@@ -67,15 +89,10 @@ public class RecorderVideoView extends LinearLayout {
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RecorderVideoView, defStyle, 0);
 
-        int mWidth = a.getInteger(R.styleable.RecorderVideoView_record_width, 320);// 默认320
-        int mHeight = a.getInteger(R.styleable.RecorderVideoView_record_height, 240);// 默认240
-
         mRecordMaxTime = a.getInteger(R.styleable.RecorderVideoView_record_max_time, 10);// 默认为10秒
 
         a.recycle();
 
-        //todo 设置自定义属性给CameraAction
-        mCameraAction.setupCustomParams(mWidth, mHeight, mRecordMaxTime);
 
         /*
          * 自定义录像控件填充自定义的布局
@@ -107,7 +124,7 @@ public class RecorderVideoView extends LinearLayout {
             super.handleMessage(msg);
             if (msg.what == 1) {
 
-                finishRecode();
+                finishRecode(true);
 
             } else if (msg.what == 2) {
 
@@ -125,8 +142,6 @@ public class RecorderVideoView extends LinearLayout {
                 if (mTimeCount >= mRecordMaxTime) {  // 达到指定时间，停止拍摄
                     mShootBtn.setProgress(mRecordMaxTime);
 
-                    stop();
-
                     if (mOnRecordFinishListener != null) {
                         mOnRecordFinishListener.onRecordFinish();
                     }
@@ -140,44 +155,14 @@ public class RecorderVideoView extends LinearLayout {
     };
 
 
-    private void finishRecode() {
+    private void finishRecode(boolean success) {
 
         stop();
 
-        /*  录制完成显示 控制控件的显示和隐藏  */
-        mVideoPlay.setVisibility(View.VISIBLE);
+        stopRecord(success);
+        releaseRecord();
 
-        // todo CameraAction是否展示预览页面
-        mCameraAction.isShowCameraView(false);
 
-        mRlbottom.setVisibility(View.VISIBLE);
-
-        mShootBtn.startAnim(0.2f, 0);
-        ValueAnimator anim = mShootBtn.getButtonAnim();
-
-        if (anim != null && anim.isRunning()) {
-            anim.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    mShootBtn.setVisibility(View.GONE);
-                }
-            });
-        }
-
-        //录制完成之后展示已经录制的路径下的视频文件
-        mVideoPlay.setVideoPath(getVecordFile().toString());
-        mVideoPlay.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mVideoPlay.setLooping(true);
-                mVideoPlay.start();
-            }
-        });
-        if (mVideoPlay.isPrepared()) {
-            mVideoPlay.setLooping(true);
-            mVideoPlay.start();
-        }
 
     }
 
@@ -224,7 +209,7 @@ public class RecorderVideoView extends LinearLayout {
                             }
                         }, 400);
 
-                        stop();
+                        finishRecode(false);
 
                         Toast.makeText(getContext(), "视频录制时间太短", Toast.LENGTH_SHORT).show();
                     }
@@ -320,8 +305,6 @@ public class RecorderVideoView extends LinearLayout {
 
         mShootBtn.setProgress(0);
 
-        stopRecord();
-        releaseRecord();
 
         //todo CameraAction释放摄像头资源
         mCameraAction.releaseCamera();
@@ -329,10 +312,57 @@ public class RecorderVideoView extends LinearLayout {
 
     /**
      * 停止录制
+     *
+     * @param success
      */
-    public void stopRecord() {
+    public void stopRecord(boolean success) {
         //todo CameraAction录制的相关控制
-        mCameraAction.stopCameraRecord();
+        mCameraAction.stopCameraRecord(() -> {
+
+            if (success) {
+
+                mHandler.post(() -> {
+
+                    /*  录制完成显示 控制控件的显示和隐藏  */
+                    mVideoPlay.setVisibility(View.VISIBLE);
+
+                    // todo CameraAction是否展示预览页面
+                    mCameraAction.isShowCameraView(false);
+
+                    mRlbottom.setVisibility(View.VISIBLE);
+
+                    mShootBtn.startAnim(0.2f, 0);
+                    ValueAnimator anim = mShootBtn.getButtonAnim();
+
+                    if (anim != null && anim.isRunning()) {
+                        anim.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                mShootBtn.setVisibility(View.GONE);
+                            }
+                        });
+                    }
+
+
+                    //录制完成之后展示已经录制的路径下的视频文件
+                    mVideoPlay.setVideoPath(getVecordFile().getAbsolutePath());
+                    mVideoPlay.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mVideoPlay.setLooping(true);
+                            mVideoPlay.start();
+                        }
+                    });
+                    if (mVideoPlay.isPrepared()) {
+                        mVideoPlay.setLooping(true);
+                        mVideoPlay.start();
+                    }
+
+                });
+
+            }
+        });
     }
 
     /**

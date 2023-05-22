@@ -25,11 +25,12 @@ import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.luck.picture.lib.decoration.GridSpacingItemDecoration
 import com.luck.picture.lib.entity.LocalMedia
-import com.luck.picture.lib.listener.OnResultCallbackListener
+import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import okio.buffer
 import okio.sink
 import okio.source
 import java.io.File
+import java.util.ArrayList
 
 
 /**
@@ -107,7 +108,7 @@ class Demo6Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo6Binding>() {
                     //获取到权限成功-打开单选相册
                     extOpenImageSelect(mImageSelectDatas, object : OnResultCallbackListener<LocalMedia> {
 
-                        override fun onResult(result: MutableList<LocalMedia>?) {
+                        override fun onResult(result: ArrayList<LocalMedia>?) {
                             result?.also {
                                 mImageSelectDatas.clear()
                                 mImageSelectDatas.addAll(it)
@@ -119,6 +120,7 @@ class Demo6Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo6Binding>() {
                         override fun onCancel() {
                             toast("取消了选择")
                         }
+
 
                     }, selectNum = 1, canTackPhoto = true, canCompress = true, canCrop = true, ratioX = 1, ratioY = 1)
 
@@ -139,7 +141,7 @@ class Demo6Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo6Binding>() {
                     //获取到权限成功-打开单选相册
                     extOpenCamera(mImageSelectDatas, object : OnResultCallbackListener<LocalMedia> {
 
-                        override fun onResult(result: MutableList<LocalMedia>?) {
+                        override fun onResult(result: ArrayList<LocalMedia>?) {
                             result?.also {
                                 mImageSelectDatas.clear()
                                 mImageSelectDatas.addAll(it)
@@ -170,7 +172,7 @@ class Demo6Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo6Binding>() {
                     //获取到权限成功-打开单选相册
                     extOpenImageSelect(mImageSelectDatas, object : OnResultCallbackListener<LocalMedia> {
 
-                        override fun onResult(result: MutableList<LocalMedia>?) {
+                        override fun onResult(result: ArrayList<LocalMedia>?) {
                             result?.also {
                                 mImageSelectDatas.clear()
                                 mImageSelectDatas.addAll(it)

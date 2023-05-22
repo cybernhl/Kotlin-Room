@@ -2,8 +2,8 @@
 apply from: "dependent.gradle"
 
 buildscript {
-    ext.kotlin_version = '1.5.31'
-    ext.booster_version = '2.4.0'
+    ext.kotlin_version = '1.6.10'
+    ext.booster_version = '4.4.0'
 
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
@@ -13,9 +13,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:7.1.2'
 
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         //Hilt插件
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.38.1'
@@ -24,7 +24,6 @@ buildscript {
         // ==================== Booster优化插件 ====================
         // 基础框架
         classpath "com.didiglobal.booster:booster-gradle-plugin:$booster_version"
-
         // 多线程优化
         classpath "com.didiglobal.booster:booster-transform-thread:$booster_version"
         // WebView 预加载
@@ -35,7 +34,7 @@ buildscript {
         // 资源压缩
         classpath "com.didiglobal.booster:booster-task-compression-cwebp:$booster_version"
         // 文件压缩
-        classpath "com.didiglobal.booster:booster-task-compression-processed-res:$booster_version"
+//        classpath "com.didiglobal.booster:booster-task-compression-processed-res:$booster_version"
         // 去冗余资源
         classpath "com.didiglobal.booster:booster-task-resource-deredundancy:$booster_version"
         // 资源索引内联
