@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl3.Camera2RecordProvider;
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.Camera2RecordProvider;
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AspectTextureView;
 
 

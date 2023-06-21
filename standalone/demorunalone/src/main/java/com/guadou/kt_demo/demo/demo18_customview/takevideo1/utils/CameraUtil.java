@@ -1,22 +1,16 @@
 package com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
-import android.graphics.PixelFormat;
 import android.graphics.Rect;
-import android.graphics.YuvImage;
 import android.media.Image;
 import android.util.Log;
 import android.util.Size;
 import android.view.TextureView;
 import android.view.ViewGroup;
 
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl3.BaseCameraProvider;
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.BaseCameraProvider;
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;

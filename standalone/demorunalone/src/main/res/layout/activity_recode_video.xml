@@ -44,4 +44,12 @@
         app:layout_constraintLeft_toRightOf="@id/end"
         app:layout_constraintTop_toTopOf="@id/end" />
 
+    <ImageView
+        android:id="@+id/iv_catch"
+        app:layout_constraintTop_toTopOf="@id/fl_container"
+        android:layout_marginTop="@dimen/d_30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

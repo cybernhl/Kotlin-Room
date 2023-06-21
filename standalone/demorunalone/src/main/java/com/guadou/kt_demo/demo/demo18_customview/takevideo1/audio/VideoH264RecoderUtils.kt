@@ -1,6 +1,7 @@
 package com.guadou.kt_demo.demo.demo18_customview.takevideo1.audio
 
 import android.app.Activity
+import android.graphics.Bitmap
 import android.graphics.SurfaceTexture
 import android.media.Image
 import android.media.MediaCodec
@@ -9,12 +10,14 @@ import android.media.MediaFormat
 import android.util.Log
 import android.util.Size
 import android.view.ViewGroup
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl3.BaseCommonCameraProvider
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl3.Camera2ImageReaderProvider
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.BaseCommonCameraProvider
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.Camera2ImageReaderProvider
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AspectTextureView
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.Camera2ImageUtils
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.Camera2ImageUtils.getBytesFromImageAsType
 import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
+import com.theeasiestway.yuv.YuvUtils
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -22,6 +25,9 @@ import java.util.concurrent.LinkedBlockingQueue
 
 
 class VideoH264RecoderUtils {
+    private val yuvUtils = YuvUtils()
+    private var bitmap: Bitmap? = null
+    private var mBitmapCallback: ((b: Bitmap?) -> Unit)? = null
 
     private var surfaceTexture: SurfaceTexture? = null
     private var mCamera2Provider: Camera2ImageReaderProvider? = null
@@ -70,7 +76,22 @@ class VideoH264RecoderUtils {
 
             override fun onFrameCannback(image: Image) {
                 if (isRecording) {
-                    val bytesFromImageAsType = getBytesFromImageAsType(image, Camera2ImageUtils.YUV420SP)
+
+                    // 使用C库获取到I420格式，对应 COLOR_FormatYUV420Planar
+                    val yuvFrame = yuvUtils.convertToI420(image)
+                    // 与MediaFormat的编码格式宽高对应
+                    val yuvFrameRotate = yuvUtils.rotate(yuvFrame, 90)
+
+                    // 用于测试RGB图片的回调预览
+                    bitmap = Bitmap.createBitmap(yuvFrameRotate.width, yuvFrameRotate.height, Bitmap.Config.ARGB_8888)
+                    yuvUtils.yuv420ToArgb(yuvFrameRotate, bitmap!!)
+                    mBitmapCallback?.invoke(bitmap)
+
+                    // 旋转90度之后的I420格式添加到同步队列
+                    val bytesFromImageAsType = yuvFrameRotate.asArray()
+
+                    //使用Java工具类转换Image对象为YUV420格式,对应 COLOR_FormatYUV420Flexible
+//                    val bytesFromImageAsType = getBytesFromImageAsType(image, Camera2ImageUtils.YUV420SP)
                     originVideoDataList.offer(bytesFromImageAsType)
                 }
             }
@@ -95,11 +116,23 @@ class VideoH264RecoderUtils {
 
         if (mPreviewSize == null) return
 
-        //配置MediaFormat信息(指定H264格式)
-        val videoMediaFormat = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, mPreviewSize!!.width, mPreviewSize!!.height)
+        //确定要竖屏的，真实场景需要根据屏幕当前方向来判断，这里简单写死为竖屏
+        val videoWidth: Int
+        val videoHeight: Int
+        if (mPreviewSize!!.width > mPreviewSize!!.height) {
+            videoWidth = mPreviewSize!!.height
+            videoHeight = mPreviewSize!!.width
+        } else {
+            videoWidth = mPreviewSize!!.width
+            videoHeight = mPreviewSize!!.height
+        }
+        YYLogUtils.w("MediaFormat的编码格式，宽：${videoWidth} 高:${videoHeight}")
 
-        //由于本身就是使用的5.0的Camera2,可以直接用新加的颜色格式
-        videoMediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Flexible)
+        //配置MediaFormat信息(指定H264格式)
+        val videoMediaFormat = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, videoWidth, videoHeight)
+
+        //添加编码需要的颜色格式
+        videoMediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar)
 
         //设置帧率
         videoMediaFormat.setInteger(MediaFormat.KEY_FRAME_RATE, 30)
@@ -255,5 +288,9 @@ class VideoH264RecoderUtils {
         mCamera2Provider?.closeCamera()
         isRecording = false
         outputStream.close()
+    }
+
+    fun setBitmapCallback(block: ((b: Bitmap?) -> Unit)? = null) {
+        mBitmapCallback = block
     }
 }

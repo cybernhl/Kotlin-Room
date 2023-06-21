@@ -1,8 +1,10 @@
 package com.guadou.kt_demo.demo.demo18_customview.takevideo1
 
+import android.graphics.Bitmap
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.audio.VideoH264RecoderUtils
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
@@ -15,6 +17,7 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
  */
 class RecoderVideo1Activity : BaseVMActivity<EmptyViewModel>() {
 
+    private lateinit var ivCatch: ImageView
     private lateinit var videoRecodeUtils: VideoH264RecoderUtils
 
     companion object {
@@ -37,6 +40,7 @@ class RecoderVideo1Activity : BaseVMActivity<EmptyViewModel>() {
         val startBtn = findViewById<Button>(R.id.start)
         val endBtn = findViewById<Button>(R.id.end)
         val playBtn = findViewById<Button>(R.id.play)
+        ivCatch = findViewById(R.id.iv_catch)
 
         initCamera(flContainer)
 
@@ -60,6 +64,18 @@ class RecoderVideo1Activity : BaseVMActivity<EmptyViewModel>() {
 
         videoRecodeUtils.setupCamera(this, container)
 
+        videoRecodeUtils.setBitmapCallback {
+            it?.let {
+                showBitMap(it)
+            }
+        }
+
+    }
+
+    private fun showBitMap(bitmap: Bitmap) {
+        ivCatch.post {
+            ivCatch.setImageBitmap(bitmap)
+        }
     }
 
     override fun onDestroy() {

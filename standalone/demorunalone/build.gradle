@@ -21,6 +21,10 @@ android {
 
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
     }
 
     buildTypes {
@@ -86,6 +90,7 @@ dependencies {
 
     api project(':cs_cptServices')
     api project(':cpt_main')
+    implementation project(':lib_yuvutil')
 //    api 'com.github.minminaya:GenaralRoundLayout:1.0.0'
 //    implementation "io.github.liukai2530533:round_circle_imageview:1.0.1"
 

@@ -83,7 +83,7 @@ dependencies {
     api project(':cs_router')
 
     //AndroidX
-    api AndroidX.appcompat
+    api deps.android.appcompat
     api deps.android.constraint_layout
     api deps.android.recyclerview
     api deps.android.design

@@ -6,6 +6,7 @@ include ':app',
         ':cs_cptServices',
 
 //        ':lib_xpopups',
+        ':lib_yuvutil',
 
         ':cpt_main',
 

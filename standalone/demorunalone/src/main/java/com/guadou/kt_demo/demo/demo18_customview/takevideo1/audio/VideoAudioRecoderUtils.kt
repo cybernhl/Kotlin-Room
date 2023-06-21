@@ -6,11 +6,13 @@ import android.media.*
 import android.util.Log
 import android.util.Size
 import android.view.ViewGroup
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl3.BaseCommonCameraProvider
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl3.Camera2ImageReaderProvider
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.BaseCommonCameraProvider
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.Camera2ImageReaderProvider
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AspectTextureView
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.Camera2ImageUtils
 import com.guadou.lib_baselib.utils.CommUtils
+import com.guadou.lib_baselib.utils.log.YYLogUtils
+import com.theeasiestway.yuv.YuvUtils
 import java.io.File
 import java.nio.ByteBuffer
 import java.util.concurrent.LinkedBlockingQueue
@@ -20,6 +22,7 @@ import kotlin.concurrent.thread
  * 音视频录制
  */
 class VideoAudioRecoderUtils {
+    private val yuvUtils = YuvUtils()
 
     private var audioRecorder: AudioRecord? = null
     private var audioCodec: MediaCodec? = null
@@ -90,9 +93,19 @@ class VideoAudioRecoderUtils {
 
             override fun onFrameCannback(image: Image) {
                 if (isRecording) {
-                    val bytesFromImageAsType = Camera2ImageUtils.getBytesFromImageAsType(image, Camera2ImageUtils.YUV420SP)
-                    Log.i("camera2", "Camera数据  $bytesFromImageAsType")
-                    videoThread.addVideoData(bytesFromImageAsType)
+
+                    //使用Java工具类转换Image对象为YUV420格式
+//                    val bytesFromImageAsType = Camera2ImageUtils.getBytesFromImageAsType(image, Camera2ImageUtils.YUV420SP)
+
+
+                    // 使用C库获取到I420格式，对应 COLOR_FormatYUV420Planar
+                    var yuvFrame = yuvUtils.convertToI420(image)
+                    // 与MediaFormat的编码格式宽高对应
+                    yuvFrame = yuvUtils.rotate(yuvFrame, 90)
+
+                    // 旋转90度之后的I420格式添加到同步队列
+                    videoThread.addVideoData(yuvFrame.asArray())
+
                 }
             }
 
@@ -176,9 +189,22 @@ class VideoAudioRecoderUtils {
     // =======================  Video 线程  begin ↓  =========================
 
     private fun initVideoFormat() {
-        videoMediaFormat = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, mPreviewSize!!.width, mPreviewSize!!.height)
-        //设置颜色类型
-        videoMediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Flexible)
+        //确定要竖屏的，真实场景需要根据屏幕当前方向来判断，这里简单写死为竖屏
+        val videoWidth: Int
+        val videoHeight: Int
+        if (mPreviewSize!!.width > mPreviewSize!!.height) {
+            videoWidth = mPreviewSize!!.height
+            videoHeight = mPreviewSize!!.width
+        } else {
+            videoWidth = mPreviewSize!!.width
+            videoHeight = mPreviewSize!!.height
+        }
+        YYLogUtils.w("MediaFormat的编码格式，宽：${videoWidth} 高:${videoHeight}")
+
+        //配置MediaFormat信息(指定H264格式)
+        val videoMediaFormat = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, videoWidth, videoHeight)
+        //添加编码需要的颜色类型
+        videoMediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar)
         //设置帧率
         videoMediaFormat.setInteger(MediaFormat.KEY_FRAME_RATE, 30)
         //设置比特率
