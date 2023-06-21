@@ -140,9 +140,24 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="视频录制1"
+                    android:text="单独音频录制"
                     android:textAllCaps="false"
-                    binding:clicks="@{click.videoRecoder1}" />
+                    binding:clicks="@{click.audioRecoder}" />
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单独视频录制"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.videoRecoder}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="音视频录制（完整）"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click.videoRecoderAll}" />
 
             </LinearLayout>
 

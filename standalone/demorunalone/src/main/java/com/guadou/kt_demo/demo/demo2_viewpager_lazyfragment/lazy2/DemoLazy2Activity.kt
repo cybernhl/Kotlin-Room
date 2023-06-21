@@ -8,6 +8,7 @@ import com.guadou.kt_demo.databinding.ActivityDemo2PagelazyBinding
 import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.LazyLoad1Fragment
 import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.LazyLoad2Fragment
 import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.LazyLoad3Fragment
+import com.guadou.kt_demo.demo.demo2_viewpager_lazyfragment.adapter.MyPager2Adapter
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
@@ -21,6 +22,7 @@ class DemoLazy2Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo2PagelazyB
 
     val fragments = mutableListOf(Lazy2Fragment1.obtainFragment(), Lazy2Fragment2.obtainFragment(), Lazy2Fragment3.obtainFragment())
     val titles = mutableListOf("Demo1", "Demo2", "Demo3")
+    val mAdapter = MyPager2Adapter(supportFragmentManager, this.lifecycle, fragments)
 
     companion object {
         fun startInstance() {
@@ -45,25 +47,22 @@ class DemoLazy2Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo2PagelazyB
             //添加并刷新
 //            titles.add("Demo4")
 //            fragments.add(Lazy2Fragment1.obtainFragment())
-//            mBinding.viewPager2.adapter?.notifyItemInserted(fragments.size-1)
+//            mAdapter.notifyItemInserted(fragments.size-1)
 
             //更新指定位置并刷新
-//            fragments[1] = Lazy2Fragment1.obtainFragment()
-//            titles[1] = "Refresh2"
-//            mBinding.viewPager2.adapter?.notifyItemChanged(1)
+            fragments[1] = Lazy2Fragment3.obtainFragment()
+            titles[1] = "Refresh2"
+            mAdapter.notifyItemChanged(1)
 
             //删除并刷新
-            fragments.removeAt(2)
-            mBinding.viewPager2.adapter?.notifyItemRemoved(2)
-            mBinding.viewPager2.adapter?.notifyItemRangeChanged(2, 1)
+//            fragments.removeAt(2)
+//            mAdapter.notifyItemRemoved(2)
+//            mAdapter.notifyItemRangeChanged(2, 1)
         }
 
 
-        mBinding.viewPager2.bindFragment(
-            supportFragmentManager,
-            this.lifecycle,
-            fragments,
-        )
+        mBinding.viewPager2.adapter = mAdapter
+        mBinding.viewPager2.offscreenPageLimit = fragments.size - 1
 
         TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager2) { tab, position ->
             //回调

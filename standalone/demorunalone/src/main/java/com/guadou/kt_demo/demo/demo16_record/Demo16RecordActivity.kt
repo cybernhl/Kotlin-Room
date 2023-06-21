@@ -31,6 +31,8 @@ import com.guadou.kt_demo.demo.demo16_record.lazy.PropertyLazyActivity
 import com.guadou.kt_demo.demo.demo16_record.list.SequencesActivity
 import com.guadou.kt_demo.demo.demo16_record.prototype.Address
 import com.guadou.kt_demo.demo.demo16_record.prototype.Company
+import com.guadou.kt_demo.demo.demo16_record.scroll1.ViewPagerScroll1Activity
+import com.guadou.kt_demo.demo.demo16_record.scroll1.ViewPagerScroll2Activity
 import com.guadou.kt_demo.demo.demo16_record.strategy.*
 import com.guadou.kt_demo.demo.demo16_record.viewpager.ViewPagerNestActivity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -61,7 +63,7 @@ import java.util.concurrent.TimeUnit
 class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeBinding>(),
     ISAFLauncher by SAFLauncher() {
 
-//    lateinit var hostLayout: StatusBarHostLayout
+    //    lateinit var hostLayout: StatusBarHostLayout
     private val clickProxy: ClickProxy by lazy { ClickProxy() }
     private val scheduledExecutorService: ScheduledExecutorService = Executors.newScheduledThreadPool(3)
 
@@ -138,7 +140,8 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
         })
 
         window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
-            YYLogUtils.w("->addOnGlobalLayoutListener-->") }
+            YYLogUtils.w("->addOnGlobalLayoutListener-->")
+        }
 
 
 
@@ -491,8 +494,14 @@ class Demo16RecordActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo16HomeB
             gotoActivity<SoftInputActivity>()
         }
 
-        fun testSequences(){
+        fun testSequences() {
             gotoActivity<SequencesActivity>()
+        }
+
+        fun scrollTest() {
+            //ViewPager垂直滚动测试
+//            gotoActivity<ViewPagerScroll1Activity>()
+            gotoActivity<ViewPagerScroll2Activity>()
         }
 
         //Java调用Kotlin

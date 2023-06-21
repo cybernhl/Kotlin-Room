@@ -150,6 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="测试滚动效果"
+                    binding:clicks="@{click.scrollTest}"
                     android:textAllCaps="false" />
 
                 <Button

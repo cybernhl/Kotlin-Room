@@ -3,10 +3,26 @@ package com.guadou.kt_demo.demo.demo18_customview.takevideo1;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.ImageFormat;
 import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
+import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CaptureResult;
+import android.media.Image;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Environment;
+import android.renderscript.Allocation;
+import android.renderscript.Matrix4f;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicColorMatrix;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Rational;
@@ -27,6 +43,7 @@ import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.core.VideoCapture;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -39,14 +56,20 @@ import com.guadou.lib_baselib.utils.CommUtils;
 import com.guadou.lib_baselib.utils.ScreenUtils;
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.nio.ByteBuffer;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 手撕 CameraX
+ */
 @SuppressLint("RestrictedApi")
-public class CameraXActionImpl implements ICameraAction {
+public class CameraX1ActionImpl implements ICameraAction {
 
     private File mVecordFile = null;  // 输出的文件
     private Context mContext;
@@ -117,7 +140,6 @@ public class CameraXActionImpl implements ICameraAction {
                 Preview preview = previewBuilder.build();
                 preview.setSurfaceProvider(mPreviewView.getSurfaceProvider());
 
-
                 //录制视频对象
                 mVideoCapture = new VideoCapture.Builder()
                         .setTargetAspectRatio(screenAspectRatio)  //设置高宽比
@@ -129,13 +151,21 @@ public class CameraXActionImpl implements ICameraAction {
                         .setBitRate(3 * 1024 * 1024)
                         .build();
 
+//                ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
+//                        .setTargetAspectRatio(screenAspectRatio)
+//                        .setTargetRotation(rotation)
+//                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+//                        .build();
+//
+//                // 在每一帧上应用颜色矩阵
+//                imageAnalysis.setAnalyzer(Executors.newSingleThreadExecutor(), new MyAnalyzer(mContext));
 
                 //开启CameraX
                 mCameraProvider.unbindAll();
 
                 if (mContext instanceof FragmentActivity) {
                     FragmentActivity fragmentActivity = (FragmentActivity) mContext;
-                    mCameraProvider.bindToLifecycle(fragmentActivity, mCameraSelector, preview, mVideoCapture);
+                    mCameraProvider.bindToLifecycle(fragmentActivity, mCameraSelector, preview, mVideoCapture/*,imageAnalysis*/);
                 }
 
 
@@ -146,6 +176,83 @@ public class CameraXActionImpl implements ICameraAction {
         }, ContextCompat.getMainExecutor(mContext));
 
     }
+
+//    private static class MyAnalyzer implements ImageAnalysis.Analyzer {
+//
+//        private final RenderScript mRenderScript;
+//
+//        public MyAnalyzer(Context context) {
+//            mRenderScript = RenderScript.create(context);
+//        }
+//
+//        @Override
+//        public void analyze(@NonNull ImageProxy image) {
+//
+//            @SuppressLint("UnsafeOptInUsageError")
+//            Bitmap bitmap = toBitmap(image.getImage());
+//
+//            YYLogUtils.w("Bitmap:" + bitmap);
+//
+//            // 对图像进行处理
+//            applyGrayScaleFilter(bitmap);
+//
+//
+//            // 释放
+//            image.close();
+//            bitmap.recycle();
+//            mRenderScript.destroy();
+//
+//        }
+//
+//        private Bitmap toBitmap(Image image) {
+//            // 获取图片的宽和高
+//            int width = image.getWidth();
+//            int height = image.getHeight();
+//
+//            // 创建YUV_420_888格式的字节数组
+//            Image.Plane[] planes = image.getPlanes();
+//            ByteBuffer yBuffer = planes[0].getBuffer();
+//            ByteBuffer uBuffer = planes[1].getBuffer();
+//            ByteBuffer vBuffer = planes[2].getBuffer();
+//            int ySize = yBuffer.remaining();
+//            int uSize = uBuffer.remaining();
+//            int vSize = vBuffer.remaining();
+//            byte[] data = new byte[ySize + uSize + vSize];
+//            yBuffer.get(data, 0, ySize);
+//            vBuffer.get(data, ySize, vSize);
+//            uBuffer.get(data, ySize + vSize, uSize);
+//
+//            //将 YUV_420_888 格式的字节数组转换为Bitmap对象
+//            YuvImage yuvImage = new YuvImage(data, ImageFormat.NV21, width, height, null);
+//            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//            yuvImage.compressToJpeg(new Rect(0, 0, width, height), 100, outputStream);
+//            byte[] jpegData = outputStream.toByteArray();
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(jpegData, 0, jpegData.length);
+//
+//            return bitmap;
+//        }
+//
+//        private Bitmap applyGrayScaleFilter(Bitmap bitmap) {
+//            // 应用灰度滤镜
+//            Allocation input = Allocation.createFromBitmap(mRenderScript, bitmap);
+//            Allocation output = Allocation.createTyped(mRenderScript, input.getType());
+//            ScriptIntrinsicColorMatrix matrix = ScriptIntrinsicColorMatrix.create(mRenderScript);
+//            matrix.setColorMatrix(new Matrix4f(
+//                    new float[]{0.5f, 0.5f, 0.5f, 0, 0,
+//                            0.5f, 0.5f, 0.5f, 0, 0,
+//                            0.5f, 0.5f, 0.5f, 0, 0,
+//                            0, 0, 0, 1, 0}
+//            ));
+//            matrix.forEach(input, output);
+//            Bitmap filteredBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+//            output.copyTo(filteredBitmap);
+//            input.destroy();
+//            output.destroy();
+//            matrix.destroy();
+//            return filteredBitmap;
+//        }
+//
+//    }
 
     private int aspectRatio(int widthPixels, int heightPixels) {
         double previewRatio = (double) Math.max(widthPixels, heightPixels) / (double) Math.min(widthPixels, heightPixels);
@@ -195,7 +302,7 @@ public class CameraXActionImpl implements ICameraAction {
     }
 
     @Override
-    public void releaseCamera() {
+    public void releaseAllCamera() {
 
     }
 
@@ -245,15 +352,4 @@ public class CameraXActionImpl implements ICameraAction {
         return -1;
     }
 
-//    private void transformsTextureView(TextureView textureView) {
-//        Matrix matrix = new Matrix();
-//        int screenHeight = ScreenUtils.getScreenHeight();
-//        int screenWidth = ScreenUtils.getScreenWidth();
-//        if (mLensFacing == CameraSelector.LENS_FACING_FRONT) {
-//            matrix.postScale(-1, 1, 1f * screenWidth / 2, 1f * screenHeight / 2);
-//        } else {
-//            matrix.postScale(1, 1, 1f * screenWidth / 2, 1f * screenHeight / 2);
-//        }
-//        textureView.setTransform(matrix);
-//    }
 }

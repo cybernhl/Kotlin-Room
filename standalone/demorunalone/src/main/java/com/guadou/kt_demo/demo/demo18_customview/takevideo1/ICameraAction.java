@@ -27,7 +27,7 @@ interface ICameraAction {
 
     void releaseCameraRecord();
 
-    void releaseCamera();
+    void releaseAllCamera();
 
     void clearWindow();
 

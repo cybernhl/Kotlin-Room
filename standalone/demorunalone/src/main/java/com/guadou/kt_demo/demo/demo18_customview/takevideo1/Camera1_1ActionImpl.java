@@ -14,11 +14,12 @@ import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class Camera1ActionImpl implements ICameraAction {
+/**
+ * 使用原生Camera手撕
+ */
+public class Camera1_1ActionImpl implements ICameraAction {
 
     private File mVecordFile = null;  // 输出的文件
 
@@ -80,7 +81,7 @@ public class Camera1ActionImpl implements ICameraAction {
         mMediaRecorder.setPreviewDisplay(mSurfaceHolder.getSurface());
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA); // 视频源
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);  // 音频源
-        mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);  // 视频输出格式
+        mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);  // 视频封装格式
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);  // 音频格式
         if (mBestPreviewSize != null) {
 //            mMediaRecorder.setVideoSize(mBestPreviewSize.width, mBestPreviewSize.height);  // 设置分辨率
@@ -89,7 +90,7 @@ public class Camera1ActionImpl implements ICameraAction {
 //        mMediaRecorder.setVideoFrameRate(16); // 比特率
         mMediaRecorder.setVideoEncodingBitRate(1024 * 512);// 设置帧频率，
         mMediaRecorder.setOrientationHint(90);// 输出旋转90度，保持竖屏录制
-        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);// 视频录制格式
+        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);// 视频输出格式
         mMediaRecorder.setOutputFile(mVecordFile.getAbsolutePath());
 
         try {
@@ -129,7 +130,7 @@ public class Camera1ActionImpl implements ICameraAction {
     }
 
     @Override
-    public void releaseCamera() {
+    public void releaseAllCamera() {
         if (mCamera != null) {
             mCamera.setPreviewCallback(null);
             mCamera.stopPreview();
@@ -153,7 +154,7 @@ public class Camera1ActionImpl implements ICameraAction {
 
     private void initCameraAndRecord() {
         if (mCamera != null) {
-            releaseCamera();
+            releaseAllCamera();
         }
 
         //打开摄像头
@@ -162,14 +163,13 @@ public class Camera1ActionImpl implements ICameraAction {
 
         } catch (Exception e) {
             e.printStackTrace();
-            releaseCamera();
+            releaseAllCamera();
         }
         if (mCamera == null)
             return;
 
         //设置摄像头参数
         setCameraParams();
-
 
         try {
             mCamera.setDisplayOrientation(90);   //设置拍摄方向为90度（竖屏）
@@ -276,7 +276,7 @@ public class Camera1ActionImpl implements ICameraAction {
 
         @Override
         public void surfaceDestroyed(SurfaceHolder holder) {
-            releaseCamera();
+            releaseAllCamera();
         }
     }
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="250">
+
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/pager_box" />
+
+    </Transition>
+
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/pager_box"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/img_gray"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/pager_box" />
+
+        <Constraint
+            android:id="@+id/img_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/img_gray" />
+
+        <Constraint
+            android:id="@+id/img_blue"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/img_star" />
+
+
+        <Constraint
+            android:id="@id/img_green"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/img_blue" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/pager_box"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            motion:layout_constraintBottom_toTopOf="@id/img_gray"
+            motion:layout_constraintLeft_toLeftOf="parent" />
+
+        <Constraint
+            android:id="@+id/img_gray"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            motion:layout_constraintBottom_toTopOf="@id/img_blue"
+            motion:layout_constraintLeft_toLeftOf="parent" />
+
+        <Constraint
+            android:id="@+id/img_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            motion:layout_constraintRight_toRightOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/img_blue"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            motion:layout_constraintBottom_toTopOf="@id/img_green"
+            motion:layout_constraintLeft_toLeftOf="parent" />
+
+
+        <Constraint
+            android:id="@id/img_green"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintLeft_toLeftOf="parent" />
+
+    </ConstraintSet>
+
+</MotionScene>

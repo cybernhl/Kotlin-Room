@@ -218,5 +218,8 @@
         <attr name="record_max_time" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="GLCameraView">
+        <attr name="type" format="string"/>
+    </declare-styleable>
 
 </resources>

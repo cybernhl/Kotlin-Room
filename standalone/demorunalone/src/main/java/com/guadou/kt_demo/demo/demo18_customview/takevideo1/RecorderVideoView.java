@@ -6,17 +6,12 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.hardware.Camera;
 import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.OrientationEventListener;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,29 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.camera.core.AspectRatio;
-import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ImageAnalysis;
-import androidx.camera.core.ImageCapture;
-import androidx.camera.core.Preview;
-import androidx.camera.core.VideoCapture;
-import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
-import com.google.common.util.concurrent.ListenableFuture;
 import com.guadou.kt_demo.R;
-import com.guadou.lib_baselib.utils.CommUtils;
-import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 /**
@@ -55,9 +31,14 @@ import java.util.concurrent.Executors;
  */
 public class RecorderVideoView extends LinearLayout {
 
-    //使用Camera1录制
-//    private ICameraAction mCameraAction = new Camera1ActionImpl();
-    private ICameraAction mCameraAction = new CameraXActionImpl();
+    //选择使用Camera录制
+//    private ICameraAction mCameraAction = new Camera1_1ActionImpl();
+//    private ICameraAction mCameraAction = new Camera1_2ActionImpl();
+//    private ICameraAction mCameraAction = new Camera2_1ActionImpl();
+    private ICameraAction mCameraAction = new Camera2_2ActionImpl();
+//    private ICameraAction mCameraAction = new CameraX1ActionImpl();
+//    private ICameraAction mCameraAction = new CameraX2ActionImpl();
+//    private ICameraAction mCameraAction = new CameraX3ActionImpl();
 
     private ImageView mIvclose;
     private ImageView mIvfinish;
@@ -107,10 +88,10 @@ public class RecorderVideoView extends LinearLayout {
         mShootBtn = (RecordedButton) findViewById(R.id.shoot_button);
         ViewGroup flCameraContrainer = findViewById(R.id.fl_camera_contrainer);
 
+        createRecordDir();
+
         // todo CameraAction初始化相机
         flCameraContrainer.addView(mCameraAction.initCamera(getContext()));
-
-        createRecordDir();
 
         initListener();
     }
@@ -305,9 +286,8 @@ public class RecorderVideoView extends LinearLayout {
 
         mShootBtn.setProgress(0);
 
-
         //todo CameraAction释放摄像头资源
-        mCameraAction.releaseCamera();
+        mCameraAction.releaseAllCamera();
     }
 
     /**
@@ -418,6 +398,9 @@ public class RecorderVideoView extends LinearLayout {
     public void destoryAll() {
         mShootBtn.clearProgress();
         mHandler.removeCallbacksAndMessages(null);
+
+        //todo CameraAction释放摄像头资源
+        mCameraAction.releaseAllCamera();
     }
 
     /**
