@@ -295,7 +295,7 @@ class Demo6Activity : BaseVDBActivity<EmptyViewModel, ActivityDemo6Binding>() {
         /**
          * 选择文件
          */
-        @SuppressLint("Recycle")
+        @SuppressLint("Recycle", "Range")
         fun chooseFile() {
 
             extRequestPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE) {

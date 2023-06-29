@@ -13,11 +13,9 @@ import android.view.ViewGroup
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.BaseCommonCameraProvider
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.Camera2ImageReaderProvider
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AspectTextureView
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.Camera2ImageUtils
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.Camera2ImageUtils.getBytesFromImageAsType
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
-import com.theeasiestway.yuv.YuvUtils
+import com.newki.yuv.YuvUtils
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -133,6 +131,7 @@ class VideoH264RecoderUtils {
 
         //添加编码需要的颜色格式
         videoMediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar)
+//        videoMediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Flexible)
 
         //设置帧率
         videoMediaFormat.setInteger(MediaFormat.KEY_FRAME_RATE, 30)

@@ -15,7 +15,6 @@ import android.os.Message;
 import android.util.Size;
 
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AspectTextureView;
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.BaseMessageLoop;
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.util.ArrayList;

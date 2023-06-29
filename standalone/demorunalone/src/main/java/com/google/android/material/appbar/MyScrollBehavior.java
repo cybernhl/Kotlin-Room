@@ -27,7 +27,7 @@ public class MyScrollBehavior extends ViewOffsetBehavior<NestedScrollView> {
     @Override
     public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull NestedScrollView child,
                                    @NonNull View dependency) {
-        return dependency instanceof ImageView || dependency instanceof TextView ;
+        return dependency instanceof ImageView || dependency instanceof TextView;
     }
 
     @Override

@@ -1,11 +1,10 @@
-package com.theeasiestway.yuv.entities
+package com.newki.yuv.entities
 
 import java.nio.ByteBuffer
 
-//
-// Created by Loboda Alexey on 25.06.2020.
-//
-
+/**
+ * ARG格式的对象封装
+ */
 class ArgbFrame {
 
     lateinit var data: ByteBuffer; private set

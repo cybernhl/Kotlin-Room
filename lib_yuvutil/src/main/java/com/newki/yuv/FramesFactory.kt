@@ -1,12 +1,8 @@
-package com.theeasiestway.yuv
+package com.newki.yuv
 
-import com.theeasiestway.yuv.entities.ArgbFrame
-import com.theeasiestway.yuv.entities.YuvFrame
+import com.newki.yuv.entities.ArgbFrame
+import com.newki.yuv.entities.YuvFrame
 import java.nio.ByteBuffer
-
-//
-// Created by Loboda Alexey on 25.06.2020.
-//
 
 object FramesFactory {
 

@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.BaseCommonCameraProvider
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.Camera2ImageReaderProvider
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AspectTextureView
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.Camera2ImageUtils
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
-import com.theeasiestway.yuv.YuvUtils
+import com.newki.yuv.YuvUtils
 import java.io.File
 import java.nio.ByteBuffer
 import java.util.concurrent.LinkedBlockingQueue
@@ -166,7 +165,6 @@ class VideoAudioRecoderUtils {
         }
 
     }
-
 
     fun getOutputPath(): String {
         return file.absolutePath

@@ -1,11 +1,10 @@
-package com.theeasiestway.yuv
+package com.newki.yuv
 
 import android.graphics.Bitmap
 import android.media.Image
 import android.util.Log
-import android.view.Surface
-import com.theeasiestway.yuv.entities.ArgbFrame
-import com.theeasiestway.yuv.entities.YuvFrame
+import com.newki.yuv.entities.ArgbFrame
+import com.newki.yuv.entities.YuvFrame
 import java.nio.ByteBuffer
 
 /**

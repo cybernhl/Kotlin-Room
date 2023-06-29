@@ -1,12 +1,11 @@
-package com.theeasiestway.yuv.entities
+package com.newki.yuv.entities
 
 import android.media.Image
 import java.nio.ByteBuffer
 
-//
-// Created by Loboda Alexey on 22.06.2020.
-//
-
+/**
+ * YUV格式的对象封装
+ */
 class YuvFrame {
 
     lateinit var y: ByteBuffer; private set
@@ -33,7 +32,7 @@ class YuvFrame {
 
     fun fill(image: Image) {
         for (i in 0 until 3) {
-            when(i) {
+            when (i) {
                 0 -> {
                     y = image.planes[i].buffer
                     yStride = image.planes[i].rowStride
@@ -52,7 +51,6 @@ class YuvFrame {
         height = image.height
     }
 
-    /** experimental method */
     fun fill(width: Int, height: Int, data: ByteArray) {
         this.width = width
         this.height = height

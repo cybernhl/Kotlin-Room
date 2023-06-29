@@ -1,4 +1,4 @@
-package com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils;
+package com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager;
 
 import android.content.Context;
 import android.os.Handler;

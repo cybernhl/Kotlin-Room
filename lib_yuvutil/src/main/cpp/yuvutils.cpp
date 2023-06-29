@@ -8,11 +8,11 @@
 #include <android/native_window_jni.h>
 
 //
-// Scale
+// Scale 缩放
 //
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_theeasiestway_yuv_YuvUtils_scale__Ljava_nio_ByteBuffer_2Ljava_nio_ByteBuffer_2Ljava_nio_ByteBuffer_2IIILjava_nio_ByteBuffer_2Ljava_nio_ByteBuffer_2Ljava_nio_ByteBuffer_2IIIIIIII(
+Java_com_newki_yuv_YuvUtils_scale(
         JNIEnv *env, jobject thiz, jobject y, jobject u, jobject v,
         jint yStride, jint uStride, jint vStride,
         jobject yOut, jobject uOut, jobject vOut,
@@ -40,12 +40,12 @@ Java_com_theeasiestway_yuv_YuvUtils_scale__Ljava_nio_ByteBuffer_2Ljava_nio_ByteB
 }
 
 //
-// Rotate
+// Rotate 旋转
 //
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_theeasiestway_yuv_YuvUtils_rotate(JNIEnv *env, jobject thiz, jobject y, jobject u,
+Java_com_newki_yuv_YuvUtils_rotate(JNIEnv *env, jobject thiz, jobject y, jobject u,
                                            jobject v, jint yStride, jint uStride, jint vStride,
                                            jobject yOut, jobject uOut, jobject vOut,
                                            jint yOutStride, jint uOutStride, jint vOutStride,
@@ -70,12 +70,12 @@ Java_com_theeasiestway_yuv_YuvUtils_rotate(JNIEnv *env, jobject thiz, jobject y,
 }
 
 //
-// Mirror
+// Mirror 水平镜像
 //
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_theeasiestway_yuv_YuvUtils_mirrorH(JNIEnv *env, jobject thiz, jobject y, jobject u,
+Java_com_newki_yuv_YuvUtils_mirrorH(JNIEnv *env, jobject thiz, jobject y, jobject u,
                                             jobject v, jint yStride, jint uStride, jint vStride,
                                             jobject yOut, jobject uOut, jobject vOut,
                                             jint yOutStride, jint uOutStride, jint vOutStride,
@@ -104,7 +104,7 @@ Java_com_theeasiestway_yuv_YuvUtils_mirrorH(JNIEnv *env, jobject thiz, jobject y
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_theeasiestway_yuv_YuvUtils_yuv420ToArgb(JNIEnv *env, jobject thiz, jobject y, jobject u,
+Java_com_newki_yuv_YuvUtils_yuv420ToArgb(JNIEnv *env, jobject thiz, jobject y, jobject u,
                                                  jobject v, jint yStride, jint uStride, jint vStride,
                                                  jobject out, jint outStride,
                                                  jint width, jint height) {
@@ -125,10 +125,9 @@ Java_com_theeasiestway_yuv_YuvUtils_yuv420ToArgb(JNIEnv *env, jobject thiz, jobj
 //
 // Convert to I420
 //
-
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_theeasiestway_yuv_YuvUtils_convertToI420(JNIEnv *env, jobject thiz, jobject y, jobject u,
+Java_com_newki_yuv_YuvUtils_convertToI420(JNIEnv *env, jobject thiz, jobject y, jobject u,
                                                   jobject v, jint yStride, jint uStride, jint vStride, jint srcPixelStrideUv,
                                                   jobject yOut, jobject uOut, jobject vOut,
                                                   jint yOutStride, jint uOutStride, jint vOutStride,
@@ -154,7 +153,7 @@ Java_com_theeasiestway_yuv_YuvUtils_convertToI420(JNIEnv *env, jobject thiz, job
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_theeasiestway_yuv_YuvUtils_yuv420ToArgbBitmap(JNIEnv *env, jobject thiz, jobject y, jobject u,
+Java_com_newki_yuv_YuvUtils_yuv420ToArgbBitmap(JNIEnv *env, jobject thiz, jobject y, jobject u,
                                                              jobject v, jint yStride, jint uStride, jint vStride,
                                                              jint width, jint height,jobject bitmap) {
 
