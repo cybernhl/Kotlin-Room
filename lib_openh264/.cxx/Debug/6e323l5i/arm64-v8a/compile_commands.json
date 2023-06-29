@@ -1,0 +1,19 @@
+[
+{
+  "directory": "E:/AndroidProject/Kotlin-Room/lib_openh264/.cxx/Debug/6e323l5i/arm64-v8a",
+  "command": "E:\\Android\\SDK\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=E:/Android/SDK/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=E:/Android/SDK/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dopenh264util_EXPORTS -IE:/AndroidProject/Kotlin-Room/lib_openh264/src/main/cpp/openh264/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -LE:/AndroidProject/Kotlin-Room/lib_openh264/src/main/cpp../../../../libs/arm64-v8a -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\openh264util.dir\\openh264util.cpp.o -c E:\\AndroidProject\\Kotlin-Room\\lib_openh264\\src\\main\\cpp\\openh264util.cpp",
+  "file": "E:\\AndroidProject\\Kotlin-Room\\lib_openh264\\src\\main\\cpp\\openh264util.cpp"
+},
+
+{
+  "directory": "E:/AndroidProject/Kotlin-Room/lib_openh264/.cxx/Debug/6e323l5i/arm64-v8a",
+  "command": "E:\\Android\\SDK\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android21 --gcc-toolchain=E:/Android/SDK/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=E:/Android/SDK/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dopenh264util_EXPORTS -IE:/AndroidProject/Kotlin-Room/lib_openh264/src/main/cpp/openh264/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -LE:/AndroidProject/Kotlin-Room/lib_openh264/src/main/cpp../../../../libs/arm64-v8a -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\openh264util.dir\\VideoEncoder.cpp.o -c E:\\AndroidProject\\Kotlin-Room\\lib_openh264\\src\\main\\cpp\\VideoEncoder.cpp",
+  "file": "E:\\AndroidProject\\Kotlin-Room\\lib_openh264\\src\\main\\cpp\\VideoEncoder.cpp"
+},
+
+{
+  "directory": "E:/AndroidProject/Kotlin-Room/lib_openh264/.cxx/Debug/6e323l5i/arm64-v8a",
+  "command": "E:\\Android\\SDK\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=aarch64-none-linux-android21 --gcc-toolchain=E:/Android/SDK/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=E:/Android/SDK/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dopenh264util_EXPORTS -IE:/AndroidProject/Kotlin-Room/lib_openh264/src/main/cpp/openh264/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\openh264util.dir\\utils\\timer.c.o   -c E:\\AndroidProject\\Kotlin-Room\\lib_openh264\\src\\main\\cpp\\utils\\timer.c",
+  "file": "E:\\AndroidProject\\Kotlin-Room\\lib_openh264\\src\\main\\cpp\\utils\\timer.c"
+}
+]

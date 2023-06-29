@@ -76,6 +76,10 @@
             android:name=".demo.demo18_customview.takevideo1.RecoderVideoAudio1Activity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".demo.demo18_customview.takevideo1.RecoderVideoAudio2Activity"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".demo.demo18_customview.takevideo1.RecoderVideoPlarerActivity" />
 
         <activity android:name=".demo.demo16_record.scroll1.ViewPagerScroll1Activity" />

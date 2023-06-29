@@ -7,10 +7,7 @@ import com.guadou.kt_demo.databinding.ActivityDemo18HomeBinding
 import com.guadou.kt_demo.demo.demo18_customview.circleView.DemoCircleViewActivity
 import com.guadou.kt_demo.demo.demo18_customview.range.RangeViewActivity
 import com.guadou.kt_demo.demo.demo18_customview.star.StarScoreViewActivity
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.RecoderAudio1Activity
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.RecoderVideo1Activity
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.RecoderVideoAudio1Activity
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.RecoderVideoWithAudioActivity
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.*
 import com.guadou.kt_demo.demo.demo18_customview.temperature.TemperatureViewActivity
 import com.guadou.kt_demo.demo.demo18_customview.viewgroup.*
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
@@ -127,6 +124,13 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
             //音视频录制
             extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
                 RecoderVideoAudio1Activity.startInstance()
+            }
+        }
+
+        fun softRecoderAll() {
+            //软编录制
+            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
+                RecoderVideoAudio2Activity.startInstance()
             }
         }
 

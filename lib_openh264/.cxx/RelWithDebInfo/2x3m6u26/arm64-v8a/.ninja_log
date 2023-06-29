@@ -1,0 +1,5 @@
+# ninja log v5
+8	581	709722244	CMakeFiles/openh264util.dir/utils/timer.c.o	77e3780a31dabeef
+5	3490	709722247	CMakeFiles/openh264util.dir/openh264util.cpp.o	71f584c5d42a1966
+1	3934	709722248	CMakeFiles/openh264util.dir/VideoEncoder.cpp.o	69b6698e866cfd47
+3934	4398	709722248	E:/AndroidProject/Kotlin-Room/lib_openh264/build/intermediates/cxx/RelWithDebInfo/2x3m6u26/obj/arm64-v8a/libopenh264util.so	7fa6acbd203a4928
