@@ -6,7 +6,7 @@
 extern "C"
 JNIEXPORT jlong JNICALL
 Java_com_newki_openh264util_OpenH264Util_createEncoder(JNIEnv *env, jobject thiz, jint width,
-                                                        jint height, jstring output_path) {
+                                                     jint height, jstring output_path) {
     VideoEncoder *decoder = new VideoEncoder(env, output_path);
     return (jlong)decoder;
 }
@@ -14,7 +14,7 @@ Java_com_newki_openh264util_OpenH264Util_createEncoder(JNIEnv *env, jobject thiz
 extern "C"
 JNIEXPORT jlong JNICALL
 Java_com_newki_openh264util_OpenH264Util_encode(JNIEnv *env, jobject thiz, jlong p_encoder,
-                                                 jbyteArray data, jint width, jint height) {
+                                              jbyteArray data, jint width, jint height) {
     if (0 != p_encoder) {
         VideoEncoder *decoder = (VideoEncoder *)p_encoder;
         jbyte *bytes = env->GetByteArrayElements(data, 0);

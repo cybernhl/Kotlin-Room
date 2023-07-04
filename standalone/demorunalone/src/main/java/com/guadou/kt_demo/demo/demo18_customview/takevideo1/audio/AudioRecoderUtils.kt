@@ -190,7 +190,7 @@ class AudioRecoderUtils {
             //AAC有 ADIF和ADTS两种  ADIF只有一个头部剩下都是音频文件
             //ADTS是每一段编码都有一个头部
             //outpacketSize是最后头部加上返回数据后的总大小
-            val outPacketSize = outBitsSize + 7 // 7 is ADTS size
+            val outPacketSize = outBitsSize + 7  // 7 is ADTS size
 
             //根据index获取buffer
             val outputBuffer = codec.getOutputBuffer(index)

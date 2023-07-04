@@ -13,7 +13,6 @@ class OpenH264Util {
         }
     }
 
-
     external fun createEncoder(width: Int, height: Int, outputPath: String): Long
 
     external fun encode(pEncoder: Long, data: ByteArray?, width: Int, height: Int): Long

@@ -13,3 +13,4 @@ include ':app',
         ':standalone:demorunalone',
         ':standalone:receiverrunalone'
 include ':lib_openh264'
+include ':lib_fdkaac'

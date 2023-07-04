@@ -3,10 +3,9 @@ package com.guadou.kt_demo.demo.demo18_customview.takevideo1.audio
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.SurfaceTexture
+import android.media.AudioRecord
 import android.media.Image
-import android.media.MediaCodec
-import android.media.MediaCodecInfo
-import android.media.MediaFormat
+import android.media.MediaRecorder
 import android.util.Log
 import android.util.Size
 import android.view.ViewGroup
@@ -15,18 +14,22 @@ import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.Came
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AspectTextureView
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
+import com.newki.fdkaacutil.FDKAACUtil
 import com.newki.openh264util.OpenH264Util
 import com.newki.yuv.YuvUtils
+import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.io.IOException
 import java.util.concurrent.LinkedBlockingQueue
+import kotlin.concurrent.thread
 
 
 /**
  * 软编
  */
 class VideoSoftRecoderUtils {
+
     private var openH264Util: OpenH264Util? = null
     private var pEncoder: Long? = 0
 
@@ -46,25 +49,62 @@ class VideoSoftRecoderUtils {
     //子线程中使用同步队列保存数据
     private val originVideoDataList = LinkedBlockingQueue<ByteArray>()
 
-    private lateinit var file: File
-    private lateinit var outputStream: FileOutputStream
+
+    private lateinit var h264File: File
+    private lateinit var h264OutputStream: FileOutputStream
 
     private var configBytes: ByteArray? = null
     private var endBlock: ((path: String) -> Unit)? = null
 
+    //音频
+    private lateinit var codec: FDKAACUtil
+    private lateinit var mAudioRecorder: AudioRecord
+    private val minBufferSize = AudioRecord.getMinBufferSize(
+        AudioConfig.SAMPLE_RATE, AudioConfig.CHANNEL_CONFIG,
+        AudioConfig.AUDIO_FORMAT
+    )
+    private lateinit var readBuffer: ShortArray
+    private lateinit var audioFile: File
+    private lateinit var audioBufferedOutputStream: BufferedOutputStream
+    private lateinit var audioOutputStream: FileOutputStream
+    var bufferSize = 4096
 
     /**
      * 初始化关联信息，设置回调处理
      */
     fun setupCamera(activity: Activity, container: ViewGroup) {
 
-        file = File(CommUtils.getContext().externalCacheDir, "${System.currentTimeMillis()}-record.h264")
-        if (!file.exists()) {
-            file.createNewFile()
+
+        h264File = File(CommUtils.getContext().externalCacheDir, "${System.currentTimeMillis()}-record.h264")
+        if (!h264File.exists()) {
+            h264File.createNewFile()
         }
-        if (!file.isDirectory) {
-            outputStream = FileOutputStream(file, true)
+        if (!h264File.isDirectory) {
+            h264OutputStream = FileOutputStream(h264File, true)
         }
+
+
+        audioFile = File(CommUtils.getContext().externalCacheDir, "${System.currentTimeMillis()}-record.aac")
+        if (!audioFile.exists()) {
+            audioFile.createNewFile()
+        }
+        if (!audioFile.isDirectory) {
+            audioOutputStream = FileOutputStream(audioFile, true)
+            audioBufferedOutputStream = BufferedOutputStream(audioOutputStream, 4096)
+        }
+
+        //创建音频录制器对象
+        mAudioRecorder = AudioRecord(
+            MediaRecorder.AudioSource.MIC,
+            AudioConfig.SAMPLE_RATE,
+            AudioConfig.CHANNEL_CONFIG,
+            AudioConfig.AUDIO_FORMAT,
+            minBufferSize
+        )
+
+        codec = FDKAACUtil()
+        codec.init(AudioConfig.SAMPLE_RATE, 2, AudioConfig.SAMPLE_RATE * 2 * 3 / 2)
+        codec.initDecoder()
 
         val textureView = AspectTextureView(activity)
         textureView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -137,7 +177,7 @@ class VideoSoftRecoderUtils {
 
 
         openH264Util = OpenH264Util()
-        pEncoder = openH264Util?.createEncoder(videoWidth, videoHeight, file.absolutePath)
+        pEncoder = openH264Util?.createEncoder(videoWidth, videoHeight, h264File.absolutePath)
 
     }
 
@@ -159,11 +199,12 @@ class VideoSoftRecoderUtils {
      * 开始录制
      */
     fun startRecord() {
+        startAudioRecord()
         isRecording = true
     }
 
     fun getOutputPath(): String {
-        return file.absolutePath
+        return h264File.absolutePath
     }
 
     /**
@@ -172,7 +213,80 @@ class VideoSoftRecoderUtils {
     fun destoryAll() {
         mCamera2Provider?.closeCamera()
         isRecording = false
-        outputStream.close()
+        h264OutputStream.close()
+    }
+
+    /**
+     * 启动音频录制
+     */
+    fun startAudioRecord() {
+
+        //开启线程启动录音
+        thread(priority = android.os.Process.THREAD_PRIORITY_URGENT_AUDIO) {
+            isRecording = true
+            var encodedData: ByteArray?
+            var decodedData: ByteArray?
+
+            if (minBufferSize > bufferSize) {
+                bufferSize = minBufferSize
+            }
+
+            readBuffer = ShortArray(bufferSize shr 1)
+
+            try {
+
+                if (AudioRecord.STATE_INITIALIZED == mAudioRecorder.state) {
+
+                    mAudioRecorder.startRecording()  //音频录制器开始启动录制
+
+                    while (isRecording) {
+                        val readCount: Int = mAudioRecorder.read(readBuffer, 0, bufferSize shr 1)
+                        Log.d("TAG", "  buffer size: " + (bufferSize shr 1) + " readCount: " + readCount)
+
+                        encodedData = codec.encode(readBuffer)!!
+                        if (encodedData != null) {
+                            Log.d("TAG", "encodedData1: " + encodedData)
+
+                            audioBufferedOutputStream.write(encodedData)
+                            audioBufferedOutputStream.flush()
+
+                            decodedData = codec.decode(encodedData)!!
+                            if (decodedData != null) {
+                                Log.d("TAG", "decodedData2: " + decodedData)
+                                audioBufferedOutputStream.write(encodedData)
+                                audioBufferedOutputStream.flush()
+                            }
+                        } else {
+                            Log.d("TAG", " Encode fail ")
+                        }
+                    }
+
+                    encodedData = codec.encode(null);
+                    while (encodedData != null) {
+                        Log.d("TAG", "encodedData3: " + encodedData)
+                        audioBufferedOutputStream.write(encodedData)
+                        audioBufferedOutputStream.flush()
+
+                        encodedData = codec.encode(null);
+                    }
+
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+
+            } finally {
+                //释放资源
+                mAudioRecorder.stop()
+                mAudioRecorder.release()
+
+                codec.release()
+                codec.releaseDecoder()
+
+                audioBufferedOutputStream.close()
+            }
+
+        }
+
     }
 
 }

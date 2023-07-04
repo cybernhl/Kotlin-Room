@@ -1,3 +1,0 @@
-E:/AndroidProject/Kotlin-Room/lib_openh264/.cxx/Debug/6e323l5i/arm64-v8a/CMakeFiles/rebuild_cache.dir
-E:/AndroidProject/Kotlin-Room/lib_openh264/.cxx/Debug/6e323l5i/arm64-v8a/CMakeFiles/openh264util.dir
-E:/AndroidProject/Kotlin-Room/lib_openh264/.cxx/Debug/6e323l5i/arm64-v8a/CMakeFiles/edit_cache.dir
