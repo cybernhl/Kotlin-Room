@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.BaseCommonCameraProvider
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.Camera2ImageReaderProvider
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AspectTextureView
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.Camera2ImageUtils
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.utils.Camera2ImageUtils.getBytesFromImageAsType
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.newki.yuv.YuvUtils
@@ -90,7 +92,7 @@ class VideoH264RecoderUtils {
 
                     //使用Java工具类转换Image对象为YUV420格式,对应 COLOR_FormatYUV420Flexible
 //                    val bytesFromImageAsType = getBytesFromImageAsType(image, Camera2ImageUtils.YUV420SP)
-                    originVideoDataList.offer(bytesFromImageAsType)
+//                    originVideoDataList.offer(bytesFromImageAsType)
                 }
             }
 

@@ -134,12 +134,12 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
             }
         }
 
-//        fun videoRecoderAll() {
-//            //音视频录制带自定义Button
-//            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
-//                RecoderVideoWithAudioActivity.startInstance()
-//            }
-//        }
+        fun videoRecodeCustomView() {
+            //音视频录制带自定义Button
+            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
+                RecoderVideoWithAudioActivity.startInstance()
+            }
+        }
 
     }
 

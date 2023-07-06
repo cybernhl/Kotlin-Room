@@ -98,6 +98,7 @@ public class CameraX1ActionImpl implements ICameraAction {
     public View initCamera(Context context) {
         mPreviewView = new PreviewView(context);
         mContext = context;
+        mPreviewView.setScaleType(PreviewView.ScaleType.FIT_CENTER);
         mPreviewView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         mPreviewView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -138,6 +139,7 @@ public class CameraX1ActionImpl implements ICameraAction {
                         .setTargetAspectRatio(screenAspectRatio)
                         .setTargetRotation(rotation);
                 Preview preview = previewBuilder.build();
+
                 preview.setSurfaceProvider(mPreviewView.getSurfaceProvider());
 
                 //录制视频对象
@@ -176,83 +178,6 @@ public class CameraX1ActionImpl implements ICameraAction {
         }, ContextCompat.getMainExecutor(mContext));
 
     }
-
-//    private static class MyAnalyzer implements ImageAnalysis.Analyzer {
-//
-//        private final RenderScript mRenderScript;
-//
-//        public MyAnalyzer(Context context) {
-//            mRenderScript = RenderScript.create(context);
-//        }
-//
-//        @Override
-//        public void analyze(@NonNull ImageProxy image) {
-//
-//            @SuppressLint("UnsafeOptInUsageError")
-//            Bitmap bitmap = toBitmap(image.getImage());
-//
-//            YYLogUtils.w("Bitmap:" + bitmap);
-//
-//            // 对图像进行处理
-//            applyGrayScaleFilter(bitmap);
-//
-//
-//            // 释放
-//            image.close();
-//            bitmap.recycle();
-//            mRenderScript.destroy();
-//
-//        }
-//
-//        private Bitmap toBitmap(Image image) {
-//            // 获取图片的宽和高
-//            int width = image.getWidth();
-//            int height = image.getHeight();
-//
-//            // 创建YUV_420_888格式的字节数组
-//            Image.Plane[] planes = image.getPlanes();
-//            ByteBuffer yBuffer = planes[0].getBuffer();
-//            ByteBuffer uBuffer = planes[1].getBuffer();
-//            ByteBuffer vBuffer = planes[2].getBuffer();
-//            int ySize = yBuffer.remaining();
-//            int uSize = uBuffer.remaining();
-//            int vSize = vBuffer.remaining();
-//            byte[] data = new byte[ySize + uSize + vSize];
-//            yBuffer.get(data, 0, ySize);
-//            vBuffer.get(data, ySize, vSize);
-//            uBuffer.get(data, ySize + vSize, uSize);
-//
-//            //将 YUV_420_888 格式的字节数组转换为Bitmap对象
-//            YuvImage yuvImage = new YuvImage(data, ImageFormat.NV21, width, height, null);
-//            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//            yuvImage.compressToJpeg(new Rect(0, 0, width, height), 100, outputStream);
-//            byte[] jpegData = outputStream.toByteArray();
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(jpegData, 0, jpegData.length);
-//
-//            return bitmap;
-//        }
-//
-//        private Bitmap applyGrayScaleFilter(Bitmap bitmap) {
-//            // 应用灰度滤镜
-//            Allocation input = Allocation.createFromBitmap(mRenderScript, bitmap);
-//            Allocation output = Allocation.createTyped(mRenderScript, input.getType());
-//            ScriptIntrinsicColorMatrix matrix = ScriptIntrinsicColorMatrix.create(mRenderScript);
-//            matrix.setColorMatrix(new Matrix4f(
-//                    new float[]{0.5f, 0.5f, 0.5f, 0, 0,
-//                            0.5f, 0.5f, 0.5f, 0, 0,
-//                            0.5f, 0.5f, 0.5f, 0, 0,
-//                            0, 0, 0, 1, 0}
-//            ));
-//            matrix.forEach(input, output);
-//            Bitmap filteredBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
-//            output.copyTo(filteredBitmap);
-//            input.destroy();
-//            output.destroy();
-//            matrix.destroy();
-//            return filteredBitmap;
-//        }
-//
-//    }
 
     private int aspectRatio(int widthPixels, int heightPixels) {
         double previewRatio = (double) Math.max(widthPixels, heightPixels) / (double) Math.min(widthPixels, heightPixels);

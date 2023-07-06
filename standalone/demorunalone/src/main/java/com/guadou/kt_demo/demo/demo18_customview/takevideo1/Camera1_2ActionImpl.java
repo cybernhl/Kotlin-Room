@@ -116,7 +116,7 @@ public class Camera1_2ActionImpl implements ICameraAction {
 
         @Override
         public void onPreview(byte[] data, Camera camera) {
-
+            // nv21 数据
         }
 
         @Override
@@ -182,7 +182,8 @@ public class Camera1_2ActionImpl implements ICameraAction {
 
     @Override
     public void releaseAllCamera() {
-
+        cameraHelper.stop();
+        cameraHelper.release();
     }
 
     @Override

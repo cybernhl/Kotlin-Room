@@ -37,6 +37,7 @@ class GLCameraView : GLSurfaceView {
 
     init {
         setEGLContextClientVersion(2)
+
         //设置GL渲染对象
         setRenderer(cameraRender)
 

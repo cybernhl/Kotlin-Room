@@ -151,7 +151,7 @@ public class Camera2ImageReaderProvider extends BaseCommonCameraProvider {
             List<Surface> outputs = new ArrayList<>();
             for (AspectTextureView aspectTextureView : mTextureViews) {
                 //设置预览大小与展示的裁剪模式
-                aspectTextureView.setScaleType(AspectInterface.ScaleType.FIT_CENTER);
+                aspectTextureView.setScaleType(AspectInterface.ScaleType.CENTER_CROP);
                 aspectTextureView.setSize(size.getHeight(), size.getWidth());
 
                 SurfaceTexture surfaceTexture = aspectTextureView.getSurfaceTexture();

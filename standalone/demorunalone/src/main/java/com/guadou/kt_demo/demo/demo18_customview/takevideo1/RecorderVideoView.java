@@ -35,9 +35,9 @@ public class RecorderVideoView extends LinearLayout {
 //    private ICameraAction mCameraAction = new Camera1_1ActionImpl();
 //    private ICameraAction mCameraAction = new Camera1_2ActionImpl();
 //    private ICameraAction mCameraAction = new Camera2_1ActionImpl();
-//    private ICameraAction mCameraAction = new CameraX1ActionImpl();
+    private ICameraAction mCameraAction = new CameraX1ActionImpl();
 //    private ICameraAction mCameraAction = new CameraX2ActionImpl();
-    private ICameraAction mCameraAction = new CameraX3ActionImpl();
+//    private ICameraAction mCameraAction = new CameraX3ActionImpl();
 
     private ImageView mIvclose;
     private ImageView mIvfinish;

@@ -48,7 +48,6 @@ class CameraXController {
             //预览对象
             val preview: Preview = Preview.Builder()
                 .setTargetAspectRatio(screenAspectRatio)
-//                .setTargetRotation(context.display.rotation ?: 0)
                 .build()
 
             preview.setSurfaceProvider(surfaceProvider)
@@ -58,7 +57,6 @@ class CameraXController {
             mVideoCapture = VideoCapture.Builder()
                 .setTargetAspectRatio(screenAspectRatio)
                 .setAudioRecordSource(MediaRecorder.AudioSource.MIC) //设置音频源麦克风
-//                .setTargetRotation(rotation)
                 //视频帧率
                 .setVideoFrameRate(30)
                 //bit率

@@ -6,7 +6,9 @@ import android.view.TextureView;
 
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
-
+/**
+ * 按比例展示的TextureView，可以像ImageView一样的选择裁剪方向
+ */
 public class AspectTextureView extends TextureView implements AspectInterface{
 
     public AspectTextureView(Context context) {

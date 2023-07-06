@@ -7,11 +7,11 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:background="@color/black"
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="W,16:9"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -46,10 +46,10 @@
 
     <ImageView
         android:id="@+id/iv_catch"
-        app:layout_constraintTop_toTopOf="@id/fl_container"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/d_30dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="@id/fl_container" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

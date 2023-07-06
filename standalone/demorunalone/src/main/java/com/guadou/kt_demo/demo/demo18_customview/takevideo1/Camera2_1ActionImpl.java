@@ -33,7 +33,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.helper.AutoFitTextureView;
 import com.guadou.lib_baselib.ext.ToastUtils;
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
