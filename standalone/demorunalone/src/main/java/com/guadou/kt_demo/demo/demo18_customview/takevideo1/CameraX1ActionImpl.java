@@ -38,8 +38,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.camera.core.AspectRatio;
+import androidx.camera.core.Camera;
+import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraInfoUnavailableException;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
@@ -162,14 +165,14 @@ public class CameraX1ActionImpl implements ICameraAction {
 //                // 在每一帧上应用颜色矩阵
 //                imageAnalysis.setAnalyzer(Executors.newSingleThreadExecutor(), new MyAnalyzer(mContext));
 
+
                 //开启CameraX
                 mCameraProvider.unbindAll();
 
                 if (mContext instanceof FragmentActivity) {
                     FragmentActivity fragmentActivity = (FragmentActivity) mContext;
-                    mCameraProvider.bindToLifecycle(fragmentActivity, mCameraSelector, preview, mVideoCapture/*,imageAnalysis*/);
+                    Camera camera = mCameraProvider.bindToLifecycle(fragmentActivity, mCameraSelector, preview, mVideoCapture/*,imageAnalysis*/);
                 }
-
 
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
@@ -189,6 +192,8 @@ public class CameraX1ActionImpl implements ICameraAction {
 
     @Override
     public void initCameraRecord() {
+
+
     }
 
     @Override
