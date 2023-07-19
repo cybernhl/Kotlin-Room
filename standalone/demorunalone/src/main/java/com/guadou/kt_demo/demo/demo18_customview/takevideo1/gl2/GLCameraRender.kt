@@ -2,6 +2,7 @@ package com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl2
 
 import android.content.Context
 import android.graphics.SurfaceTexture
+import android.opengl.EGL14
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.util.Size
@@ -9,6 +10,9 @@ import android.view.Surface
 import androidx.annotation.WorkerThread
 import androidx.camera.core.Preview
 import androidx.camera.core.SurfaceRequest
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl2.gles.EglCore
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl2.gles.WindowSurface
+import com.guadou.lib_baselib.utils.log.YYLogUtils
 import java.util.concurrent.Executors
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -30,7 +34,7 @@ class GLCameraRender(private val context: Context, private val callback: Callbac
         gl?.let {
             it.glGenTextures(textures.size, textures, 0)
             surfaceTexture = SurfaceTexture(textures[0])
-            filter = when(type) {
+            filter = when (type) {
                 "WhiteBalance" -> WhiteBalanceFilter(context)
                 else -> ScreenFilter(context)
             }
@@ -55,7 +59,7 @@ class GLCameraRender(private val context: Context, private val callback: Callbac
 
     // Preview.SurfaceProvider 接口的实现，用于绑定CameraX
     override fun onSurfaceRequested(request: SurfaceRequest) {
-        val resetTexture = resetPreviewTexture(request.resolution) ?: return
+        val resetTexture: SurfaceTexture = resetPreviewTexture(request.resolution) ?: return
         val surface = Surface(resetTexture)
         request.provideSurface(surface, executor) {
             surface.release()

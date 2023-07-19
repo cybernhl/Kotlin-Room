@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.guadou.kt_demo.R;
+import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,9 +36,9 @@ public class RecorderVideoView extends LinearLayout {
 //    private ICameraAction mCameraAction = new Camera1_1ActionImpl();
 //    private ICameraAction mCameraAction = new Camera1_2ActionImpl();
 //    private ICameraAction mCameraAction = new Camera2_1ActionImpl();
-    private ICameraAction mCameraAction = new CameraX1ActionImpl();
+//    private ICameraAction mCameraAction = new CameraX1ActionImpl();
 //    private ICameraAction mCameraAction = new CameraX2ActionImpl();
-//    private ICameraAction mCameraAction = new CameraX3ActionImpl();
+    private ICameraAction mCameraAction = new CameraX3ActionImpl();
 
     private ImageView mIvclose;
     private ImageView mIvfinish;
@@ -141,7 +142,6 @@ public class RecorderVideoView extends LinearLayout {
 
         stopRecord(success);
         releaseRecord();
-
 
 
     }
@@ -325,6 +325,7 @@ public class RecorderVideoView extends LinearLayout {
 
 
                     //录制完成之后展示已经录制的路径下的视频文件
+                    YYLogUtils.w("录制完成的录制为：" + getVecordFile().getAbsolutePath());
                     mVideoPlay.setVideoPath(getVecordFile().getAbsolutePath());
                     mVideoPlay.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override

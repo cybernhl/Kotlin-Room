@@ -30,28 +30,28 @@
             android:layout_height="wrap_content"
             android:text="普通LinearLayout"
             android:textAllCaps="false"
-            binding:clicks="@{click.testLayout}" />
+            binding:clicks="@{click::testLayout}" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ScrollView"
             android:textAllCaps="false"
-            binding:clicks="@{click.testScrollView}" />
+            binding:clicks="@{click::testScrollView}" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="列表"
             android:textAllCaps="false"
-            binding:clicks="@{click.testRV}" />
+            binding:clicks="@{click::testRV}" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="朋友圈"
             android:textAllCaps="false"
-            binding:clicks="@{click.testMoment}" />
+            binding:clicks="@{click::testMoment}" />
 
     </LinearLayout>
 

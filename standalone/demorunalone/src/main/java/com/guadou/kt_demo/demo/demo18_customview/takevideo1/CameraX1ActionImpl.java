@@ -58,6 +58,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.guadou.lib_baselib.utils.CommUtils;
 import com.guadou.lib_baselib.utils.ScreenUtils;
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
+import com.newki.yuv.YuvUtils;
+import com.newki.yuv.entities.YuvFrame;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -201,7 +203,6 @@ public class CameraX1ActionImpl implements ICameraAction {
         if (mVideoCapture == null) return;
 
         VideoCapture.OutputFileOptions outputFileOptions = new VideoCapture.OutputFileOptions.Builder(getOutFile()).build();
-
         mVideoCapture.startRecording(outputFileOptions, mExecutorService, new VideoCapture.OnVideoSavedCallback() {
             @Override
             public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
@@ -282,4 +283,27 @@ public class CameraX1ActionImpl implements ICameraAction {
         return -1;
     }
 
+//    @SuppressLint("UnsafeOptInUsageError")
+//    private class MyAnalyzer implements ImageAnalysis.Analyzer {
+//
+//        private YuvUtils yuvUtils = new YuvUtils();
+//
+//        public MyAnalyzer(Context context) {
+//
+//        }
+//
+//        @Override
+//        public void analyze(@NonNull ImageProxy image) {
+//
+//            // 使用C库获取到I420格式，对应 COLOR_FormatYUV420Planar
+//
+//            YuvFrame yuvFrame = yuvUtils.convertToI420(image.getImage());
+//            // 与MediaFormat的编码格式宽高对应
+//            yuvFrame = yuvUtils.rotate(yuvFrame, 90);
+//
+//            // 旋转90度之后的I420格式添加到同步队列
+//            videoThread.addVideoData(yuvFrame.asArray());
+//
+//        }
+//    }
 }

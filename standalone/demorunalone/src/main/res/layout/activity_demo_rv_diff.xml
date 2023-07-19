@@ -32,21 +32,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Diff刷新1"
-                binding:clicks="@{click.handleDiff1}" />
+                binding:clicks="@{click::handleDiff1}" />
 
             <Button
 
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Diff刷新2"
-                binding:clicks="@{click.handleDiff2}" />
+                binding:clicks="@{click::handleDiff2}" />
 
             <Button
 
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Diff刷新3"
-                binding:clicks="@{click.handleDiff3}" />
+                binding:clicks="@{click::handleDiff3}" />
 
         </LinearLayout>
 

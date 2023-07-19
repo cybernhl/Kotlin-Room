@@ -4,6 +4,7 @@ import android.content.Context
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import com.guadou.kt_demo.R
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camerax_controller.CameraXController
 
 /**
  * GLSurfaceView的滤镜实现，内部使用自己的 GLCameraRender 实现滤镜的渲染

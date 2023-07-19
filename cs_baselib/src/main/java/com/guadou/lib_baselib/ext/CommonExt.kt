@@ -494,6 +494,35 @@ fun Fragment.countDown(
 
 }
 
+fun CoroutineScope.countDownFlow(
+    time: Int = 60,
+    onStart: (suspend () -> Unit)? = null,
+    onEach: (suspend (Int) -> Unit)? = null,
+    onCancel: (suspend (msg: String?) -> Unit)? = null,
+    onCompletion: (suspend () -> Unit)? = null
+): Job {
+    return (time downTo 0)
+        .asFlow()
+        .cancellable()
+        .flowOn(Dispatchers.Default)
+        .onStart {
+            onStart?.invoke()
+        }
+        .onEach {
+            onEach?.invoke(it)
+            delay(1000L)
+        }
+        .onCompletion {
+            if (it == null) {
+                onCompletion?.invoke() // 正常完成
+            } else {
+                onCancel?.invoke(it.message) // 取消时执行取消回调
+            }
+        }
+        .launchIn(this)
+
+}
+
 /**
  * 登录的校验
  */

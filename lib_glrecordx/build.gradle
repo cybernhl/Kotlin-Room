@@ -1,0 +1,67 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildToolsVersion
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles 'consumer-rules.pro'
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        // Disable unused AGP features
+        buildConfig false
+        aidl false
+        renderScript false
+        shaders false
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation deps.android.appcompat
+    implementation deps.android.kt_ktx
+    implementation deps.android.ktx_coroutines_core
+    implementation deps.android.ktx_coroutines_android
+
+    //CameraX依赖
+    implementation 'androidx.camera:camera-camera2:1.0.1'
+    implementation 'androidx.camera:camera-core:1.0.1'
+    implementation 'androidx.camera:camera-lifecycle:1.0.1'
+    implementation 'androidx.camera:camera-view:1.0.0-alpha27'
+
+    api 'jp.co.cyberagent.android:gpuimage:2.1.0'
+
+}

@@ -2,12 +2,11 @@ package com.guadou.kt_demo.demo.demo18_customview.takevideo1
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.camera.view.PreviewView
-import com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl2.CameraXController
+import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camerax_controller.CameraXController
 import java.io.File
 
 /**

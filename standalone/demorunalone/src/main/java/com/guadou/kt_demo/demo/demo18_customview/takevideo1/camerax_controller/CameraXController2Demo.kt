@@ -1,7 +1,9 @@
-package com.guadou.kt_demo.demo.demo18_customview.takevideo1.gl2
+package com.guadou.kt_demo.demo.demo18_customview.takevideo1.camerax_controller
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
+import android.media.Image
 import android.media.MediaRecorder
 
 import androidx.camera.core.*
@@ -19,12 +21,12 @@ import java.util.concurrent.Executors
  * CameraX 绑定自定义的 GLTextTure
  */
 @SuppressLint("RestrictedApi")
-class CameraXController {
+class CameraXController2Demo {
 
     private var mCameraProvider: ProcessCameraProvider? = null
     private var mLensFacing = 0
     private var mCameraSelector: CameraSelector? = null
-    private var mVideoCapture: VideoCapture? = null
+
     private var mCameraCallback: ICameraCallback? = null
     private val mExecutorService = Executors.newSingleThreadExecutor()
 
@@ -52,24 +54,30 @@ class CameraXController {
 
             preview.setSurfaceProvider(surfaceProvider)
 
-
-            //录制视频对象
-            mVideoCapture = VideoCapture.Builder()
+            val imageAnalysis =  ImageAnalysis.Builder()
                 .setTargetAspectRatio(screenAspectRatio)
-                .setAudioRecordSource(MediaRecorder.AudioSource.MIC) //设置音频源麦克风
-                //视频帧率
-                .setVideoFrameRate(30)
-                //bit率
-                .setBitRate(3 * 1024 * 1024)
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
+
+            // 在每一帧上应用颜色矩阵
+            imageAnalysis.setAnalyzer(mExecutorService, object : ImageAnalysis.Analyzer {
+                @SuppressLint("UnsafeOptInUsageError")
+                override fun analyze(image: ImageProxy) {
+
+                    mImageCallback?.invoke(image.image)
+
+                    image.close()
+                }
+            });
+
 
             //绑定到页面
             mCameraProvider?.unbindAll()
             val camera = mCameraProvider?.bindToLifecycle(
                 context as LifecycleOwner,
                 mCameraSelector!!,
-                mVideoCapture,
-                preview
+                preview,
+                imageAnalysis,
             )
 
             val cameraInfo = camera?.cameraInfo
@@ -128,34 +136,26 @@ class CameraXController {
 
     // 开始录制
     fun startCameraRecord(outFile: File) {
-        mVideoCapture ?: return
 
-        val outputFileOptions: VideoCapture.OutputFileOptions = VideoCapture.OutputFileOptions.Builder(outFile).build()
-
-        mVideoCapture!!.startRecording(outputFileOptions, mExecutorService, object : VideoCapture.OnVideoSavedCallback {
-            override fun onVideoSaved(outputFileResults: VideoCapture.OutputFileResults) {
-                YYLogUtils.w("视频保存成功,outputFileResults:" + outputFileResults.savedUri)
-                mCameraCallback?.takeSuccess()
-            }
-
-            override fun onError(videoCaptureError: Int, message: String, cause: Throwable?) {
-                YYLogUtils.e(message)
-            }
-        })
     }
 
     // 停止录制
     fun stopCameraRecord(cameraCallback: ICameraCallback?) {
         mCameraCallback = cameraCallback
-        mVideoCapture?.stopRecording()
     }
 
     // 释放资源
     fun releseAll() {
-        mVideoCapture?.stopRecording()
         mExecutorService.shutdown()
         mCameraProvider?.unbindAll()
         mCameraProvider?.shutdown()
         mCameraProvider = null
     }
+
+    var mImageCallback: ((b: Image?) -> Unit)? = null
+
+    fun setImageCallback(block: ((b: Image?) -> Unit)? = null) {
+        mImageCallback = block
+    }
+
 }

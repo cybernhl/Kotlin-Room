@@ -96,6 +96,9 @@ dependencies {
     implementation project(':lib_openh264')
     implementation project(':lib_fdkaac')
 
+    implementation project(':lib_glrecord')
+    implementation project(':lib_glrecordx')
+
 //    api 'com.github.minminaya:GenaralRoundLayout:1.0.0'
 //    implementation "io.github.liukai2530533:round_circle_imageview:1.0.1"
 

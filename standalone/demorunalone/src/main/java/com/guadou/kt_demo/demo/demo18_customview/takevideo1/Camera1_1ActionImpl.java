@@ -78,6 +78,7 @@ public class Camera1_1ActionImpl implements ICameraAction {
                 }
             }
         });
+
         mMediaRecorder.setPreviewDisplay(mSurfaceHolder.getSurface());
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA); // 视频源
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);  // 音频源

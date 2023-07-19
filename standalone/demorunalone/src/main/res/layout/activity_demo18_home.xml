@@ -169,6 +169,34 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="特效录制-1"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click::effectsRecoder}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="特效录制-CameraX"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click::effectsRecoder2}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="特效录制-Camera1"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click::effectsRecoder3}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Surface录制"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click::surfaceRecoder}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="录制实现(自定义控件)"
                     android:textAllCaps="false"
                     binding:clicks="@{click::videoRecodeCustomView}" />

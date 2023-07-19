@@ -93,9 +93,6 @@ class VideoAudioRecoderUtils {
             override fun onFrameCannback(image: Image) {
                 if (isRecording) {
 
-                    //使用Java工具类转换Image对象为YUV420格式
-//                    val bytesFromImageAsType = Camera2ImageUtils.getBytesFromImageAsType(image, Camera2ImageUtils.YUV420SP)
-
 
                     // 使用C库获取到I420格式，对应 COLOR_FormatYUV420Planar
                     var yuvFrame = yuvUtils.convertToI420(image)
@@ -315,19 +312,19 @@ class VideoAudioRecoderUtils {
         }
     }
 
-    /**
-     * 在开始录制前调用，强制插入一个I帧
-     */
-    private fun forceKeyFrame() {
-        val flags = MediaCodec.BUFFER_FLAG_KEY_FRAME
-        val dummyData = ByteArray(0)
-        val dummyIndex = videoCodec!!.dequeueInputBuffer(TIME_OUT_US)
-        if (dummyIndex >= 0) {
-            val byteBuffer = videoCodec!!.inputBuffers[dummyIndex]
-            byteBuffer.clear()
-            videoCodec!!.queueInputBuffer(dummyIndex, 0, dummyData.size, System.nanoTime() / 1000, flags)
-        }
-    }
+//    /**
+//     * 在开始录制前调用，强制插入一个I帧
+//     */
+//    private fun forceKeyFrame() {
+//        val flags = MediaCodec.BUFFER_FLAG_KEY_FRAME
+//        val dummyData = ByteArray(0)
+//        val dummyIndex = videoCodec!!.dequeueInputBuffer(TIME_OUT_US)
+//        if (dummyIndex >= 0) {
+//            val byteBuffer = videoCodec!!.inputBuffers[dummyIndex]
+//            byteBuffer.clear()
+//            videoCodec!!.queueInputBuffer(dummyIndex, 0, dummyData.size, System.nanoTime() / 1000, flags)
+//        }
+//    }
 
     // =======================   Video 线程 end ↑ =========================
 
@@ -504,7 +501,9 @@ class VideoAudioRecoderUtils {
 
     class MuxThread(val file: File) : Thread() {
 
+        //音频缓冲区
         private val audioData = LinkedBlockingQueue<EncodeData>()
+        //视频缓冲区
         private val videoData = LinkedBlockingQueue<EncodeData>()
 
         companion object {

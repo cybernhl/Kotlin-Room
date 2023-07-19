@@ -92,7 +92,8 @@ class VideoH264RecoderUtils {
 
                     //使用Java工具类转换Image对象为YUV420格式,对应 COLOR_FormatYUV420Flexible
 //                    val bytesFromImageAsType = getBytesFromImageAsType(image, Camera2ImageUtils.YUV420SP)
-//                    originVideoDataList.offer(bytesFromImageAsType)
+
+                    originVideoDataList.offer(bytesFromImageAsType)
                 }
             }
 
@@ -159,7 +160,6 @@ class VideoH264RecoderUtils {
      */
     val callback = object : MediaCodec.Callback() {
 
-        val currentTime = Date().time * 1000  //以微秒为计算单位
 
         override fun onOutputFormatChanged(codec: MediaCodec, format: MediaFormat) {
         }

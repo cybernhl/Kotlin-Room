@@ -85,25 +85,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/d_20dp"
                     android:text="切换状态栏背景颜色-红色"
-                    binding:clicks="@{click.changeBGRed}" />
+                    binding:clicks="@{click::changeBGRed}" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="切换状态栏背景颜色-白色"
-                    binding:clicks="@{click.changeBGWhite}" />
+                    binding:clicks="@{click::changeBGWhite}" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="切换状态栏背景图片"
-                    binding:clicks="@{click.changeBGImage}" />
+                    binding:clicks="@{click::changeBGImage}" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="切换状态栏文本颜色"
-                    binding:clicks="@{click.changeTextColor}" />
+                    binding:clicks="@{click::changeTextColor}" />
 
             </LinearLayout>
 

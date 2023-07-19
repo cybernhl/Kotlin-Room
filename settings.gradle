@@ -14,3 +14,5 @@ include ':app',
         ':standalone:receiverrunalone'
 include ':lib_openh264'
 include ':lib_fdkaac'
+include ':lib_glrecord'
+include ':lib_glrecordx'

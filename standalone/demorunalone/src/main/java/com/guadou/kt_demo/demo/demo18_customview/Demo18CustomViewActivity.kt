@@ -134,6 +134,33 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
             }
         }
 
+        fun effectsRecoder() {
+            //特效
+            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
+                RecoderVideoAudio3Activity.startInstance()
+            }
+        }
+
+        fun effectsRecoder2() {
+            //特效-2
+            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
+                RecoderVideoAudio5Activity.startInstance()
+            }
+        }
+
+        fun effectsRecoder3() {
+            //特效-3
+            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
+                RecoderVideoAudio6Activity.startInstance()
+            }
+        }
+
+        fun surfaceRecoder() {
+            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
+                RecoderVideoAudio4Activity.startInstance()
+            }
+        }
+
         fun videoRecodeCustomView() {
             //音视频录制带自定义Button
             extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
