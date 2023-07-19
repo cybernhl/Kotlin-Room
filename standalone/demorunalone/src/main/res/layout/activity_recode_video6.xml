@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/d_20dp"
+        android:text="开始录制" />
+
+    <Button
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/d_20dp"
+        android:layout_toRightOf="@id/start"
+        android:text="结束录制" />
+
+    <Button
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/d_20dp"
+        android:layout_marginBottom="@dimen/d_20dp"
+        android:layout_toRightOf="@id/end"
+        android:text="完成后播放" />
+
+
+    <Button
+        android:id="@+id/change_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/start"
+        android:layout_marginLeft="@dimen/d_20dp"
+        android:text="切换滤镜" />
+
+    <Button
+        android:id="@+id/change_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/end"
+        android:layout_marginLeft="@dimen/d_20dp"
+        android:layout_marginBottom="@dimen/d_20dp"
+        android:layout_toRightOf="@id/change_filter"
+        android:text="切换镜头" />
+
+    <com.newki.glrecord.widget.FocusImageView
+        android:id="@+id/recorder_focus_iv"
+        android:layout_width="@dimen/d_70dp"
+        android:layout_height="@dimen/d_70dp"
+        android:visibility="invisible"
+        app:focus_fail_id="@drawable/focus_focus_failed"
+        app:focus_focusing_id="@drawable/focus_focusing"
+        app:focus_success_id="@drawable/focus_focused" />
+
+</RelativeLayout>

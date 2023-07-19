@@ -1,5 +1,10 @@
 package com.guadou.kt_demo.demo.demo18_customview.takevideo1
 
+
+import android.graphics.Point
+import android.hardware.Camera
+import android.view.MotionEvent
+import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -11,16 +16,16 @@ import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.newki.glrecord.GLCamera1View
 import com.newki.glrecord.model.MagicFilterType
+import com.newki.glrecord.widget.FocusImageView
 import com.newki.glrecord.widget.SlideGpuFilterGroup
-
-
 import java.io.File
 
 /**
  * 录制音视频文件(特效录制Camera1)
  */
-class RecoderVideoAudio6Activity : BaseVMActivity<EmptyViewModel>(), SlideGpuFilterGroup.OnFilterChangeListener {
+class RecoderVideoAudio6Activity : BaseVMActivity<EmptyViewModel>(), SlideGpuFilterGroup.OnFilterChangeListener, View.OnTouchListener {
 
+    private lateinit var mRecorderFocusIv: FocusImageView
     private lateinit var outFile: File
     private var screenHeight: Int = 0
     private var screenWidth: Int = 0
@@ -34,7 +39,7 @@ class RecoderVideoAudio6Activity : BaseVMActivity<EmptyViewModel>(), SlideGpuFil
         }
     }
 
-    override fun getLayoutIdRes(): Int = R.layout.activity_recode_video5
+    override fun getLayoutIdRes(): Int = R.layout.activity_recode_video6
 
     override fun startObserve() {
 
@@ -54,15 +59,18 @@ class RecoderVideoAudio6Activity : BaseVMActivity<EmptyViewModel>(), SlideGpuFil
         }
 
         val flContainer = findViewById<FrameLayout>(R.id.fl_container)
+        mRecorderFocusIv = findViewById(R.id.recorder_focus_iv)
         val startBtn = findViewById<Button>(R.id.start)
         val endBtn = findViewById<Button>(R.id.end)
         val playBtn = findViewById<Button>(R.id.play)
         val changeCamera = findViewById<Button>(R.id.change_camera)
         val changeFilter = findViewById<Button>(R.id.change_filter)
 
+
         startBtn.text = "特效录制"
 
         mRecordCameraView = GLCamera1View(this)
+        mRecordCameraView.setOnTouchListener(this)
         mRecordCameraView.setOnFilterChangeListener(this)
         flContainer.addView(mRecordCameraView)
 
@@ -107,40 +115,43 @@ class RecoderVideoAudio6Activity : BaseVMActivity<EmptyViewModel>(), SlideGpuFil
         mRecordCameraView.onDestroy()
     }
 
-//    override fun onTouch(v: View?, event: MotionEvent): Boolean {
-//        mRecordCameraView.onTouch(event)
-//
-//        if (mRecordCameraView.cameraId == 1) {
-//            return false
-//        }
+    // 自定义对焦的处理
+    override fun onTouch(v: View?, event: MotionEvent): Boolean {
+        mRecordCameraView.onTouch(event)
 
-//        when (event.action) {
-//            MotionEvent.ACTION_UP -> {
-//                val sRawX = event.rawX
-//                val sRawY = event.rawY
-//                var rawY: Float = sRawY * screenWidth / screenHeight
-//                val rawX = rawY
-//                rawY = (screenWidth - sRawX) * screenHeight / screenWidth
-//                val point = Point(rawX.toInt(), rawY.toInt())
-//                mRecordCameraView.onFocus(point, AutoFocusCallback { success, camera ->
-//                    if (success) {
-//                        mRecorderFocusIv.onFocusSuccess()
-//                    } else {
-//                        mRecorderFocusIv.onFocusFailed()
-//                    }
-//                })
-//                mRecorderFocusIv.startFocus(Point(sRawX.toInt(), sRawY.toInt()))
-//            }
-//        }
-//        return true
-//    }
+        if (mRecordCameraView.cameraId == 1) {
+            return false
+        }
+
+        when (event.action) {
+            MotionEvent.ACTION_UP -> {
+                val sRawX = event.rawX
+                val sRawY = event.rawY
+                var rawY: Float = sRawY * screenWidth / screenHeight
+                val rawX = rawY
+                rawY = (screenWidth - sRawX) * screenHeight / screenWidth
+                val point = Point(rawX.toInt(), rawY.toInt())
+
+                mRecordCameraView.onFocus(point, Camera.AutoFocusCallback { success, camera ->
+                    if (success) {
+                        mRecorderFocusIv.onFocusSuccess()
+                    } else {
+                        mRecorderFocusIv.onFocusFailed()
+                    }
+                })
+
+                mRecorderFocusIv.startFocus(Point(sRawX.toInt(), sRawY.toInt()))
+            }
+        }
+        return true
+    }
 
     override fun onFilterChange(type: MagicFilterType?) {
         runOnUiThread {
             if (type === MagicFilterType.NONE) {
-                Toast.makeText(this, "当前没有设置滤镜--$type", Toast.LENGTH_SHORT).show()
+                toast("当前没有设置滤镜--$type")
             } else {
-                Toast.makeText(this, "当前滤镜切换为--$type", Toast.LENGTH_SHORT).show()
+                toast("当前滤镜切换为--$type")
             }
         }
     }

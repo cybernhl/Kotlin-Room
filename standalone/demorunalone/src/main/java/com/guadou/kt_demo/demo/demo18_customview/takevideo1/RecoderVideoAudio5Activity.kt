@@ -105,40 +105,12 @@ class RecoderVideoAudio5Activity : BaseVMActivity<EmptyViewModel>(), SlideGpuFil
         //CameraX自动绑定生命周期解绑
     }
 
-//    override fun onTouch(v: View?, event: MotionEvent): Boolean {
-//        mRecordCameraView.onTouch(event)
-//
-//        if (mRecordCameraView.cameraId == 1) {
-//            return false
-//        }
-
-//        when (event.action) {
-//            MotionEvent.ACTION_UP -> {
-//                val sRawX = event.rawX
-//                val sRawY = event.rawY
-//                var rawY: Float = sRawY * screenWidth / screenHeight
-//                val rawX = rawY
-//                rawY = (screenWidth - sRawX) * screenHeight / screenWidth
-//                val point = Point(rawX.toInt(), rawY.toInt())
-//                mRecordCameraView.onFocus(point, AutoFocusCallback { success, camera ->
-//                    if (success) {
-//                        mRecorderFocusIv.onFocusSuccess()
-//                    } else {
-//                        mRecorderFocusIv.onFocusFailed()
-//                    }
-//                })
-//                mRecorderFocusIv.startFocus(Point(sRawX.toInt(), sRawY.toInt()))
-//            }
-//        }
-//        return true
-//    }
-
     override fun onFilterChange(type: MagicFilterType?) {
         runOnUiThread {
             if (type === MagicFilterType.NONE) {
-                Toast.makeText(this, "当前没有设置滤镜--$type", Toast.LENGTH_SHORT).show()
+                toast("当前没有设置滤镜--$type")
             } else {
-                Toast.makeText(this, "当前滤镜切换为--$type", Toast.LENGTH_SHORT).show()
+                toast("当前滤镜切换为--$type")
             }
         }
     }
