@@ -10,6 +10,7 @@ import android.view.Surface
 import androidx.annotation.WorkerThread
 import androidx.camera.core.Preview
 import androidx.camera.core.SurfaceRequest
+import com.newki.glrecordx.camerax.draw.CameraDrawer
 import com.newki.glrecordx.camerax.widget.SlideGpuFilterGroup
 import jp.co.cyberagent.android.gpuimage.GLTextureView
 import java.util.concurrent.Executors
@@ -30,7 +31,7 @@ class GLCameraXView(context: Context, private val ratio: Float) : GLTextureView(
         }
     }
 
-    private val mCameraDrawer: com.newki.glrecordx.camerax.draw.CameraDrawer = com.newki.glrecordx.camerax.draw.CameraDrawer(context.resources)
+    private val mCameraDrawer: CameraDrawer = CameraDrawer(context.resources)
 
     /**
      * 是否来自前后摄像头切换

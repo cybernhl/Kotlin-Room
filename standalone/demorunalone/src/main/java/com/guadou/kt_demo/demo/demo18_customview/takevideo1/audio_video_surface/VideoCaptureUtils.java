@@ -30,8 +30,6 @@ import androidx.annotation.RestrictTo;
 import androidx.annotation.UiThread;
 import androidx.camera.core.AspectRatio;
 import androidx.camera.core.CameraXThreads;
-import androidx.camera.core.impl.DeferrableSurface;
-import androidx.camera.core.impl.ImmediateSurface;
 import androidx.camera.core.impl.utils.executor.CameraXExecutors;
 import androidx.camera.core.internal.utils.VideoUtil;
 import androidx.core.util.Preconditions;
@@ -70,7 +68,6 @@ public final class VideoCaptureUtils {
     //开启相机的错误
     public static final int ERROR_INVALID_CAMERA = 5;
 
-
     private static final String TAG = "VideoCaptureUtils";
 
     //等待从视频编码器中取出缓冲区的时间量.
@@ -100,7 +97,7 @@ public final class VideoCaptureUtils {
     private final MediaCodec.BufferInfo mVideoBufferInfo = new MediaCodec.BufferInfo();
     private final MediaCodec.BufferInfo mAudioBufferInfo = new MediaCodec.BufferInfo();
     //封装格式的锁
-    private final Object mMuxerLock = new Object();
+    private final Object mMediaMuxerLock = new Object();
 
     // 启动录制与结束录制的线程锁
     private final AtomicBoolean mEndOfVideoStreamSignal = new AtomicBoolean(true);
@@ -132,7 +129,7 @@ public final class VideoCaptureUtils {
      * 封装格式对象 MediaMuxer
      */
     @GuardedBy("mMuxerLock")
-    private MediaMuxer mMuxer;
+    private MediaMuxer mMediaMuxer;
     private boolean mMuxerStarted = false;
 
     //用于添加到MediaMuxer中的视频轨道
@@ -244,14 +241,14 @@ public final class VideoCaptureUtils {
 
         //启动封装器
         try {
-            synchronized (mMuxerLock) {
-                mMuxer = initMediaMuxer(outputFileOptions);
-                Preconditions.checkNotNull(mMuxer);
-                mMuxer.setOrientationHint(90); //设置视频文件的方向，参数表示视频文件应该被旋转的角度
+            synchronized (mMediaMuxerLock) {
+                mMediaMuxer = initMediaMuxer(outputFileOptions);
+                Preconditions.checkNotNull(mMediaMuxer);
+                mMediaMuxer.setOrientationHint(90); //设置视频文件的方向，参数表示视频文件应该被旋转的角度
 
                 Metadata metadata = outputFileOptions.getMetadata();
                 if (metadata != null && metadata.location != null) {
-                    mMuxer.setLocation(
+                    mMediaMuxer.setLocation(
                             (float) metadata.location.getLatitude(),
                             (float) metadata.location.getLongitude());
                 }
@@ -410,13 +407,13 @@ public final class VideoCaptureUtils {
             outputBuffer.limit(mVideoBufferInfo.offset + mVideoBufferInfo.size);
             mVideoBufferInfo.presentationTimeUs = (System.nanoTime() / 1000);
 
-            synchronized (mMuxerLock) {
+            synchronized (mMediaMuxerLock) {
                 if (!mIsFirstVideoSampleWrite.get()) {
                     Log.d(TAG, "First video sample written.");
                     mIsFirstVideoSampleWrite.set(true);
                 }
                 Log.d(TAG, "write video Data");
-                mMuxer.writeSampleData(mVideoTrackIndex, outputBuffer, mVideoBufferInfo);
+                mMediaMuxer.writeSampleData(mVideoTrackIndex, outputBuffer, mVideoBufferInfo);
             }
         }
 
@@ -437,13 +434,13 @@ public final class VideoCaptureUtils {
                 && mAudioBufferInfo.size > 0
                 && mAudioBufferInfo.presentationTimeUs > 0) {
             try {
-                synchronized (mMuxerLock) {
+                synchronized (mMediaMuxerLock) {
                     if (!mIsFirstAudioSampleWrite.get()) {
                         Log.d(TAG, "First audio sample written.");
                         mIsFirstAudioSampleWrite.set(true);
                     }
 
-                    mMuxer.writeSampleData(mAudioTrackIndex, buffer, mAudioBufferInfo);
+                    mMediaMuxer.writeSampleData(mAudioTrackIndex, buffer, mAudioBufferInfo);
                 }
             } catch (Exception e) {
                 Log.e(TAG, "audio error:size="
@@ -484,13 +481,13 @@ public final class VideoCaptureUtils {
                         errorOccurred = true;
                     }
 
-                    synchronized (mMuxerLock) {
-                        mVideoTrackIndex = mMuxer.addTrack(mVideoEncoder.getOutputFormat());
+                    synchronized (mMediaMuxerLock) {
+                        mVideoTrackIndex = mMediaMuxer.addTrack(mVideoEncoder.getOutputFormat());
                         Log.d(TAG, "mAudioTrackIndex：" + mAudioTrackIndex + "mVideoTrackIndex:" + mVideoTrackIndex);
                         if (mAudioTrackIndex >= 0 && mVideoTrackIndex >= 0) {
                             mMuxerStarted = true;
                             Log.i(TAG, "media mMuxer start by video");
-                            mMuxer.start();
+                            mMediaMuxer.start();
                         }
                     }
                     break;
@@ -513,13 +510,13 @@ public final class VideoCaptureUtils {
 
         //因为视频编码会更耗时，所以在此停止封装器的执行
         try {
-            synchronized (mMuxerLock) {
-                if (mMuxer != null) {
+            synchronized (mMediaMuxerLock) {
+                if (mMediaMuxer != null) {
                     if (mMuxerStarted) {
-                        mMuxer.stop();
+                        mMediaMuxer.stop();
                     }
-                    mMuxer.release();
-                    mMuxer = null;
+                    mMediaMuxer.release();
+                    mMediaMuxer = null;
                 }
             }
         } catch (IllegalStateException e) {
@@ -585,13 +582,13 @@ public final class VideoCaptureUtils {
                     outIndex = mAudioEncoder.dequeueOutputBuffer(mAudioBufferInfo, 0);
                     switch (outIndex) {
                         case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:
-                            synchronized (mMuxerLock) {
-                                mAudioTrackIndex = mMuxer.addTrack(mAudioEncoder.getOutputFormat());
+                            synchronized (mMediaMuxerLock) {
+                                mAudioTrackIndex = mMediaMuxer.addTrack(mAudioEncoder.getOutputFormat());
                                 Log.d(TAG, "mAudioTrackIndex：" + mAudioTrackIndex + "mVideoTrackIndex:" + mVideoTrackIndex);
                                 if (mAudioTrackIndex >= 0 && mVideoTrackIndex >= 0) {
                                     mMuxerStarted = true;
                                     Log.d(TAG, "media mMuxer start by audio");
-                                    mMuxer.start();
+                                    mMediaMuxer.start();
                                 }
                             }
                             break;
@@ -795,41 +792,23 @@ public final class VideoCaptureUtils {
     public static final class RecordConfig {
 
         private static final int DEFAULT_VIDEO_FRAME_RATE = 30;
-        /**
-         * 8Mb/s the recommend rate for 30fps 1080p
-         */
+
         private static final int DEFAULT_BIT_RATE = 8 * 1024 * 1024;
-        /**
-         * Seconds between each key frame
-         */
+
         private static final int DEFAULT_INTRA_FRAME_INTERVAL = 1;
-        /**
-         * audio bit rate
-         */
+
         private static final int DEFAULT_AUDIO_BIT_RATE = 64000;
-        /**
-         * audio sample rate
-         */
+
         private static final int DEFAULT_AUDIO_SAMPLE_RATE = 8000;
-        /**
-         * audio channel count
-         */
+
         private static final int DEFAULT_AUDIO_CHANNEL_COUNT = 1;
-        /**
-         * audio record source
-         */
+
         private static final int DEFAULT_AUDIO_RECORD_SOURCE = MediaRecorder.AudioSource.MIC;
-        /**
-         * audio default minimum buffer size
-         */
+
         private static final int DEFAULT_AUDIO_MIN_BUFFER_SIZE = 1024;
-        /**
-         * Current max resolution of VideoCaptureUtils is set as FHD
-         */
+
         private static final Size DEFAULT_MAX_RESOLUTION = new Size(1920, 1080);
-        /**
-         * Surface occupancy prioirty to this use case
-         */
+
         private static final int DEFAULT_SURFACE_OCCUPANCY_PRIORITY = 3;
         private static final int DEFAULT_ASPECT_RATIO = AspectRatio.RATIO_16_9;
 

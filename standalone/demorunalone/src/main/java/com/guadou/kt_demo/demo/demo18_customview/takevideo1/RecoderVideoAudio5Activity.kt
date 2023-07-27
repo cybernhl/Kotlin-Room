@@ -13,6 +13,7 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.newki.glrecordx.camerax.GLCameraXView
 import com.newki.glrecordx.camerax.model.MagicFilterType
 import com.newki.glrecordx.camerax.widget.SlideGpuFilterGroup
+import jp.co.cyberagent.android.gpuimage.GPUImage
 
 import java.io.File
 

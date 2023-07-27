@@ -33,7 +33,6 @@ import javax.microedition.khronos.opengles.GL10
 class MyGLRender(private val context: Context, private val callback: MyGLRenderCallback) : GLSurfaceView.Renderer,
     Preview.SurfaceProvider, SurfaceTexture.OnFrameAvailableListener {
 
-//    private var mWaterMark: WaterMark? = null
     private var textures: IntArray = IntArray(1)
     private var surfaceTexture: SurfaceTexture? = null
     private var textureMatrix: FloatArray = FloatArray(16)
@@ -51,8 +50,6 @@ class MyGLRender(private val context: Context, private val callback: MyGLRenderC
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         callback.onSurfaceChanged()
-//        mWaterMark = WaterMark(context)
-//        mWaterMark?.renderSize(width,height)
         filter?.onReady(width, height)
     }
 
@@ -60,13 +57,12 @@ class MyGLRender(private val context: Context, private val callback: MyGLRenderC
         val surfaceTexture = this.surfaceTexture
         if (gl == null || surfaceTexture == null) return
 
-        gl.glClearColor(0f, 0f, 0f, 0f)
-        gl.glClear(GLES20.GL_COLOR_BUFFER_BIT)
+        gl.glClearColor(0f, 0f, 0f, 0f)   // 设置背景色
+        gl.glClear(GLES20.GL_COLOR_BUFFER_BIT) // 清空颜色缓冲区
 
         surfaceTexture.updateTexImage()
         surfaceTexture.getTransformMatrix(textureMatrix)
 
-//        mWaterMark?.drawSelf()
 
         filter?.setTransformMatrix(textureMatrix)
         filter?.onDrawFrame(textures[0])
@@ -76,6 +72,7 @@ class MyGLRender(private val context: Context, private val callback: MyGLRenderC
     override fun onSurfaceRequested(request: SurfaceRequest) {
         val resetTexture = resetPreviewTexture(request.resolution) ?: return
         val surface = Surface(resetTexture)
+        //提供一个明确的Surface给CameraX预览
         request.provideSurface(surface, executor) {
             surface.release()
             surfaceTexture?.release()

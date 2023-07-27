@@ -133,6 +133,10 @@ public class Camera1_2ActionImpl implements ICameraAction {
         public void onCameraConfigurationChanged(int cameraID, int displayOrientation) {
             YYLogUtils.w("CameraListener - onCameraConfigurationChanged");
         }
+
+        @Override
+        public void onSurfaceTextureUpdated() {
+        }
     };
 
     @Override

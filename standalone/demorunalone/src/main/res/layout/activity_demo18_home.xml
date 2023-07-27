@@ -176,6 +176,13 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="特效录制-2"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click::gpuimageRecord}" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="特效录制-CameraX"
                     android:textAllCaps="false"
                     binding:clicks="@{click::effectsRecoder2}" />

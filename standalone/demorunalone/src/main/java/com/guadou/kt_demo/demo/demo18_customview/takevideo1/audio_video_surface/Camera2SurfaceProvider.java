@@ -10,6 +10,8 @@ import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.CaptureResult;
+import android.hardware.camera2.TotalCaptureResult;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.MediaCodecInfo;
@@ -19,6 +21,8 @@ import android.os.Build;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
+
+import androidx.annotation.NonNull;
 
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.BaseCommonCameraProvider;
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.camear2_mamager.Camera2SimpleInterface;
@@ -62,7 +66,6 @@ public class Camera2SurfaceProvider extends BaseCommonCameraProvider {
 
             //Surface 录制工具类
             videoCaptureUtils = new VideoCaptureUtils(recordConfig, outputSize);
-//            videoCaptureUtils = new VideoCaptureUtils(recordConfig, new Size(outputSize.getHeight(), outputSize.getWidth()));
         }
     }
 
@@ -179,6 +182,7 @@ public class Camera2SurfaceProvider extends BaseCommonCameraProvider {
             //这里设置输入Surface编码的数据源
             //使用 mVideoEncoder.createInputSurface() 的方式创建的Surface，就是预览与录制各玩各的效果不相关，
             Surface inputSurface = videoCaptureUtils.mCameraSurface;
+
             mPreviewBuilder.addTarget(inputSurface);
             outputs.add(inputSurface);
 

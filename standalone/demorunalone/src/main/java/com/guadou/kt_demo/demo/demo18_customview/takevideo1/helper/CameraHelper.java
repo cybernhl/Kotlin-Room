@@ -316,7 +316,9 @@ public class CameraHelper implements Camera.PreviewCallback {
 
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
-
+            if (cameraListener != null) {
+                cameraListener.onSurfaceTextureUpdated();
+            }
         }
     };
 

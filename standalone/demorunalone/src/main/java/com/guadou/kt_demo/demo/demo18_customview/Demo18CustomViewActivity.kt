@@ -135,21 +135,29 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
         }
 
         fun effectsRecoder() {
-            //特效
+            //特效 - 1
             extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
                 RecoderVideoAudio3Activity.startInstance()
             }
         }
 
+        fun gpuimageRecord() {
+            //特效 - 2
+            extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
+//                RecoderVideoAudio7Activity.startInstance()
+                RecoderVideoAudio8Activity.startInstance()
+            }
+        }
+
         fun effectsRecoder2() {
-            //特效-2
+            //特效-Camerax
             extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
                 RecoderVideoAudio5Activity.startInstance()
             }
         }
 
         fun effectsRecoder3() {
-            //特效-3
+            //特效-camera1
             extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
                 RecoderVideoAudio6Activity.startInstance()
             }

@@ -1,5 +1,6 @@
 package com.guadou.kt_demo.demo.demo18_customview.takevideo1
 
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
@@ -12,6 +13,8 @@ import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.utils.StatusBarUtils
+import jp.co.cyberagent.android.gpuimage.GPUImage
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSketchFilter
 
 /**
  * 录制音视频文件(特效)
@@ -19,6 +22,7 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 class RecoderVideoAudio3Activity : BaseVMActivity<EmptyViewModel>() {
 
     private lateinit var videoCameraXRecoderUtils: VideoCameraXRecoderUtils
+    private var gpuImage: GPUImage? = null
 
     companion object {
         fun startInstance() {
@@ -36,12 +40,14 @@ class RecoderVideoAudio3Activity : BaseVMActivity<EmptyViewModel>() {
 
         StatusBarUtils.immersive(this)
 
+        gpuImage = GPUImage(this)
+        gpuImage!!.setFilter(GPUImageSketchFilter())
+
         val flContainer = findViewById<FrameLayout>(R.id.fl_container)
         val startBtn = findViewById<Button>(R.id.start)
         val endBtn = findViewById<Button>(R.id.end)
         val playBtn = findViewById<Button>(R.id.play)
         val iv_catch = findViewById<ImageView>(R.id.iv_catch)
-
         startBtn.text = "特效录制"
 
         initCamera(flContainer)
@@ -57,8 +63,11 @@ class RecoderVideoAudio3Activity : BaseVMActivity<EmptyViewModel>() {
 
         videoCameraXRecoderUtils.setBitmapCallback {
             it?.let {
+
+                val bitmap = gpuImage!!.getBitmapWithFilterApplied(it)
+
                 iv_catch.post {
-                    iv_catch.setImageBitmap(it)
+                    iv_catch.setImageBitmap(bitmap)
                 }
             }
         }

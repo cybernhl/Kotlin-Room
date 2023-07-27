@@ -75,6 +75,7 @@ class ScreenFilter(context: Context): Filter {
         GLES20.glViewport(0, 0, mWidth, mHeight)
         // 2.使用着色器程序
         GLES20.glUseProgram(program)
+
         // 3.给着色器程序中传值
         // 3.1 给顶点坐标数据传值
         vertexBuffer.position(0)
@@ -88,12 +89,6 @@ class ScreenFilter(context: Context): Filter {
 
         // 3.3 变化矩阵传值
         GLES20.glUniformMatrix4fv(vMatrix, 1, false, mtx, 0)
-
-//        GLES20.glUniform1f(
-//            vTemperature,
-//            if (this.temperature < 5000) (0.0004 * (this.temperature - 5000.0)).toFloat()
-//            else (0.00006 * (this.temperature - 5000.0)).toFloat()
-//        )
 
         // 3.4 给片元着色器中的 采样器绑定
         // 激活图层

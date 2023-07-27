@@ -88,6 +88,7 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
         mBeautyFilter = new MagicBeautyFilter();
 //        mBeautyFilter = new MagicAntiqueFilter();
         mSlideFilterGroup = new SlideGpuFilterGroup();
+
         OM = MatrixUtils.getOriginalMatrix();
         MatrixUtils.flip(OM, false, false);//矩阵上下翻转
         showFilter.setMatrix(OM);
@@ -197,14 +198,14 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
         //绘制显示的filter
         GLES20.glViewport(0, 0, width, height);
 
-        showFilter.setTextureId(mAfFilter.getOutputTexture());
 //        showFilter.setTextureId(fTexture[0]); //设置这样的预览的时候不会显示滤镜的
+        showFilter.setTextureId(mAfFilter.getOutputTexture());
         showFilter.draw();
 
         if (videoEncoder != null && recordingEnabled && recordingStatus == RECORDING_ON) {
 
-            videoEncoder.setTextureId(mAfFilter.getOutputTexture());
 //            videoEncoder.setTextureId(fTexture[0]); //设置这样的录制的时候不会显示滤镜的
+            videoEncoder.setTextureId(mAfFilter.getOutputTexture());
             videoEncoder.frameAvailable(mSurfaceTextrue);
         }
     }

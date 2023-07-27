@@ -37,10 +37,8 @@ class GLCameraView : GLSurfaceView {
     }
 
     init {
-        setEGLContextClientVersion(2)
-
-        //设置GL渲染对象
-        setRenderer(cameraRender)
+        setEGLContextClientVersion(2)  // 设置 OpenGL ES 版本
+        setRenderer(cameraRender)       //设置GL渲染对象
 
         renderMode = RENDERMODE_WHEN_DIRTY
     }

@@ -44,4 +44,9 @@ public interface CameraListener {
      * @param displayOrientation 相机旋转方向
      */
     void onCameraConfigurationChanged(int cameraID, int displayOrientation);
+
+    /**
+     * TextView的每一次更新回调
+     */
+    void onSurfaceTextureUpdated();
 }
