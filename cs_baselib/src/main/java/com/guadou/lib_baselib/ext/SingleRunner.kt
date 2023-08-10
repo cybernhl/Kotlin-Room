@@ -28,6 +28,7 @@ class ControlledRunner<T> {
 
     private val activeTask = AtomicReference<Deferred<T>?>(null)
 
+    //取消上一次的任务，执行这一次的
     suspend fun cancelPreviousThenRun(block: suspend () -> T): T {
 
         activeTask.get()?.cancelAndJoin()

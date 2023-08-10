@@ -1,5 +1,6 @@
 package com.guadou.kt_demo.demo.demo18_customview.takevideo1.audio
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.SurfaceTexture
@@ -72,6 +73,7 @@ class VideoSoftRecoderUtils {
     /**
      * 初始化关联信息，设置回调处理
      */
+    @SuppressLint("MissingPermission")
     fun setupCamera(activity: Activity, container: ViewGroup) {
 
 
