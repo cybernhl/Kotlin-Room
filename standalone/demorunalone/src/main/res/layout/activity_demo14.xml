@@ -8,7 +8,7 @@
 
         <variable
             name="click"
-            type="com.guadou.kt_demo.demo.demo14_mvi.mvi.Demo14Activity.ClickProxy" />
+            type="com.guadou.kt_demo.demo.demo14_mvi.mvi.mvi1.Demo14Activity.ClickProxy" />
 
     </data>
 
@@ -71,6 +71,21 @@
             android:id="@+id/tv_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="去 - MVI2"
+            android:textAllCaps="false"
+            binding:clicks="@{click.gotoMVI2}" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="去 - MVI3"
+            android:textAllCaps="false"
+            binding:clicks="@{click.gotoMVI3}" />
 
     </LinearLayout>
 

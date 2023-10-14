@@ -383,12 +383,12 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
         }
 
 
-//        lifecycleScope.launch {
-//            mViewModel.sharedFlow.collect {
-//                YYLogUtils.w("shared-value1 $it")
-//            }
-//
-//        }
+        lifecycleScope.launch {
+            mViewModel.sharedFlow.collect {
+                YYLogUtils.w("shared-value1 $it")
+            }
+
+        }
 //
 //        lifecycleScope.launch {
 //            mViewModel.channel.consumeAsFlow().collect {

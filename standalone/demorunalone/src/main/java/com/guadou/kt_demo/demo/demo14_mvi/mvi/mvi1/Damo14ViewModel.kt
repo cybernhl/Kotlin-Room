@@ -1,4 +1,4 @@
-package com.guadou.kt_demo.demo.demo14_mvi.mvi
+package com.guadou.kt_demo.demo.demo14_mvi.mvi.mvi1
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,8 +13,6 @@ import com.guadou.lib_baselib.base.vm.BaseViewModel
 import com.guadou.lib_baselib.bean.OkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,12 +40,12 @@ class Damo14ViewModel @Inject constructor(
     val viewStates: LiveData<Demo14ViewState> = _viewStates
 
     //Action分发入口
-    fun dispatch(action: DemoAction) {
-        when (action) {
-            is DemoAction.RequestIndustry -> requestIndustry()
-            is DemoAction.RequestSchool -> requestSchool()
-            is DemoAction.RequestAllData -> getTotalData()
-            is DemoAction.UpdateChanged -> changeData(action.isChange)
+    fun dispatch(intent: DemoIntent) {
+        when (intent) {
+            is DemoIntent.RequestIndustry -> requestIndustry()
+            is DemoIntent.RequestSchool -> requestSchool()
+            is DemoIntent.RequestAllData -> getTotalData()
+            is DemoIntent.UpdateChanged -> changeData(intent.isChange)
         }
     }
 
@@ -145,12 +143,12 @@ class Damo14ViewModel @Inject constructor(
 //    }
 
     //当前页面需要的事件定义
-    sealed class DemoAction {
-        object RequestIndustry : DemoAction()
-        object RequestSchool : DemoAction()
-        object RequestAllData : DemoAction()
+    sealed class DemoIntent {
+        object RequestIndustry : DemoIntent()
+        object RequestSchool : DemoIntent()
+        object RequestAllData : DemoIntent()
 
-        data class UpdateChanged(val isChange: Boolean) : DemoAction()
+        data class UpdateChanged(val isChange: Boolean) : DemoIntent()
     }
 
 }

@@ -5,7 +5,7 @@ import com.guadou.kt_demo.demo.demo10_date_span_sp_acache_hilt.Demo10Activity
 import com.guadou.kt_demo.demo.demo11_fragment_navigation.Demo11Activity
 import com.guadou.kt_demo.demo.demo12_databinding_texing.Demo12Activity
 import com.guadou.kt_demo.demo.demo13_motionlayout.Demo13MotionActivity
-import com.guadou.kt_demo.demo.demo14_mvi.mvi.Demo14Activity
+import com.guadou.kt_demo.demo.demo14_mvi.mvi.mvi1.Demo14Activity
 import com.guadou.kt_demo.demo.demo15_aidl.Demo15OptionActivity
 import com.guadou.kt_demo.demo.demo16_record.Demo16RecordActivity
 import com.guadou.kt_demo.demo.demo17_softinput.Demo17SoftInputActivity

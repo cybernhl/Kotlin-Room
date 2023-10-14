@@ -99,8 +99,13 @@ class GlobalWebActivity : BaseVMActivity<BaseViewModel>() {
             }
         })
 
-        if (!TextUtils.isEmpty(mWeburl))
-            mWebView!!.loadUrl(mWeburl!!)
+        if (!TextUtils.isEmpty(mWeburl)){
+         if (mWeburl!!.startsWith("http")){
+             mWebView!!.loadUrl(mWeburl!!)
+         }else{
+             mWebView!!.loadData(mWeburl!!, "text/html", "UTF-8")
+         }
+        }
 
         fl_content.addView(mWebView)
 

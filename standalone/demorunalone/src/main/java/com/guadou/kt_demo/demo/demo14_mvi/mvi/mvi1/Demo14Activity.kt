@@ -1,14 +1,17 @@
-package com.guadou.kt_demo.demo.demo14_mvi.mvi
+package com.guadou.kt_demo.demo.demo14_mvi.mvi.mvi1
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo14Binding
+import com.guadou.kt_demo.demo.demo14_mvi.mvi.mvi2.Demo14MVIActivity
+import com.guadou.kt_demo.demo.demo14_mvi.mvi.mvi3.Demo14MVI3Activity
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.mvi.observeState
 import com.guadou.lib_baselib.bean.DataBindingConfig
 import com.guadou.lib_baselib.ext.commContext
+import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -57,7 +60,7 @@ class Demo14Activity : BaseVDBActivity<Damo14ViewModel, ActivityDemo14Binding>()
 
     override fun init() {
         //发送Intent指令，具体的实现由ViewModel实现
-        mViewModel.dispatch(Damo14ViewModel.DemoAction.RequestAllData)
+        mViewModel.dispatch(Damo14ViewModel.DemoIntent.RequestAllData)
     }
 
     /**
@@ -69,8 +72,16 @@ class Demo14Activity : BaseVDBActivity<Damo14ViewModel, ActivityDemo14Binding>()
             //发送Intent指令，具体的实现由ViewModel实现
 //            mViewModel.dispatch(Damo14ViewModel.DemoAction.RequestIndustry)
 //            mViewModel.dispatch(Damo14ViewModel.DemoAction.RequestSchool)
-            mViewModel.dispatch(Damo14ViewModel.DemoAction.UpdateChanged(true))
+            mViewModel.dispatch(Damo14ViewModel.DemoIntent.UpdateChanged(true))
 
+        }
+
+        fun gotoMVI2() {
+            gotoActivity<Demo14MVIActivity>()
+        }
+
+        fun gotoMVI3() {
+            gotoActivity<Demo14MVI3Activity>()
         }
     }
 

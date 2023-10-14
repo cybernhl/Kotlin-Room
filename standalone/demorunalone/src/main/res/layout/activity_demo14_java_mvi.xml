@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:Easy_title="Java版本的MVI" />
+
+        <TextView
+            android:id="@+id/btn_get_data"
+            android:clickable="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:background="@color/divider_color"
+            android:text="获取数据" />
+
+    </LinearLayout>
+
+</layout>
+

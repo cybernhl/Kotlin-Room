@@ -105,6 +105,6 @@ fun <T : ViewModel> Fragment.getActivityVM(clazz: Class<T>) = ViewModelProvider(
 
 
 //获取泛型的实例
-fun <VM> getVMCls(cls: Any): VM {
-    return (cls.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as VM
+fun <VM> getVMCls(cls: Any, index: Int = 0): VM {
+    return (cls.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[index] as VM
 }

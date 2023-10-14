@@ -192,7 +192,24 @@
         <activity android:name=".demo.demo8_recyclerview.rv7.DemoMyDiffActivity" />
         <activity android:name=".demo.demo10_date_span_sp_acache_hilt.DemoSpanActivity" />
         <activity android:name=".demo.demo8_recyclerview.rv8.CustomRV1Activity" />
-        <activity android:name=".demo.demo18_customview.Demo18CustomViewActivity" />
+        <activity android:name=".demo.demo18_customview.Demo18CustomViewActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="adhocjobdetail"
+                    android:scheme="yycircle" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".demo.demo14_mvi.mvi.mvi2.Demo14MVIActivity" />
+        <activity android:name=".demo.demo14_mvi.mvi.mvi3.Demo14MVI3Activity" />
         <activity android:name=".demo.demo18_customview.circleView.DemoCircleViewActivity" />
         <activity android:name=".demo.demo18_customview.temperature.TemperatureViewActivity" />
         <activity android:name=".demo.demo18_customview.star.StarScoreViewActivity" />
@@ -214,7 +231,7 @@
         <activity android:name=".demo.demo13_motionlayout.Demo13MotionActivity" />
         <activity android:name=".demo.demo13_motionlayout.Demo13JavaActivity" />
         <activity android:name=".demo.demo13_motionlayout.Demo13XmlActivity" />
-        <activity android:name=".demo.demo14_mvi.mvi.Demo14Activity" />
+        <activity android:name=".demo.demo14_mvi.mvi.mvi1.Demo14Activity" />
         <activity android:name=".demo.demo15_aidl.Demo15OptionActivity" />
         <activity android:name=".demo.demo15_aidl.service1.Service1Activity" />
         <activity android:name=".demo.demo15_aidl.service2.Service2Activity" />
