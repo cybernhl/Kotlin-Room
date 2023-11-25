@@ -5,7 +5,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.view.View
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
@@ -13,7 +12,7 @@ import com.guadou.kt_demo.databinding.ActivityDemo4Binding
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.banner.DemoBannerActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.InterceptChain
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.intercept.lai.*
-import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.popup.DemoXPopupActivity
+
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostImmersiveStatusActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostNormalStatusActivity
 import com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.statusbars.HostScrollStatusActivity
@@ -27,12 +26,8 @@ import com.guadou.lib_baselib.utils.StatusBarUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.view.LoadingDialogManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
 
@@ -228,6 +223,8 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 
     private fun testflow() {
 
+        mViewModel.changeSearch("1234")
+
 //        val bannerFlow = MutableStateFlow<String?>(null)
 //        val listFlow = MutableStateFlow<String?>(null)
 //
@@ -293,48 +290,48 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //        }.asCoroutineDispatcher()
 
 
-        lifecycleScope.launch {
-
-            val start = System.currentTimeMillis()
-            var count = 0
-
-            suspend fun addActor() = actor<Int>(capacity = Channel.UNLIMITED) {
-
-                for (msg in channel) {
-                    when (msg) {
-                        0 -> count++
-                        1 -> count--
-                    }
-                }
-            }
-
-            val actor = addActor()
-
-            val job1 = CoroutineScope(Dispatchers.IO).launch {
-                repeat(99999) {
-                    actor.send(0)//加
-                }
-            }
-
-            val job2 = CoroutineScope(Dispatchers.IO).launch {
-                repeat(99999) {
-                    actor.send(1)//减
-                }
-            }
-
-            job1.join()
-            job2.join()
-
-            val deferred = CompletableDeferred<Int>()
-            deferred.complete(count)
-            val result = deferred.await()
-
-            actor.close()
-
-            //等待Job1 Job2执行完毕打印结果
-            YYLogUtils.w("count: $result")
-            YYLogUtils.w("count:执行耗时：${System.currentTimeMillis() - start}")
-        }
+//        lifecycleScope.launch {
+//
+//            val start = System.currentTimeMillis()
+//            var count = 0
+//
+//            suspend fun addActor() = actor<Int>(capacity = Channel.UNLIMITED) {
+//
+//                for (msg in channel) {
+//                    when (msg) {
+//                        0 -> count++
+//                        1 -> count--
+//                    }
+//                }
+//            }
+//
+//            val actor = addActor()
+//
+//            val job1 = CoroutineScope(Dispatchers.IO).launch {
+//                repeat(99999) {
+//                    actor.send(0)//加
+//                }
+//            }
+//
+//            val job2 = CoroutineScope(Dispatchers.IO).launch {
+//                repeat(99999) {
+//                    actor.send(1)//减
+//                }
+//            }
+//
+//            job1.join()
+//            job2.join()
+//
+//            val deferred = CompletableDeferred<Int>()
+//            deferred.complete(count)
+//            val result = deferred.await()
+//
+//            actor.close()
+//
+//            //等待Job1 Job2执行完毕打印结果
+//            YYLogUtils.w("count: $result")
+//            YYLogUtils.w("count:执行耗时：${System.currentTimeMillis() - start}")
+//        }
 
 
 //        mViewModel.suspendSth()
@@ -374,32 +371,32 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
     override fun startObserve() {
         lifecycleScope.launch {
             mViewModel.searchFlow.collect {
-                YYLogUtils.w("search-state-value $it")
+                YYLogUtils.w("StateFlow -value $it")
             }
         }
 
         mViewModel.searchLD.observeForever {
-            YYLogUtils.w("search-livedata-value $it")
+            YYLogUtils.w("LiveData-value $it")
         }
 
 
         lifecycleScope.launch {
             mViewModel.sharedFlow.collect {
-                YYLogUtils.w("shared-value1 $it")
+                YYLogUtils.w("SharedFlow-value $it")
             }
 
         }
-//
-//        lifecycleScope.launch {
-//            mViewModel.channel.consumeAsFlow().collect {
-//                YYLogUtils.w("shared-value2 $it")
-//            }
-//        }
 
         lifecycleScope.launch {
-            mViewModel.stateFlow.flowWithLifecycle(lifecycle).collect {
-
+            mViewModel.channel.consumeAsFlow().collect {
+                YYLogUtils.w("Channel-value  $it")
             }
+        }
+
+//        lifecycleScope.launch {
+//            mViewModel.stateFlow.flowWithLifecycle(lifecycle).collect {
+//
+//            }
 
 //            repeatOnLifecycle(Lifecycle.State.STARTED){
 //                mViewModel.stateFlow.collect{
@@ -410,7 +407,7 @@ class Demo4Activity : BaseVDBActivity<Demo4ViewModel, ActivityDemo4Binding>() {
 //            mViewModel.stateFlow.collect {
 //                updateUI()
 //            }
-        }
+//        }
 
     }
 

@@ -7,6 +7,7 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemo18HomeBinding
 import com.guadou.kt_demo.demo.demo18_customview.circleView.DemoCircleViewActivity
+import com.guadou.kt_demo.demo.demo18_customview.context.DemoContextActivity
 import com.guadou.kt_demo.demo.demo18_customview.range.RangeViewActivity
 import com.guadou.kt_demo.demo.demo18_customview.star.StarScoreViewActivity
 import com.guadou.kt_demo.demo.demo18_customview.takevideo1.*
@@ -183,6 +184,11 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
             extRequestPermission(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO) {
                 RecoderVideoWithAudioActivity.startInstance()
             }
+        }
+
+        //测试上下文
+        fun testContext(){
+            DemoContextActivity.startInstance()
         }
 
     }

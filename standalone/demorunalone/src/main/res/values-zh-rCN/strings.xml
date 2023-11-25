@@ -9,4 +9,9 @@
     <font color=\"#ff6c00\"><size value=\"25\">1500/天</size></font> <del><font color=\"#808080\"><size value=\"18\">原价:20000元</size></font></del>
 
      ]]> </string>
+
+    <string name="test1">一辆红色面包车停在房前。</string>
+    <string name="normal_internationalized_text">默认的国际化文本</string>
+    <string name="limited_internationalization_text">限定国际化文本</string>
+
 </resources>

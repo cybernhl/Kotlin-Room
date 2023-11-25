@@ -208,6 +208,7 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".demo.demo18_customview.context.DemoContextActivity" />
         <activity android:name=".demo.demo14_mvi.mvi.mvi2.Demo14MVIActivity" />
         <activity android:name=".demo.demo14_mvi.mvi.mvi3.Demo14MVI3Activity" />
         <activity android:name=".demo.demo18_customview.circleView.DemoCircleViewActivity" />

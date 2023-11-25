@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.guadou.lib_baselib.view.titlebar.EasyTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:Easy_title="Context 上下文" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/d_15dp"
+        android:text="@string/normal_internationalized_text" />
+
+    <FrameLayout
+        android:id="@+id/fl_box1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/d_15dp"
+        android:text="@string/limited_internationalization_text" />
+
+    <FrameLayout
+        android:id="@+id/fl_box2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

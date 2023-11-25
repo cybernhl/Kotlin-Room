@@ -13,6 +13,7 @@ import com.guadou.lib_baselib.utils.okhttp.OkhttpUtil
 import com.guadou.testxiecheng.base.BaseBean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -41,12 +42,15 @@ class Demo4ViewModel @Inject constructor(
 
     val searchFlow: StateFlow<String> = _searchFlow
 
-    val sharedFlow = MutableSharedFlow<String>()
+    private val _state = MutableSharedFlow<String>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val sharedFlow: Flow<String> by lazy { _state.distinctUntilChanged() }
 
     fun changeSearch(keyword: String) {
         viewModelScope.launch {
-            sharedFlow.emit(keyword)
-
+            _state.emit(keyword)
             _searchFlow.value = keyword
             _searchLD.value = keyword
             channel.trySend(keyword)

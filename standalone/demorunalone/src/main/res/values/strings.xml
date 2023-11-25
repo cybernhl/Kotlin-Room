@@ -10,6 +10,8 @@
 
 ]]> </string>
 
+    <string name="test1">A red van was parked in front of the house.</string>
+
     <string name="scroll_content">君不见，黄河之水天上来，奔流到海不复回。
 
 君不见，高堂明镜悲白发，朝如青丝暮成雪。
@@ -110,5 +112,7 @@
 销：同“消”。万古愁：无穷无尽的愁闷。
 
 ⒄圣贤：一般指圣人贤士，又另指古时的酒名。</string>
+    <string name="normal_internationalized_text">Normal internationalized text</string>
+    <string name="limited_internationalization_text">Limited internationalization text</string>
 
 </resources>

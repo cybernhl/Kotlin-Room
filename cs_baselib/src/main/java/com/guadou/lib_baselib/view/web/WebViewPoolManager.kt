@@ -26,6 +26,7 @@ object WebViewPoolManager {
     @JvmStatic
     fun prepare(context: Context) {
         if (webViewCache.isEmpty()) {
+            Looper.getMainLooper()
             Looper.myQueue().addIdleHandler {
                 webViewCache.add(create(MutableContextWrapper(context)))
                 false
