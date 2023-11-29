@@ -10,6 +10,8 @@ import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemoCountDownBinding
 import com.guadou.kt_demo.demo.demo9_ktfollow.extend.*
+import com.guadou.kt_demo.demo.demo9_ktfollow.extend.CurrencyAmount.Companion.hkd
+import com.guadou.kt_demo.demo.demo9_ktfollow.extend.CurrencyAmount.Companion.usd
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig

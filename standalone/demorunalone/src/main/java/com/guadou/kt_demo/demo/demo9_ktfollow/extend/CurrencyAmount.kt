@@ -24,7 +24,26 @@ fun convertCurrency(value: Double, sourceUnit: CurrencyUnit, targetUnit: Currenc
 如果不想使用 @JvmInline value class 用普通的class也能行
  */
 @JvmInline
-value class CurrencyAmount constructor(private val rawAmount: Double) : Comparable<CurrencyAmount> {
+value class CurrencyAmount internal constructor(private val rawAmount: Double) : Comparable<CurrencyAmount> {
+
+    companion object {
+        //定义常用的一系列扩展属性(只读)
+        val Double.cny get() = CurrencyAmount(this)
+        val Long.cny get() = CurrencyAmount(this.toDouble())
+        val Int.cny get() = CurrencyAmount(this.toDouble())
+
+        val Double.usd get() = CurrencyAmount(this * CurrencyUnit.USD.exchangeRate)
+        val Long.usd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.USD.exchangeRate)
+        val Int.usd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.USD.exchangeRate)
+
+        val Double.sgd get() = CurrencyAmount(this * CurrencyUnit.SGD.exchangeRate)
+        val Long.sgd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.SGD.exchangeRate)
+        val Int.sgd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.SGD.exchangeRate)
+
+        val Double.hkd get() = CurrencyAmount(this * CurrencyUnit.HKD.exchangeRate)
+        val Long.hkd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.HKD.exchangeRate)
+        val Int.hkd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.HKD.exchangeRate)
+    }
 
     private fun toDouble(unit: CurrencyUnit): Double = convertCurrency(rawAmount, CurrencyUnit.CNY, unit)
 
@@ -77,20 +96,4 @@ value class CurrencyAmount constructor(private val rawAmount: Double) : Comparab
     }
 }
 
-//定义常用的一系列扩展属性(只读)
-val Double.cny get() = CurrencyAmount(this)
-val Long.cny get() = CurrencyAmount(this.toDouble())
-val Int.cny get() = CurrencyAmount(this.toDouble())
-
-val Double.usd get() = CurrencyAmount(this * CurrencyUnit.USD.exchangeRate)
-val Long.usd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.USD.exchangeRate)
-val Int.usd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.USD.exchangeRate)
-
-val Double.sgd get() = CurrencyAmount(this * CurrencyUnit.SGD.exchangeRate)
-val Long.sgd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.SGD.exchangeRate)
-val Int.sgd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.SGD.exchangeRate)
-
-val Double.hkd get() = CurrencyAmount(this * CurrencyUnit.HKD.exchangeRate)
-val Long.hkd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.HKD.exchangeRate)
-val Int.hkd get() = CurrencyAmount(this.toDouble() * CurrencyUnit.HKD.exchangeRate)
 
