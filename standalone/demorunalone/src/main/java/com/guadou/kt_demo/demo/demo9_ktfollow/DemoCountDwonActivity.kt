@@ -9,17 +9,16 @@ import androidx.lifecycle.MutableLiveData
 import com.guadou.kt_demo.BR
 import com.guadou.kt_demo.R
 import com.guadou.kt_demo.databinding.ActivityDemoCountDownBinding
+import com.guadou.kt_demo.demo.demo9_ktfollow.extend.*
 import com.guadou.lib_baselib.base.activity.BaseVDBActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
 import com.guadou.lib_baselib.bean.DataBindingConfig
-import com.guadou.lib_baselib.ext.commContext
-import com.guadou.lib_baselib.ext.countDown
-import com.guadou.lib_baselib.ext.toast
+import com.guadou.lib_baselib.ext.*
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.ScreenUtils
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import kotlinx.coroutines.*
-import org.w3c.dom.Text
+
 import java.util.*
 import kotlin.properties.Delegates
 import kotlin.properties.ReadOnlyProperty
@@ -142,8 +141,8 @@ class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountD
 //        age = 20
 //        YYLogUtils.w("age:$age")
 
-        val member = Member(mapOf("name" to "guanyu", "age" to "36", Pair("dob", 1234567890L)))
-        YYLogUtils.w("member:$member")
+//        val member = Member(mapOf("name" to "guanyu", "age" to "36", Pair("dob", 1234567890L)))
+//        YYLogUtils.w("member:$member")
 
 //        val powerManager = commContext().getSystemService(Service.POWER_SERVICE) as PowerManager
 //        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock")
@@ -342,6 +341,43 @@ class DemoCountDwonActivity : BaseVDBActivity<EmptyViewModel, ActivityDemoCountD
 
             YYLogUtils.w("点击按钮-开启 alarmManager 定时任务啦")
 
+        }
+
+        //扩展函数学习
+        fun ktextend() {
+//            val idNameEntity = IDNameEntity("25", "关羽")
+//            val propertyName = idNameEntity.propertyName
+//            idNameEntity.propertyId = "30"
+//            val propertyId = idNameEntity.propertyId
+//
+//            YYLogUtils.w("propertyName:$propertyName propertyId:$propertyId")
+
+            val dataSize1 = 888.mb
+
+            YYLogUtils.w("格式化 B:${dataSize1.toString()}")
+            YYLogUtils.w("格式化 KB:${dataSize1.toString(DataUnit.KILOBYTES)}")
+            YYLogUtils.w("格式化 GB:${dataSize1.toString(DataUnit.GIGABYTES)}")
+
+
+            val sizeInBytes = 1500000.b // 假设单位为字节
+            val formattedSize = sizeInBytes.autoFormatDataSize()
+            YYLogUtils.w(formattedSize) // 输出：1.43MB
+
+            val dataSize2 = 1.gb
+
+            val plusSize = DataUnitSize(dataSize1.rawBytes + dataSize2.rawBytes).autoFormatDataSize()
+            YYLogUtils.w(plusSize)
+
+
+            //金额的计算
+            val money1 = 100.usd
+            YYLogUtils.w("格式化金额人民币:${money1.toString()}")
+            YYLogUtils.w("格式化金额新加坡:${money1.toString(CurrencyUnit.SGD)}")
+            YYLogUtils.w("格式化金额港币:${money1.toString(CurrencyUnit.HKD)}")
+
+            val money2 = 100.50.hkd
+
+            YYLogUtils.w("100美元加100.5港币等于:${(money1+money2).toString()}")
         }
 
     }

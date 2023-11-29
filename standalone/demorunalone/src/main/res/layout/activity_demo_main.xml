@@ -91,7 +91,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="9.Kotlin倒计时"
+                    android:text="9.Kotlin语法相关"
                     android:textAllCaps="false"
                     binding:clicks="@{click.navDemo9}" />
 

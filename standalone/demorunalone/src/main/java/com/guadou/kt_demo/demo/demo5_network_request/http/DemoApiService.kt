@@ -4,7 +4,7 @@ package com.guadou.kt_demo.demo.demo5_network_request.http
 import com.guadou.kt_demo.demo.demo5_network_request.bean.Industry
 import com.guadou.kt_demo.demo.demo5_network_request.bean.SchoolBean
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.NewsBean
-import com.guadou.testxiecheng.base.BaseBean
+import com.guadou.lib_baselib.bean.BaseBean
 import retrofit2.http.*
 
 interface DemoApiService {

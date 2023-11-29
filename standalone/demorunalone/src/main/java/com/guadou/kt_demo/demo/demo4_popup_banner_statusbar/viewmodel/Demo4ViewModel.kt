@@ -1,7 +1,6 @@
 package com.guadou.kt_demo.demo.demo4_popup_banner_statusbar.viewmodel
 
 import androidx.lifecycle.*
-import com.guadou.kt_demo.demo.demo5_network_request.bean.Industry
 import com.guadou.kt_demo.demo.demo5_network_request.bean.SchoolBean
 import com.guadou.kt_demo.demo.demo5_network_request.mvvm.Demo5Repository
 import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.NewsBean
@@ -10,7 +9,6 @@ import com.guadou.lib_baselib.bean.OkResult
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import com.guadou.lib_baselib.utils.okhttp.CallBackUtil
 import com.guadou.lib_baselib.utils.okhttp.OkhttpUtil
-import com.guadou.testxiecheng.base.BaseBean
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.channels.BufferOverflow
@@ -19,7 +17,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.Call
-import okhttp3.Response
 import java.lang.Exception
 import javax.inject.Inject
 import kotlin.concurrent.thread

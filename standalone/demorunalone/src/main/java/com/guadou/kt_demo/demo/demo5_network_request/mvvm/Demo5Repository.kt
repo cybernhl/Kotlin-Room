@@ -8,7 +8,6 @@ import com.guadou.kt_demo.demo.demo8_recyclerview.rv4.bean.NewsBean
 import com.guadou.lib_baselib.base.vm.BaseRepository
 import com.guadou.lib_baselib.bean.OkResult
 import com.guadou.lib_baselib.engine.extRequestHttp
-import com.guadou.testxiecheng.base.BaseBean
 import javax.inject.Inject
 import javax.inject.Singleton
 

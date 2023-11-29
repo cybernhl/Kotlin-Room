@@ -74,6 +74,12 @@
             android:text="定时任务"
             binding:clicks="@{click.backgroundTask}" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="KT扩展学习"
+            binding:clicks="@{click.ktextend}" />
+
     </LinearLayout>
 
 </layout>

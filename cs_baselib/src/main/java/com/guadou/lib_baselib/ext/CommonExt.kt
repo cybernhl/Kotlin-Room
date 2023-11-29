@@ -20,6 +20,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.guadou.lib_baselib.base.BaseApplication
 import com.guadou.lib_baselib.base.vm.BaseViewModel
+import com.guadou.lib_baselib.bean.IDNameEntity
 import com.guadou.lib_baselib.utils.CommUtils
 import com.guadou.lib_baselib.utils.NetWorkUtil
 import com.guadou.lib_baselib.utils.interceptor.LoginInterceptorTask
@@ -35,6 +36,22 @@ import kotlin.reflect.full.primaryConstructor
 /**
  *  通用扩展
  */
+val Int.ap: Int
+    get() = CommUtils.dip2px(this)
+
+fun Int.sp(): Int {
+    return CommUtils.dip2px(this)
+}
+
+var IDNameEntity.propertyId: String
+    get() = this.id
+    set(value:String) {
+        this.id = value
+    }
+
+val IDNameEntity.propertyName :String
+       get() = this.name
+
 
 /**
  * 全局的Context
@@ -348,7 +365,6 @@ fun <T : Any> T.deepCopy(): T {
         }.toMap().let(primaryConstructor::callBy)
     }
 }
-
 
 
 /**

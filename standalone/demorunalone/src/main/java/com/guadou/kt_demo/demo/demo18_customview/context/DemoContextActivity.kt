@@ -8,10 +8,18 @@ import com.guadou.kt_demo.R
 
 import com.guadou.lib_baselib.base.activity.BaseVMActivity
 import com.guadou.lib_baselib.base.vm.EmptyViewModel
+import com.guadou.lib_baselib.ext.ap
 import com.guadou.lib_baselib.ext.commContext
 import com.guadou.lib_baselib.ext.gotoActivity
 import com.guadou.lib_baselib.utils.log.YYLogUtils
 import java.util.*
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.nanoseconds
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.DurationUnit
 
 
 class DemoContextActivity : BaseVMActivity<EmptyViewModel>() {
