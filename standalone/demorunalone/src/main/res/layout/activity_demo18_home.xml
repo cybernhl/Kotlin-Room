@@ -215,6 +215,13 @@
                     android:textAllCaps="false"
                     binding:clicks="@{click::testContext}" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="蒙层指引控件"
+                    android:textAllCaps="false"
+                    binding:clicks="@{click::guideView}" />
+
             </LinearLayout>
 
         </ScrollView>
