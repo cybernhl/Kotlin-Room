@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup7_6
+    <com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup7_5
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:background="#009688" />
 
-    </com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup7_6>
+    </com.guadou.kt_demo.demo.demo18_customview.viewgroup.ViewGroup7_5>
 
 
 </LinearLayout>
