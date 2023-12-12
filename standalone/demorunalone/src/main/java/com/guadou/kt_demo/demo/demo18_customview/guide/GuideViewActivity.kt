@@ -33,10 +33,6 @@ class GuideViewActivity : BaseVMActivity<EmptyViewModel>() {
 
     override fun init() {
 
-        findViewById<Button>(R.id.btn_show_guide).click {
-
-        }
-
         val mUserGuideView = findViewById<UserGuideView>(R.id.guide_view)
         val mYYJobsLl = findViewById<ViewGroup>(R.id.ll_part_time)
         val mCVBuildLl = findViewById<ViewGroup>(R.id.ll_cv_build)

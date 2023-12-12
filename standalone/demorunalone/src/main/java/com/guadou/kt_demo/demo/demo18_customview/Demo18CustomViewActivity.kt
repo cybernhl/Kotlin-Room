@@ -116,6 +116,9 @@ class Demo18CustomViewActivity : BaseVDBActivity<EmptyViewModel, ActivityDemo18H
             GlobalWebActivity.startInstance("Title", url)
         }
 
+        fun viewGroup7() {
+            ViewGroup7Activity.startInstance()
+        }
 
         fun videoRecoder() {
             //单独视频录制

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Scroller;
 
 import androidx.annotation.Nullable;
@@ -13,7 +14,7 @@ import com.guadou.lib_baselib.utils.ScreenUtils;
 import com.guadou.lib_baselib.utils.log.YYLogUtils;
 
 
-public class ViewGroup4Scroll extends ViewGroup4 implements View.OnTouchListener {
+public class ViewGroup4Scroll extends ViewGroup implements View.OnTouchListener {
 
     private int mScreenHeight;
     private int mLastY;
@@ -34,6 +35,7 @@ public class ViewGroup4Scroll extends ViewGroup4 implements View.OnTouchListener
 
         mScreenHeight = ScreenUtils.getScreenHeith(context);
         mScroller = new Scroller(context);
+
         setOnTouchListener(this);
     }
 
